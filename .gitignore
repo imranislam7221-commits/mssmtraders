@@ -1,0 +1,19 @@
+# Runtime data (shop's live DB - do not push)
+data/db.json
+
+# Temp/fix scripts
+fix*.cjs
+*.cjs.tmp
+~$*
+
+# OS junk
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+
+# Node (no deps, but just in case)
+node_modules/
