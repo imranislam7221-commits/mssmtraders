@@ -19,12 +19,24 @@ function renderLogin(err) {
   $('#loginform').addEventListener('submit', async e => {
     e.preventDefault();
     const f = e.target;
+    const btn = f.querySelector('button[type=submit]');
+    if (btn) { btn.disabled = true; btn.dataset.old = btn.textContent; btn.textContent = '⏳ লগইন হচ্ছে...'; }
+    const slow = setTimeout(function () {
+      if (btn) btn.textContent = '⏳ সার্ভার জাগাচ্ছে... অপেক্ষা করুন (১ম বার ~১ মিনিট)';
+    }, 4000);
     try {
       const d = await api('/login', { method: 'POST', body: { email: f.email.value, password: f.password.value } });
+      clearTimeout(slow);
       S.token = d.token; S.user = d.user;
       localStorage.setItem('pos_token', S.token);
       location.hash = '#/dashboard';
-    } catch (ex) { renderLogin(ex.message); }
+    } catch (ex) {
+      clearTimeout(slow);
+      if (btn) { btn.disabled = false; btn.textContent = btn.dataset.old || 'Login →'; }
+      const box = f.querySelector('.err');
+      if (box) box.textContent = ex.message;
+      else f.insertAdjacentHTML('afterbegin', '<div class="err">' + esc(ex.message) + '</div>');
+    }
   });
 }
 async function logout() { try { await api('/logout', { method: 'POST' }); } catch (e) {} S.token = ''; S.user = null; localStorage.removeItem('pos_token'); location.hash = '#/login'; }

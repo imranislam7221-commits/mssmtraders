@@ -83,8 +83,12 @@ function applyLang(){
     let v = n.nodeValue;
     const mails = [];
     v = v.replace(/[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}/g, function(m){ mails.push(m); return '\u0001' + 'e'.repeat(mails.length) + '\u0001'; });
+    // protect emoji keycaps (1️⃣ 2️⃣ 3️⃣) — digit conversion breaks the box glyph
+    const keycaps = [];
+    v = v.replace(/[0-9]\uFE0F\u20E3/g, function(m){ keycaps.push(m); return '\u0003' + 'x'.repeat(keycaps.length) + '\u0003'; });
     for(const k of keys){ if(v.indexOf(k) >= 0) v = v.split(k).join(I18N_BN[k]); }
-    if(LANG==='bn'){ v = v.replace(/mm/g, 'মি. মি'); v = v.replace(/[0-9]/g, function(d){ return '০১২৩৪৫৬৭৮৯'[+d]; }); }
+    if(LANG==='bn'){ v = v.replace(/\bmm\b/g, 'মি. মি'); v = v.replace(/[0-9]/g, function(d){ return '০১২৩৪৫৬৭৮৯'[+d]; }); }
+    if(keycaps.length) v = v.replace(/\u0003(x+)\u0003/g, function(m, xs){ return keycaps[xs.length - 1] || m; });
     if(mails.length){ v = v.replace(/\u0001(e+)\u0001/g, function(m, es){ return mails[es.length - 1] || m; }); }
     if(v !== n.nodeValue) n.nodeValue = v;
   }
