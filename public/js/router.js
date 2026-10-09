@@ -28,7 +28,7 @@ function layout(inner) {
 }
 const VIEWS = {};
 async function router() {
-  if (!S.token) { renderLogin(); return; }
+  /* DEMO_MODE: login gate disabled — auto-fetch owner profile (backend fills user without token) */
   if (!S.user) { try { const d = await api('/me'); S.user = d.user; } catch (e) { return; } }
   const h = location.hash || '#/dashboard';
   const fn = VIEWS[h.replace('#/', '')] || VIEWS.dashboard;

@@ -101,7 +101,7 @@ function applyLang(){
 function toggleLang(){
   LANG = LANG === 'bn' ? 'en' : 'bn';
   localStorage.setItem('pos_lang', LANG);
-  if(S.token) router(); else renderLogin();
+  router(); // DEMO_MODE: login gate off — always re-render
   toast(LANG === 'bn' ? 'বাংলা চালু ✅ (default)' : 'English mode ON ✅');
 }
 
