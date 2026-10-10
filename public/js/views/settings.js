@@ -15,14 +15,14 @@ VIEWS.settings = async function () {
       <h3 style="margin-top:16px">🧾 মেমো হেড (প্রিন্ট রিসিটের উপরে যা দেখাবে)</h3>
       <div class="grid g3">
         <div><label>লোগো টেক্সট (MST ছোট বক্স)</label><input name="memo_logo" value="${esc(s.memo_logo || '')}" placeholder="MST"></div>
-        <div><label>মেমো টাইটেল (বড় বাংলা নাম)</label><input name="memo_title_line" value="${esc(s.memo_title_line || '')}" placeholder="মেসার্স এস.এস ট্রেডার্স"></div>
-        <div><label>প্রো লাইন (প্রো: XXX)</label><input name="memo_pro_line" value="${esc(s.memo_pro_line || '')}" placeholder="প্রো: মুনজুর আহমেদ"></div>
+        <div><label>মেমো টাইটেল (বড় বাংলা নাম)</label><input name="memo_title_line" value="${esc(s.memo_title_line || '')}" placeholder="মেসার্স এম.এস ট্রেডার্স"></div>
+        <div><label>প্রো লাইন (প্রো: XXX)</label><input name="memo_pro_line" value="${esc(s.memo_pro_line || '')}" placeholder="প্রোঃ মুনজুর আহমেদ"></div>
       </div>
-      <label>ট্রেড লাইন (কী বিক্রি হয় — এক লাইনে)</label><input name="memo_trade_line" value="${esc(s.memo_trade_line || '')}" placeholder="এখানে রড, সিমেন্ট, ইট, বালি, খোয়া জাতীয় নির্মাণ সামগ্রী মূলত খুলনা বিক্রয় করা হয়।">
-      <label>মেমো ঠিকানা লাইন</label><input name="memo_address_line" value="${esc(s.memo_address_line || '')}" placeholder="সেসাইট খুরাতন মার্কেট, খুরাতন বাজার, দক্ষিণ, চুয়াডাঙ্গা।">
-      <label>মোবাইল ব্যানার (নীল বক্সে যাবে)</label><input name="memo_mobile_line" value="${esc(s.memo_mobile_line || '')}" placeholder="মোবাইল: ০১৭xxx-xxxxxx, ০১৯xx-xxxxxx">
-      <label>ধন্যবাদ পিল (নীল ছোট বক্স)</label><input name="memo_footer_note" value="${esc(s.memo_footer_note || '')}" placeholder="এম.এস ট্রেডার্স এর মাল জ্বর করার জন্য আপনাকে ধন্যবাদ">
-      <label>রিসিট হেড (মাল্টি-লাইন — প্রতি লাইন = প্রিন্টে এক লাইন)</label><textarea name="receipt_header" rows="2" placeholder="লাইন ১: ট্রেড লাইসেন্স ইত্যাদি">${esc(s.receipt_header || '')}</textarea>
+      <label>ট্রেড লাইন (কী বিক্রি হয় — এক লাইনে)</label><input name="memo_trade_line" value="${esc(s.memo_trade_line || '')}" placeholder="এখানে রড, সিমেন্ট, ইট, বালি, খোয়া জাতীয় নির্মাণ সামগ্রী সুলভ মূল্যে বিক্রয় করা হয়।">
+      <label>মেমো ঠিকানা লাইন</label><input name="memo_address_line" value="${esc(s.memo_address_line || '')}" placeholder="সোসাইটি পুরাতন মার্কেট, পুরাতন বাজার, দর্শনা, চুয়াডাঙ্গা।">
+      <label>মোবাইল ব্যানার (নীল বক্সে যাবে)</label><input name="memo_mobile_line" value="${esc(s.memo_mobile_line || '')}" placeholder="মোবাইল: ০১৯৫৬-২২৬৪৬৫, ০১৭৪৮-১৫২০৩৬">
+      <label>ধন্যবাদ পিল (নীল ছোট বক্স)</label><input name="memo_footer_note" value="${esc(s.memo_footer_note || '')}" placeholder="এম.এস ট্রেডার্স এর মাল ক্রয় করার জন্য আপনাকে ধন্যবাদ">
+      <label>রিসিট হেড (মাল্টি-লাইন — অতিরিক্ত লাইন)</label><textarea name="receipt_header" rows="2" placeholder="লাইন ১: ট্রেড লাইসেন্স ইত্যাদি">${esc(s.receipt_header || '')}</textarea>
       <label>রিসিট ফুট (মাল্টি-লাইন — বাকির নোটিশ ইত্যাদি)</label><textarea name="receipt_footer" rows="2" placeholder="লাইন ১: কেনা মাল ফেরত চলবে না">${esc(s.receipt_footer || '')}</textarea>
       <h3 style="margin-top:16px">📨 MiMSMS এসএমএস গেটওয়ে</h3>
       <div class="grid g3">

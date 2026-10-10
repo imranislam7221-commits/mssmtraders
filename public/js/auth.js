@@ -1,19 +1,19 @@
 /* ---------- login ---------- */
 function renderLogin(err) {
-  document.title = 'Login — M/S S.M. Traders POS';
+  document.title = 'লগইন — মেসার্স এম.এস ট্রেডার্স';
   $('#app').innerHTML = `
   <div class="login-wrap"><div class="login-card">
-    <div class="logo">🔧</div>
-    <h2>M/S S.M. Traders</h2>
-    <div class="sub">POS & Inventory System — Login</div>
+    <div class="logo">🏗️</div>
+    <h2>মেসার্স এম.এস ট্রেডার্স</h2>
+    <div class="sub">রড, সিমেন্ট ও নির্মাণ সামগ্রী — পিওএস ও হিসাব সিস্টেম</div>
     <div style="text-align:center;margin-top:8px"><button class="btn sm" type="button" onclick="toggleLang()">🌐 বাংলা / English</button></div>
     <form id="loginform">
-      <label>Email</label><input name="email" type="email" required placeholder="owner@shop.com" autocomplete="username">
-      <label>Password</label><input name="password" type="password" required placeholder="••••••••" autocomplete="current-password">
+      <label>ইউজারনেম বা জিমেইল (Username / Gmail)</label><input name="email" type="text" required placeholder="mssmtradersdokan অথবা monjurahmed1984dsn@gmail.com" autocomplete="username">
+      <label>পাসওয়ার্ড (Password)</label><input name="password" type="password" required placeholder="••••••••" autocomplete="current-password">
       ${err ? '<div class="err">' + esc(err) + '</div>' : ''}
-      <br><button class="btn pri blk" type="submit">Login →</button>
+      <br><button class="btn pri blk" type="submit">লগইন করুন →</button>
     </form>
-    <div class="login-hint"><b>Demo logins:</b><br>👑 Owner: owner@shop.com / owner123<br>🧑‍💼 Manager: manager@shop.com / manager123</div>
+    <div class="login-hint"><b>লগইন তথ্য:</b><br>🔑 ইউজারনেম: <b>mssmtradersdokan</b><br>📧 জিমেইল: <b>monjurahmed1984dsn@gmail.com</b><br>🔒 পাসওয়ার্ড: <b>Smtradersdokan</b></div>
   </div></div>`;
   if (window.applyLang) applyLang();
   $('#loginform').addEventListener('submit', async e => {
@@ -30,6 +30,7 @@ function renderLogin(err) {
       S.token = d.token; S.user = d.user;
       localStorage.setItem('pos_token', S.token);
       location.hash = '#/dashboard';
+      router();
     } catch (ex) {
       clearTimeout(slow);
       if (btn) { btn.disabled = false; btn.textContent = btn.dataset.old || 'Login →'; }
@@ -39,4 +40,10 @@ function renderLogin(err) {
     }
   });
 }
-async function logout() { try { await api('/logout', { method: 'POST' }); } catch (e) {} S.token = ''; S.user = null; localStorage.removeItem('pos_token'); location.hash = '#/login'; }
+async function logout() {
+  try { await api('/logout', { method: 'POST' }); } catch (e) {}
+  S.token = ''; S.user = null;
+  localStorage.removeItem('pos_token');
+  location.hash = '#/login';
+  renderLogin();
+}
