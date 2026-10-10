@@ -1,4 +1,4 @@
-# 🔧 M/S S.M. Traders — POS & Inventory System
+# 🔧 মেসার্স এম.এস ট্রেডার্স — POS & Inventory System
 
 Desktop PC এবং Mobile Browser — দুটোতেই চলে (100% responsive)।
 PC বন্ধ থাকলেও একই WiFi-তে মোবাইল থেকে বিল করা যায়।
@@ -9,14 +9,13 @@ PC বন্ধ থাকলেও একই WiFi-তে মোবাইল থ�
 2. Browser এ খুলে যাবে: `http://localhost:3000`
 3. মোবাইল থেকে খুলতে: server window-তে যে **Mobile (same WiFi)** address দেখায়, সেটা মোবাইল browser-এ খুলুন
 
-## Login
+## Login (লগইন তথ্য)
 
-| Role | Email | Password |
+| Role | Username / Gmail | Password |
 |---|---|---|
-| 👑 Owner (সব এক্সেস) | `owner@shop.com` | `owner123` |
-| 🧑‍💼 Manager (POS + Stock In) | `manager@shop.com` | `manager123` |
+| 👑 প্রোপ্রাইটর (মুনজুর আহমেদ) | `mssmtradersdokan` অথবা `monjurahmed1984dsn@gmail.com` | `Smtradersdokan` |
 
-- Owner & Manager: same full access (owner@shop.com / owner123, manager@shop.com / manager123)
+- দোকান: **মেসার্স এম.এস ট্রেডার্স**, দর্শনা, চুয়াডাঙ্গা।
 
 ## Features
 
