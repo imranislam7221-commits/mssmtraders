@@ -22,7 +22,7 @@ function layout(inner) {
         <div class="nm">${esc(S.user.name)}</div>
         <div class="rl">${isBn && S.user.role === 'owner' ? 'দোকানের মালিক' : esc(S.user.role)} • ${esc(S.user.username || S.user.email)}</div>
         <button onclick="toggleLang()" style="background:#292524;color:#fbbf24">🌐 <span id="langlabel">${isBn ? 'English' : 'বাংলা'}</span></button>
-        <button onclick="logout()">${isBn ? 'লগআউট ⏻' : 'Logout ⏻'}</button>
+        <button onclick="logout()">${isBn ? '🚪 লগআউট' : '🚪 Logout'}</button>
       </div>
     </aside>
     <main class="main">${inner}</main>

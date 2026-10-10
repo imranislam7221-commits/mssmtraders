@@ -62,12 +62,61 @@ const I18N_BN = {
 "Shop Owner (Malik)":"দোকানের মালিক","Shop Manager":"দোকানের ম্যানেজার","owner":"মালিক","manager":"ম্যানেজার",
 "Product":"পণ্য","Unit":"একক","Current Stock":"বর্তমান স্টক","Purchase Price":"কেনা দাম","Selling Price":"বিক্রি দাম","Actions":"একশন","Edit":"পরিবর্তন","Subtotal":"সাবটোটাল","TOTAL":"মোট"," Paid":"জমা","Due":"বাকি","Phone":"ফোন","Address":"ঠিকানা","Save Settings":"সেটিংস সেভ করুন",
 "Purchase Price (Tk)":"কেনা দাম (৳)","Selling Price (Tk)":"বিক্রি দাম (৳)","Price (Tk)":"দাম (৳)","Qty":"পরিমাণ",
-"kg":"কেজি","bag":"বস্তা","sft":"বর্গফুট","pc":"পিস","ltr":"লিটার","cft":"ঘনফুট",
-"Rod":"রড","Rod (Brand)":"রড (ব্র্যান্ড)","Cement":"সিমেন্ট","Tiles":"টাইলস","Pipes":"পাইপ","Paint":"পেইন্ট","Tools":"টুলস","Balu (Sand)":"বালু","Brick (ইট)":"ইট",
-"Receipt Header (multi-line — per line = print e ek line)":"রিসিট হেড (মাল্টি-লাইন — প্রতি লাইন = প্রিন্টে এক লাইন)","Receipt Footer (multi-line — per line = print e ek line)":"রিসিট ফুট (মাল্টি-লাইন — প্রতি লাইন = প্রিন্টে এক লাইন)"
+"kg":"কেজি","bag":"বস্তা","sft":"বর্গফুট","pc":"পিস","ltr":"লিটার","cft":"ঘনফুট","ton":"টন","bundle":"বান্ডিল","box":"বক্স","pkt":"প্যাকেট",
+"Rod":"রড","Rod (Brand)":"রড (ব্র্যান্ড)","Cement":"সিমেন্ট","Tiles":"টাইলস","Pipes":"পাইপ","Paint":"পেইন্ট","Tools":"টুলস","Balu (Sand)":"বালু","Brick (ইট)":"ইট","Sand":"বালি ও খোয়া","Brick":"ইট",
+"Receipt Header (multi-line — per line = print e ek line)":"রিসিট হেড (মাল্টি-লাইন — প্রতি লাইন = প্রিন্টে এক লাইন)","Receipt Footer (multi-line — per line = print e ek line)":"রিসিট ফুট (মাল্টি-লাইন — প্রতি লাইন = প্রিন্টে এক লাইন)",
+"Select item — enter Qty & Price — totals auto-calculate":"পণ্য নির্বাচন করুন → পরিমাণ ও দর দিন → মোট হিসাব স্বয়ংক্রিয়ভাবে হবে",
+"Select item — enter পরিমাণ & Price — totals auto-calculate":"পণ্য নির্বাচন করুন → পরিমাণ ও দর দিন → মোট হিসাব স্বয়ংক্রিয়ভাবে হবে",
+"Customer (search by name/phone)":"কাস্টমার নির্বাচন (নাম বা মোবাইল নম্বর দিয়ে খুঁজুন)",
+"Customer (searchable)":"কাস্টমার নির্বাচন (নাম বা মোবাইল নম্বর দিয়ে খুঁজুন)",
+"🔍 Customer name/phone…":"🔍 কাস্টমারের নাম বা ফোন নম্বর লিখুন...",
+"🔍 Customer name/phone...":"🔍 কাস্টমারের নাম বা ফোন নম্বর লিখুন...",
+"🔍 কাস্টমার name/phone...":"🔍 কাস্টমারের নাম বা ফোন নম্বর লিখুন...",
+"🔍 কাস্টমার name/phone…":"🔍 কাস্টমারের নাম বা ফোন নম্বর লিখুন...",
+"Discount (Tk)":"ছাড় (টাকা)",
+"Discount":"ছাড় (ডিসকাউন্ট)",
+"VAT %":"ভ্যাট (%)",
+"VAT (0%)":"ভ্যাট (০%)",
+"VAT":"ভ্যাট",
+"Subtotal":"সাবটোটাল",
+"Net Payable":"সর্বমোট প্রদেয়",
+"Due (Baki)":"বকেয়া / বাকি",
+"Paid Amount (Tk)":"জমা টাকা (নগদ)",
+"Paid":"জমা",
+"Total":"মোট",
+"stock 0":"স্টক ০",
+"stock":"স্টক",
+"Stock":"স্টক",
+"Logout ⏻":"🚪 লগআউট",
+"Logout":"🚪 লগআউট",
+"Save":"চালান সংরক্ষণ করুন",
+"Save & Print":"সংরক্ষণ ও মেমো প্রিন্ট"
 };
 let LANG = localStorage.getItem('pos_lang') || 'bn';
-function t(s){ return (LANG === 'bn' && I18N_BN[s]) ? I18N_BN[s] : s; }
+function t(s){
+  if (!s) return '';
+  if (LANG !== 'bn') return s;
+  return I18N_BN[s] || s;
+}
+function bnUnit(u){
+  if (!u) return '';
+  if (LANG !== 'bn') return u;
+  const map = {
+    'kg':'কেজি','ton':'টন','bag':'বস্তা','pc':'পিস','sft':'বর্গফুট','cft':'ঘনফুট',
+    'ltr':'লিটার','bundle':'বান্ডিল','hajar':'হাজার','box':'বক্স','pkt':'প্যাকেট'
+  };
+  return map[String(u).toLowerCase()] || u;
+}
+function bnCat(c){
+  if (!c) return '';
+  if (LANG !== 'bn') return c;
+  const map = {
+    'Rod':'রড','Rod (Brand)':'রড (ব্র্যান্ড)','Cement':'সিমেন্ট','Tiles':'টাইলস',
+    'Pipes':'পাইপ','Paint':'রং','Tools':'টুলস','Balu (Sand)':'বালু',
+    'Brick (ইট)':'ইট','Brick':'ইট','Sand':'বালি ও খোয়া','General':'সাধারণ'
+  };
+  return map[c] || c;
+}
 function swapText(v){
   const keys = Object.keys(I18N_BN).sort((a,b)=>b.length-a.length);
   for(const k of keys){ if(v.indexOf(k) >= 0) v = v.split(k).join(I18N_BN[k]); }

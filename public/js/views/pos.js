@@ -19,7 +19,7 @@ VIEWS.pos = async function () {
     <div class="pos-grid">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-          <h3 style="margin:0">${isBn ? '১️⃣ পণ্য যোগ করুন' : '1️⃣ Add Items'}</h3>
+          <h3 style="margin:0">${isBn ? '১️⃣ মালামাল যোগ করুন' : '1️⃣ Add Items'}</h3>
           <button class="btn sm" type="button" onclick="openRodCalcModal()">⚖️ ${isBn ? 'রড ওজন ক্যালকুলেটর' : 'Rod Calculator'}</button>
         </div>
         <div class="psearch-wrap">
@@ -35,16 +35,16 @@ VIEWS.pos = async function () {
                 <button type="button" class="unit-btn" id="btn-u-ton" onclick="setPosUnitMode('ton')">টন (ton)</button>
               </div>
             </div>
-            <input id="pqty" type="number" step="0.001" placeholder="${isBn ? 'পরিমাণ' : 'Qty'}" oninput="onQtyChange()">
+            <input id="pqty" type="number" step="0.001" placeholder="${isBn ? 'পরিমাণ লিখুন' : 'Qty'}" oninput="onQtyChange()">
             <div id="conv-info" class="conv-hint" style="display:none"></div>
           </div>
           <div style="flex:1.4">
             <label style="margin-top:0">${isBn ? 'দর / রেট (টাকা)' : 'Price (Tk)'} <span id="priceunit" style="font-weight:400;color:var(--mut)"></span></label>
-            <input id="pprice" type="number" step="0.01" placeholder="${isBn ? 'টাকা' : 'Tk'}" oninput="onPriceChange()">
+            <input id="pprice" type="number" step="0.01" placeholder="${isBn ? 'দর দিন' : 'Tk'}" oninput="onPriceChange()">
             <div id="price-conv-info" class="conv-hint" style="display:none"></div>
           </div>
           <div style="flex:0.8;display:flex;align-items:flex-end">
-            <button class="btn pri blk" style="padding:10px" onclick="addToCart()">${isBn ? '+ যোগ' : '+ Add'}</button>
+            <button class="btn pri blk" style="padding:10px" onclick="addToCart()">${isBn ? '+ কার্টে যোগ' : '+ Add'}</button>
           </div>
         </div>
         <h3 style="margin-top:16px">${isBn ? '২️⃣ নির্বাচিত পণ্য (কার্ট)' : '2️⃣ Cart'}</h3>
@@ -53,7 +53,7 @@ VIEWS.pos = async function () {
 
       <div class="card">
         <h3>${isBn ? '৩️⃣ কাস্টমার ও পেমেন্ট' : '3️⃣ Customer & Payment'}</h3>
-        <label>${isBn ? 'কাস্টমার (নাম বা মোবাইল নম্বর দিয়ে খুঁজুন)' : 'Customer (search by name/phone)'}</label>
+        <label>${isBn ? 'কাস্টমার নির্বাচন (নাম বা মোবাইল নম্বর দিয়ে খুঁজুন)' : 'Customer (search by name/phone)'}</label>
         <div class="psearch-wrap">
           <input id="custsearch" placeholder="${isBn ? '🔍 কাস্টমারের নাম বা ফোন নম্বর লিখুন...' : '🔍 Customer name/phone…'}" autocomplete="off" oninput="cDrop()" onfocus="cDrop()">
           <div id="cdrop" class="pdrop" style="display:none"></div>
@@ -67,7 +67,7 @@ VIEWS.pos = async function () {
           <label>${isBn ? 'মোবাইল নম্বর' : 'Phone'}</label>
           <input id="ncphone" placeholder="${isBn ? '০১XXXXXXXXX' : '01XXXXXXXXX'}">
           <label style="display:flex;gap:6px;align-items:center;margin-top:8px;cursor:pointer">
-            <input type="checkbox" id="ncwa" style="width:auto"> ${isBn ? 'হোয়াটসঅ্যাপ মেসেজ পাঠানো যাবে' : 'WhatsApp enabled (statement via WhatsApp)'}
+            <input type="checkbox" id="ncwa" style="width:auto"> ${isBn ? 'হোয়াটসঅ্যাপ চালু (রসিদ যাবে হোয়াটসঅ্যাপে)' : 'WhatsApp enabled'}
           </label>
         </div>
 
@@ -77,7 +77,7 @@ VIEWS.pos = async function () {
             <input id="fdiscount" type="number" step="0.01" value="0" oninput="calcTotals()">
           </div>
           <div>
-            <label style="margin-top:0">${isBn ? 'ভ্যাট %' : 'VAT %'}</label>
+            <label style="margin-top:0">${isBn ? 'ভ্যাট (%)' : 'VAT (%)'}</label>
             <input id="fvat" type="number" step="0.01" value="0" oninput="calcTotals()">
           </div>
         </div>
@@ -91,7 +91,7 @@ VIEWS.pos = async function () {
         <input id="fnote" placeholder="${isBn ? 'যেকোনো নোট বা মন্তব্য...' : 'any remark'}">
 
         <div style="display:flex;gap:8px;margin-top:14px">
-          <button class="btn pri blk" onclick="saveInvoice(false)">${isBn ? '💾 সংরক্ষণ' : '💾 Save'}</button>
+          <button class="btn pri blk" onclick="saveInvoice(false)">${isBn ? '💾 চালান সংরক্ষণ করুন' : '💾 Save'}</button>
           <button class="btn grn blk" onclick="saveInvoice(true)">${isBn ? '🖨️ সংরক্ষণ ও মেমো প্রিন্ট' : '🖨️ Save & Print'}</button>
         </div>
       </div>
@@ -114,13 +114,16 @@ function pDrop() {
   }
 
   box.innerHTML = list.map(p => {
+    const pName = isBn ? t(p.name) : p.name;
+    const pCat = isBn ? bnCat(p.category) : p.category;
+    const pUnit = isBn ? bnUnit(p.unit) : p.unit;
     const sizeStr = p.size_mili ? ' • ' + (isBn ? bnDigits(p.size_mili) + ' মি.মি' : p.size_mili + 'mm') : '';
-    const stockStr = isBn ? ('স্টক ' + bnDigits(p.current_stock)) : ('stock ' + p.current_stock);
-    const priceStr = money(p.selling_price) + ' / ' + esc(p.unit);
+    const stockStr = isBn ? ('স্টক ' + bnDigits(p.current_stock) + ' ' + pUnit) : ('stock ' + p.current_stock + ' ' + p.unit);
+    const priceStr = money(p.selling_price) + ' / ' + esc(pUnit);
     const dis = p.current_stock <= 0 ? 'dis' : '';
     return `
       <div class="pi ${dis}" onmousedown="pickProduct(${p.id})">
-        <span>${esc(p.name)} <small style="color:var(--mut)">${esc(p.category)}${sizeStr}</small></span>
+        <span>${esc(pName)} <small style="color:var(--mut)">${esc(pCat)}${sizeStr}</small></span>
         <span class="st">${priceStr} • ${stockStr}</span>
       </div>`;
   }).join('');
@@ -173,9 +176,11 @@ function onPriceChange() {
 }
 
 function pickProduct(id) {
+  const isBn = window.LANG === 'bn';
   const p = S.__products.find(x => x.id === id);
   if (!p) return;
-  $('#psearch').value = p.name;
+  const pName = isBn ? t(p.name) : p.name;
+  $('#psearch').value = pName;
   $('#psearch').dataset.pid = p.id;
   $('#pdrop').style.display = 'none';
   $('#pprice').value = p.selling_price;
@@ -185,10 +190,11 @@ function pickProduct(id) {
   if (sw) sw.style.display = isRodOrKg ? 'inline-flex' : 'none';
 
   setPosUnitMode('kg');
+  const pUnit = isBn ? bnUnit(p.unit) : p.unit;
   const qu = $('#qtyunit');
-  if (qu) qu.textContent = p.unit;
+  if (qu) qu.textContent = pUnit;
   const pu = $('#priceunit');
-  if (pu) pu.textContent = `/${p.unit}`;
+  if (pu) pu.textContent = `/${pUnit}`;
 
   $('#pqty').value = 1;
   onQtyChange();

@@ -4,10 +4,10 @@ VIEWS.products = async function () {
   const { products } = await api('/products');
   const rows = products.slice().sort(prodSort).map(p => `<tr>
     <td>
-      <b>${esc(p.name)}</b><br>
-      <small style="color:var(--mut)">${esc(p.category)}${p.size_mili ? ' • ' + (isBn ? bnDigits(p.size_mili) + ' মি.মি' : p.size_mili + 'mm') : ''}</small>
+      <b>${esc(isBn ? t(p.name) : p.name)}</b><br>
+      <small style="color:var(--mut)">${esc(isBn ? bnCat(p.category) : p.category)}${p.size_mili ? ' • ' + (isBn ? bnDigits(p.size_mili) + ' মি.মি' : p.size_mili + 'mm') : ''}</small>
     </td>
-    <td>${esc(p.unit)}</td>
+    <td>${esc(isBn ? bnUnit(p.unit) : p.unit)}</td>
     <td class="num ${p.current_stock <= p.low_stock ? 'dueX' : ''}"><b>${isBn ? bnDigits(p.current_stock) : p.current_stock}</b></td>
     <td class="num">${money(p.purchase_price)}</td>
     <td class="num"><b>${money(p.selling_price)}</b></td>
