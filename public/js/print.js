@@ -284,11 +284,13 @@ async function printInvoice(id) {
   }
 }
 
-async function printStatement(id) {
+async function printStatement(id, fromDate, toDate) {
   try {
-    const { customer: c, ledger } = await api('/customers/' + id + '/ledger');
+    const from = fromDate !== undefined ? fromDate : (($('#cfrom') || {}).value || '');
+    const to = toDate !== undefined ? toDate : (($('#cto') || {}).value || '');
+    const qs = (from || to) ? '?' + new URLSearchParams({ from, to }) : '';
+    const { customer: c, ledger } = await api('/customers/' + id + '/ledger' + qs);
     const s = await settingsSafe();
-    const from = ($('#cfrom') || {}).value || '', to = ($('#cto') || {}).value || '';
     const rng = (from || to) ? (bnDigits(from || 'শুরু') + ' থেকে ' + bnDigits(to || 'আজ')) : 'সব লেনদেন';
     const stmtHtml = buildStatementMemoHtml(c, ledger, s, rng);
     const pa = $('#print-area');

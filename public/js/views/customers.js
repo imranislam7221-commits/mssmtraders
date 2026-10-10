@@ -125,11 +125,19 @@ async function viewCustomer(id) {
           <div class="val">${isBn ? bnDigits(ledger.length) : ledger.length}</div>
         </div>
       </div>
-      <div class="toolbar" style="margin-top:12px">
-        <input type="date" id="cfrom">
-        <input type="date" id="cto">
-        <button class="btn sm" onclick="filterCustLedger(${c.id})">${isBn ? 'ফিল্টার' : 'Filter'}</button>
+      <div class="pill-group" style="margin-top:14px;margin-bottom:8px">
+        <button type="button" class="cat-pill active" id="dp-all" onclick="setCustDateRange(${c.id}, 'all')">${isBn ? 'সব লেনদেন' : 'All'}</button>
+        <button type="button" class="cat-pill" id="dp-today" onclick="setCustDateRange(${c.id}, 'today')">${isBn ? 'আজকের' : 'Today'}</button>
+        <button type="button" class="cat-pill" id="dp-week" onclick="setCustDateRange(${c.id}, 'week')">${isBn ? 'চলতি সপ্তাহ' : 'This Week'}</button>
+        <button type="button" class="cat-pill" id="dp-month" onclick="setCustDateRange(${c.id}, 'month')">${isBn ? 'চলতি মাস' : 'This Month'}</button>
+        <button type="button" class="cat-pill" id="dp-prev" onclick="setCustDateRange(${c.id}, 'prev_month')">${isBn ? 'গত মাস' : 'Last Month'}</button>
       </div>
+      <div class="toolbar" style="margin-top:6px;margin-bottom:8px">
+        <input type="date" id="cfrom" onchange="highlightCustomDate()">
+        <input type="date" id="cto" onchange="highlightCustomDate()">
+        <button class="btn sm" onclick="filterCustLedger(${c.id})">${isBn ? '🔍 ফিল্টার করুন' : 'Filter'}</button>
+      </div>
+      <div id="cperiod-summary" class="period-summary" style="display:none"></div>
       <div id="custledger">
         <div class="tblwrap">
           <table class="tbl">
@@ -146,15 +154,47 @@ async function viewCustomer(id) {
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
         <button class="btn grn" onclick="payModal(${c.id}, ${c.total_due})">💵 ${isBn ? 'বাকি জমা গ্রহণ করুন' : 'Collect Due Payment'}</button>
-        <button class="btn pri" onclick="printStatement(${c.id})">🖨️ ${isBn ? 'লেজার প্রিন্ট প্রিভিউ' : 'Print Statement'}</button>
+        <button class="btn pri" id="btn-print-stmt" onclick="printStatement(${c.id}, ($('#cfrom')||{}).value, ($('#cto')||{}).value)">🖨️ ${isBn ? 'লেজার প্রিন্ট প্রিভিউ' : 'Print Statement'}</button>
       </div>
     </div>`, true);
+}
+
+function highlightCustomDate() {
+  document.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
+}
+
+function setCustDateRange(id, type) {
+  const now = new Date();
+  const f = $('#cfrom'), t = $('#cto');
+  document.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
+  const activeBtn = $(`#dp-${type}`);
+  if (activeBtn) activeBtn.classList.add('active');
+
+  const fmt = d => d.toISOString().split('T')[0];
+  if (type === 'all') {
+    f.value = ''; t.value = '';
+  } else if (type === 'today') {
+    const todayStr = fmt(now);
+    f.value = todayStr; t.value = todayStr;
+  } else if (type === 'week') {
+    const start = new Date(now);
+    start.setDate(now.getDate() - 7);
+    f.value = fmt(start); t.value = fmt(now);
+  } else if (type === 'month') {
+    const start = new Date(now.getFullYear(), now.getMonth(), 1);
+    f.value = fmt(start); t.value = fmt(now);
+  } else if (type === 'prev_month') {
+    const start = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+    const end = new Date(now.getFullYear(), now.getMonth(), 0);
+    f.value = fmt(start); t.value = fmt(end);
+  }
+  filterCustLedger(id);
 }
 
 async function filterCustLedger(id) {
   const isBn = window.LANG === 'bn';
   const from = $('#cfrom').value, to = $('#cto').value;
-  const { ledger } = await api('/customers/' + id + '/ledger' + (from || to ? '?' + new URLSearchParams({ from, to }) : ''));
+  const { ledger, customer: c } = await api('/customers/' + id + '/ledger' + (from || to ? '?' + new URLSearchParams({ from, to }) : ''));
   const rows = ledger.map(l => `<tr>
     <td>${fmtDT(l.timestamp)}</td>
     <td><span class="badge ${l.transaction_type === 'CREDIT' ? 'in' : 'out'}">${l.transaction_type === 'CREDIT' ? (isBn ? 'জমা' : 'CREDIT') : (isBn ? 'বিল' : 'DEBIT')}</span></td>
@@ -171,6 +211,29 @@ async function filterCustLedger(id) {
       <th class="num">${isBn ? 'ব্যালেন্স' : 'Balance'}</th>
       <th>${isBn ? 'মন্তব্য' : 'Note'}</th>
     </tr>` + rows;
+
+  const sumBox = $('#cperiod-summary');
+  if (sumBox) {
+    if (from || to) {
+      const billed = ledger.filter(l => l.transaction_type !== 'CREDIT').reduce((s, l) => s + l.amount, 0);
+      const paid = ledger.filter(l => l.transaction_type === 'CREDIT').reduce((s, l) => s + l.amount, 0);
+      const rngTxt = (from || 'শুরু') + ' থেকে ' + (to || 'আজ');
+      sumBox.innerHTML = `
+        <div>📅 <b>${isBn ? bnDigits(rngTxt) : rngTxt}</b> এর লেনদেন (${isBn ? bnDigits(ledger.length) : ledger.length} টি)</div>
+        <div>
+          <span style="color:var(--red);font-weight:700">${isBn ? 'মোট বিল: ' : 'Billed: '}${money(billed)}</span> | 
+          <span style="color:var(--green);font-weight:700">${isBn ? 'মোট জমা: ' : 'Paid: '}${money(paid)}</span>
+        </div>`;
+      sumBox.style.display = 'flex';
+    } else {
+      sumBox.style.display = 'none';
+    }
+  }
+
+  const pBtn = $('#btn-print-stmt');
+  if (pBtn && c) {
+    pBtn.onclick = () => printStatement(c.id, from, to);
+  }
 }
 
 function payModal(id, due) {

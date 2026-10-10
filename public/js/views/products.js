@@ -27,7 +27,12 @@ VIEWS.products = async function () {
       <div style="display:flex;gap:8px;align-items:center">
         <input id="psearch2" placeholder="${isBn ? '🔍 পণ্য খুঁজুন…' : '🔍 Search product…'}" style="width:220px" oninput="filterProducts(this.value)">
         <button class="btn pri" onclick="addProduct()">${isBn ? '+ নতুন পণ্য যোগ' : '+ Add Product'}</button>
-      </div>
+    <div class="pill-group" style="margin-bottom:12px">
+      <button type="button" class="cat-pill active" id="cp-all" onclick="filterByCat('all')">🏷️ ${isBn ? 'সব পণ্য' : 'All'}</button>
+      <button type="button" class="cat-pill" id="cp-rod" onclick="filterByCat('Rod')">🏗️ ${isBn ? 'রড (Rod)' : 'Rod'}</button>
+      <button type="button" class="cat-pill" id="cp-cement" onclick="filterByCat('Cement')">🧱 ${isBn ? 'সিমেন্ট (Cement)' : 'Cement'}</button>
+      <button type="button" class="cat-pill" id="cp-brick" onclick="filterByCat('Brick')">🧱 ${isBn ? 'ইট (Bricks)' : 'Bricks'}</button>
+      <button type="button" class="cat-pill" id="cp-sand" onclick="filterByCat('Sand')">🏖️ ${isBn ? 'বালি ও খোয়া' : 'Sand & Stone'}</button>
     </div>
     <div class="card">
       <div class="tblwrap">
@@ -147,8 +152,33 @@ function openStockIn(pid) {
   api('/products').then(d => stockInModal(pid, d.products));
 }
 
+let SI_UNIT_MODE = 'kg';
+
+function setSIUnitMode(mode) {
+  SI_UNIT_MODE = mode;
+  const bKg = $('#btn-si-kg'), bTon = $('#btn-si-ton');
+  if (bKg) bKg.className = 'unit-btn ' + (mode === 'kg' ? 'active' : '');
+  if (bTon) bTon.className = 'unit-btn ' + (mode === 'ton' ? 'active' : '');
+  calcSIHint();
+}
+
+function calcSIHint() {
+  const isBn = window.LANG === 'bn';
+  const val = parseFloat(($('#si-qty-in') || {}).value) || 0;
+  const hint = $('#si-conv-hint');
+  if (!hint) return;
+  if (SI_UNIT_MODE === 'ton') {
+    const kg = Math.round(val * 1000 * 100) / 100;
+    hint.innerHTML = isBn ? `➡️ <b>${bnDigits(kg)} কেজি</b> স্টকে জমা হবে` : `➡️ <b>${kg} kg</b> will be added to stock`;
+    hint.style.display = val > 0 ? 'block' : 'none';
+  } else {
+    hint.style.display = 'none';
+  }
+}
+
 function stockInModal(pid, products) {
   const isBn = window.LANG === 'bn';
+  SI_UNIT_MODE = 'kg';
   modal(`
     <div class="modal-h">
       <h3>📥 ${isBn ? 'স্টক ইন — মালামাল গ্রহণ' : 'Stock In — New Shipment'}</h3>
@@ -157,23 +187,30 @@ function stockInModal(pid, products) {
     <div class="modal-b">
       <form id="siform">
         <label>${isBn ? 'পণ্য নির্বাচন করুন *' : 'Product *'}</label>
-        <select name="product_id" required>
+        <select name="product_id" id="si-prod-sel" required>
           ${(products || []).slice().sort(prodSort).map(p => `<option value="${p.id}" ${p.id === pid ? 'selected' : ''}>${esc(p.name)} (${isBn ? 'বর্তমান: ' + bnDigits(p.current_stock) : 'now: ' + p.current_stock} ${esc(p.unit)})</option>`).join('')}
         </select>
         <div class="grid g2">
           <div>
-            <label>${isBn ? 'পরিমাণ (+) *' : 'Quantity (+) *'} <span id="siunit" style="color:var(--brand);font-weight:400"></span></label>
-            <input name="quantity" type="number" step="0.01" required placeholder="${isBn ? 'যেমন: ১০০' : 'e.g. 100'}">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <label style="margin-top:0">${isBn ? 'পরিমাণ (+) *' : 'Quantity (+) *'} <span id="siunit" style="color:var(--brand);font-weight:400"></span></label>
+              <div id="si-unit-wrap" class="unit-switcher" style="display:none">
+                <button type="button" class="unit-btn active" id="btn-si-kg" onclick="setSIUnitMode('kg')">কেজি (kg)</button>
+                <button type="button" class="unit-btn" id="btn-si-ton" onclick="setSIUnitMode('ton')">টন (ton)</button>
+              </div>
+            </div>
+            <input name="quantity" id="si-qty-in" type="number" step="0.001" required placeholder="${isBn ? 'যেমন: ১০০' : 'e.g. 100'}" oninput="calcSIHint()">
+            <div id="si-conv-hint" class="conv-hint" style="display:none"></div>
           </div>
           <div>
-            <label>${isBn ? 'কেনা দর / ইউনিট প্রতি খরচ (টাকা)' : 'Purchase Cost / unit (Tk)'}</label>
-            <input name="unit_cost" type="number" step="0.01" placeholder="${isBn ? 'আগের দর থাকবে খালি রাখলে' : 'default = purchase price'}">
+            <label>${isBn ? 'কেনা দর / ইউনিট প্রতি খরচ (টাকা)' : 'Purchase Cost / unit (Tk)'} <span id="si-cost-hint" style="color:var(--mut);font-weight:400"></span></label>
+            <input name="unit_cost" id="si-cost-in" type="number" step="0.01" placeholder="${isBn ? 'আগের দর থাকবে খালি রাখলে' : 'default = purchase price'}">
           </div>
         </div>
         <div class="grid g2">
           <div>
-            <label>${isBn ? 'সাপ্লায়ার / মহাজন / উৎস' : 'Supplier / Vendor Source'}</label>
-            <input name="supplier" placeholder="${isBn ? 'যেমন: বিএসআরএম / আবুল খায়ের' : 'e.g. BSRM / Abul Khair'}">
+            <label>${isBn ? 'সাপ্লায়ার / মহাজন / মিল' : 'Supplier / Vendor Source'}</label>
+            <input name="supplier" placeholder="${isBn ? 'যেমন: বিএসআরএম / আবুল খায়ের / মেঘনা' : 'e.g. BSRM / Abul Khair'}">
           </div>
           <div>
             <label>${isBn ? 'পেমেন্ট ধরন' : 'Payment Type'}</label>
@@ -184,7 +221,7 @@ function stockInModal(pid, products) {
           </div>
         </div>
         <label>${isBn ? 'নোট বা চালান নং (ঐচ্ছিক)' : 'Note (optional)'}</label>
-        <input name="note" placeholder="${isBn ? 'চালান নম্বর বা মন্তব্য' : 'invoice no or remark'}">
+        <input name="note" id="si-note-in" placeholder="${isBn ? 'চালান নম্বর বা মন্তব্য' : 'invoice no or remark'}">
         <br>
         <button class="btn grn blk">${isBn ? 'স্টকে যোগ করুন ➕' : 'Add Stock ➕'}</button>
       </form>
@@ -195,6 +232,10 @@ function stockInModal(pid, products) {
     const p = (products || []).find(x => x.id === +sif.product_id.value);
     const u = $('#siunit');
     if (u) u.textContent = p ? '(' + p.unit + ')' : '';
+    const isRodOrKg = p && (p.unit === 'kg' || p.unit === 'কেজি' || (p.category && p.category.toLowerCase().includes('rod')));
+    const wrap = $('#si-unit-wrap');
+    if (wrap) wrap.style.display = isRodOrKg ? 'inline-flex' : 'none';
+    setSIUnitMode('kg');
   };
   sif.product_id.addEventListener('change', updSI);
   updSI();
@@ -202,16 +243,25 @@ function stockInModal(pid, products) {
   $('#siform').addEventListener('submit', async e => {
     e.preventDefault();
     const f = e.target;
+    let qty = parseFloat(f.quantity.value) || 0;
+    let note = f.note ? f.note.value.trim() : '';
+
+    if (SI_UNIT_MODE === 'ton') {
+      const tonVal = qty;
+      qty = +(qty * 1000).toFixed(2);
+      note = (note ? note + ' • ' : '') + `${tonVal} টন চালান`;
+    }
+
     try {
       await api('/stockin', {
         method: 'POST',
         body: {
           product_id: +f.product_id.value,
-          quantity: f.quantity.value,
+          quantity: qty,
           unit_cost: f.unit_cost.value,
           supplier: f.supplier.value,
           is_credit: f.is_credit.value === '1',
-          note: f.note ? f.note.value : ''
+          note
         }
       });
       closeModal();
@@ -224,9 +274,24 @@ function stockInModal(pid, products) {
 }
 
 function filterProducts(q) {
-  q = q.toLowerCase();
+  q = (q || '').toLowerCase();
   document.querySelectorAll("#ptable tr").forEach(function (tr, i) {
     if (i === 0) return;
     tr.style.display = tr.textContent.toLowerCase().includes(q) ? "" : "none";
+  });
+}
+
+function filterByCat(cat) {
+  document.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
+  const btn = $(`#cp-${cat.toLowerCase()}`);
+  if (btn) btn.classList.add('active');
+
+  document.querySelectorAll("#ptable tr").forEach(function (tr, i) {
+    if (i === 0) return;
+    if (cat === 'all') {
+      tr.style.display = "";
+    } else {
+      tr.style.display = tr.textContent.toLowerCase().includes(cat.toLowerCase()) ? "" : "none";
+    }
   });
 }

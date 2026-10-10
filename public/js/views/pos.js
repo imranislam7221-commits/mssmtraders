@@ -18,19 +18,30 @@ VIEWS.pos = async function () {
     </div>
     <div class="pos-grid">
       <div class="card">
-        <h3>${isBn ? '১️⃣ পণ্য যোগ করুন' : '1️⃣ Add Items'}</h3>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <h3 style="margin:0">${isBn ? '১️⃣ পণ্য যোগ করুন' : '1️⃣ Add Items'}</h3>
+          <button class="btn sm" type="button" onclick="openRodCalcModal()">⚖️ ${isBn ? 'রড ওজন ক্যালকুলেটর' : 'Rod Calculator'}</button>
+        </div>
         <div class="psearch-wrap">
           <input id="psearch" placeholder="${isBn ? '🔍 পণ্য খুঁজুন (রড, সিমেন্ট, ইট, বালি, টাইলস...)' : '🔍 Search item (Rod, Cement, Tiles…)'}" autocomplete="off" oninput="pDrop()" onfocus="pDrop()">
           <div id="pdrop" class="pdrop" style="display:none"></div>
         </div>
         <div class="qtyrow" style="margin-top:10px">
           <div style="flex:1.4">
-            <label style="margin-top:0">${isBn ? 'পরিমাণ' : 'Qty'} (<span id="qtyunit" style="color:var(--brand)">—</span>) *</label>
-            <input id="pqty" type="number" step="0.01" placeholder="${isBn ? 'পরিমাণ' : 'Qty'}">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <label style="margin-top:0">${isBn ? 'পরিমাণ' : 'Qty'} (<span id="qtyunit" style="color:var(--brand)">—</span>) *</label>
+              <div id="unit-switch-wrap" class="unit-switcher" style="display:none">
+                <button type="button" class="unit-btn active" id="btn-u-kg" onclick="setPosUnitMode('kg')">কেজি (kg)</button>
+                <button type="button" class="unit-btn" id="btn-u-ton" onclick="setPosUnitMode('ton')">টন (ton)</button>
+              </div>
+            </div>
+            <input id="pqty" type="number" step="0.001" placeholder="${isBn ? 'পরিমাণ' : 'Qty'}" oninput="onQtyChange()">
+            <div id="conv-info" class="conv-hint" style="display:none"></div>
           </div>
           <div style="flex:1.4">
-            <label style="margin-top:0">${isBn ? 'দর / রেট (টাকা)' : 'Price (Tk)'}</label>
-            <input id="pprice" type="number" step="0.01" placeholder="${isBn ? 'টাকা' : 'Tk'}">
+            <label style="margin-top:0">${isBn ? 'দর / রেট (টাকা)' : 'Price (Tk)'} <span id="priceunit" style="font-weight:400;color:var(--mut)"></span></label>
+            <input id="pprice" type="number" step="0.01" placeholder="${isBn ? 'টাকা' : 'Tk'}" oninput="onPriceChange()">
+            <div id="price-conv-info" class="conv-hint" style="display:none"></div>
           </div>
           <div style="flex:0.8;display:flex;align-items:flex-end">
             <button class="btn pri blk" style="padding:10px" onclick="addToCart()">${isBn ? '+ যোগ' : '+ Add'}</button>
@@ -116,6 +127,51 @@ function pDrop() {
   box.style.display = 'block';
 }
 
+let POS_UNIT_MODE = 'kg';
+
+function setPosUnitMode(mode) {
+  POS_UNIT_MODE = mode;
+  const bKg = $('#btn-u-kg'), bTon = $('#btn-u-ton');
+  if (bKg) bKg.className = 'unit-btn ' + (mode === 'kg' ? 'active' : '');
+  if (bTon) bTon.className = 'unit-btn ' + (mode === 'ton' ? 'active' : '');
+  const qu = $('#qtyunit');
+  if (qu) qu.textContent = (mode === 'ton' ? 'টন' : 'কেজি');
+  onQtyChange();
+}
+
+function onQtyChange() {
+  const isBn = window.LANG === 'bn';
+  const val = parseFloat($('#pqty').value) || 0;
+  const conv = $('#conv-info');
+  const prConv = $('#price-conv-info');
+  const pr = parseFloat($('#pprice').value) || 0;
+
+  if (!conv) return;
+  if (POS_UNIT_MODE === 'ton') {
+    const kg = Math.round(val * 1000 * 100) / 100;
+    conv.innerHTML = isBn ? `➡️ <b>${bnDigits(kg)} কেজি</b> (১ টন = ১০০০ কেজি)` : `➡️ <b>${kg} kg</b> (1 ton = 1000 kg)`;
+    conv.style.display = val > 0 ? 'block' : 'none';
+    if (prConv) {
+      const tonPrice = Math.round(pr * 1000);
+      prConv.innerHTML = isBn ? `প্রতি টন: <b>${money(tonPrice)}</b>` : `Per ton: <b>${money(tonPrice)}</b>`;
+      prConv.style.display = pr > 0 ? 'block' : 'none';
+    }
+  } else {
+    if (val >= 1000) {
+      const tons = (val / 1000).toFixed(3);
+      conv.innerHTML = isBn ? `💡 বা <b>${bnDigits(tons)} টন</b>` : `💡 or <b>${tons} ton</b>`;
+      conv.style.display = 'block';
+    } else {
+      conv.style.display = 'none';
+    }
+    if (prConv) prConv.style.display = 'none';
+  }
+}
+
+function onPriceChange() {
+  onQtyChange();
+}
+
 function pickProduct(id) {
   const p = S.__products.find(x => x.id === id);
   if (!p) return;
@@ -123,9 +179,19 @@ function pickProduct(id) {
   $('#psearch').dataset.pid = p.id;
   $('#pdrop').style.display = 'none';
   $('#pprice').value = p.selling_price;
+
+  const isRodOrKg = (p.unit === 'kg' || p.unit === 'কেজি' || (p.category && p.category.toLowerCase().includes('rod')));
+  const sw = $('#unit-switch-wrap');
+  if (sw) sw.style.display = isRodOrKg ? 'inline-flex' : 'none';
+
+  setPosUnitMode('kg');
   const qu = $('#qtyunit');
   if (qu) qu.textContent = p.unit;
+  const pu = $('#priceunit');
+  if (pu) pu.textContent = `/${p.unit}`;
+
   $('#pqty').value = 1;
+  onQtyChange();
   $('#pqty').focus();
 }
 
@@ -139,7 +205,7 @@ function addToCart() {
     toast(isBn ? 'তালিকা থেকে পণ্য নির্বাচন করুন' : 'Select item from list', true);
     return;
   }
-  const qty = parseFloat($('#pqty').value);
+  let qty = parseFloat($('#pqty').value);
   const price = parseFloat($('#pprice').value);
 
   if (!(qty > 0)) {
@@ -149,6 +215,12 @@ function addToCart() {
   if (!(price >= 0)) {
     toast(isBn ? 'সঠিক দর দিন' : 'Enter valid price', true);
     return;
+  }
+
+  let enteredTon = null;
+  if (POS_UNIT_MODE === 'ton' && (p.unit === 'kg' || p.unit === 'কেজি' || (p.category && p.category.toLowerCase().includes('rod')))) {
+    enteredTon = qty;
+    qty = +(qty * 1000).toFixed(2);
   }
 
   const ex = S.cart.find(c => c.product_id === p.id);
@@ -163,12 +235,14 @@ function addToCart() {
     ex.qty = +(ex.qty + qty).toFixed(2);
     ex.price = price;
     ex.amount = +(ex.qty * ex.price).toFixed(2);
+    if (enteredTon) ex.ton_qty = +((ex.ton_qty || 0) + enteredTon).toFixed(3);
   } else {
     S.cart.push({
       product_id: p.id,
       name: p.name,
       unit: p.unit,
       qty,
+      ton_qty: enteredTon,
       price,
       amount: +(qty * price).toFixed(2)
     });
@@ -178,8 +252,15 @@ function addToCart() {
   ps.dataset.pid = '';
   $('#pqty').value = '';
   $('#pprice').value = '';
+  const sw = $('#unit-switch-wrap');
+  if (sw) sw.style.display = 'none';
+  const conv = $('#conv-info');
+  if (conv) conv.style.display = 'none';
+  const prConv = $('#price-conv-info');
+  if (prConv) prConv.style.display = 'none';
   const qu = $('#qtyunit');
   if (qu) qu.textContent = '—';
+
   $('#cartbox').innerHTML = cartHtml();
   calcTotals();
 }
@@ -195,15 +276,18 @@ function cartHtml() {
   if (!S.cart.length) {
     return `<div class="empty">${isBn ? 'কার্ট খালি — উপরে পণ্য খুঁজে যোগ করুন' : 'Cart is empty — search & add items above'}</div>`;
   }
-  return S.cart.map((c, i) => `
+  return S.cart.map((c, i) => {
+    const tonNote = c.ton_qty ? ` <span style="color:var(--brand);font-weight:600">(${isBn ? bnDigits(c.ton_qty) + ' টন' : c.ton_qty + ' ton'})</span>` : '';
+    return `
     <div class="cart-line">
       <div class="nm">
         ${esc(c.name)}
-        <small>${isBn ? bnDigits(c.qty) : c.qty} ${esc(c.unit)} × ${money(c.price)}</small>
+        <small>${isBn ? bnDigits(c.qty) : c.qty} ${esc(c.unit)}${tonNote} × ${money(c.price)}</small>
       </div>
       <b>${money(c.amount)}</b>
       <button class="btn sm dan" onclick="rmCart(${i})">✕</button>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 }
 
 function calcTotals() {
@@ -341,4 +425,126 @@ function pickCust(id, name) {
   $('#cdrop').style.display = 'none';
   const nc = $('#newcust');
   if (nc) nc.style.display = 'none';
+}
+
+/* ---------- Rod & Ton Weight Calculator Modal ---------- */
+function openRodCalcModal() {
+  const isBn = window.LANG === 'bn';
+  modal(`
+    <div class="modal-h">
+      <h3>⚖️ ${isBn ? 'রড ওজন ও টন ⇄ কেজি ক্যালকুলেটর' : 'Rod Weight & Ton-Kg Calculator'}</h3>
+      <button class="modal-x" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-b" style="padding:14px">
+      <div style="background:#fffbeb;border:1px solid #fef3c7;border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:12.5px;color:#92400e">
+        <b>💡 নোট:</b> ১ টন = ১,০০০ কেজি (1 Ton = 1000 Kg)। স্ট্যান্ডার্ড রডের ১টি বারের দৈর্ঘ্য = ১২ মিটার (~৪০ ফুট)।
+      </div>
+
+      <div class="grid g2" style="margin-bottom:12px">
+        <div style="background:#f8fafc;padding:12px;border-radius:8px;border:1px solid var(--line)">
+          <h4 style="margin:0 0 8px 0;font-size:13.5px">🔄 ${isBn ? '১. টন থেকে কেজি রূপান্তর' : '1. Ton to Kg Converter'}</h4>
+          <label style="margin-top:0">${isBn ? 'টনের পরিমাণ' : 'Ton'}</label>
+          <input id="calc-ton-in" type="number" step="0.001" placeholder="${isBn ? 'যেমন: ২.৫' : 'e.g. 2.5'}" oninput="calcTonToKg()">
+          <div id="calc-ton-out" style="font-size:13px;font-weight:700;color:var(--brand);margin-top:6px">—</div>
+          <button class="btn sm pri" style="margin-top:8px" onclick="applyCalcToPos('ton')">${isBn ? '📥 পস-এ বসান' : 'Apply to POS'}</button>
+        </div>
+
+        <div style="background:#f8fafc;padding:12px;border-radius:8px;border:1px solid var(--line)">
+          <h4 style="margin:0 0 8px 0;font-size:13.5px">🔄 ${isBn ? '২. কেজি থেকে টন রূপান্তর' : '2. Kg to Ton Converter'}</h4>
+          <label style="margin-top:0">${isBn ? 'কেজির পরিমাণ' : 'Kg'}</label>
+          <input id="calc-kg-in" type="number" step="1" placeholder="${isBn ? 'যেমন: ১৫০০' : 'e.g. 1500'}" oninput="calcKgToTon()">
+          <div id="calc-kg-out" style="font-size:13px;font-weight:700;color:var(--brand);margin-top:6px">—</div>
+          <button class="btn sm pri" style="margin-top:8px" onclick="applyCalcToPos('kg')">${isBn ? '📥 পস-এ বসান' : 'Apply to POS'}</button>
+        </div>
+      </div>
+
+      <div style="background:#f8fafc;padding:12px;border-radius:8px;border:1px solid var(--line)">
+        <h4 style="margin:0 0 8px 0;font-size:13.5px">📏 ${isBn ? '৩. রডের সাইজ ও পিস থেকে আনুমানিক ওজন' : '3. Estimate Weight by Bar Count'}</h4>
+        <div class="grid g2">
+          <div>
+            <label style="margin-top:0">${isBn ? 'রড সাইজ (মি.মি)' : 'Rod Size (mm)'}</label>
+            <select id="calc-rod-size" onchange="calcBarWeight()">
+              <option value="0.395">৮ মি.মি (8mm) — ~৪.৭৪ কেজি/বার</option>
+              <option value="0.617">১০ মি.মি (10mm) — ~৭.৪০ কেজি/বার</option>
+              <option value="0.888" selected>১২ মি.মি (12mm) — ~১০.৬৬ কেজি/বার</option>
+              <option value="1.580">১৬ মি.মি (16mm) — ~১৮.৯৬ কেজি/বার</option>
+              <option value="2.470">২০ মি.মি (20mm) — ~২৯.৬৪ কেজি/বার</option>
+              <option value="2.980">২২ মি.মি (22mm) — ~৩৫.৭৬ কেজি/বার</option>
+              <option value="3.850">২৫ মি.মি (25mm) — ~৪৬.২০ কেজি/বার</option>
+            </select>
+          </div>
+          <div>
+            <label style="margin-top:0">${isBn ? 'পিস / বারের সংখ্যা (১২ মিটার বার)' : 'Total Pieces / Bars'}</label>
+            <input id="calc-bar-pcs" type="number" step="1" value="10" placeholder="পিস সংখ্যা" oninput="calcBarWeight()">
+          </div>
+        </div>
+        <div id="calc-bar-result" style="margin-top:8px;font-size:13.5px;font-weight:700;color:var(--brand)">—</div>
+        <button class="btn sm grn" style="margin-top:8px" onclick="applyBarWeightToPos()">${isBn ? '📥 এই ওজন পস-এ বসান' : 'Apply Weight to POS'}</button>
+      </div>
+    </div>`);
+
+  setTimeout(() => {
+    calcTonToKg();
+    calcKgToTon();
+    calcBarWeight();
+  }, 50);
+}
+
+function calcTonToKg() {
+  const isBn = window.LANG === 'bn';
+  const val = parseFloat($('#calc-ton-in').value) || 0;
+  const kg = Math.round(val * 1000 * 100) / 100;
+  $('#calc-ton-out').innerHTML = isBn ? `মোট: <b>${bnDigits(kg)} কেজি</b>` : `Total: <b>${kg} kg</b>`;
+}
+
+function calcKgToTon() {
+  const isBn = window.LANG === 'bn';
+  const val = parseFloat($('#calc-kg-in').value) || 0;
+  const ton = (val / 1000).toFixed(3);
+  $('#calc-kg-out').innerHTML = isBn ? `মোট: <b>${bnDigits(ton)} টন</b>` : `Total: <b>${ton} Ton</b>`;
+}
+
+function calcBarWeight() {
+  const isBn = window.LANG === 'bn';
+  const wtPerM = parseFloat($('#calc-rod-size').value) || 0.888;
+  const pcs = parseFloat($('#calc-bar-pcs').value) || 0;
+  const totalKg = Math.round(wtPerM * 12 * pcs * 100) / 100;
+  const totalTon = (totalKg / 1000).toFixed(3);
+  $('#calc-bar-result').innerHTML = isBn
+    ? `আনুমানিক মোট ওজন: <b>${bnDigits(totalKg)} কেজি</b> (${bnDigits(totalTon)} টন)`
+    : `Estimated Weight: <b>${totalKg} kg</b> (${totalTon} Ton)`;
+  $('#calc-bar-result').dataset.kg = totalKg;
+}
+
+function applyCalcToPos(type) {
+  if (type === 'ton') {
+    const tonVal = parseFloat($('#calc-ton-in').value) || 0;
+    if (tonVal > 0) {
+      setPosUnitMode('ton');
+      $('#pqty').value = tonVal;
+      onQtyChange();
+      closeModal();
+      $('#pqty').focus();
+    }
+  } else {
+    const kgVal = parseFloat($('#calc-kg-in').value) || 0;
+    if (kgVal > 0) {
+      setPosUnitMode('kg');
+      $('#pqty').value = kgVal;
+      onQtyChange();
+      closeModal();
+      $('#pqty').focus();
+    }
+  }
+}
+
+function applyBarWeightToPos() {
+  const kg = parseFloat($('#calc-bar-result').dataset.kg) || 0;
+  if (kg > 0) {
+    setPosUnitMode('kg');
+    $('#pqty').value = kg;
+    onQtyChange();
+    closeModal();
+    $('#pqty').focus();
+  }
 }
