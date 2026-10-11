@@ -130,14 +130,6 @@ VIEWS.settings = async function () {
       </div>
     </div>
 
-    <!-- Factory Reset for Client Handover -->
-    <div class="card" style="margin-top:16px;border:1px solid #fca5a5;background:#fff5f5">
-      <h3 style="color:#b91c1c;margin:0 0 8px 0">🧹 ক্লায়েন্ট হ্যান্ডওভার / টেস্ট ডাটা সম্পূর্ণ রিসেট</h3>
-      <p style="font-size:13.5px;color:#7f1d1d;margin:0 0 14px 0;line-height:1.6">
-        টেস্টিং শেষে ক্লায়েন্টকে সফটওয়্যার বুঝিয়ে দেওয়ার আগে এই বাটনে চাপ দিলে সমস্ত টেস্ট মেমো/চালান, টেস্ট কাস্টমার ও ক্যাশ লেনদেন মুছে যাবে এবং মেমো নাম্বার আবার ১ (INV-1)-এ ফিরে যাবে। প্রোডাক্ট তালিকা ও দোকানের সেটিংস সম্পূর্ণ অক্ষত থাকবে।
-      </p>
-      <button type="button" id="btnResetTestData" class="btn dan">🗑️ সমস্ত টেস্ট ডাটা রিসেট করুন (মেমো ১-এ ফেরত)</button>
-    </div>
 
     <!-- PWA Install Guide -->
     <div class="card" style="margin-top:16px;background:rgba(30,58,138,0.1);border:1px solid rgba(59,130,246,0.25)">
@@ -350,24 +342,6 @@ VIEWS.settings = async function () {
     e.target.value = '';
   });
 
-  // Reset Test Data handler
-  const btnReset = $('#btnResetTestData');
-  if (btnReset) {
-    btnReset.addEventListener('click', async () => {
-      if (!confirm('⚠️ সতর্কতা: আপনি কি নিশ্চিত যে সমস্ত টেস্ট চালান, টেস্ট কাস্টমার ও ক্যাশ লেনদেন মুছে মেমো নাম্বার ১-এ রিসেট করতে চান? (পণ্য তালিকা অক্ষত থাকবে)')) return;
-      btnReset.disabled = true;
-      btnReset.textContent = '⏳ রিসেট হচ্ছে...';
-      try {
-        const res = await api('/backup/reset-test-data', { method: 'POST' });
-        toast(res.message || 'রিসেট সম্পন্ন হয়েছে ✅');
-        setTimeout(() => location.reload(), 1200);
-      } catch (err) {
-        toast(err.message, true);
-        btnReset.disabled = false;
-        btnReset.textContent = '🗑️ সমস্ত টেস্ট ডাটা রিসেট করুন (মেমো ১-এ ফেরত)';
-      }
-    });
-  }
 
   // PWA Install prompt listener
   if (window.mstDeferredPrompt) {
