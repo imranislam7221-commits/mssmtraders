@@ -43,8 +43,7 @@ function memoSummaryLines(s) {
 function ml(s) { return esc(s).split('\n').map(t => t.trim()).filter(Boolean).join('<br>'); }
 
 function padBn(n) {
-  const s = String(n).padStart(2, '0');
-  return bnDigits(s);
+  return bnDigits(n);
 }
 
 function buildInvoiceMemoHtml(inv, customer, s) {
@@ -75,6 +74,7 @@ function buildInvoiceMemoHtml(inv, customer, s) {
   }
 
   const totalWords = banglaMoneyWords(inv.total) + ' টাকা মাত্র।';
+  const cleanInvNo = bnDigits(String(inv.invoice_no || '').replace(/^INV-?/i, ''));
 
   return `
   <div class="receipt memo">
@@ -93,9 +93,9 @@ function buildInvoiceMemoHtml(inv, customer, s) {
     <div class="cust-info">
       <div class="c-row">
         <span class="c-lbl">নং</span>
-        <span class="c-dots" style="max-width:130px;font-weight:700">${bnDigits(inv.invoice_no)}</span>
+        <span class="c-dots" style="max-width:140px;font-weight:700">${cleanInvNo}</span>
         <span class="c-lbl" style="margin-left:auto">তারিখ</span>
-        <span class="c-dots" style="max-width:130px">${bnDigits(inv.time_display ? inv.time_display.split(' | ')[0] : fmtDate(inv.timestamp))}</span>
+        <span class="c-dots" style="max-width:140px">${bnDigits(inv.time_display ? inv.time_display.split(' | ')[0] : fmtDate(inv.timestamp))}</span>
       </div>
       <div class="c-row" style="margin-top:4px">
         <span class="c-lbl">নাম</span>

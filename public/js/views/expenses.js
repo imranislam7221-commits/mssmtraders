@@ -36,7 +36,7 @@ VIEWS.expenses = async function () {
         <div class="sub">${isBn ? 'দোকান ভাড়া, গোডাউন ভাড়া, বিদ্যুৎ বিল, কর্মচারীর বেতন ও দৈনন্দিন খরচের নির্ভুল হিসাব' : 'Track rent, electricity, salaries, pocket expenses & shop maintenance'}</div>
       </div>
       <div style="display:flex;gap:8px;align-items:center">
-        <button class="btn pri" onclick="openExpenseModal()">${isBn ? '+ নতুন খরচ যোগ' : '+ Add Expense'}</button>
+        <button class="btn pri" style="padding:10px 20px;font-size:14px;font-weight:700;box-shadow:0 4px 14px rgba(245,158,11,0.35);display:flex;align-items:center;gap:6px" onclick="openExpenseModal()">➕ ${isBn ? 'নতুন খরচ যোগ করুন' : 'Add New Expense'}</button>
       </div>
     </div>
     ${stats}
@@ -56,6 +56,7 @@ VIEWS.expenses = async function () {
         <input type="date" id="exp-from" onchange="filterExpTable()" title="${isBn ? 'শুরুর তারিখ' : 'From Date'}">
         <input type="date" id="exp-to" onchange="filterExpTable()" title="${isBn ? 'শেষ তারিখ' : 'To Date'}">
         <button class="btn sm" onclick="clearExpFilter()">${isBn ? 'রিসেট' : 'Reset'}</button>
+        <button class="btn pri sm" onclick="openExpenseModal()" style="margin-left:auto">➕ ${isBn ? 'খরচ লিখুন' : 'Add Expense'}</button>
       </div>
       <div class="tblwrap">
         <table class="tbl" id="exptable">
@@ -76,7 +77,12 @@ VIEWS.expenses = async function () {
 
 function renderExpenseRows(list, isBn) {
   if (!list || !list.length) {
-    return `<tr><td colspan="7" class="empty">${isBn ? 'কোনো খরচের এন্ট্রি পাওয়া যায়নি' : 'No expense entries found'}</td></tr>`;
+    return `<tr><td colspan="7" class="empty" style="padding:36px 16px;text-align:center">
+      <div style="font-size:38px;margin-bottom:8px">💸</div>
+      <div style="font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px">${isBn ? 'এখনও কোনো খরচ এন্ট্রি করা হয়নি' : 'No expense entries found'}</div>
+      <div style="font-size:12.5px;color:var(--sub);margin-bottom:14px">${isBn ? 'দোকানের ভাড়া, কর্মচারীর বেতন, বিদ্যুৎ বিল বা যেকোনো খরচ লিখে রাখতে নিচের বাটনে চাপ দিন' : 'Click the button below to add your first expense'}</div>
+      <button type="button" class="btn pri" style="padding:9px 22px;font-size:13.5px;font-weight:700" onclick="openExpenseModal()">➕ ${isBn ? 'এখানে চাপ দিয়ে খরচ লিখুন' : 'Add Expense'}</button>
+    </td></tr>`;
   }
   return list.map(e => `
     <tr>
