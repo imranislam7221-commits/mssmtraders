@@ -84,6 +84,9 @@ VIEWS.pos = async function () {
           </label>
         </div>
 
+        <label style="margin-top:12px">${isBn ? 'জমা টাকা (৳)' : 'Paid Amount (Tk)'}</label>
+        <input id="fpaid" type="number" step="0.01" value="0" oninput="calcTotals()">
+
         <div class="grid g2" style="margin-top:10px">
           <div>
             <label style="margin-top:0">${isBn ? 'মূল্য ছাড় (৳)' : 'Discount (Tk)'}</label>
@@ -94,9 +97,6 @@ VIEWS.pos = async function () {
             <input id="fvat" type="number" step="0.01" value="0" oninput="calcTotals()">
           </div>
         </div>
-
-        <label>${isBn ? 'জমা টাকা (৳)' : 'Paid Amount (Tk)'}</label>
-        <input id="fpaid" type="number" step="0.01" value="0" oninput="calcTotals()">
 
         <div style="margin-top:10px" id="totalsbox">${totalsHtml()}</div>
 
