@@ -142,7 +142,7 @@ function applyLang(){
     const keycaps = [];
     v = v.replace(/[0-9]\uFE0F\u20E3/g, function(m){ keycaps.push(m); return '\u0003' + 'x'.repeat(keycaps.length) + '\u0003'; });
     for(const k of keys){ if(v.indexOf(k) >= 0) v = v.split(k).join(I18N_BN[k]); }
-    if(curLang==='bn'){ v = v.replace(/\bmm\b/g, 'মি. মি'); v = v.replace(/[0-9]/g, function(d){ return '০১২৩৪৫৬৭৮৯'[+d]; }); }
+    if(curLang==='bn'){ v = v.replace(/\bmm\b/g, 'মি.লি'); v = v.replace(/[0-9]/g, function(d){ return '০১২৩৪৫৬৭৮৯'[+d]; }); }
     if(keycaps.length) v = v.replace(/\u0003(x+)\u0003/g, function(m, xs){ return keycaps[xs.length - 1] || m; });
     if(mails.length){ v = v.replace(/\u0001(e+)\u0001/g, function(m, es){ return mails[es.length - 1] || m; }); }
     if(v !== n.nodeValue) n.nodeValue = v;

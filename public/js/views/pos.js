@@ -18,8 +18,11 @@ VIEWS.pos = async function () {
     </div>
     <div class="pos-grid">
       <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-          <h3 style="margin:0">${isBn ? '১️⃣ মালামাল যোগ করুন' : '1️⃣ Add Items'}</h3>
+        <div class="pos-card-head">
+          <h3 class="pos-card-title">
+            <span class="step-badge">${isBn ? '১' : '1'}</span>
+            <span>${isBn ? 'মালামাল যোগ করুন' : 'Add Items'}</span>
+          </h3>
           <button class="btn sm" type="button" onclick="openRodCalcModal()">⚖️ ${isBn ? 'রড ওজন ক্যালকুলেটর' : 'Rod Calculator'}</button>
         </div>
         <div class="psearch-wrap">
@@ -47,12 +50,22 @@ VIEWS.pos = async function () {
             <button class="btn pri blk" style="padding:10px" onclick="addToCart()">${isBn ? '+ কার্টে যোগ' : '+ Add'}</button>
           </div>
         </div>
-        <h3 style="margin-top:16px">${isBn ? '২️⃣ নির্বাচিত পণ্য (কার্ট)' : '2️⃣ Cart'}</h3>
+        <div class="pos-card-head" style="margin-top:22px">
+          <h3 class="pos-card-title">
+            <span class="step-badge">${isBn ? '২' : '2'}</span>
+            <span>${isBn ? 'নির্বাচিত পণ্য (কার্ট)' : 'Cart'}</span>
+          </h3>
+        </div>
         <div id="cartbox">${cartHtml()}</div>
       </div>
 
       <div class="card">
-        <h3>${isBn ? '৩️⃣ কাস্টমার ও পেমেন্ট' : '3️⃣ Customer & Payment'}</h3>
+        <div class="pos-card-head">
+          <h3 class="pos-card-title">
+            <span class="step-badge">${isBn ? '৩' : '3'}</span>
+            <span>${isBn ? 'কাস্টমার ও পেমেন্ট' : 'Customer & Payment'}</span>
+          </h3>
+        </div>
         <label>${isBn ? 'কাস্টমার নির্বাচন (নাম বা মোবাইল নম্বর দিয়ে খুঁজুন)' : 'Customer (search by name/phone)'}</label>
         <div class="psearch-wrap">
           <input id="custsearch" placeholder="${isBn ? '🔍 কাস্টমারের নাম বা ফোন নম্বর লিখুন...' : '🔍 Customer name/phone…'}" autocomplete="off" oninput="cDrop()" onfocus="cDrop()">

@@ -118,6 +118,9 @@ table.tbl td.num, table.tbl th.num { text-align: right; }
 /* ---- POS ---- */
 .pos-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 16px; align-items: start; }
 @media (max-width: 900px) { .pos-grid { grid-template-columns: 1fr; } }
+.pos-card-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.pos-card-title { display: inline-flex; align-items: center; gap: 9px; font-size: 15.5px; font-weight: 700; color: var(--ink); margin: 0; }
+.step-badge { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 6px; background: var(--brand2); color: #fff; font-size: 13px; font-weight: 700; line-height: 1; flex-shrink: 0; box-shadow: 0 1px 3px rgba(217,119,6,.25); }
 .psearch-wrap { position: relative; }
 .pdrop { position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid var(--line); border-radius: 10px; box-shadow: var(--shadow); z-index: 30; max-height: 260px; overflow-y: auto; margin-top: 4px; }
 .pdrop .pi { padding: 9px 13px; display: flex; justify-content: space-between; gap: 8px; cursor: pointer; font-size: 13.5px; align-items: center; }
