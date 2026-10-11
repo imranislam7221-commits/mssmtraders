@@ -245,8 +245,8 @@ function payModal(id, due) {
     </div>
     <div class="modal-b">
       <form id="payform">
-        <p style="font-size:13.5px">${isBn ? 'বর্তমান বকেয়া (Due):' : 'Current Due:'} <b class="${due > 0 ? 'dueX' : 'due0'}">${money(due)}</b></p>
-        <label>${isBn ? 'জমা প্রাপ্ত টাকা (Tk) *' : 'Paid Amount (Tk) *'}</label>
+        <p style="font-size:13.5px">${isBn ? 'বর্তমান বকেয়া / বাকি:' : 'Current Due:'} <b class="${due > 0 ? 'dueX' : 'due0'}">${money(due)}</b></p>
+        <label>${isBn ? 'জমা প্রাপ্ত টাকা (৳) *' : 'Paid Amount (Tk) *'}</label>
         <input name="amount" type="number" step="0.01" required placeholder="${isBn ? 'টাকার পরিমাণ লিখুন' : 'Enter amount'}">
         <label>${isBn ? 'নোট বা মাধ্যম' : 'Note'}</label>
         <input name="note" placeholder="${isBn ? 'যেমন: নগদ / বিকাশ / ব্যাংক' : 'e.g. Cash / bKash'}">

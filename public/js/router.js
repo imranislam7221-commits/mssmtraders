@@ -5,6 +5,7 @@ const NAV = [
   { h: '#/stock', ico: '📋', label: 'Stock Ledger', bn: 'স্টক খাতা' },
   { h: '#/customers', ico: '👥', label: 'Customers', bn: 'কাস্টমার হিসাব' },
   { h: '#/invoices', ico: '🗂️', label: 'Invoices', bn: 'ইনভয়েস তালিকা' },
+  { h: '#/expenses', ico: '💸', label: 'Expenses', bn: 'খরচের খাতা' },
   { h: '#/settings', ico: '⚙️', label: 'Settings', bn: 'সেটিংস' }
 ];
 function layout(inner) {
@@ -12,15 +13,16 @@ function layout(inner) {
   const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const links = NAV.filter(n => !n.owner || isOwner()).map(n => '<a href="' + n.h + '" class="' + (cur === n.h ? 'active' : '') + '"><span class="ico">' + n.ico + '</span>' + (isBn ? n.bn : n.label) + '</a>').join('');
   document.title = 'মেসার্স এম.এস ট্রেডার্স — POS & Inventory';
+  const roleTitle = isBn ? (S.user.role === 'owner' ? 'দোকানের মালিক' : (S.user.role === 'manager' ? 'ম্যানেজার' : esc(S.user.role))) : esc(S.user.role);
   $('#app').innerHTML = `
-  <div class="topbar"><div><div class="t">🏗️ মেসার্স এম.এস ট্রেডার্স</div></div><div class="who">${esc(S.user.name)} (${isBn && S.user.role === 'owner' ? 'মালিক' : esc(S.user.role)}) <button onclick="toggleLang()" style="background:none;border:1px solid #57534e;color:#fbbf24;border-radius:7px;padding:3px 8px;font-size:11px;cursor:pointer">🌐 ${isBn ? 'English' : 'বাংলা'}</button></div></div>
+  <div class="topbar"><div><div class="t">🏗️ মেসার্স এম.এস ট্রেডার্স</div></div><div class="who">${esc(S.user.name)} (${roleTitle}) <button onclick="toggleLang()" style="background:none;border:1px solid #57534e;color:#fbbf24;border-radius:7px;padding:3px 8px;font-size:11px;cursor:pointer">🌐 ${isBn ? 'English' : 'বাংলা'}</button></div></div>
   <div class="layout">
     <aside class="sidebar">
       <div class="side-brand"><div class="t">🏗️ মেসার্স এম.এস ট্রেডার্স</div><div class="s">রড, সিমেন্ট ও নির্মাণ সামগ্রী</div></div>
       <nav class="nav">${links}</nav>
       <div class="side-user">
         <div class="nm">${esc(S.user.name)}</div>
-        <div class="rl">${isBn && S.user.role === 'owner' ? 'দোকানের মালিক' : esc(S.user.role)} • ${esc(S.user.username || S.user.email)}</div>
+        <div class="rl">${roleTitle} • ${esc(S.user.username || S.user.email)}</div>
         <button onclick="toggleLang()" style="background:#292524;color:#fbbf24">🌐 <span id="langlabel">${isBn ? 'English' : 'বাংলা'}</span></button>
         <button onclick="logout()">${isBn ? '🚪 লগআউট' : '🚪 Logout'}</button>
       </div>

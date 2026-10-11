@@ -67,9 +67,9 @@ VIEWS.stock = async function () {
             <th>${isBn ? 'পণ্য' : 'Product'}</th>
             <th>${isBn ? 'ধরন' : 'Type'}</th>
             <th class="num">${isBn ? 'পরিমাণ' : 'Qty'}</th>
-            <th class="num">${isBn ? 'দর / রেট' : 'Cost/Price'}</th>
-            <th>${isBn ? 'উৎস / চালান' : 'Source'}</th>
-            <th>${isBn ? 'ইউজার' : 'By (User)'}</th>
+            <th class="num">${isBn ? 'দর / রেট (৳)' : 'Cost/Price'}</th>
+            <th>${isBn ? 'উৎস / মহাজন' : 'Source'}</th>
+            <th>${isBn ? 'এন্ট্রি করেছেন' : 'By (User)'}</th>
           </tr>
           ${log}
         </table>
@@ -88,9 +88,9 @@ function filterLedger(q) {
     <th>${isBn ? 'পণ্য' : 'Product'}</th>
     <th>${isBn ? 'ধরন' : 'Type'}</th>
     <th class="num">${isBn ? 'পরিমাণ' : 'Qty'}</th>
-    <th class="num">${isBn ? 'দর / রেট' : 'Cost/Price'}</th>
-    <th>${isBn ? 'উৎস / চালান' : 'Source'}</th>
-    <th>${isBn ? 'ইউজার' : 'By (User)'}</th>
+    <th class="num">${isBn ? 'দর / রেট (৳)' : 'Cost/Price'}</th>
+    <th>${isBn ? 'উৎস / মহাজন' : 'Source'}</th>
+    <th>${isBn ? 'এন্ট্রি করেছেন' : 'By (User)'}</th>
   </tr>` + (rows.map(l => {
     const typeLabel = isBn ? (l.type === 'IN' ? 'স্টক ইন' : l.type === 'OUT' ? 'স্টক আউট' : 'প্রারম্ভিক') : l.type;
     return `<tr>

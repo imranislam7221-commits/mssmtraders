@@ -35,10 +35,10 @@ VIEWS.products = async function () {
     </div>
     <div class="pill-group" style="margin-bottom:12px">
       <button type="button" class="cat-pill active" id="cp-all" onclick="filterByCat('all')">🏷️ ${isBn ? 'সব পণ্য' : 'All'}</button>
-      <button type="button" class="cat-pill" id="cp-rod" onclick="filterByCat('Rod')">🏗️ ${isBn ? 'রড (Rod)' : 'Rod'}</button>
-      <button type="button" class="cat-pill" id="cp-cement" onclick="filterByCat('Cement')">🧱 ${isBn ? 'সিমেন্ট (Cement)' : 'Cement'}</button>
-      <button type="button" class="cat-pill" id="cp-brick" onclick="filterByCat('Brick')">🧱 ${isBn ? 'ইট (Bricks)' : 'Bricks'}</button>
-      <button type="button" class="cat-pill" id="cp-sand" onclick="filterByCat('Sand')">🏖️ ${isBn ? 'বালি ও খোয়া' : 'Sand & Stone'}</button>
+      <button type="button" class="cat-pill" id="cp-rod" onclick="filterByCat('Rod')">🏗️ ${isBn ? 'রড' : 'Rod'}</button>
+      <button type="button" class="cat-pill" id="cp-cement" onclick="filterByCat('Cement')">🧱 ${isBn ? 'সিমেন্ট' : 'Cement'}</button>
+      <button type="button" class="cat-pill" id="cp-brick" onclick="filterByCat('Brick')">🧱 ${isBn ? 'ইট ও খোয়া' : 'Bricks & Chips'}</button>
+      <button type="button" class="cat-pill" id="cp-sand" onclick="filterByCat('Sand')">🏖️ ${isBn ? 'বালু' : 'Sand'}</button>
     </div>
     <div class="card">
       <div class="tblwrap">
@@ -72,32 +72,32 @@ function productModal(p) {
         <div class="grid g2">
           <div>
             <label>${isBn ? 'ক্যাটাগরি' : 'Category'}</label>
-            <input name="category" value="${esc(p.category || '')}" placeholder="${isBn ? 'রড / সিমেন্ট / ইট / বালি / টাইলস' : 'Rod / Cement / Tiles'}">
+            <input name="category" value="${esc(p.category || '')}" placeholder="${isBn ? 'রড / সিমেন্ট / ইট / বালু / টাইলস' : 'Rod / Cement / Tiles'}">
           </div>
           <div>
-            <label>${isBn ? 'পরিমাপের একক (Unit)' : 'Unit'}</label>
+            <label>${isBn ? 'পরিমাপের একক' : 'Unit'}</label>
             <select name="unit">
-              ${['কেজি', 'টন', 'ব্যাগ', 'পিস', 'বর্গফুট', 'ঘনফুট', 'হাজার', 'বান্ডিল', 'লিটার', 'কার্টন', 'kg', 'ton', 'bag', 'pc', 'sft', 'cft'].map(u => `<option ${p.unit === u ? 'selected' : ''}>${u}</option>`).join('')}
+              ${['কেজি', 'টন', 'বস্তা', 'পিস', 'বর্গফুট', 'ঘনফুট', 'হাজার', 'বান্ডিল', 'লিটার', 'কার্টন', 'kg', 'ton', 'bag', 'pc', 'sft', 'cft'].map(u => `<option ${p.unit === u ? 'selected' : ''}>${u}</option>`).join('')}
             </select>
           </div>
         </div>
         <div class="grid g2">
           <div>
-            <label>${isBn ? 'সাইজ (মি.মি — রডের জন্য)' : 'Size (mm — for Rod)'}</label>
+            <label>${isBn ? 'রডের সাইজ (মি.মি)' : 'Size (mm — for Rod)'}</label>
             <input name="size_mili" type="number" step="0.5" value="${p.size_mili == null ? '' : p.size_mili}" placeholder="8, 10, 12, 16...">
           </div>
           <div>
-            <label>${isBn ? 'কম স্টক সতর্কতার লেভেল' : 'Low Stock Alert Level'}</label>
+            <label>${isBn ? 'কম স্টক সতর্কতার সীমা' : 'Low Stock Alert Level'}</label>
             <input name="low_stock" type="number" value="${p.low_stock == null ? 10 : p.low_stock}">
           </div>
         </div>
         <div class="grid g2">
           <div>
-            <label>${isBn ? 'ক্রয় মূল্য / কেনা দর (টাকা)' : 'Purchase Price (Tk)'}</label>
+            <label>${isBn ? 'ক্রয় মূল্য / কেনা দর (৳)' : 'Purchase Price (Tk)'}</label>
             <input name="purchase_price" type="number" step="0.01" value="${p.purchase_price || ''}">
           </div>
           <div>
-            <label>${isBn ? 'বিক্রয় মূল্য / বেচা দর (টাকা)' : 'Selling Price (Tk)'}</label>
+            <label>${isBn ? 'বিক্রয় মূল্য / বিক্রির দর (৳)' : 'Selling Price (Tk)'}</label>
             <input name="selling_price" type="number" step="0.01" value="${p.selling_price || ''}">
           </div>
         </div>
@@ -206,15 +206,15 @@ function stockInModal(pid, products) {
             <div style="display:flex;justify-content:space-between;align-items:center">
               <label style="margin-top:0">${isBn ? 'পরিমাণ (+) *' : 'Quantity (+) *'} <span id="siunit" style="color:var(--brand);font-weight:400"></span></label>
               <div id="si-unit-wrap" class="unit-switcher" style="display:none">
-                <button type="button" class="unit-btn active" id="btn-si-kg" onclick="setSIUnitMode('kg')">কেজি (kg)</button>
-                <button type="button" class="unit-btn" id="btn-si-ton" onclick="setSIUnitMode('ton')">টন (ton)</button>
+                <button type="button" class="unit-btn active" id="btn-si-kg" onclick="setSIUnitMode('kg')">${isBn ? 'কেজি' : 'kg'}</button>
+                <button type="button" class="unit-btn" id="btn-si-ton" onclick="setSIUnitMode('ton')">${isBn ? 'টন' : 'ton'}</button>
               </div>
             </div>
             <input name="quantity" id="si-qty-in" type="number" step="0.001" required placeholder="${isBn ? 'যেমন: ১০০' : 'e.g. 100'}" oninput="calcSIHint()">
             <div id="si-conv-hint" class="conv-hint" style="display:none"></div>
           </div>
           <div>
-            <label>${isBn ? 'কেনা দর / ইউনিট প্রতি খরচ (টাকা)' : 'Purchase Cost / unit (Tk)'} <span id="si-cost-hint" style="color:var(--mut);font-weight:400"></span></label>
+            <label>${isBn ? 'কেনা দর / ইউনিট প্রতি খরচ (৳)' : 'Purchase Cost / unit (Tk)'} <span id="si-cost-hint" style="color:var(--mut);font-weight:400"></span></label>
             <input name="unit_cost" id="si-cost-in" type="number" step="0.01" placeholder="${isBn ? 'আগের দর থাকবে খালি রাখলে' : 'default = purchase price'}">
           </div>
         </div>

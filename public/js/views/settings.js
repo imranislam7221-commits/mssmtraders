@@ -1,9 +1,10 @@
 /* ---------- settings (all roles) ---------- */
 VIEWS.settings = async function () {
   if (!isOwner()) { location.hash = '#/dashboard'; return; }
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const { settings: s } = await api('/settings');
   layout(`
-    <div class="page-head"><div><h1>Settings</h1><div class="sub">দোকানের প্রোফাইল, মেমো হেড, MiMSMS SMS গেটওয়ে কনফিগারেশন</div></div></div>
+    <div class="page-head"><div><h1>${isBn ? 'দোকান ও সিস্টেম সেটিংস' : 'Settings'}</h1><div class="sub">${isBn ? 'দোকানের প্রোফাইল, মেমো হেড ও এসএমএস কনফিগারেশন' : 'Shop profile, memo header & SMS gateway configuration'}</div></div></div>
     <div class="card"><h3>🏪 দোকানের প্রোফাইল</h3><form id="setform">
       <div class="grid g2">
         <div><label>দোকানের নাম</label><input name="shop_name" value="${esc(s.shop_name)}"></div>

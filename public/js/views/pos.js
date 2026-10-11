@@ -31,15 +31,15 @@ VIEWS.pos = async function () {
             <div style="display:flex;justify-content:space-between;align-items:center">
               <label style="margin-top:0">${isBn ? 'পরিমাণ' : 'Qty'} (<span id="qtyunit" style="color:var(--brand)">—</span>) *</label>
               <div id="unit-switch-wrap" class="unit-switcher" style="display:none">
-                <button type="button" class="unit-btn active" id="btn-u-kg" onclick="setPosUnitMode('kg')">কেজি (kg)</button>
-                <button type="button" class="unit-btn" id="btn-u-ton" onclick="setPosUnitMode('ton')">টন (ton)</button>
+                <button type="button" class="unit-btn active" id="btn-u-kg" onclick="setPosUnitMode('kg')">${isBn ? 'কেজি' : 'kg'}</button>
+                <button type="button" class="unit-btn" id="btn-u-ton" onclick="setPosUnitMode('ton')">${isBn ? 'টন' : 'ton'}</button>
               </div>
             </div>
             <input id="pqty" type="number" step="0.001" placeholder="${isBn ? 'পরিমাণ লিখুন' : 'Qty'}" oninput="onQtyChange()">
             <div id="conv-info" class="conv-hint" style="display:none"></div>
           </div>
           <div style="flex:1.4">
-            <label style="margin-top:0">${isBn ? 'দর / রেট (টাকা)' : 'Price (Tk)'} <span id="priceunit" style="font-weight:400;color:var(--mut)"></span></label>
+            <label style="margin-top:0">${isBn ? 'বিক্রয় দর (৳)' : 'Price (Tk)'} <span id="priceunit" style="font-weight:400;color:var(--mut)"></span></label>
             <input id="pprice" type="number" step="0.01" placeholder="${isBn ? 'দর দিন' : 'Tk'}" oninput="onPriceChange()">
             <div id="price-conv-info" class="conv-hint" style="display:none"></div>
           </div>
@@ -73,7 +73,7 @@ VIEWS.pos = async function () {
 
         <div class="grid g2" style="margin-top:10px">
           <div>
-            <label style="margin-top:0">${isBn ? 'ছাড় (ডিসকাউন্ট)' : 'Discount (Tk)'}</label>
+            <label style="margin-top:0">${isBn ? 'মূল্য ছাড় (৳)' : 'Discount (Tk)'}</label>
             <input id="fdiscount" type="number" step="0.01" value="0" oninput="calcTotals()">
           </div>
           <div>
@@ -82,7 +82,7 @@ VIEWS.pos = async function () {
           </div>
         </div>
 
-        <label>${isBn ? 'জমা টাকা (নগদ)' : 'Paid Amount (Tk)'}</label>
+        <label>${isBn ? 'জমা টাকা (৳)' : 'Paid Amount (Tk)'}</label>
         <input id="fpaid" type="number" step="0.01" value="0" oninput="calcTotals()">
 
         <div style="margin-top:10px" id="totalsbox">${totalsHtml()}</div>
@@ -91,7 +91,7 @@ VIEWS.pos = async function () {
         <input id="fnote" placeholder="${isBn ? 'যেকোনো নোট বা মন্তব্য...' : 'any remark'}">
 
         <div style="display:flex;gap:8px;margin-top:14px">
-          <button class="btn pri blk" onclick="saveInvoice(false)">${isBn ? '💾 চালান সংরক্ষণ করুন' : '💾 Save'}</button>
+          <button class="btn pri blk" onclick="saveInvoice(false)">${isBn ? '💾 শুধু সংরক্ষণ করুন' : '💾 Save'}</button>
           <button class="btn grn blk" onclick="saveInvoice(true)">${isBn ? '🖨️ সংরক্ষণ ও মেমো প্রিন্ট' : '🖨️ Save & Print'}</button>
         </div>
       </div>
@@ -465,7 +465,7 @@ function openRodCalcModal() {
           <label style="margin-top:0">${isBn ? 'টনের পরিমাণ' : 'Ton'}</label>
           <input id="calc-ton-in" type="number" step="0.001" placeholder="${isBn ? 'যেমন: ২.৫' : 'e.g. 2.5'}" oninput="calcTonToKg()">
           <div id="calc-ton-out" style="font-size:13px;font-weight:700;color:var(--brand);margin-top:6px">—</div>
-          <button class="btn sm pri" style="margin-top:8px" onclick="applyCalcToPos('ton')">${isBn ? '📥 পস-এ বসান' : 'Apply to POS'}</button>
+          <button class="btn sm pri" style="margin-top:8px" onclick="applyCalcToPos('ton')">${isBn ? '📥 বিলে বসান' : 'Apply to POS'}</button>
         </div>
 
         <div style="background:#f8fafc;padding:12px;border-radius:8px;border:1px solid var(--line)">
@@ -473,7 +473,7 @@ function openRodCalcModal() {
           <label style="margin-top:0">${isBn ? 'কেজির পরিমাণ' : 'Kg'}</label>
           <input id="calc-kg-in" type="number" step="1" placeholder="${isBn ? 'যেমন: ১৫০০' : 'e.g. 1500'}" oninput="calcKgToTon()">
           <div id="calc-kg-out" style="font-size:13px;font-weight:700;color:var(--brand);margin-top:6px">—</div>
-          <button class="btn sm pri" style="margin-top:8px" onclick="applyCalcToPos('kg')">${isBn ? '📥 পস-এ বসান' : 'Apply to POS'}</button>
+          <button class="btn sm pri" style="margin-top:8px" onclick="applyCalcToPos('kg')">${isBn ? '📥 বিলে বসান' : 'Apply to POS'}</button>
         </div>
       </div>
 
@@ -498,7 +498,7 @@ function openRodCalcModal() {
           </div>
         </div>
         <div id="calc-bar-result" style="margin-top:8px;font-size:13.5px;font-weight:700;color:var(--brand)">—</div>
-        <button class="btn sm grn" style="margin-top:8px" onclick="applyBarWeightToPos()">${isBn ? '📥 এই ওজন পস-এ বসান' : 'Apply Weight to POS'}</button>
+        <button class="btn sm grn" style="margin-top:8px" onclick="applyBarWeightToPos()">${isBn ? '📥 এই ওজন বিলে বসান' : 'Apply Weight to POS'}</button>
       </div>
     </div>`);
 

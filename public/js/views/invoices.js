@@ -21,7 +21,7 @@ VIEWS.invoices = async function () {
   layout(`
     <div class="page-head">
       <div>
-        <h1>${isBn ? 'বিক্রয় রশিদ ও ইনভয়েস' : 'Invoices'}</h1>
+        <h1>${isBn ? 'বিক্রয় রসিদ ও মেমো তালিকা' : 'Invoices'}</h1>
         <div class="sub">${isBn ? 'সকল বিক্রয়ের বিস্তারিত তালিকা ও অডিট হিসাব' : 'All bills — immutable audit trail (who & when)'}</div>
       </div>
       <div style="display:flex;gap:8px;align-items:center">
@@ -33,14 +33,14 @@ VIEWS.invoices = async function () {
       <div class="tblwrap">
         <table class="tbl" id="itable">
           <tr>
-            <th>${isBn ? 'রশিদ নং' : 'Invoice'}</th>
+            <th>${isBn ? 'মেমো / রসিদ নং' : 'Invoice'}</th>
             <th>${isBn ? 'কাস্টমার' : 'Customer'}</th>
             <th class="num">${isBn ? 'মোট বিল' : 'Total'}</th>
             <th class="num">${isBn ? 'জমা' : 'Paid'}</th>
             <th class="num">${isBn ? 'বাকি' : 'Due'}</th>
-            <th>${isBn ? 'এসএমএস' : 'SMS'}</th>
+            <th>${isBn ? 'এসএমএস স্ট্যাটাস' : 'SMS'}</th>
             <th>${isBn ? 'তারিখ ও সময়' : 'Date & Time'}</th>
-            <th>${isBn ? 'তৈরি করেছেন' : 'By'}</th>
+            <th>${isBn ? 'বিক্রেতা' : 'By'}</th>
             <th>${isBn ? 'অ্যাকশন' : 'Actions'}</th>
           </tr>
           ${rows}

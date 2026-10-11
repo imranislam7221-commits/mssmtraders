@@ -21,6 +21,11 @@ VIEWS.dashboard = async function () {
         <div class="lab">💰 ${isBn ? 'হাতে নগদ ক্যাশ' : 'Cash in Hand'}</div>
         <div class="val">${money(d.cash_balance)}</div>
       </div>
+      <div class="stat due">
+        <div class="lab">💸 ${isBn ? 'আজকের মোট খরচ' : "Today's Expense"}</div>
+        <div class="val">${money(d.today_expense || 0)}</div>
+        <div class="lab" style="margin-top:4px">${isBn ? 'চলতি মাস: ' + money(d.month_expense || 0) : 'Month: ' + money(d.month_expense || 0)}</div>
+      </div>
       ${isOwner() ? `
       <div class="stat">
         <div class="lab">${isBn ? 'বর্তমান স্টক মূল্য (ক্রয়মূল্য)' : 'Stock Valuation (cost)'}</div>
@@ -67,23 +72,24 @@ VIEWS.dashboard = async function () {
       <div style="display:flex;gap:8px;flex-wrap:wrap">
         <a class="btn pri" href="#/pos">${isBn ? '🧾 নতুন বিক্রয় (POS)' : '🧾 New Sale'}</a>
         <a class="btn" href="#/stock">${isBn ? '📥 স্টক ইন' : '📥 Stock In'}</a>
+        <a class="btn" href="#/expenses">${isBn ? '💸 খরচের খাতা' : '💸 Expenses'}</a>
         <a class="btn" href="#/customers">${isBn ? '👤 কাস্টমার বাকি খাতা' : '👤 Customer'}</a>
       </div>
     </div>
     ${stats}
     <div class="grid g2">
       <div class="card">
-        <h3>${isBn ? 'সাম্প্রতিক বিক্রয় রশিদ (ইনভয়েস)' : 'Recent Invoices'}</h3>
+        <h3>${isBn ? 'সাম্প্রতিক বিক্রয় রসিদ (মেমো)' : 'Recent Invoices'}</h3>
         <div class="tblwrap">
           <table class="tbl">
             <tr>
-              <th>${isBn ? 'রশিদ নং' : 'Invoice'}</th>
+              <th>${isBn ? 'মেমো / রসিদ নং' : 'Invoice'}</th>
               <th>${isBn ? 'কাস্টমার' : 'Customer'}</th>
               <th class="num">${isBn ? 'মোট' : 'Total'}</th>
               <th class="num">${isBn ? 'জমা' : 'Paid'}</th>
               <th class="num">${isBn ? 'বাকি' : 'Due'}</th>
               <th>${isBn ? 'তারিখ' : 'Date'}</th>
-              <th>${isBn ? 'দ্বারা' : 'By'}</th>
+              <th>${isBn ? 'বিক্রেতা' : 'By'}</th>
             </tr>
             ${invRows}
           </table>
