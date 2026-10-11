@@ -196,7 +196,7 @@ function onPriceChange() {
   onQtyChange();
 }
 
-function pickProduct(id) {
+function pickProduct(id, customQty) {
   const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const p = S.__products.find(x => x.id === id);
   if (!p) return;
@@ -218,7 +218,7 @@ function pickProduct(id) {
   const pu = $('#priceunit');
   if (pu) pu.textContent = `/${pUnit}`;
 
-  $('#pqty').value = 1;
+  $('#pqty').value = (customQty != null && customQty > 0) ? customQty : 1;
   onQtyChange();
   $('#pqty').focus();
 }
@@ -510,13 +510,13 @@ function openRodCalcModal() {
           <div>
             <label style="margin-top:0">${isBn ? 'রড সাইজ (মি.লি)' : 'Rod Size (mm)'}</label>
             <select id="calc-rod-size" onchange="calcBarWeight()">
-              <option value="0.395">৮ মি.লি (8mm) — ~৪.৭৪ কেজি/বার</option>
-              <option value="0.617">১০ মি.লি (10mm) — ~৭.৪০ কেজি/বার</option>
-              <option value="0.888" selected>১২ মি.লি (12mm) — ~১০.৬৬ কেজি/বার</option>
-              <option value="1.580">১৬ মি.লি (16mm) — ~১৮.৯৬ কেজি/বার</option>
-              <option value="2.470">২০ মি.লি (20mm) — ~২৯.৬৪ কেজি/বার</option>
-              <option value="2.980">২২ মি.লি (22mm) — ~৩৫.৭৬ কেজি/বার</option>
-              <option value="3.850">২৫ মি.লি (25mm) — ~৪৬.২০ কেজি/বার</option>
+              <option value="0.395" data-mili="8">৮ মি.লি (8mm) — ~৪.৭৪ কেজি/বার</option>
+              <option value="0.617" data-mili="10">১০ মি.লি (10mm) — ~৭.৪০ কেজি/বার</option>
+              <option value="0.888" data-mili="12" selected>১২ মি.লি (12mm) — ~১০.৬৬ কেজি/বার</option>
+              <option value="1.580" data-mili="16">১৬ মি.লি (16mm) — ~১৮.৯৬ কেজি/বার</option>
+              <option value="2.470" data-mili="20">২০ মি.লি (20mm) — ~২৯.৬৪ কেজি/বার</option>
+              <option value="2.980" data-mili="22">২২ মি.লি (22mm) — ~৩৫.৭৬ কেজি/বার</option>
+              <option value="3.850" data-mili="25">২৫ মি.লি (25mm) — ~৪৬.২০ কেজি/বার</option>
             </select>
           </div>
           <div>
@@ -525,11 +525,18 @@ function openRodCalcModal() {
           </div>
         </div>
         <div id="calc-bar-result" style="margin-top:8px;font-size:13.5px;font-weight:700;color:var(--brand)">—</div>
-        <button class="btn sm grn" style="margin-top:8px" onclick="applyBarWeightToPos()">${isBn ? '📥 এই ওজন বিলে বসান' : 'Apply Weight to POS'}</button>
+        <button class="btn sm grn" style="margin-top:8px" onclick="applyBarWeightToPos()">${isBn ? '📥 এই ওজন ও মাল বিলে বসান' : 'Apply Weight & Product to POS'}</button>
       </div>
     </div>`);
 
   setTimeout(() => {
+    // If a rod is already selected in POS, pre-select its size
+    const curPid = +($('#psearch') && $('#psearch').dataset ? ($('#psearch').dataset.pid || 0) : 0);
+    const curP = curPid ? (S.__products || []).find(x => x.id === curPid) : null;
+    if (curP && curP.size_mili && $('#calc-rod-size')) {
+      const opt = Array.from($('#calc-rod-size').options).find(o => +o.dataset.mili === +curP.size_mili);
+      if (opt) opt.selected = true;
+    }
     calcTonToKg();
     calcKgToTon();
     calcBarWeight();
@@ -563,6 +570,7 @@ function calcBarWeight() {
 }
 
 function applyCalcToPos(type) {
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   if (type === 'ton') {
     const tonVal = parseFloat($('#calc-ton-in').value) || 0;
     if (tonVal > 0) {
@@ -571,6 +579,7 @@ function applyCalcToPos(type) {
       onQtyChange();
       closeModal();
       $('#pqty').focus();
+      toast(isBn ? `টনের পরিমাণ (${bnDigits(tonVal)} টন) বিলে বসানো হয়েছে ✅` : `Applied ${tonVal} ton to POS ✅`);
     }
   } else {
     const kgVal = parseFloat($('#calc-kg-in').value) || 0;
@@ -580,17 +589,40 @@ function applyCalcToPos(type) {
       onQtyChange();
       closeModal();
       $('#pqty').focus();
+      toast(isBn ? `কেজির পরিমাণ (${bnDigits(kgVal)} কেজি) বিলে বসানো হয়েছে ✅` : `Applied ${kgVal} kg to POS ✅`);
     }
   }
 }
 
 function applyBarWeightToPos() {
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const kg = parseFloat($('#calc-bar-result').dataset.kg) || 0;
-  if (kg > 0) {
+  if (!(kg > 0)) {
+    toast(isBn ? 'সঠিক পিস সংখ্যা দিন' : 'Enter valid piece count', true);
+    return;
+  }
+
+  const sel = $('#calc-rod-size');
+  const selOpt = sel ? sel.options[sel.selectedIndex] : null;
+  const mili = selOpt ? +selOpt.dataset.mili : null;
+
+  const curPid = +($('#psearch') && $('#psearch').dataset ? ($('#psearch').dataset.pid || 0) : 0);
+  const curP = curPid ? (S.__products || []).find(x => x.id === curPid) : null;
+
+  let targetProduct = curP;
+  if (!targetProduct || (mili && +targetProduct.size_mili !== mili)) {
+    targetProduct = (S.__products || []).find(p => +p.size_mili === mili && ((p.category || '').includes('রড') || (p.category || '').toLowerCase().includes('rod')));
+  }
+
+  if (targetProduct) {
+    pickProduct(targetProduct.id, kg);
+    toast(isBn ? `🎯 ${targetProduct.name} ও ওজন (${bnDigits(kg)} কেজি) বিলে যুক্ত হয়েছে ✅` : `Applied ${targetProduct.name} (${kg} kg) ✅`);
+  } else {
     setPosUnitMode('kg');
     $('#pqty').value = kg;
     onQtyChange();
-    closeModal();
-    $('#pqty').focus();
+    toast(isBn ? `ওজন (${bnDigits(kg)} কেজি) বিলে যুক্ত হয়েছে ✅` : `Applied ${kg} kg to POS ✅`);
   }
+  closeModal();
+  $('#pqty').focus();
 }
