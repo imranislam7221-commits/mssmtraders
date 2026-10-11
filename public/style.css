@@ -320,7 +320,12 @@ table.memo-items .mt-val {
   padding: 3px 6px;
   text-align: center;
 }
-.due-text { color: #d90429; }
+.pay-strip tr.prev-due-row td {
+  border-top: 1px dashed #0b4ea2;
+  background: #f8fafc;
+  padding: 3.5px 6px;
+}
+.due-text { color: #d90429; font-weight: 700; }
 
 /* Memo Footer */
 .memo-footer-flex {

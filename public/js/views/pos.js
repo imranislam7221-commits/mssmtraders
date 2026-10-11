@@ -76,6 +76,19 @@ VIEWS.pos = async function () {
           <div id="cdrop" class="pdrop" style="display:none"></div>
         </div>
         <input type="hidden" id="custsel" value="0">
+        <div id="cust-selected-card" style="display:none;background:#f8fafc;border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-top:8px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span id="cust-card-name" style="font-weight:700;color:var(--text);font-size:13px"></span>
+            <span id="cust-card-due" class="badge"></span>
+          </div>
+          <div style="margin-top:4px;display:flex;gap:6px;align-items:center;color:var(--mut);font-size:12px">
+            <span>📞</span><span id="cust-card-phone">—</span>
+          </div>
+          <div style="margin-top:6px;display:flex;gap:6px;align-items:center">
+            <span style="font-size:12px">🏠</span>
+            <input id="cust-card-address" style="flex:1;padding:4px 8px;font-size:12px;background:#fff;border:1px solid var(--line);border-radius:4px" placeholder="${isBn ? 'ঠিকানা (গ্রাম/এলাকা লিখুন বা সংশোধন করুন)' : 'Address (village/area)'}">
+          </div>
+        </div>
         <button class="btn sm" style="margin-top:6px" onclick="newCustInline()">${isBn ? '+ নতুন কাস্টমার' : '+ New customer'}</button>
 
         <div id="newcust" style="display:none;background:#f8fafc;padding:12px;border-radius:8px;margin-top:8px;border:1px solid var(--line)">
@@ -372,7 +385,13 @@ function newCustInline() {
   const nc = $('#newcust');
   if (nc) {
     nc.style.display = (nc.style.display === 'none' ? 'block' : 'none');
-    if (nc.style.display === 'block') $('#ncname').focus();
+    if (nc.style.display === 'block') {
+      $('#ncname').focus();
+      $('#custsel').value = 0;
+      $('#custsearch').value = '';
+      const sc = $('#cust-selected-card');
+      if (sc) sc.style.display = 'none';
+    }
   }
 }
 
@@ -402,6 +421,10 @@ async function saveInvoice(doPrint) {
     };
   } else if (+custsel > 0) {
     body.customer_id = +custsel;
+    const cardAddr = $('#cust-card-address') ? $('#cust-card-address').value.trim() : '';
+    if (cardAddr) {
+      body.customer_address = cardAddr;
+    }
   }
 
   try {
@@ -470,11 +493,40 @@ function cDrop() {
 }
 
 function pickCust(id, name) {
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   $('#custsel').value = id;
   $('#custsearch').value = name;
   $('#cdrop').style.display = 'none';
   const nc = $('#newcust');
   if (nc) nc.style.display = 'none';
+
+  const card = $('#cust-selected-card');
+  if (!card) return;
+  if (!id) {
+    card.style.display = 'none';
+    return;
+  }
+  const c = (S.__customers || []).find(x => x.id === id);
+  if (c) {
+    $('#cust-card-name').textContent = c.name;
+    $('#cust-card-phone').textContent = c.phone || (isBn ? 'ফোন নম্বর নেই' : 'No phone');
+    const dueEl = $('#cust-card-due');
+    if (c.total_due > 0) {
+      dueEl.className = 'badge dan';
+      dueEl.textContent = isBn ? `পূর্বের বাকি: ৳${bnDigits(c.total_due)}` : `Due: Tk ${c.total_due}`;
+    } else {
+      dueEl.className = 'badge grn';
+      dueEl.textContent = isBn ? 'বাকি নেই' : 'No due';
+    }
+    const addrInput = $('#cust-card-address');
+    if (addrInput) {
+      addrInput.value = c.address || '';
+      addrInput.oninput = () => { c.address = addrInput.value.trim(); };
+    }
+    card.style.display = 'block';
+  } else {
+    card.style.display = 'none';
+  }
 }
 
 /* ---------- Rod & Ton Weight Calculator Modal ---------- */
