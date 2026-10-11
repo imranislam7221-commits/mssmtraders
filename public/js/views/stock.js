@@ -79,7 +79,7 @@ VIEWS.stock = async function () {
 };
 
 function filterLedger(q) {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   q = q.toLowerCase();
   const tbl = $('#sltbl');
   const rows = (window.__ledger || []).filter(l => (l.product_name + ' ' + l.source + ' ' + l.type + ' ' + l.user_name).toLowerCase().includes(q));

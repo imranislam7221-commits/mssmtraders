@@ -102,7 +102,7 @@ async function viewInvoice(id) {
 }
 
 async function resendSms(id) {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const d = await api('/invoices/' + id);
   const inv = d.invoice, customer = d.customer;
   if (!customer || !customer.phone) {
@@ -145,7 +145,7 @@ async function resendSms(id) {
 }
 
 async function delInvoice(id) {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   askConfirm(
     isBn ? 'এই চালানটি মুছবেন? স্টক ও কাস্টমার লেজার স্বয়ংক্রিয়ভাবে পূর্বের অবস্থায় ফিরে যাবে।' : 'Delete this invoice? Stock & customer ledger will be auto-reversed.',
     async function () {

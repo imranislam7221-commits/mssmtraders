@@ -9,7 +9,7 @@ const NAV = [
 ];
 function layout(inner) {
   const cur = location.hash || '#/dashboard';
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const links = NAV.filter(n => !n.owner || isOwner()).map(n => '<a href="' + n.h + '" class="' + (cur === n.h ? 'active' : '') + '"><span class="ico">' + n.ico + '</span>' + (isBn ? n.bn : n.label) + '</a>').join('');
   document.title = 'মেসার্স এম.এস ট্রেডার্স — POS & Inventory';
   $('#app').innerHTML = `

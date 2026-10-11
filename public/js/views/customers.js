@@ -1,6 +1,6 @@
 /* ---------- customers ---------- */
 VIEWS.customers = async function () {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const { customers } = await api('/customers');
   const rows = customers.map(c => `<tr onclick="viewCustomer(${c.id})" style="cursor:pointer">
     <td><b>${esc(c.name)}</b></td>
@@ -40,7 +40,7 @@ VIEWS.customers = async function () {
 };
 
 function customerModal(c) {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   c = c || {};
   modal(`
     <div class="modal-h">
@@ -82,7 +82,7 @@ function editCustomer(id) {
 }
 
 async function delCustomer(id) {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   askConfirm(isBn ? 'এই কাস্টমারকে মুছে ফেলতে চান?' : 'Delete customer?', async function () {
     try {
       await api('/customers/' + id, { method: 'DELETE' });
@@ -95,7 +95,7 @@ async function delCustomer(id) {
 }
 
 async function viewCustomer(id) {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const { customer: c, ledger } = await api('/customers/' + id + '/ledger');
   const rows = ledger.map(l => `<tr>
     <td>${fmtDT(l.timestamp)}</td>
@@ -192,7 +192,7 @@ function setCustDateRange(id, type) {
 }
 
 async function filterCustLedger(id) {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const from = $('#cfrom').value, to = $('#cto').value;
   const { ledger, customer: c } = await api('/customers/' + id + '/ledger' + (from || to ? '?' + new URLSearchParams({ from, to }) : ''));
   const rows = ledger.map(l => `<tr>
@@ -237,7 +237,7 @@ async function filterCustLedger(id) {
 }
 
 function payModal(id, due) {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   modal(`
     <div class="modal-h">
       <h3>💵 ${isBn ? 'বাকি টাকা জমা গ্রহণ' : 'Payment Collection'}</h3>

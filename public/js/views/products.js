@@ -56,7 +56,7 @@ VIEWS.products = async function () {
 };
 
 function productModal(p) {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   p = p || {};
   modal(`
     <div class="modal-h">
@@ -140,7 +140,7 @@ async function editProduct(id) {
   productModal(products.find(p => p.id === id));
 }
 async function delProduct(id) {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   askConfirm(isBn ? 'এই পণ্যটি স্থায়ীভাবে মুছে ফেলবেন?' : 'Delete this product permanently?', async function () {
     try {
       await api('/products/' + id, { method: 'DELETE' });
@@ -167,7 +167,7 @@ function setSIUnitMode(mode) {
 }
 
 function calcSIHint() {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const val = parseFloat(($('#si-qty-in') || {}).value) || 0;
   const hint = $('#si-conv-hint');
   if (!hint) return;

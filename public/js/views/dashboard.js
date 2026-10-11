@@ -1,6 +1,6 @@
 /* ---------- dashboard ---------- */
 VIEWS.dashboard = async function () {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const d = await api('/dashboard');
   const stats = `
     <div class="grid g4">

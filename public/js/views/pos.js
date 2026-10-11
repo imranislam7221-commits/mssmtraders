@@ -147,7 +147,7 @@ function setPosUnitMode(mode) {
 }
 
 function onQtyChange() {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const val = parseFloat($('#pqty').value) || 0;
   const conv = $('#conv-info');
   const prConv = $('#price-conv-info');
@@ -347,7 +347,7 @@ function newCustInline() {
 }
 
 async function saveInvoice(doPrint) {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   if (!S.cart.length) {
     toast(isBn ? 'কার্টে কোনো পণ্য নেই' : 'Cart is empty', true);
     return;
@@ -383,7 +383,7 @@ async function saveInvoice(doPrint) {
 }
 
 function invoiceSuccess(inv, customer, doPrint) {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   modal(`
     <div class="modal-h">
       <h3>${isBn ? `✅ চালান #${esc(inv.invoice_no)} সংরক্ষিত হয়েছে` : `✅ Invoice ${esc(inv.invoice_no)} saved`}</h3>
@@ -415,7 +415,7 @@ function invoiceSuccess(inv, customer, doPrint) {
 }
 
 function cDrop() {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const q = ($('#custsearch').value || '').trim().toLowerCase();
   const box = $('#cdrop');
   const list = (S.__customers || []).filter(c => {
