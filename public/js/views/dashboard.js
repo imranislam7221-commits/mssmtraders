@@ -2,29 +2,38 @@
 VIEWS.dashboard = async function () {
   const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const d = await api('/dashboard');
+
   const stats = `
-    <div class="grid g4">
-      <div class="stat due">
-        <div class="lab">${isBn ? 'সর্বমোট বাকি (দোকানের মোট পাওনা)' : 'Total Outstanding Dues'}</div>
-        <div class="val">${money(d.total_due)}</div>
-      </div>
+    <div class="grid g4" style="margin-bottom:14px">
       <div class="stat brand">
         <div class="lab">${isBn ? 'আজকের মোট বিক্রয়' : "Today's Sales"}</div>
         <div class="val">${money(d.today_sales)}</div>
-        <div class="lab" style="margin-top:4px">${isBn ? bnDigits(d.today_invoices) + ' টি রশিদ' : d.today_invoices + ' invoices'}</div>
+        <div class="lab" style="margin-top:4px">${isBn ? bnDigits(d.today_invoices) + ' টি বিক্রয় মেমো' : d.today_invoices + ' invoices'}</div>
       </div>
       <div class="stat">
-        <div class="lab">${isBn ? 'আজকের মোট নগদ আদায়' : "Today's Collection"}</div>
+        <div class="lab">${isBn ? 'আজকের নগদ আদায়' : "Today's Collection"}</div>
         <div class="val">${money(d.today_collection)}</div>
-      </div>
-      <div class="stat brand">
-        <div class="lab">💰 ${isBn ? 'হাতে নগদ ক্যাশ' : 'Cash in Hand'}</div>
-        <div class="val">${money(d.cash_balance)}</div>
+        <div class="lab" style="margin-top:4px;color:var(--green)">${isBn ? 'ক্যাশ জমা' : 'Cash in'}</div>
       </div>
       <div class="stat due">
         <div class="lab">💸 ${isBn ? 'আজকের মোট খরচ' : "Today's Expense"}</div>
         <div class="val">${money(d.today_expense || 0)}</div>
         <div class="lab" style="margin-top:4px">${isBn ? 'চলতি মাস: ' + money(d.month_expense || 0) : 'Month: ' + money(d.month_expense || 0)}</div>
+      </div>
+      <div class="stat brand">
+        <div class="lab">💰 ${isBn ? 'হাতে নগদ ক্যাশ' : 'Cash in Hand'}</div>
+        <div class="val">${money(d.cash_balance)}</div>
+        <div class="lab" style="margin-top:4px">${isBn ? 'আদায় ও খরচ সমন্বিত' : 'Net balance'}</div>
+      </div>
+    </div>
+    <div class="grid g4">
+      <div class="stat due">
+        <div class="lab">${isBn ? 'সর্বমোট বাকি (দোকানের মোট পাওনা)' : 'Total Outstanding Dues'}</div>
+        <div class="val">${money(d.total_due)}</div>
+      </div>
+      <div class="stat">
+        <div class="lab">📅 ${isBn ? 'চলতি মাসের মোট খরচ' : 'This Month Expense'}</div>
+        <div class="val">${money(d.month_expense || 0)}</div>
       </div>
       ${isOwner() ? `
       <div class="stat">
@@ -33,9 +42,13 @@ VIEWS.dashboard = async function () {
         <div class="lab" style="margin-top:4px">${isBn ? 'বিক্রয় মূল্য: ' + money(d.stock_valuation_sale) : 'Sale value: ' + money(d.stock_valuation_sale)}</div>
       </div>` : `
       <div class="stat">
+        <div class="lab">${isBn ? 'মোট পণ্য' : 'Products'}</div>
+        <div class="val">${isBn ? bnDigits(d.products) : d.products}</div>
+      </div>`}
+      <div class="stat">
         <div class="lab">${isBn ? 'মোট কাস্টমার' : 'Customers'}</div>
         <div class="val">${isBn ? bnDigits(d.customers) : d.customers}</div>
-      </div>`}
+      </div>
     </div>`;
 
   const invRows = d.recent_invoices.map(i => `
@@ -48,6 +61,15 @@ VIEWS.dashboard = async function () {
       <td>${fmtDT(i.timestamp)}</td>
       <td>${esc(i.user_name)}</td>
     </tr>`).join('') || `<tr><td colspan="7" class="empty">${isBn ? 'এখনো কোনো ইনভয়েস হয়নি — পিওএস থেকে নতুন বিক্রয় করুন' : 'No invoices yet — start billing from POS'}</td></tr>`;
+
+  const expRows = (d.recent_expenses || []).map(e => `
+    <tr>
+      <td>${fmtDate(e.date || e.timestamp)}</td>
+      <td><b>${esc(e.category)}</b></td>
+      <td>${esc(e.paid_to || e.note || '—')}</td>
+      <td class="num dueX"><b>${money(e.amount)}</b></td>
+      <td>${esc(e.user_name)}</td>
+    </tr>`).join('') || `<tr><td colspan="5" class="empty">${isBn ? 'কোনো খরচ এন্ট্রি করা হয়নি' : 'No expenses recorded'}</td></tr>`;
 
   const low = d.low_stock.slice().sort(prodSort).map(p => `
     <div class="lowrow">
@@ -77,9 +99,12 @@ VIEWS.dashboard = async function () {
       </div>
     </div>
     ${stats}
-    <div class="grid g2">
+    <div class="grid g2" style="margin-top:14px">
       <div class="card">
-        <h3>${isBn ? 'সাম্প্রতিক বিক্রয় রসিদ (মেমো)' : 'Recent Invoices'}</h3>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <h3 style="margin:0">${isBn ? '🧾 সাম্প্রতিক বিক্রয় রসিদ (মেমো)' : 'Recent Invoices'}</h3>
+          <a href="#/invoices" style="font-size:12.5px;color:var(--brand2);font-weight:600">${isBn ? 'সব দেখুন →' : 'View all →'}</a>
+        </div>
         <div class="tblwrap">
           <table class="tbl">
             <tr>
@@ -95,13 +120,34 @@ VIEWS.dashboard = async function () {
           </table>
         </div>
       </div>
+
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <h3 style="margin:0">💸 ${isBn ? 'সাম্প্রতিক খরচের হিসাব' : 'Recent Expenses'}</h3>
+          <a href="#/expenses" style="font-size:12.5px;color:var(--brand2);font-weight:600">${isBn ? 'খরচের খাতা দেখুন →' : 'Manage →'}</a>
+        </div>
+        <div class="tblwrap">
+          <table class="tbl">
+            <tr>
+              <th>${isBn ? 'তারিখ' : 'Date'}</th>
+              <th>${isBn ? 'খাত' : 'Category'}</th>
+              <th>${isBn ? 'প্রাপক / বিবরণ' : 'Paid To'}</th>
+              <th class="num">${isBn ? 'পরিমাণ (৳)' : 'Amount'}</th>
+              <th>${isBn ? 'ইউজার' : 'By'}</th>
+            </tr>
+            ${expRows}
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>💰 ${isBn ? 'নগদ ক্যাশ লেনদেন (ক্যাশ বুক)' : 'Cash Movements'}</h3>
+        ${cashRows}
+      </div>
+
       <div class="card">
         <h3>⚠️ ${isBn ? 'কম স্টক সতর্কতা' : 'Low Stock Alerts'}</h3>
         ${low}
-      </div>
-      <div class="card">
-        <h3>💰 ${isBn ? 'নগদ ক্যাশ লেনদেন' : 'Cash Movements'}</h3>
-        ${cashRows}
       </div>
     </div>`);
 };
