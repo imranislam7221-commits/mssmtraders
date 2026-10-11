@@ -60,3 +60,26 @@ function prodSort(a, b) {
   if (sa != null && sb != null && sa !== sb) return sa - sb;
   return String(a.name).localeCompare(String(b.name));
 }
+
+function downloadCsv(filename, headers, rows) {
+  const escapeCsv = function (val) {
+    if (val == null) return '""';
+    const s = String(val).replace(/"/g, '""');
+    return '"' + s + '"';
+  };
+  const bom = '\uFEFF';
+  let csv = bom + headers.map(escapeCsv).join(',') + '\r\n';
+  rows.forEach(function (r) {
+    csv += r.map(escapeCsv).join(',') + '\r\n';
+  });
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename.endsWith('.csv') ? filename : filename + '.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
