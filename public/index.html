@@ -8,8 +8,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1e3a8a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MS Traders">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
 <link rel="stylesheet" href="style.css?v=20261011_final_v5">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
+<link rel="icon" href="/icons/icon.svg">
 </head>
 <body>
 <div id="app"></div>
@@ -30,5 +37,16 @@
 <script src="js/views/settings.js?v=20261011_final_v5"></script>
 <script src="js/print.js?v=20261011_final_v5"></script>
 <script src="js/boot.js?v=20261011_final_v5"></script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').then(reg => {
+      console.log('MST Service Worker registered:', reg.scope);
+    }).catch(err => {
+      console.warn('MST Service Worker failed:', err);
+    });
+  });
+}
+</script>
 </body>
 </html>

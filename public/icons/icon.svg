@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="50%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <rect x="16" y="16" width="480" height="480" rx="96" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="4"/>
+  <!-- Crane / Construction / Materials silhouette -->
+  <g transform="translate(64, 50) scale(0.75)">
+    <!-- Tall building pillars / rods -->
+    <rect x="180" y="140" width="28" height="240" rx="6" fill="url(#cyan)"/>
+    <rect x="220" y="80" width="32" height="300" rx="6" fill="url(#gold)"/>
+    <rect x="264" y="120" width="28" height="260" rx="6" fill="url(#cyan)"/>
+    <rect x="304" y="170" width="28" height="210" rx="6" fill="url(#gold)"/>
+    <path d="M120 380 L392 380 L370 410 L142 410 Z" fill="url(#gold)"/>
+  </g>
+  <!-- Text Monogram -->
+  <text x="256" y="380" font-family="'Noto Serif Bengali', 'Hind Siliguri', 'Segoe UI', sans-serif" font-weight="900" font-size="58" fill="#ffffff" text-anchor="middle" letter-spacing="3">মেসার্স এম.এস</text>
+  <text x="256" y="430" font-family="'Hind Siliguri', 'Segoe UI', sans-serif" font-weight="700" font-size="28" fill="#38bdf8" text-anchor="middle" letter-spacing="6">ট্রেডার্স • পিওএস</text>
+</svg>
