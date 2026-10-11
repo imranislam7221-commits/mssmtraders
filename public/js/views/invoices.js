@@ -14,7 +14,7 @@ VIEWS.invoices = async function () {
     <td style="white-space:nowrap">
       <button class="btn sm pri" onclick="viewInvoice(${i.id})">${isBn ? 'দেখুন' : 'View'}</button>
       <button class="btn sm grn" onclick="printInvoice(${i.id})" title="${isBn ? 'প্রিন্ট' : 'Print'}">🖨️</button>
-      ${isOwner() ? `<button class="btn sm dan" onclick="delInvoice(${i.id})" title="${isBn ? 'মুছুন' : 'Delete'}">🗑️</button>` : ''}
+      ${isOwner() ? `<button class="btn sm ${i.due > 0 ? 'mut' : 'dan'}" onclick="delInvoice(${i.id}, ${i.due})" title="${i.due > 0 ? (isBn ? 'বাকি চালান পরিশোধ ছাড়া ডিলিট বন্ধ 🔒' : 'Locked — invoice has due') : (isBn ? 'মুছুন' : 'Delete')}">${i.due > 0 ? '🔒' : '🗑️'}</button>` : ''}
     </td>
   </tr>`).join('') || `<tr><td colspan="9" class="empty">${isBn ? 'কোনো ইনভয়েস পাওয়া যায়নি' : 'No invoices found'}</td></tr>`;
 
@@ -144,8 +144,12 @@ async function resendSms(id) {
   });
 }
 
-async function delInvoice(id) {
+async function delInvoice(id, due) {
   const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
+  if (due > 0) {
+    toast(isBn ? '⚠️ এই চালানে বকেয়া (বাকি) রয়েছে! সম্পূর্ণ বাকি পরিশোধ ছাড়া চালান ডিলিট করা যাবে না।' : 'Cannot delete! Invoice has outstanding due.', true);
+    return;
+  }
   askConfirm(
     isBn ? 'এই চালানটি মুছবেন? স্টক ও কাস্টমার লেজার স্বয়ংক্রিয়ভাবে পূর্বের অবস্থায় ফিরে যাবে।' : 'Delete this invoice? Stock & customer ledger will be auto-reversed.',
     async function () {
