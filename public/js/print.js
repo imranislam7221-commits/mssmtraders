@@ -4,13 +4,13 @@ async function settingsSafe() {
   catch (e) {}
   return {
     shop_name: 'মেসার্স এম.এস ট্রেডার্স',
-    shop_phone: '০১৯৫৬-২২৬৪৬৫',
+    shop_phone: '01956-226465',
     memo_logo: 'MST',
     memo_title_line: 'মেসার্স এম.এস ট্রেডার্স',
     memo_pro_line: 'প্রোঃ মুনজুর আহমেদ',
     memo_trade_line: 'এখানে রড, সিমেন্ট, ইট, বালি, খোয়া জাতীয় নির্মাণ সামগ্রী সুলভ মূল্যে বিক্রয় করা হয়।',
     memo_address_line: 'সোসাইটি পুরাতন মার্কেট, পুরাতন বাজার, দর্শনা, চুয়াডাঙ্গা।',
-    memo_mobile_line: 'মোবাইল: ০১৯৫৬-২২৬৪৬৫, ০১৭৪৮-১৫২০৩৬',
+    memo_mobile_line: 'মোবাইল: 01956-226465, 01748-152036',
     memo_footer_note: 'এম.এস ট্রেডার্স এর মাল ক্রয় করার জন্য আপনাকে ধন্যবাদ'
   };
 }
@@ -21,7 +21,7 @@ const MEMO_DEF = {
   pro_line: 'প্রোঃ মুনজুর আহমেদ',
   trade_line: 'এখানে রড, সিমেন্ট, ইট, বালি, খোয়া জাতীয় নির্মাণ সামগ্রী সুলভ মূল্যে বিক্রয় করা হয়।',
   address_line: 'সোসাইটি পুরাতন মার্কেট, পুরাতন বাজার, দর্শনা, চুয়াডাঙ্গা।',
-  mobile_line: 'মোবাইল: ০১৯৫৬-২২৬৪৬৫, ০১৭৪৮-১৫২০৩৬',
+  mobile_line: 'মোবাইল: 01956-226465, 01748-152036',
   footer_note: 'এম.এস ট্রেডার্স এর মাল ক্রয় করার জন্য আপনাকে ধন্যবাদ'
 };
 
@@ -103,7 +103,7 @@ function buildInvoiceMemoHtml(inv, customer, s) {
           </div>
           <div class="c-row" style="margin-top:4px">
             <span class="c-lbl">মোবাইল</span>
-            <span class="c-dots">${customer && customer.phone ? bnDigits(customer.phone) : ''}</span>
+            <span class="c-dots" style="font-family:'Segoe UI',Arial,sans-serif;letter-spacing:0.5px">${customer && customer.phone ? esc(customer.phone) : ''}</span>
           </div>
         </div>
 
@@ -335,3 +335,139 @@ async function printStatement(id, fromDate, toDate) {
     toast('লেজার প্রিন্ট প্রিভিউ সমস্যা: ' + e.message, true);
   }
 }
+
+function buildPaymentReceiptHtml(pay, c, s) {
+  const m = memoSummaryLines(s);
+  const isPaidInFull = (pay.balance || 0) <= 0;
+  const prevDue = pay.prev_due != null ? pay.prev_due : ((pay.balance || 0) + (pay.amount || 0));
+  const cleanRcptNo = bnDigits(String(pay.id || '').replace(/^MR-?/i, ''));
+  const dateStr = bnDigits(pay.time_display ? pay.time_display.split(' | ')[0] : fmtDate(pay.timestamp));
+  const timeStr = pay.time_display && pay.time_display.includes(' | ') ? pay.time_display.split(' | ')[1] : '';
+
+  return `
+  <div class="receipt memo">
+    <div class="memo-hd-wrap">
+      <div class="hd-title-flex">
+        <div class="logo-box"><span>${esc(m.logo)}</span></div>
+        <div class="bn-title">${esc(m.title_line)}</div>
+      </div>
+      <div class="pro-pill-wrap"><span class="pro-pill">${esc(m.pro_line)}</span></div>
+      <div class="trade-line">${esc(m.trade_line)}</div>
+      <div class="addr-line">${esc(m.address_line)}</div>
+      <div class="mob-banner">${esc(m.mobile_line)}</div>
+      <div style="margin: 6px 0 2px 0;">
+        <span style="display:inline-block;background:#0b4ea2;color:#fff;font-weight:700;font-size:13px;padding:3px 18px;border-radius:14px;letter-spacing:0.5px">
+          💵 টাকা জমার রসিদ (MONEY RECEIPT)
+        </span>
+      </div>
+    </div>
+
+    <div class="cust-info" style="margin-top:8px">
+      <div class="cust-info-flex">
+        <div class="cust-col-left">
+          <div class="c-row">
+            <span class="c-lbl">নাম</span>
+            <span class="c-dots">${esc(c.name || 'সম্মানিত কাস্টমার')}</span>
+          </div>
+          <div class="c-row" style="margin-top:4px">
+            <span class="c-lbl">ঠিকানা</span>
+            <span class="c-dots">${esc(c.address || '—')}</span>
+          </div>
+          <div class="c-row" style="margin-top:4px">
+            <span class="c-lbl">মোবাইল</span>
+            <span class="c-dots" style="font-family:'Segoe UI',Arial,sans-serif;letter-spacing:0.5px">${esc(c.phone || '—')}</span>
+          </div>
+        </div>
+
+        <div class="cust-col-right">
+          <div class="c-row">
+            <span class="c-lbl">তারিখ</span>
+            <span class="c-dots date-dots">${dateStr}</span>
+          </div>
+          <div class="c-row" style="margin-top:4px">
+            <span class="c-lbl">রসিদ নং</span>
+            <span class="c-dots inv-dots">${cleanRcptNo ? 'MR-' + cleanRcptNo : '—'}</span>
+          </div>
+          ${timeStr ? `
+          <div class="c-row" style="margin-top:4px">
+            <span class="c-lbl">সময়</span>
+            <span class="c-dots" style="font-family:'Segoe UI',Arial,sans-serif;font-size:11px">${timeStr}</span>
+          </div>` : ''}
+        </div>
+      </div>
+    </div>
+
+    <table class="memo-items" style="margin-top:10px">
+      <thead>
+        <tr>
+          <th style="width:12%">নং</th>
+          <th style="width:58%">বিবরণ</th>
+          <th style="width:30%">টাকা (৳)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="c">১</td>
+          <td>পূর্বের মোট বকেয়া (Previous Due)</td>
+          <td class="r">${bnDigits(prevDue)} ৳</td>
+        </tr>
+        <tr style="background:#f0fdf4">
+          <td class="c"><b>২</b></td>
+          <td><b>আজকের জমা গ্রহণ (Cash Received)</b>${pay.note ? ' <small style="color:#0b4ea2">(' + esc(pay.note) + ')</small>' : ''}</td>
+          <td class="r" style="color:#15803d;font-weight:800;font-size:13.5px"><b>${bnDigits(pay.amount)} ৳</b></td>
+        </tr>
+        <tr>
+          <td class="c">৩</td>
+          <td><b>অবশিষ্ট বর্তমান বাকি (Remaining Due)</b></td>
+          <td class="r" style="font-weight:800;font-size:13.5px;color:${isPaidInFull ? '#15803d' : '#b91c1c'}">
+            <b>${isPaidInFull ? '০ ৳ (পরিশোধ)' : bnDigits(pay.balance) + ' ৳'}</b>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    ${isPaidInFull ? `
+    <div style="margin:12px auto;text-align:center;padding:10px 14px;border:2px dashed #15803d;background:#f0fdf4;border-radius:8px">
+      <div style="font-size:16px;font-weight:800;color:#15803d;letter-spacing:0.5px">
+        ✅ সম্পূর্ণ বাকি পরিশোধিত (ALL DUE PAID)
+      </div>
+      <div style="font-size:11.5px;color:#166534;margin-top:3px;font-weight:600">
+        মেসার্স এম.এস ট্রেডার্স-এ আপনার সকল পূর্বের দেনা সম্পূর্ণ পরিশোধ হয়েছে।
+      </div>
+    </div>` : ''}
+
+    <div class="kothay-box" style="margin-top:8px">
+      <span class="kothay-lbl">কথায়</span>
+      <span class="kothay-dots">জমা গ্রহণ ${banglaMoneyWords(pay.amount)} টাকা মাত্র।</span>
+    </div>
+
+    <div class="memo-footer-flex" style="margin-top:24px">
+      <div class="sign-block">
+        <div class="dots-line">.......................................</div>
+        <div class="sign-lbl">টাকা প্রদানকারীর স্বাক্ষর</div>
+      </div>
+      <div class="thanks-block">
+        <span class="thanks-pill">${esc(m.footer_note)}</span>
+      </div>
+      <div class="sign-block">
+        <div class="dots-line">.......................................</div>
+        <div class="sign-lbl">আদায়কারীর স্বাক্ষর</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+async function printPaymentReceipt(pay, c) {
+  try {
+    const s = await settingsSafe();
+    const html = buildPaymentReceiptHtml(pay, c, s);
+    const pa = $('#print-area');
+    if (pa) pa.innerHTML = html;
+    showPrintPreviewModal(html, `জমা রসিদ — ${c.name} (৳${pay.amount})`, () => {
+      if (pa) pa.innerHTML = html;
+    });
+  } catch (e) {
+    toast('রসিদ প্রিভিউ লোড হতে সমস্যা: ' + e.message, true);
+  }
+}
+

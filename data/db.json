@@ -22,7 +22,7 @@
   "products": [
     {
       "id": 1,
-      "name": "এম.এস রডড ৮ মি.লি",
+      "name": "এম.এস রড 8 মি.লি",
       "category": "রড",
       "unit": "কেজি",
       "size_mili": 8,
@@ -36,7 +36,7 @@
     },
     {
       "id": 2,
-      "name": "এম.এস রডড ১০ মি.লি",
+      "name": "এম.এস রড 10 মি.লি",
       "category": "রড",
       "unit": "কেজি",
       "size_mili": 10,
@@ -50,7 +50,7 @@
     },
     {
       "id": 3,
-      "name": "এম.এস রডড ১২ মি.লি",
+      "name": "এম.এস রড 12 মি.লি",
       "category": "রড",
       "unit": "কেজি",
       "size_mili": 12,
@@ -64,7 +64,7 @@
     },
     {
       "id": 4,
-      "name": "এম.এস রডড ১৪ মি.লি",
+      "name": "এম.এস রড 14 মি.লি",
       "category": "রড",
       "unit": "কেজি",
       "size_mili": 14,
@@ -78,7 +78,7 @@
     },
     {
       "id": 5,
-      "name": "এম.এস রডড ১৬ মি.লি",
+      "name": "এম.এস রড 16 মি.লি",
       "category": "রড",
       "unit": "কেজি",
       "size_mili": 16,
@@ -92,7 +92,7 @@
     },
     {
       "id": 6,
-      "name": "এম.এস রডড ১৮ মি.লি",
+      "name": "এম.এস রড 18 মি.লি",
       "category": "রড",
       "unit": "কেজি",
       "size_mili": 18,
@@ -106,7 +106,7 @@
     },
     {
       "id": 7,
-      "name": "এম.এস রডড ২০ মি.লি",
+      "name": "এম.এস রড 20 মি.লি",
       "category": "রড",
       "unit": "কেজি",
       "size_mili": 20,
@@ -120,7 +120,7 @@
     },
     {
       "id": 8,
-      "name": "এম.এস রড�� ২২ মি.লি",
+      "name": "এম.এস রড 22 মি.লি",
       "category": "রড",
       "unit": "কেজি",
       "size_mili": 22,
@@ -134,7 +134,7 @@
     },
     {
       "id": 9,
-      "name": "এম.এস রডড ২৫ মি.লি",
+      "name": "এম.এস রড 25 মি.লি",
       "category": "রড",
       "unit": "কেজি",
       "size_mili": 25,
@@ -148,7 +148,7 @@
     },
     {
       "id": 10,
-      "name": "বিএসআরএম এক্সট্রিম ৫০০ডব্লিউ ১২ মি.লি",
+      "name": "বিএসআরএম এক্সট্রিম ৫০০ডব্লিউ 12 মি.লি",
       "category": "রড (ব্র্যান্ড)",
       "unit": "কেজি",
       "size_mili": 12,
@@ -162,7 +162,7 @@
     },
     {
       "id": 11,
-      "name": "বিএসআরএম এক্সট্রিম ৫০০ডব্লিউ ১৬ মি.লি",
+      "name": "বিএসআরএম এক্সট্রিম ৫০০ডব্লিউ 16 মি.লি",
       "category": "রড (ব্র্যান্ড)",
       "unit": "কেজি",
       "size_mili": 16,
@@ -557,7 +557,7 @@
     {
       "id": 1,
       "product_id": 1,
-      "product_name": "এম.এস রডড ৮ মি.লি",
+      "product_name": "এম.এস রড 8 মি.লি",
       "user_id": 1,
       "user_name": "Shop Owner (Malik)",
       "type": "OPENING",
@@ -572,7 +572,7 @@
     {
       "id": 2,
       "product_id": 2,
-      "product_name": "এম.এস রডড ১০ মি.লি",
+      "product_name": "এম.এস রড 10 মি.লি",
       "user_id": 1,
       "user_name": "Shop Owner (Malik)",
       "type": "OPENING",
@@ -587,7 +587,7 @@
     {
       "id": 3,
       "product_id": 3,
-      "product_name": "এম.এস রডড ১২ মি.লি",
+      "product_name": "এম.এস রড 12 মি.লি",
       "user_id": 1,
       "user_name": "Shop Owner (Malik)",
       "type": "OPENING",
@@ -602,7 +602,7 @@
     {
       "id": 4,
       "product_id": 4,
-      "product_name": "এম.এস রডড ১৪ মি.লি",
+      "product_name": "এম.এস রড 14 মি.লি",
       "user_id": 1,
       "user_name": "Shop Owner (Malik)",
       "type": "OPENING",
@@ -617,7 +617,7 @@
     {
       "id": 5,
       "product_id": 5,
-      "product_name": "এম.এস রডড ১৬ মি.লি",
+      "product_name": "এম.এস রড 16 মি.লি",
       "user_id": 1,
       "user_name": "Shop Owner (Malik)",
       "type": "OPENING",
@@ -632,7 +632,7 @@
     {
       "id": 6,
       "product_id": 6,
-      "product_name": "এম.এস রডড ১৮ মি.লি",
+      "product_name": "এম.এস রড 18 মি.লি",
       "user_id": 1,
       "user_name": "Shop Owner (Malik)",
       "type": "OPENING",
@@ -647,7 +647,7 @@
     {
       "id": 7,
       "product_id": 7,
-      "product_name": "এম.এস রডড ২০ মি.লি",
+      "product_name": "এম.এস রড 20 মি.লি",
       "user_id": 1,
       "user_name": "Shop Owner (Malik)",
       "type": "OPENING",
@@ -662,7 +662,7 @@
     {
       "id": 8,
       "product_id": 8,
-      "product_name": "এম.এস রড�� ২২ মি.লি",
+      "product_name": "এম.এস রড 22 মি.লি",
       "user_id": 1,
       "user_name": "Shop Owner (Malik)",
       "type": "OPENING",
@@ -677,7 +677,7 @@
     {
       "id": 9,
       "product_id": 9,
-      "product_name": "এম.এস রডড ২৫ মি.লি",
+      "product_name": "এম.এস রড 25 মি.লি",
       "user_id": 1,
       "user_name": "Shop Owner (Malik)",
       "type": "OPENING",
@@ -692,7 +692,7 @@
     {
       "id": 10,
       "product_id": 10,
-      "product_name": "বিএসআরএম এক্সট্রিম ৫০০ডব্লিউ ১২ মি.লি",
+      "product_name": "বিএসআরএম এক্সট্রিম ৫০০ডব্লিউ 12 মি.লি",
       "user_id": 1,
       "user_name": "Shop Owner (Malik)",
       "type": "OPENING",
@@ -707,7 +707,7 @@
     {
       "id": 11,
       "product_id": 11,
-      "product_name": "বিএসআরএম এক্সট্রিম ৫০০ডব্লিউ ১৬ মি.লি",
+      "product_name": "বিএসআরএম এক্সট্রিম ৫০০ডব্লিউ 16 মি.লি",
       "user_id": 1,
       "user_name": "Shop Owner (Malik)",
       "type": "OPENING",
@@ -1764,7 +1764,7 @@
   "sessions": {},
   "settings": {
     "shop_name": "মেসার্স এম.এস ট্রেডার্স",
-    "shop_phone": "০১৯৫৬-২২৬৪৬৫",
+    "shop_phone": "01956-226465",
     "shop_address": "সোসাইটি পুরাতন মার্কেট, পুরাতন বাজার, দর্শনা, চুয়াডাঙ্গা।",
     "vat_percent": 0,
     "opening_cash": 516810,
@@ -1782,7 +1782,7 @@
     "memo_pro_line": "প্রোঃ মুনজুর আহমেদ",
     "memo_trade_line": "এখানে রড, সিমেন্ট, ইট, বালি, খোয়া জাতীয় নির্মাণ সামগ্রী সুলভ মূল্যে বিক্রয় করা হয়।",
     "memo_address_line": "সোসাইটি পুরাতন মার্কেট, পুরাতন বাজার, দর্শনা, চুয়াডাঙ্গা।",
-    "memo_mobile_line": "মোবাইল: ০১৯৫৬-২২৬৪৬৫, ০১৭৪৮-১৫২০৩৬",
+    "memo_mobile_line": "মোবাইল: 01956-226465, 01748-152036",
     "memo_footer_note": "এম.এস ট্রেডার্স এর মাল ক্রয় করার জন্য আপনাকে ধন্যবাদ",
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",

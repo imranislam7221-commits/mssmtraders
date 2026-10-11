@@ -132,18 +132,34 @@ function applyLang(){
   const lb = document.getElementById('langlabel');
   if (lb) lb.textContent = curLang === 'bn' ? 'English' : 'বাংলা';
   if(curLang !== 'bn') return;
-  const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
+  const filter = {
+    acceptNode: function(node) {
+      if (node.parentElement && node.parentElement.closest('#print-area, .mob-banner, .phone-dots, .inv-dots, #calc-rod-size')) {
+        return NodeFilter.FILTER_REJECT;
+      }
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  };
+  const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, filter);
   let n; const keys = Object.keys(I18N_BN).sort((a,b)=>b.length-a.length);
   while((n = w.nextNode())){
     let v = n.nodeValue;
     const mails = [];
     v = v.replace(/[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}/g, function(m){ mails.push(m); return '\u0001' + 'e'.repeat(mails.length) + '\u0001'; });
+    // protect phone numbers (e.g., 01956-226465, 01748-152036, 01712345678)
+    const phones = [];
+    v = v.replace(/(?:(?:\+?88)?01[3-9]\d{8}|01[3-9]\d{2}-\d{6})/g, function(m){ phones.push(m); return '\u0002' + 'p'.repeat(phones.length) + '\u0002'; });
+    // protect rod mm sizes (e.g., 8 মি.লি, 10 মি.লি, 12 মি.লি, 16 মি.লি)
+    const mmSizes = [];
+    v = v.replace(/\b(\d+(?:\.\d+)?)\s*(?:মি\.লি|mm)\b/g, function(m, num){ mmSizes.push(num + ' মি.লি'); return '\u0004' + 'm'.repeat(mmSizes.length) + '\u0004'; });
     // protect emoji keycaps (1️⃣ 2️⃣ 3️⃣) — digit conversion breaks the box glyph
     const keycaps = [];
     v = v.replace(/[0-9]\uFE0F\u20E3/g, function(m){ keycaps.push(m); return '\u0003' + 'x'.repeat(keycaps.length) + '\u0003'; });
     for(const k of keys){ if(v.indexOf(k) >= 0) v = v.split(k).join(I18N_BN[k]); }
-    if(curLang==='bn'){ v = v.replace(/\bmm\b/g, 'মি.লি'); v = v.replace(/[0-9]/g, function(d){ return '০১২৩৪৫৬৭৮৯'[+d]; }); }
+    if(curLang==='bn'){ v = v.replace(/[0-9]/g, function(d){ return '০১২৩৪৫৬৭৮৯'[+d]; }); }
     if(keycaps.length) v = v.replace(/\u0003(x+)\u0003/g, function(m, xs){ return keycaps[xs.length - 1] || m; });
+    if(mmSizes.length) v = v.replace(/\u0004(m+)\u0004/g, function(m, ms){ return mmSizes[ms.length - 1] || m; });
+    if(phones.length) v = v.replace(/\u0002(p+)\u0002/g, function(m, ps){ return phones[ps.length - 1] || m; });
     if(mails.length){ v = v.replace(/\u0001(e+)\u0001/g, function(m, es){ return mails[es.length - 1] || m; }); }
     if(v !== n.nodeValue) n.nodeValue = v;
   }

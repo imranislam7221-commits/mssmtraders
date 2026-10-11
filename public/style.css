@@ -152,7 +152,7 @@ table.tbl td.num, table.tbl th.num { text-align: right; }
 
 /* ---- memo (pad-style, matching physical printed pad) ---- */
 .receipt.memo {
-  font-family: 'Hind Siliguri', 'Noto Serif Bengali', 'SolaimanLipi', sans-serif !important;
+  font-family: 'Noto Sans Bengali', 'SolaimanLipi', 'Hind Siliguri', 'Segoe UI', sans-serif !important;
   width: 100%;
   max-width: 148mm;
   margin: 0 auto;
@@ -164,7 +164,7 @@ table.tbl td.num, table.tbl th.num { text-align: right; }
   padding: 10px 12px;
 }
 .receipt.memo, .receipt.memo table, .receipt.memo td, .receipt.memo th, .receipt.memo span, .receipt.memo div {
-  font-family: 'Hind Siliguri', 'Noto Serif Bengali', sans-serif !important;
+  font-family: 'Noto Sans Bengali', 'SolaimanLipi', 'Hind Siliguri', 'Segoe UI', sans-serif !important;
 }
 .memo-hd-wrap { text-align: center; position: relative; }
 .hd-title-flex {
@@ -252,7 +252,12 @@ table.tbl td.num, table.tbl th.num { text-align: right; }
   text-align: center;
 }
 .cust-col-right .date-dots {
-  letter-spacing: 1px;
+  letter-spacing: 0.8px;
+  font-family: 'Noto Sans Bengali', 'Segoe UI', Arial, sans-serif !important;
+}
+.cust-col-right .inv-dots {
+  font-size: 15px;
+  font-family: 'Noto Sans Bengali', 'Segoe UI', Arial, sans-serif !important;
 }
 
 /* Memo Items Table */

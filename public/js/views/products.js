@@ -8,7 +8,7 @@ VIEWS.products = async function () {
     return `<tr>
     <td>
       <b>${esc(pName)}</b><br>
-      <small style="color:var(--mut)">${esc(isBn ? bnCat(p.category) : p.category)}${p.size_mili ? ' • ' + (isBn ? bnDigits(p.size_mili) + ' মি.লি' : p.size_mili + 'mm') : ''}</small>
+      <small style="color:var(--mut)">${esc(isBn ? bnCat(p.category) : p.category)}${p.size_mili ? ' • ' + (isBn ? p.size_mili + ' মি.লি' : p.size_mili + 'mm') : ''}</small>
     </td>
     <td>${esc(isBn ? bnUnit(p.unit) : p.unit)}</td>
     <td class="num ${p.current_stock <= p.low_stock ? 'dueX' : ''}"><b>${isBn ? bnDigits(p.current_stock) : p.current_stock}</b></td>
@@ -69,7 +69,7 @@ function productModal(p) {
     <div class="modal-b">
       <form id="pform">
         <label>${isBn ? 'পণ্যের নাম *' : 'Product Name *'}</label>
-        <input name="name" required value="${esc(p.name || '')}" placeholder="${isBn ? 'যেমন: এম.এস রড ১২ মি.লি' : 'e.g. MS Rod 12mm'}">
+        <input name="name" required value="${esc(p.name || '')}" placeholder="${isBn ? 'যেমন: এম.এস রড 12 মি.লি' : 'e.g. MS Rod 12mm'}">
         <div class="grid g2">
           <div>
             <label>${isBn ? 'ক্যাটাগরি' : 'Category'}</label>

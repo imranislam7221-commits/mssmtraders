@@ -106,7 +106,10 @@ async function viewCustomer(id) {
     <td><span class="badge ${l.transaction_type === 'CREDIT' ? 'in' : 'out'}">${l.transaction_type === 'CREDIT' ? (isBn ? 'জমা' : 'CREDIT') : (isBn ? 'বিল' : 'DEBIT')}</span></td>
     <td class="num">${l.transaction_type === 'CREDIT' ? '−' : '+'}${money(l.amount)}</td>
     <td class="num"><b>${money(l.balance)}</b></td>
-    <td>${esc(l.note || '')} <small style="color:var(--mut)">(${esc(l.source || '')} — ${esc(l.user_name || '')})</small></td>
+    <td>
+      ${esc(l.note || '')} <small style="color:var(--mut)">(${esc(l.source || '')} — ${esc(l.user_name || '')})</small>
+      ${l.transaction_type === 'CREDIT' ? `<button class="btn sm" style="padding:2px 8px;margin-left:6px;font-size:11px" onclick="printSinglePayment(${c.id}, ${l.id})">🖨️ রসিদ</button>` : ''}
+    </td>
   </tr>`).join('') || `<tr><td colspan="5" class="empty">${isBn ? 'কোনো লেনদেন পাওয়া যায়নি' : 'No transactions'}</td></tr>`;
 
   modal(`
@@ -204,7 +207,10 @@ async function filterCustLedger(id) {
     <td><span class="badge ${l.transaction_type === 'CREDIT' ? 'in' : 'out'}">${l.transaction_type === 'CREDIT' ? (isBn ? 'জমা' : 'CREDIT') : (isBn ? 'বিল' : 'DEBIT')}</span></td>
     <td class="num">${l.transaction_type === 'CREDIT' ? '−' : '+'}${money(l.amount)}</td>
     <td class="num"><b>${money(l.balance)}</b></td>
-    <td>${esc(l.note || '')}</td>
+    <td>
+      ${esc(l.note || '')}
+      ${l.transaction_type === 'CREDIT' ? `<button class="btn sm" style="padding:2px 8px;margin-left:6px;font-size:11px" onclick="printSinglePayment(${c.id}, ${l.id})">🖨️ রসিদ</button>` : ''}
+    </td>
   </tr>`).join('') || `<tr><td colspan="5" class="empty">${isBn ? 'এই তারিখে কোনো লেনদেন নেই' : 'No transactions in range'}</td></tr>`;
 
   $('#custledger table.tbl').innerHTML = `
@@ -267,11 +273,27 @@ function payModal(id, due) {
       closeModal();
       toast(isBn ? 'টাকা জমা হয়েছে ✅ বর্তমান বাকি: ' + money(d.customer.total_due) : 'Payment recorded ✅ Due: ' + money(d.customer.total_due));
       router();
+      if (d.payment && typeof printPaymentReceipt === 'function') {
+        printPaymentReceipt(d.payment, d.customer);
+      }
     } catch (ex) {
       toast(ex.message, true);
     }
   });
 }
+
+window.printSinglePayment = async function (cid, lid) {
+  try {
+    const { customer: c, ledger } = await api('/customers/' + cid + '/ledger');
+    const entry = ledger.find(x => x.id === lid);
+    if (!entry) return toast('লেনদেন পাওয়া যায়নি', true);
+    if (typeof printPaymentReceipt === 'function') {
+      printPaymentReceipt(entry, c);
+    }
+  } catch (e) {
+    toast('রসিদ লোড হতে সমস্যা: ' + e.message, true);
+  }
+};
 
 function filterCustomers(q) {
   q = q.toLowerCase();
