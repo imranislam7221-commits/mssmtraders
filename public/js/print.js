@@ -164,8 +164,8 @@ function buildInvoiceMemoHtml(inv, customer, s) {
     </div>
 
     ${(() => {
-      const prevDue = customer ? Math.max(0, round2((customer.total_due || 0) - (inv.due || 0))) : 0;
-      const netDue = customer ? (customer.total_due || 0) : (inv.due || 0);
+      const prevDue = inv.prev_due != null ? inv.prev_due : (customer ? Math.max(0, round2((customer.total_due || 0) - (inv.due || 0))) : 0);
+      const netDue = inv.net_due != null ? inv.net_due : (customer ? (customer.total_due || 0) : (inv.due || 0));
       return `
     <table class="pay-strip">
       <tr>
