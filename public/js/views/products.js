@@ -215,7 +215,19 @@ function stockInModal(pid, products) {
           </div>
           <div>
             <label>${isBn ? 'কেনা দর / ইউনিট প্রতি খরচ (৳)' : 'Purchase Cost / unit (Tk)'} <span id="si-cost-hint" style="color:var(--mut);font-weight:400"></span></label>
-            <input name="unit_cost" id="si-cost-in" type="number" step="0.01" placeholder="${isBn ? 'আগের দর থাকবে খালি রাখলে' : 'default = purchase price'}">
+            <input name="unit_cost" id="si-cost-in" type="number" step="0.01" placeholder="${isBn ? 'যেমন: ৪৭০' : 'default = purchase price'}">
+          </div>
+        </div>
+        <div class="grid g2" style="margin-top:10px">
+          <div>
+            <label style="margin-top:0">${isBn ? 'নতুন বিক্রয় দর (৳) (ঐচ্ছিক)' : 'New Selling Price (Tk)'} <span id="si-sell-hint" style="color:var(--mut);font-weight:400"></span></label>
+            <input name="new_sell_price" id="si-sell-in" type="number" step="0.01" placeholder="${isBn ? 'যেমন: ৫০০' : 'e.g. 500'}">
+          </div>
+          <div style="display:flex;align-items:flex-end;padding-bottom:10px">
+            <label style="margin:0;display:flex;align-items:center;gap:7px;cursor:pointer;font-size:12.5px;color:var(--brand);font-weight:600">
+              <input type="checkbox" name="update_prices" id="si-upd-prices" checked style="width:auto">
+              ${isBn ? 'আগের স্টকসহ সব নতুন দরে সেট করুন' : 'Update catalog rates for all stock'}
+            </label>
           </div>
         </div>
         <div class="grid g2">
@@ -243,6 +255,16 @@ function stockInModal(pid, products) {
     const p = (products || []).find(x => x.id === +sif.product_id.value);
     const u = $('#siunit');
     if (u) u.textContent = p ? '(' + p.unit + ')' : '';
+    const ch = $('#si-cost-hint');
+    if (ch) ch.textContent = p ? (isBn ? `(বর্তমান: ৳ ${bnDigits(p.purchase_price)})` : `(current: Tk ${p.purchase_price})`) : '';
+    const sh = $('#si-sell-hint');
+    if (sh) sh.textContent = p ? (isBn ? `(বর্তমান: ৳ ${bnDigits(p.selling_price)})` : `(current: Tk ${p.selling_price})`) : '';
+    if (p && sif.new_sell_price && !sif.new_sell_price.value) {
+      sif.new_sell_price.value = p.selling_price || '';
+    }
+    if (p && sif.unit_cost && !sif.unit_cost.value) {
+      sif.unit_cost.value = p.purchase_price || '';
+    }
     const isRodOrKg = p && (p.unit === 'kg' || p.unit === 'কেজি' || (p.category && p.category.toLowerCase().includes('rod')));
     const wrap = $('#si-unit-wrap');
     if (wrap) wrap.style.display = isRodOrKg ? 'inline-flex' : 'none';
@@ -270,13 +292,15 @@ function stockInModal(pid, products) {
           product_id: +f.product_id.value,
           quantity: qty,
           unit_cost: f.unit_cost.value,
+          new_sell_price: f.new_sell_price ? f.new_sell_price.value : '',
+          update_prices: f.update_prices ? f.update_prices.checked : false,
           supplier: f.supplier.value,
           is_credit: f.is_credit.value === '1',
           note
         }
       });
       closeModal();
-      toast(isBn ? 'স্টক সফলভাবে বৃদ্ধি করা হয়েছে ✅' : 'Stock added ✅');
+      toast(isBn ? 'স্টক ও নতুন দর সফলভাবে আপডেট করা হয়েছে ✅' : 'Stock & prices updated ✅');
       router();
     } catch (ex) {
       toast(ex.message, true);

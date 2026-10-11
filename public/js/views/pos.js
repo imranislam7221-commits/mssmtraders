@@ -45,6 +45,10 @@ VIEWS.pos = async function () {
             <label style="margin-top:0">${isBn ? 'বিক্রয় দর (৳)' : 'Price (Tk)'} <span id="priceunit" style="font-weight:400;color:var(--mut)"></span></label>
             <input id="pprice" type="number" step="0.01" placeholder="${isBn ? 'দর দিন' : 'Tk'}" oninput="onPriceChange()">
             <div id="price-conv-info" class="conv-hint" style="display:none"></div>
+            <label style="margin-top:5px;display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--mut);cursor:pointer" title="${isBn ? 'চেক করলে এই নতুন দরটি পণ্য তালিকায় স্থায়ীভাবে সেভ হয়ে থাকবে' : 'Save as default product price'}">
+              <input type="checkbox" id="save-as-default-price" style="width:auto">
+              ${isBn ? 'স্থায়ী দর হিসেবে সেভ' : 'Save as default'}
+            </label>
           </div>
           <div style="flex:0.8;display:flex;align-items:flex-end">
             <button class="btn pri blk" style="padding:10px" onclick="addToCart()">${isBn ? '+ কার্টে যোগ' : '+ Add'}</button>
@@ -277,10 +281,20 @@ function addToCart() {
     });
   }
 
+  const saveDef = $('#save-as-default-price');
+  if (saveDef && saveDef.checked && price > 0 && p) {
+    p.selling_price = price;
+    api('/products/' + p.id, { method: 'PUT', body: { selling_price: price } }).then(() => {
+      toast(isBn ? `পণ্য তালিকায় স্থায়ী দর ৳${bnDigits(price)} সেট করা হয়েছে ✅` : `Default price updated to ${price} ✅`);
+    }).catch(console.error);
+    saveDef.checked = false;
+  }
+
   ps.value = '';
   ps.dataset.pid = '';
   $('#pqty').value = '';
   $('#pprice').value = '';
+  if (saveDef) saveDef.checked = false;
   const sw = $('#unit-switch-wrap');
   if (sw) sw.style.display = 'none';
   const conv = $('#conv-info');
