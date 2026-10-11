@@ -16,7 +16,7 @@ VIEWS.products = async function () {
     <td class="num"><b>${money(p.selling_price)}</b></td>
     <td style="white-space:nowrap">
       <button class="btn sm grn" onclick="openStockIn(${p.id})">${isBn ? '+ স্টক ইন' : '+ Stock In'}</button>
-      <button class="btn sm" onclick="editProduct(${p.id})">✏️</button>
+      <button class="btn sm" onclick="editProduct(${p.id})">✏️ ${isBn ? 'এডিট' : 'Edit'}</button>
       ${isOwner() ? `<button class="btn sm dan" onclick="delProduct(${p.id})">🗑️</button>` : ''}
     </td>
   </tr>`;
@@ -102,7 +102,15 @@ function productModal(p) {
             <input name="selling_price" type="number" step="0.01" value="${p.selling_price || ''}">
           </div>
         </div>
-        ${p.id ? '' : `<label>${isBn ? 'প্রারম্ভিক স্টক (ঐচ্ছিক)' : 'Opening Stock (optional)'}</label><input name="opening_stock" type="number" step="0.01" value="" placeholder="0">`}
+        <div>
+          ${p.id ? `
+            <label>${isBn ? 'বর্তমান স্টক (সরাসরি পরিবর্তন / সংশোধন)' : 'Current Stock (direct adjust)'}</label>
+            <input name="current_stock" type="number" step="0.01" value="${p.current_stock == null ? '' : p.current_stock}">
+          ` : `
+            <label>${isBn ? 'প্রারম্ভিক স্টক (ঐচ্ছিক)' : 'Opening Stock (optional)'}</label>
+            <input name="opening_stock" type="number" step="0.01" value="" placeholder="0">
+          `}
+        </div>
         <br>
         <button class="btn pri blk">${isBn ? 'সংরক্ষণ করুন' : 'Save'}</button>
       </form>
@@ -122,7 +130,7 @@ function productModal(p) {
     };
     try {
       if (p.id) {
-        body.opening_stock = undefined;
+        body.current_stock = f.current_stock ? f.current_stock.value : undefined;
         await api('/products/' + p.id, { method: 'PUT', body });
       } else {
         body.opening_stock = f.opening_stock ? f.opening_stock.value : 0;
