@@ -1,5 +1,6 @@
-# Runtime data (shop's live DB - do not push)
-data/db.json
+# Runtime data temp files
+data/*.tmp
+data/*.bak
 
 # Temp/fix scripts
 fix*.cjs
