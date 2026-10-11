@@ -97,3 +97,14 @@ function downloadCsv(filename, headers, rows) {
   URL.revokeObjectURL(url);
 }
 
+// Auto-select text on click/focus for number inputs so typing replaces existing content immediately
+document.addEventListener('focusin', function (e) {
+  if (e.target && e.target.tagName === 'INPUT' && (e.target.type === 'number' || e.target.type === 'text') && e.target.value) {
+    if (e.target.type === 'number' || ['fpaid', 'fdiscount', 'fvat', 'pqty', 'pprice'].includes(e.target.id)) {
+      setTimeout(() => {
+        try { e.target.select(); } catch (err) {}
+      }, 20);
+    }
+  }
+});
+

@@ -38,12 +38,12 @@ VIEWS.pos = async function () {
                 <button type="button" class="unit-btn" id="btn-u-ton" onclick="setPosUnitMode('ton')">${isBn ? 'টন' : 'ton'}</button>
               </div>
             </div>
-            <input id="pqty" type="number" step="0.001" placeholder="${isBn ? 'পরিমাণ লিখুন' : 'Qty'}" oninput="onQtyChange()">
+            <input id="pqty" type="number" step="0.001" placeholder="${isBn ? 'পরিমাণ লিখুন' : 'Qty'}" onfocus="this.select()" oninput="onQtyChange()">
             <div id="conv-info" class="conv-hint" style="display:none"></div>
           </div>
           <div style="flex:1.4">
             <label style="margin-top:0">${isBn ? 'বিক্রয় দর (৳)' : 'Price (Tk)'} <span id="priceunit" style="font-weight:400;color:var(--mut)"></span></label>
-            <input id="pprice" type="number" step="0.01" placeholder="${isBn ? 'দর দিন' : 'Tk'}" oninput="onPriceChange()">
+            <input id="pprice" type="number" step="0.01" placeholder="${isBn ? 'দর দিন' : 'Tk'}" onfocus="this.select()" oninput="onPriceChange()">
             <div id="price-conv-info" class="conv-hint" style="display:none"></div>
             <label style="margin-top:5px;display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--mut);cursor:pointer" title="${isBn ? 'চেক করলে এই নতুন দরটি পণ্য তালিকায় স্থায়ীভাবে সেভ হয়ে থাকবে' : 'Save as default product price'}">
               <input type="checkbox" id="save-as-default-price" style="width:auto">
@@ -105,16 +105,16 @@ VIEWS.pos = async function () {
         </div>
 
         <label style="margin-top:12px">${isBn ? 'জমা টাকা (৳)' : 'Paid Amount (Tk)'}</label>
-        <input id="fpaid" type="number" step="0.01" value="0" oninput="calcTotals()">
+        <input id="fpaid" type="number" step="0.01" placeholder="${isBn ? '০.০০' : '0.00'}" onfocus="this.select()" oninput="calcTotals()">
 
         <div class="grid g2" style="margin-top:10px">
           <div>
             <label style="margin-top:0">${isBn ? 'মূল্য ছাড় (৳)' : 'Discount (Tk)'}</label>
-            <input id="fdiscount" type="number" step="0.01" value="0" oninput="calcTotals()">
+            <input id="fdiscount" type="number" step="0.01" placeholder="${isBn ? '০.০০' : '0.00'}" onfocus="this.select()" oninput="calcTotals()">
           </div>
           <div>
             <label style="margin-top:0">${isBn ? 'ভ্যাট (%)' : 'VAT (%)'}</label>
-            <input id="fvat" type="number" step="0.01" value="0" oninput="calcTotals()">
+            <input id="fvat" type="number" step="0.01" placeholder="${isBn ? '০' : '0'}" onfocus="this.select()" oninput="calcTotals()">
           </div>
         </div>
 
@@ -234,7 +234,7 @@ function pickProduct(id, customQty) {
   const pu = $('#priceunit');
   if (pu) pu.textContent = `/${pUnit}`;
 
-  $('#pqty').value = (customQty != null && customQty > 0) ? customQty : 1;
+  $('#pqty').value = (customQty != null && customQty > 0) ? customQty : '';
   onQtyChange();
   $('#pqty').focus();
 }
@@ -546,7 +546,7 @@ function openRodCalcModal() {
         <div style="background:#f8fafc;padding:12px;border-radius:8px;border:1px solid var(--line)">
           <h4 style="margin:0 0 8px 0;font-size:13.5px">🔄 ${isBn ? '১. টন থেকে কেজি রূপান্তর' : '1. Ton to Kg Converter'}</h4>
           <label style="margin-top:0">${isBn ? 'টনের পরিমাণ' : 'Ton'}</label>
-          <input id="calc-ton-in" type="number" step="0.001" placeholder="${isBn ? 'যেমন: ২.৫' : 'e.g. 2.5'}" oninput="calcTonToKg()">
+          <input id="calc-ton-in" type="number" step="0.001" placeholder="${isBn ? 'যেমন: ২.৫' : 'e.g. 2.5'}" onfocus="this.select()" oninput="calcTonToKg()">
           <div id="calc-ton-out" style="font-size:13px;font-weight:700;color:var(--brand);margin-top:6px">—</div>
           <button class="btn sm pri" style="margin-top:8px" onclick="applyCalcToPos('ton')">${isBn ? '📥 বিলে বসান' : 'Apply to POS'}</button>
         </div>
@@ -554,7 +554,7 @@ function openRodCalcModal() {
         <div style="background:#f8fafc;padding:12px;border-radius:8px;border:1px solid var(--line)">
           <h4 style="margin:0 0 8px 0;font-size:13.5px">🔄 ${isBn ? '২. কেজি থেকে টন রূপান্তর' : '2. Kg to Ton Converter'}</h4>
           <label style="margin-top:0">${isBn ? 'কেজির পরিমাণ' : 'Kg'}</label>
-          <input id="calc-kg-in" type="number" step="1" placeholder="${isBn ? 'যেমন: ১৫০০' : 'e.g. 1500'}" oninput="calcKgToTon()">
+          <input id="calc-kg-in" type="number" step="1" placeholder="${isBn ? 'যেমন: ১৫০০' : 'e.g. 1500'}" onfocus="this.select()" oninput="calcKgToTon()">
           <div id="calc-kg-out" style="font-size:13px;font-weight:700;color:var(--brand);margin-top:6px">—</div>
           <button class="btn sm pri" style="margin-top:8px" onclick="applyCalcToPos('kg')">${isBn ? '📥 বিলে বসান' : 'Apply to POS'}</button>
         </div>
@@ -577,7 +577,7 @@ function openRodCalcModal() {
           </div>
           <div>
             <label style="margin-top:0">${isBn ? 'পিস / বারের সংখ্যা (১২ মিটার বার)' : 'Total Pieces / Bars'}</label>
-            <input id="calc-bar-pcs" type="number" step="1" value="10" placeholder="পিস সংখ্যা" oninput="calcBarWeight()">
+            <input id="calc-bar-pcs" type="number" step="1" placeholder="${isBn ? 'যেমন: ১০' : 'e.g. 10'}" onfocus="this.select()" oninput="calcBarWeight()">
           </div>
         </div>
         <div id="calc-bar-result" style="margin-top:8px;font-size:13.5px;font-weight:700;color:var(--brand)">—</div>
@@ -617,12 +617,17 @@ function calcBarWeight() {
   const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const wtPerM = parseFloat($('#calc-rod-size').value) || 0.888;
   const pcs = parseFloat($('#calc-bar-pcs').value) || 0;
-  const totalKg = Math.round(wtPerM * 12 * pcs * 100) / 100;
-  const totalTon = (totalKg / 1000).toFixed(3);
-  $('#calc-bar-result').innerHTML = isBn
-    ? `আনুমানিক মোট ওজন: <b>${bnDigits(totalKg)} কেজি</b> (${bnDigits(totalTon)} টন)`
-    : `Estimated Weight: <b>${totalKg} kg</b> (${totalTon} Ton)`;
-  $('#calc-bar-result').dataset.kg = totalKg;
+  if (pcs > 0) {
+    const totalKg = Math.round(wtPerM * 12 * pcs * 100) / 100;
+    const totalTon = (totalKg / 1000).toFixed(3);
+    $('#calc-bar-result').innerHTML = isBn
+      ? `আনুমানিক মোট ওজন: <b>${bnDigits(totalKg)} কেজি</b> (${bnDigits(totalTon)} টন)`
+      : `Estimated Weight: <b>${totalKg} kg</b> (${totalTon} Ton)`;
+    $('#calc-bar-result').dataset.kg = totalKg;
+  } else {
+    $('#calc-bar-result').innerHTML = '—';
+    $('#calc-bar-result').dataset.kg = 0;
+  }
 }
 
 function applyCalcToPos(type) {
