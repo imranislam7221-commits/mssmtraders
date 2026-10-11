@@ -121,7 +121,7 @@ function pDrop() {
     const pName = isBn ? (I18N_BN[rawName] || t(rawName) || rawName) : rawName;
     const pCat = isBn ? bnCat(p.category) : p.category;
     const pUnit = isBn ? bnUnit(p.unit) : p.unit;
-    const sizeStr = p.size_mili ? ' • ' + (isBn ? bnDigits(p.size_mili) + ' মি.মি' : p.size_mili + 'mm') : '';
+    const sizeStr = p.size_mili ? ' • ' + (isBn ? bnDigits(p.size_mili) + ' মি.লি' : p.size_mili + 'mm') : '';
     const stockStr = isBn ? ('স্টক ' + bnDigits(p.current_stock) + ' ' + pUnit) : ('stock ' + p.current_stock + ' ' + p.unit);
     const priceStr = (isBn ? '৳ ' + bnDigits(p.selling_price) : money(p.selling_price)) + ' / ' + esc(pUnit);
     const dis = p.current_stock <= 0 ? 'dis' : '';
@@ -481,15 +481,15 @@ function openRodCalcModal() {
         <h4 style="margin:0 0 8px 0;font-size:13.5px">📏 ${isBn ? '৩. রডের সাইজ ও পিস থেকে আনুমানিক ওজন' : '3. Estimate Weight by Bar Count'}</h4>
         <div class="grid g2">
           <div>
-            <label style="margin-top:0">${isBn ? 'রড সাইজ (মি.মি)' : 'Rod Size (mm)'}</label>
+            <label style="margin-top:0">${isBn ? 'রড সাইজ (মি.লি)' : 'Rod Size (mm)'}</label>
             <select id="calc-rod-size" onchange="calcBarWeight()">
-              <option value="0.395">৮ মি.মি (8mm) — ~৪.৭৪ কেজি/বার</option>
-              <option value="0.617">১০ মি.মি (10mm) — ~৭.৪০ কেজি/বার</option>
-              <option value="0.888" selected>১২ মি.মি (12mm) — ~১০.৬৬ কেজি/বার</option>
-              <option value="1.580">১৬ মি.মি (16mm) — ~১৮.৯৬ কেজি/বার</option>
-              <option value="2.470">২০ মি.মি (20mm) — ~২৯.৬৪ কেজি/বার</option>
-              <option value="2.980">২২ মি.মি (22mm) — ~৩৫.৭৬ কেজি/বার</option>
-              <option value="3.850">২৫ মি.মি (25mm) — ~৪৬.২০ কেজি/বার</option>
+              <option value="0.395">৮ মি.লি (8mm) — ~৪.৭৪ কেজি/বার</option>
+              <option value="0.617">১০ মি.লি (10mm) — ~৭.৪০ কেজি/বার</option>
+              <option value="0.888" selected>১২ মি.লি (12mm) — ~১০.৬৬ কেজি/বার</option>
+              <option value="1.580">১৬ মি.লি (16mm) — ~১৮.৯৬ কেজি/বার</option>
+              <option value="2.470">২০ মি.লি (20mm) — ~২৯.৬৪ কেজি/বার</option>
+              <option value="2.980">২২ মি.লি (22mm) — ~৩৫.৭৬ কেজি/বার</option>
+              <option value="3.850">২৫ মি.লি (25mm) — ~৪৬.২০ কেজি/বার</option>
             </select>
           </div>
           <div>
