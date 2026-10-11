@@ -88,6 +88,10 @@ table.tbl td.num, table.tbl th.num { text-align: right; }
 .due0 { color: var(--green); font-weight: 700; } .dueX { color: var(--red); font-weight: 700; }
 .toolbar { display: flex; gap: 9px; flex-wrap: wrap; margin-bottom: 14px; }
 .toolbar input, .toolbar select { width: auto; min-width: 170px; flex: 1; max-width: 300px; }
+.pill-group { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.cat-pill { display: inline-flex; align-items: center; gap: 6px; background: #f1f5f9; border: 1px solid var(--line); color: var(--ink); padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all .15s ease; }
+.cat-pill:hover { background: #e2e8f0; }
+.cat-pill.active { background: var(--brand2); border-color: var(--brand2); color: #fff; box-shadow: 0 2px 8px rgba(217, 119, 6, .35); }
 .empty { text-align: center; color: var(--mut); padding: 26px 10px; font-size: 13.5px; }
 .lowrow { display: flex; justify-content: space-between; padding: 8px 2px; border-bottom: 1px dashed var(--line); font-size: 13.5px; }
 .lowrow:last-child { border-bottom: none; }
