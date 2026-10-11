@@ -1,22 +1,28 @@
 /* ---------- stock ledger ---------- */
 VIEWS.stock = async function () {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const [{ rows }, { ledger }] = await Promise.all([api('/stock/summary'), api('/stock/ledger')]);
-  const sum = rows.slice().sort(prodSort).map(r => `<tr>
-    <td><b>${esc(isBn ? t(r.name) : r.name)}</b></td><td>${esc(isBn ? bnUnit(r.unit) : r.unit)}</td>
+  const sum = rows.slice().sort(prodSort).map(r => {
+    const rawName = r.name || '';
+    const rName = isBn ? (I18N_BN[rawName] || t(rawName) || rawName) : rawName;
+    return `<tr>
+    <td><b>${esc(rName)}</b></td><td>${esc(isBn ? bnUnit(r.unit) : r.unit)}</td>
     <td class="num">${isBn ? bnDigits(r.opening_stock) : r.opening_stock}</td>
     <td class="num due0">+${isBn ? bnDigits(r.stock_in) : r.stock_in}</td>
     <td class="num dueX">−${isBn ? bnDigits(r.stock_out) : r.stock_out}</td>
     <td class="num"><b>${isBn ? bnDigits(r.current_stock) : r.current_stock}</b></td>
     <td class="num">${money(r.current_stock * r.purchase_price)}</td>
     <td><button class="btn sm grn" onclick="openStockIn(${r.id})">${isBn ? '+ স্টক ইন' : '+ In'}</button></td>
-  </tr>`).join('');
+  </tr>`;
+  }).join('');
 
   const log = ledger.map(l => {
     const typeLabel = isBn ? (l.type === 'IN' ? 'স্টক ইন' : l.type === 'OUT' ? 'স্টক আউট' : 'প্রারম্ভিক') : l.type;
+    const rawProd = l.product_name || '';
+    const lProdName = isBn ? (I18N_BN[rawProd] || t(rawProd) || rawProd) : rawProd;
     return `<tr>
       <td>${fmtDT(l.timestamp)}</td>
-      <td><b>${esc(isBn ? t(l.product_name) : l.product_name)}</b></td>
+      <td><b>${esc(lProdName)}</b></td>
       <td><span class="badge ${l.type === 'IN' ? 'in' : l.type === 'OUT' ? 'out' : 'open'}">${typeLabel}</span></td>
       <td class="num">${l.type === 'OUT' ? '−' : '+'}${isBn ? bnDigits(l.quantity) : l.quantity}</td>
       <td class="num">${l.unit_cost != null ? money(l.unit_cost) : (l.unit_price != null ? money(l.unit_price) : '—')}</td>

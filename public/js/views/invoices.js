@@ -1,6 +1,6 @@
 /* ---------- invoices ---------- */
 VIEWS.invoices = async function () {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const { invoices } = await api('/invoices');
   const rows = invoices.map(i => `<tr>
     <td><b>${esc(i.invoice_no)}</b></td>
@@ -50,15 +50,20 @@ VIEWS.invoices = async function () {
 };
 
 async function viewInvoice(id) {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const { invoice: inv, customer } = await api('/invoices/' + id);
-  const items = inv.items.map(i => `
+  const items = inv.items.map(i => {
+    const rawName = i.name || '';
+    const iName = isBn ? (I18N_BN[rawName] || t(rawName) || rawName) : rawName;
+    const iUnit = isBn ? bnUnit(i.unit) : (i.unit || '');
+    return `
     <tr>
-      <td>${esc(i.name)}</td>
-      <td class="num">${isBn ? bnDigits(i.qty) : i.qty} ${esc(i.unit || '')}</td>
+      <td>${esc(iName)}</td>
+      <td class="num">${isBn ? bnDigits(i.qty) : i.qty} ${esc(iUnit)}</td>
       <td class="num">${money(i.price)}</td>
       <td class="num">${money(i.amount)}</td>
-    </tr>`).join('');
+    </tr>`;
+  }).join('');
 
   modal(`
     <div class="modal-h">

@@ -1,10 +1,13 @@
 /* ---------- products ---------- */
 VIEWS.products = async function () {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const { products } = await api('/products');
-  const rows = products.slice().sort(prodSort).map(p => `<tr>
+  const rows = products.slice().sort(prodSort).map(p => {
+    const rawName = p.name || '';
+    const pName = isBn ? (I18N_BN[rawName] || t(rawName) || rawName) : rawName;
+    return `<tr>
     <td>
-      <b>${esc(isBn ? t(p.name) : p.name)}</b><br>
+      <b>${esc(pName)}</b><br>
       <small style="color:var(--mut)">${esc(isBn ? bnCat(p.category) : p.category)}${p.size_mili ? ' • ' + (isBn ? bnDigits(p.size_mili) + ' মি.মি' : p.size_mili + 'mm') : ''}</small>
     </td>
     <td>${esc(isBn ? bnUnit(p.unit) : p.unit)}</td>
@@ -16,7 +19,8 @@ VIEWS.products = async function () {
       <button class="btn sm" onclick="editProduct(${p.id})">✏️</button>
       ${isOwner() ? `<button class="btn sm dan" onclick="delProduct(${p.id})">🗑️</button>` : ''}
     </td>
-  </tr>`).join('') || `<tr><td colspan="6" class="empty">${isBn ? 'কোনো পণ্য পাওয়া যায়নি — নতুন পণ্য যোগ করুন' : 'No products — add your first product'}</td></tr>`;
+  </tr>`;
+  }).join('') || `<tr><td colspan="6" class="empty">${isBn ? 'কোনো পণ্য পাওয়া যায়নি — নতুন পণ্য যোগ করুন' : 'No products — add your first product'}</td></tr>`;
 
   layout(`
     <div class="page-head">
@@ -177,7 +181,7 @@ function calcSIHint() {
 }
 
 function stockInModal(pid, products) {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   SI_UNIT_MODE = 'kg';
   modal(`
     <div class="modal-h">
@@ -188,7 +192,12 @@ function stockInModal(pid, products) {
       <form id="siform">
         <label>${isBn ? 'পণ্য নির্বাচন করুন *' : 'Product *'}</label>
         <select name="product_id" id="si-prod-sel" required>
-          ${(products || []).slice().sort(prodSort).map(p => `<option value="${p.id}" ${p.id === pid ? 'selected' : ''}>${esc(p.name)} (${isBn ? 'বর্তমান: ' + bnDigits(p.current_stock) : 'now: ' + p.current_stock} ${esc(p.unit)})</option>`).join('')}
+          ${(products || []).slice().sort(prodSort).map(p => {
+            const rawName = p.name || '';
+            const pName = isBn ? (I18N_BN[rawName] || t(rawName) || rawName) : rawName;
+            const pUnit = isBn ? bnUnit(p.unit) : p.unit;
+            return `<option value="${p.id}" ${p.id === pid ? 'selected' : ''}>${esc(pName)} (${isBn ? 'বর্তমান: ' + bnDigits(p.current_stock) : 'now: ' + p.current_stock} ${esc(pUnit)})</option>`;
+          }).join('')}
         </select>
         <div class="grid g2">
           <div>

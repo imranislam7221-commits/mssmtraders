@@ -92,30 +92,35 @@ const I18N_BN = {
 "Save":"চালান সংরক্ষণ করুন",
 "Save & Print":"সংরক্ষণ ও মেমো প্রিন্ট"
 };
-let LANG = localStorage.getItem('pos_lang') || 'bn';
+window.LANG = localStorage.getItem('pos_lang') || 'bn';
+var LANG = window.LANG;
+
 function t(s){
   if (!s) return '';
-  if (LANG !== 'bn') return s;
+  const curLang = window.LANG || localStorage.getItem('pos_lang') || 'bn';
+  if (curLang !== 'bn') return s;
   return I18N_BN[s] || s;
 }
 function bnUnit(u){
   if (!u) return '';
-  if (LANG !== 'bn') return u;
+  const curLang = window.LANG || localStorage.getItem('pos_lang') || 'bn';
+  if (curLang !== 'bn') return u;
   const map = {
     'kg':'কেজি','ton':'টন','bag':'বস্তা','pc':'পিস','sft':'বর্গফুট','cft':'ঘনফুট',
     'ltr':'লিটার','bundle':'বান্ডিল','hajar':'হাজার','box':'বক্স','pkt':'প্যাকেট'
   };
-  return map[String(u).toLowerCase()] || u;
+  return map[String(u).trim().toLowerCase()] || u;
 }
 function bnCat(c){
   if (!c) return '';
-  if (LANG !== 'bn') return c;
+  const curLang = window.LANG || localStorage.getItem('pos_lang') || 'bn';
+  if (curLang !== 'bn') return c;
   const map = {
-    'Rod':'রড','Rod (Brand)':'রড (ব্র্যান্ড)','Cement':'সিমেন্ট','Tiles':'টাইলস',
-    'Pipes':'পাইপ','Paint':'রং','Tools':'টুলস','Balu (Sand)':'বালু',
-    'Brick (ইট)':'ইট','Brick':'ইট','Sand':'বালি ও খোয়া','General':'সাধারণ'
+    'rod':'রড','rod (brand)':'রড (ব্র্যান্ড)','cement':'সিমেন্ট','tiles':'টাইলস',
+    'pipes':'পাইপ','pipe':'পাইপ','paint':'রং','tools':'টুলস','balu (sand)':'বালু',
+    'balu':'বালু','brick (ইট)':'ইট','brick':'ইট','sand':'বালু ও খোয়া','general':'সাধারণ'
   };
-  return map[c] || c;
+  return map[String(c).trim().toLowerCase()] || map[c] || c;
 }
 function swapText(v){
   const keys = Object.keys(I18N_BN).sort((a,b)=>b.length-a.length);
@@ -123,9 +128,10 @@ function swapText(v){
   return v;
 }
 function applyLang(){
+  const curLang = window.LANG || localStorage.getItem('pos_lang') || 'bn';
   const lb = document.getElementById('langlabel');
-  if (lb) lb.textContent = LANG === 'bn' ? 'English' : 'বাংলা';
-  if(LANG !== 'bn') return;
+  if (lb) lb.textContent = curLang === 'bn' ? 'English' : 'বাংলা';
+  if(curLang !== 'bn') return;
   const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
   let n; const keys = Object.keys(I18N_BN).sort((a,b)=>b.length-a.length);
   while((n = w.nextNode())){
@@ -136,7 +142,7 @@ function applyLang(){
     const keycaps = [];
     v = v.replace(/[0-9]\uFE0F\u20E3/g, function(m){ keycaps.push(m); return '\u0003' + 'x'.repeat(keycaps.length) + '\u0003'; });
     for(const k of keys){ if(v.indexOf(k) >= 0) v = v.split(k).join(I18N_BN[k]); }
-    if(LANG==='bn'){ v = v.replace(/\bmm\b/g, 'মি. মি'); v = v.replace(/[0-9]/g, function(d){ return '০১২৩৪৫৬৭৮৯'[+d]; }); }
+    if(curLang==='bn'){ v = v.replace(/\bmm\b/g, 'মি. মি'); v = v.replace(/[0-9]/g, function(d){ return '০১২৩৪৫৬৭৮৯'[+d]; }); }
     if(keycaps.length) v = v.replace(/\u0003(x+)\u0003/g, function(m, xs){ return keycaps[xs.length - 1] || m; });
     if(mails.length){ v = v.replace(/\u0001(e+)\u0001/g, function(m, es){ return mails[es.length - 1] || m; }); }
     if(v !== n.nodeValue) n.nodeValue = v;
@@ -148,10 +154,11 @@ function applyLang(){
   });
 }
 function toggleLang(){
-  LANG = LANG === 'bn' ? 'en' : 'bn';
-  localStorage.setItem('pos_lang', LANG);
+  window.LANG = (window.LANG || 'bn') === 'bn' ? 'en' : 'bn';
+  LANG = window.LANG;
+  localStorage.setItem('pos_lang', window.LANG);
   router(); // DEMO_MODE: login gate off — always re-render
-  toast(LANG === 'bn' ? 'বাংলা চালু ✅ (default)' : 'English mode ON ✅');
+  toast(window.LANG === 'bn' ? 'বাংলা চালু ✅ (default)' : 'English mode ON ✅');
 }
 
 /* ---------- Bangla digits + money-in-words (কথায়) ---------- */

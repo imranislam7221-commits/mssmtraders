@@ -51,14 +51,19 @@ function buildInvoiceMemoHtml(inv, customer, s) {
   const m = memoSummaryLines(s);
 
   // Render items rows
-  const rows = inv.items.map((it, idx) => `
+  const rows = inv.items.map((it, idx) => {
+    const rawName = it.name || '';
+    const itName = (typeof I18N_BN !== 'undefined' && I18N_BN[rawName]) || (typeof t === 'function' && t(rawName)) || rawName;
+    const itUnit = (typeof bnUnit === 'function' && bnUnit(it.unit)) || it.unit || '';
+    return `
     <tr>
       <td class="c">${padBn(idx + 1)}</td>
-      <td class="item-name">${esc(it.name)}</td>
-      <td class="c">${bnDigits(it.qty)} ${esc(it.unit || '')}</td>
+      <td class="item-name">${esc(itName)}</td>
+      <td class="c">${bnDigits(it.qty)} ${esc(itUnit)}</td>
       <td class="r">${bnDigits(it.price)}</td>
       <td class="r">${bnDigits(it.amount)}</td>
-    </tr>`).join('');
+    </tr>`;
+  }).join('');
 
   // Pad table with empty rows to match authentic 10-12 row memo pad
   const minRows = Math.max(8, Math.min(12, 12 - (inv.discount > 0 ? 1 : 0) - (inv.vat > 0 ? 1 : 0)));

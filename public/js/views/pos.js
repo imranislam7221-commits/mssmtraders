@@ -7,12 +7,12 @@ VIEWS.pos = async function () {
   S.__products = products;
   S.__customers = customers;
   S.cart = S.cart || [];
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
 
   layout(`
     <div class="page-head">
       <div>
-        <h1>${isBn ? 'পস — দ্রুত বিলিং ও বিক্রয়' : 'POS — Fast Billing'}</h1>
+        <h1>${isBn ? 'বিক্রয় — দ্রুত বিলিং' : 'POS — Fast Billing'}</h1>
         <div class="sub">${isBn ? 'পণ্য নির্বাচন করুন → পরিমাণ ও দর দিন → মোট হিসাব স্বয়ংক্রিয়ভাবে হবে' : 'Select item → enter Qty & Price → totals auto-calculate'}</div>
       </div>
     </div>
@@ -23,7 +23,7 @@ VIEWS.pos = async function () {
           <button class="btn sm" type="button" onclick="openRodCalcModal()">⚖️ ${isBn ? 'রড ওজন ক্যালকুলেটর' : 'Rod Calculator'}</button>
         </div>
         <div class="psearch-wrap">
-          <input id="psearch" placeholder="${isBn ? '🔍 পণ্য খুঁজুন (রড, সিমেন্ট, ইট, বালি, টাইলস...)' : '🔍 Search item (Rod, Cement, Tiles…)'}" autocomplete="off" oninput="pDrop()" onfocus="pDrop()">
+          <input id="psearch" placeholder="${isBn ? '🔍 মাল খুঁজুন (রড, সিমেন্ট, ইট, বালি, টাইলস...)' : '🔍 Search item (Rod, Cement, Tiles…)'}" autocomplete="off" oninput="pDrop()" onfocus="pDrop()">
           <div id="pdrop" class="pdrop" style="display:none"></div>
         </div>
         <div class="qtyrow" style="margin-top:10px">
@@ -73,7 +73,7 @@ VIEWS.pos = async function () {
 
         <div class="grid g2" style="margin-top:10px">
           <div>
-            <label style="margin-top:0">${isBn ? 'ছাড় / ডিসকাউন্ট (টাকা)' : 'Discount (Tk)'}</label>
+            <label style="margin-top:0">${isBn ? 'ছাড় (ডিসকাউন্ট)' : 'Discount (Tk)'}</label>
             <input id="fdiscount" type="number" step="0.01" value="0" oninput="calcTotals()">
           </div>
           <div>
@@ -99,12 +99,15 @@ VIEWS.pos = async function () {
 };
 
 function pDrop() {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const q = ($('#psearch').value || '').trim().toLowerCase();
   const box = $('#pdrop');
   const list = (S.__products || []).filter(p => {
-    const hay = ((p.name || '') + ' ' + (p.category || '')).toLowerCase();
-    return hay.includes(q);
+    const rawN = (p.name || '').toLowerCase();
+    const rawC = (p.category || '').toLowerCase();
+    const bnN = (t(p.name) || '').toLowerCase();
+    const bnC = (bnCat(p.category) || '').toLowerCase();
+    return rawN.includes(q) || rawC.includes(q) || bnN.includes(q) || bnC.includes(q);
   }).sort(prodSort).slice(0, 60);
 
   if (!list.length) {
@@ -114,12 +117,13 @@ function pDrop() {
   }
 
   box.innerHTML = list.map(p => {
-    const pName = isBn ? t(p.name) : p.name;
+    const rawName = p.name || '';
+    const pName = isBn ? (I18N_BN[rawName] || t(rawName) || rawName) : rawName;
     const pCat = isBn ? bnCat(p.category) : p.category;
     const pUnit = isBn ? bnUnit(p.unit) : p.unit;
     const sizeStr = p.size_mili ? ' • ' + (isBn ? bnDigits(p.size_mili) + ' মি.মি' : p.size_mili + 'mm') : '';
     const stockStr = isBn ? ('স্টক ' + bnDigits(p.current_stock) + ' ' + pUnit) : ('stock ' + p.current_stock + ' ' + p.unit);
-    const priceStr = money(p.selling_price) + ' / ' + esc(pUnit);
+    const priceStr = (isBn ? '৳ ' + bnDigits(p.selling_price) : money(p.selling_price)) + ' / ' + esc(pUnit);
     const dis = p.current_stock <= 0 ? 'dis' : '';
     return `
       <div class="pi ${dis}" onmousedown="pickProduct(${p.id})">
@@ -176,16 +180,17 @@ function onPriceChange() {
 }
 
 function pickProduct(id) {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const p = S.__products.find(x => x.id === id);
   if (!p) return;
-  const pName = isBn ? t(p.name) : p.name;
+  const rawName = p.name || '';
+  const pName = isBn ? (I18N_BN[rawName] || t(rawName) || rawName) : rawName;
   $('#psearch').value = pName;
   $('#psearch').dataset.pid = p.id;
   $('#pdrop').style.display = 'none';
   $('#pprice').value = p.selling_price;
 
-  const isRodOrKg = (p.unit === 'kg' || p.unit === 'কেজি' || (p.category && p.category.toLowerCase().includes('rod')));
+  const isRodOrKg = (p.unit === 'kg' || p.unit === 'কেজি' || (p.category && (p.category.toLowerCase().includes('rod') || p.category.includes('রড'))));
   const sw = $('#unit-switch-wrap');
   if (sw) sw.style.display = isRodOrKg ? 'inline-flex' : 'none';
 
@@ -202,7 +207,7 @@ function pickProduct(id) {
 }
 
 function addToCart() {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const ps = $('#psearch');
   let p = S.__products.find(x => x.id === +ps.dataset.pid) ||
           S.__products.find(x => (x.name || '').toLowerCase() === (ps.value || '').trim().toLowerCase());
@@ -224,7 +229,7 @@ function addToCart() {
   }
 
   let enteredTon = null;
-  if (POS_UNIT_MODE === 'ton' && (p.unit === 'kg' || p.unit === 'কেজি' || (p.category && p.category.toLowerCase().includes('rod')))) {
+  if (POS_UNIT_MODE === 'ton' && (p.unit === 'kg' || p.unit === 'কেজি' || (p.category && (p.category.toLowerCase().includes('rod') || p.category.includes('রড'))))) {
     enteredTon = qty;
     qty = +(qty * 1000).toFixed(2);
   }
@@ -233,9 +238,14 @@ function addToCart() {
   const currentInCart = ex ? ex.qty : 0;
   if ((currentInCart + qty) > (p.current_stock + 0.001)) {
     const left = Math.max(0, p.current_stock - currentInCart);
-    toast(isBn ? `পর্যাপ্ত স্টক নেই! অবশিষ্ট স্টক: ${bnDigits(left)} ${p.unit}` : `Insufficient stock! Remaining: ${left} ${p.unit}`, true);
+    const unitText = isBn ? bnUnit(p.unit) : p.unit;
+    toast(isBn ? `পর্যাপ্ত স্টক নেই! অবশিষ্ট স্টক: ${bnDigits(left)} ${unitText}` : `Insufficient stock! Remaining: ${left} ${p.unit}`, true);
     return;
   }
+
+  const rawName = p.name || '';
+  const pName = isBn ? (I18N_BN[rawName] || t(rawName) || rawName) : rawName;
+  const pUnit = isBn ? bnUnit(p.unit) : p.unit;
 
   if (ex) {
     ex.qty = +(ex.qty + qty).toFixed(2);
@@ -245,8 +255,8 @@ function addToCart() {
   } else {
     S.cart.push({
       product_id: p.id,
-      name: p.name,
-      unit: p.unit,
+      name: pName,
+      unit: pUnit,
       qty,
       ton_qty: enteredTon,
       price,
@@ -278,17 +288,20 @@ function rmCart(i) {
 }
 
 function cartHtml() {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   if (!S.cart.length) {
-    return `<div class="empty">${isBn ? 'কার্ট খালি — উপরে পণ্য খুঁজে যোগ করুন' : 'Cart is empty — search & add items above'}</div>`;
+    return `<div class="empty">${isBn ? 'কার্ট খালি — উপরে মাল খুঁজে যোগ করুন' : 'Cart is empty — search & add items above'}</div>`;
   }
   return S.cart.map((c, i) => {
+    const rawName = c.name || '';
+    const cName = isBn ? (I18N_BN[rawName] || t(rawName) || rawName) : rawName;
+    const cUnit = isBn ? bnUnit(c.unit) : c.unit;
     const tonNote = c.ton_qty ? ` <span style="color:var(--brand);font-weight:600">(${isBn ? bnDigits(c.ton_qty) + ' টন' : c.ton_qty + ' ton'})</span>` : '';
     return `
     <div class="cart-line">
       <div class="nm">
-        ${esc(c.name)}
-        <small>${isBn ? bnDigits(c.qty) : c.qty} ${esc(c.unit)}${tonNote} × ${money(c.price)}</small>
+        ${esc(cName)}
+        <small>${isBn ? bnDigits(c.qty) : c.qty} ${esc(cUnit)}${tonNote} × ${money(c.price)}</small>
       </div>
       <b>${money(c.amount)}</b>
       <button class="btn sm dan" onclick="rmCart(${i})">✕</button>
@@ -302,7 +315,7 @@ function calcTotals() {
 }
 
 function totalsHtml() {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const sub = S.cart.reduce((s, c) => s + c.qty * c.price, 0);
   const disc = Math.max(0, parseFloat(($('#fdiscount') || {}).value) || 0);
   const vatP = parseFloat(($('#fvat') || {}).value) || 0;
@@ -435,7 +448,7 @@ function pickCust(id, name) {
 
 /* ---------- Rod & Ton Weight Calculator Modal ---------- */
 function openRodCalcModal() {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   modal(`
     <div class="modal-h">
       <h3>⚖️ ${isBn ? 'রড ওজন ও টন ⇄ কেজি ক্যালকুলেটর' : 'Rod Weight & Ton-Kg Calculator'}</h3>
@@ -497,21 +510,21 @@ function openRodCalcModal() {
 }
 
 function calcTonToKg() {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const val = parseFloat($('#calc-ton-in').value) || 0;
   const kg = Math.round(val * 1000 * 100) / 100;
   $('#calc-ton-out').innerHTML = isBn ? `মোট: <b>${bnDigits(kg)} কেজি</b>` : `Total: <b>${kg} kg</b>`;
 }
 
 function calcKgToTon() {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const val = parseFloat($('#calc-kg-in').value) || 0;
   const ton = (val / 1000).toFixed(3);
   $('#calc-kg-out').innerHTML = isBn ? `মোট: <b>${bnDigits(ton)} টন</b>` : `Total: <b>${ton} Ton</b>`;
 }
 
 function calcBarWeight() {
-  const isBn = window.LANG === 'bn';
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const wtPerM = parseFloat($('#calc-rod-size').value) || 0.888;
   const pcs = parseFloat($('#calc-bar-pcs').value) || 0;
   const totalKg = Math.round(wtPerM * 12 * pcs * 100) / 100;

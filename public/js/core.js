@@ -1,25 +1,31 @@
 'use strict';
 /* Jaia Hardware POS — frontend SPA (vanilla JS) */
 
+window.LANG = localStorage.getItem('pos_lang') || 'bn';
+function bnDigits(x) { return String(x == null ? '' : x).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[+d]); }
+
 /* ---------- state + helpers ---------- */
 const S = { token: localStorage.getItem('pos_token') || '', user: null, cart: [], posCustomer: null };
 const $ = sel => document.querySelector(sel);
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const money = n => {
   const val = Number(n || 0).toLocaleString('en-IN', { maximumFractionDigits: 2 });
-  return '৳ ' + (window.LANG === 'bn' ? bnDigits(val) : val);
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
+  return '৳ ' + (isBn ? bnDigits(val) : val);
 };
 const fmtDate = iso => {
   const d = new Date(iso);
   const p = x => String(x).padStart(2, '0');
   const str = p(d.getDate()) + '-' + p(d.getMonth() + 1) + '-' + d.getFullYear();
-  return window.LANG === 'bn' ? bnDigits(str) : str;
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
+  return isBn ? bnDigits(str) : str;
 };
 const fmtDT = iso => {
   const d = new Date(iso);
   const p = x => String(x).padStart(2, '0');
   const str = p(d.getDate()) + '-' + p(d.getMonth() + 1) + '-' + d.getFullYear() + ' | ' + p(d.getHours()) + ':' + p(d.getMinutes()) + ':' + p(d.getSeconds());
-  return window.LANG === 'bn' ? bnDigits(str) : str;
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
+  return isBn ? bnDigits(str) : str;
 };
 const isOwner = () => S.user && S.user.role === 'owner';
 let toastTimer = null;
