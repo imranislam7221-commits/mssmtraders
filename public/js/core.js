@@ -53,12 +53,26 @@ function askConfirm(msg, onYes) {
 }
 
 function prodSort(a, b) {
-  const rank = function (c) { const cat = (String(c.category || '') + ' ' + String(c.name || '')).toLowerCase(); if (cat.indexOf('rod') >= 0) return 0; if (cat.indexOf('cement') >= 0) return 1; return 2; };
-  const ra = rank(a), rb = rank(b);
+  const getRank = function (c) {
+    const s = (String(c.category || '') + ' ' + String(c.name || '')).toLowerCase();
+    // 1. Cement (সবার উপরে)
+    if (s.includes('cement') || s.includes('সিমেন্ট') || s.includes('সি প্লাস') || s.includes('c-plus') || s.includes('হোলসিম')) return 0;
+    // 2. Rod (রড)
+    if (s.includes('rod') || s.includes('রড') || s.includes('বিএসআরএম') || s.includes('bsrm') || s.includes('বার')) return 1;
+    // 3. Sand / Balu (বালি / বালু)
+    if (s.includes('balu') || s.includes('bali') || s.includes('বালু') || s.includes('বালি') || s.includes('sand')) return 2;
+    // 4. Khua (খোয়া / চিপস)
+    if (s.includes('khua') || s.includes('khoa') || s.includes('খোয়া') || s.includes('খোয়া') || s.includes('chips')) return 3;
+    // 5. Eaat / It (ইট)
+    if (s.includes('ইট') || s.includes('brick') || s.includes('eat') || s.includes('eaat')) return 4;
+    // 6. Others (অন্যান্য)
+    return 5;
+  };
+  const ra = getRank(a), rb = getRank(b);
   if (ra !== rb) return ra - rb;
   const sa = a.size_mili == null ? null : +a.size_mili, sb = b.size_mili == null ? null : +b.size_mili;
   if (sa != null && sb != null && sa !== sb) return sa - sb;
-  return String(a.name).localeCompare(String(b.name));
+  return String(a.name || '').localeCompare(String(b.name || ''));
 }
 
 function downloadCsv(filename, headers, rows) {

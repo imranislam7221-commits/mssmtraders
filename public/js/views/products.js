@@ -35,10 +35,11 @@ VIEWS.products = async function () {
     </div>
     <div class="pill-group" style="margin-bottom:12px">
       <button type="button" class="cat-pill active" id="cp-all" onclick="filterByCat('all')">🏷️ ${isBn ? 'সব পণ্য' : 'All'}</button>
-      <button type="button" class="cat-pill" id="cp-rod" onclick="filterByCat('Rod')">🏗️ ${isBn ? 'রড' : 'Rod'}</button>
       <button type="button" class="cat-pill" id="cp-cement" onclick="filterByCat('Cement')">🧱 ${isBn ? 'সিমেন্ট' : 'Cement'}</button>
-      <button type="button" class="cat-pill" id="cp-brick" onclick="filterByCat('Brick')">🧱 ${isBn ? 'ইট ও খোয়া' : 'Bricks & Chips'}</button>
+      <button type="button" class="cat-pill" id="cp-rod" onclick="filterByCat('Rod')">🏗️ ${isBn ? 'রড' : 'Rod'}</button>
       <button type="button" class="cat-pill" id="cp-sand" onclick="filterByCat('Sand')">🏖️ ${isBn ? 'বালু' : 'Sand'}</button>
+      <button type="button" class="cat-pill" id="cp-khua" onclick="filterByCat('Khua')">🪨 ${isBn ? 'খোয়া' : 'Chips'}</button>
+      <button type="button" class="cat-pill" id="cp-brick" onclick="filterByCat('Brick')">🧱 ${isBn ? 'ইট' : 'Bricks'}</button>
     </div>
     <div class="card">
       <div class="tblwrap">
@@ -323,10 +324,11 @@ function filterByCat(cat) {
 
   const terms = {
     'all': [],
-    'rod': ['rod', 'রড'],
     'cement': ['cement', 'সিমেন্ট'],
-    'brick': ['brick', 'ইট', 'খোয়া'],
-    'sand': ['sand', 'বালু', 'বালি']
+    'rod': ['rod', 'রড'],
+    'sand': ['sand', 'বালু', 'বালি'],
+    'khua': ['khua', 'খোয়া', 'খোয়া', 'chips'],
+    'brick': ['brick', 'ইট']
   }[cat.toLowerCase()] || [cat.toLowerCase()];
 
   document.querySelectorAll("#ptable tr").forEach(function (tr, i) {
