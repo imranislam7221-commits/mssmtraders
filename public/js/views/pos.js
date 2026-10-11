@@ -29,29 +29,33 @@ VIEWS.pos = async function () {
           <input id="psearch" placeholder="${isBn ? '🔍 মাল খুঁজুন (রড, সিমেন্ট, ইট, বালি, টাইলস...)' : '🔍 Search item (Rod, Cement, Tiles…)'}" autocomplete="off" oninput="pDrop()" onfocus="pDrop()">
           <div id="pdrop" class="pdrop" style="display:none"></div>
         </div>
-        <div class="qtyrow" style="margin-top:10px">
-          <div style="flex:1.4">
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <label style="margin-top:0">${isBn ? 'পরিমাণ' : 'Qty'} (<span id="qtyunit" style="color:var(--brand)">—</span>) *</label>
-              <div id="unit-switch-wrap" class="unit-switcher" style="display:none">
-                <button type="button" class="unit-btn active" id="btn-u-kg" onclick="setPosUnitMode('kg')">${isBn ? 'কেজি' : 'kg'}</button>
-                <button type="button" class="unit-btn" id="btn-u-ton" onclick="setPosUnitMode('ton')">${isBn ? 'টন' : 'ton'}</button>
+        <div style="margin-top:10px">
+          <div class="qtyrow" style="align-items:flex-end">
+            <div style="flex:1.4">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+                <label style="margin:0">${isBn ? 'পরিমাণ' : 'Qty'} (<span id="qtyunit" style="color:var(--brand)">—</span>) *</label>
+                <div id="unit-switch-wrap" class="unit-switcher" style="display:none">
+                  <button type="button" class="unit-btn active" id="btn-u-kg" onclick="setPosUnitMode('kg')">${isBn ? 'কেজি' : 'kg'}</button>
+                  <button type="button" class="unit-btn" id="btn-u-ton" onclick="setPosUnitMode('ton')">${isBn ? 'টন' : 'ton'}</button>
+                </div>
               </div>
+              <input id="pqty" type="number" step="0.001" placeholder="${isBn ? 'পরিমাণ লিখুন' : 'Qty'}" onfocus="this.select()" oninput="onQtyChange()">
             </div>
-            <input id="pqty" type="number" step="0.001" placeholder="${isBn ? 'পরিমাণ লিখুন' : 'Qty'}" onfocus="this.select()" oninput="onQtyChange()">
-            <div id="conv-info" class="conv-hint" style="display:none"></div>
+            <div style="flex:1.4">
+              <label style="margin:0 0 4px 0">${isBn ? 'বিক্রয় দর (৳)' : 'Price (Tk)'} <span id="priceunit" style="font-weight:400;color:var(--mut)"></span></label>
+              <input id="pprice" type="number" step="0.01" placeholder="${isBn ? 'দর দিন' : 'Tk'}" onfocus="this.select()" oninput="onPriceChange()">
+            </div>
+            <div style="flex:1">
+              <button class="btn pri blk" style="padding:10px 12px;white-space:nowrap" onclick="addToCart()">${isBn ? '+ কার্টে যোগ' : '+ Add'}</button>
+            </div>
           </div>
-          <div style="flex:1.4">
-            <label style="margin-top:0">${isBn ? 'বিক্রয় দর (৳)' : 'Price (Tk)'} <span id="priceunit" style="font-weight:400;color:var(--mut)"></span></label>
-            <input id="pprice" type="number" step="0.01" placeholder="${isBn ? 'দর দিন' : 'Tk'}" onfocus="this.select()" oninput="onPriceChange()">
-            <div id="price-conv-info" class="conv-hint" style="display:none"></div>
-            <label style="margin-top:5px;display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--mut);cursor:pointer" title="${isBn ? 'চেক করলে এই নতুন দরটি পণ্য তালিকায় স্থায়ীভাবে সেভ হয়ে থাকবে' : 'Save as default product price'}">
-              <input type="checkbox" id="save-as-default-price" style="width:auto">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px">
+            <div id="conv-info" class="conv-hint" style="display:none;margin:0"></div>
+            <div id="price-conv-info" class="conv-hint" style="display:none;margin:0"></div>
+            <label style="margin:0 0 0 auto;display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--mut);cursor:pointer" title="${isBn ? 'চেক করলে এই নতুন দরটি পণ্য তালিকায় স্থায়ীভাবে সেভ হয়ে থাকবে' : 'Save as default product price'}">
+              <input type="checkbox" id="save-as-default-price" style="width:auto;margin:0">
               ${isBn ? 'স্থায়ী দর হিসেবে সেভ' : 'Save as default'}
             </label>
-          </div>
-          <div style="flex:0.8;display:flex;align-items:flex-end">
-            <button class="btn pri blk" style="padding:10px" onclick="addToCart()">${isBn ? '+ কার্টে যোগ' : '+ Add'}</button>
           </div>
         </div>
         <div class="pos-card-head" style="margin-top:22px">
