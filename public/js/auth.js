@@ -13,7 +13,6 @@ function renderLogin(err) {
       ${err ? '<div class="err">' + esc(err) + '</div>' : ''}
       <br><button class="btn pri blk" type="submit">লগইন করুন →</button>
     </form>
-    <div class="login-hint"><b>লগইন তথ্য:</b><br>🔑 ইউজারনেম: <b>mssmtradersdokan</b><br>📧 জিমেইল: <b>mssmtradersdokan@gmail.com</b><br>🔒 পাসওয়ার্ড: <b>Smtradersdokan</b></div>
   </div></div>`;
   if (window.applyLang) applyLang();
   $('#loginform').addEventListener('submit', async e => {
