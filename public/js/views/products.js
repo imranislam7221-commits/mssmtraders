@@ -31,6 +31,8 @@ VIEWS.products = async function () {
       <div style="display:flex;gap:8px;align-items:center">
         <input id="psearch2" placeholder="${isBn ? '🔍 পণ্য খুঁজুন…' : '🔍 Search product…'}" style="width:220px" oninput="filterProducts(this.value)">
         <button class="btn pri" onclick="addProduct()">${isBn ? '+ নতুন পণ্য যোগ' : '+ Add Product'}</button>
+      </div>
+    </div>
     <div class="pill-group" style="margin-bottom:12px">
       <button type="button" class="cat-pill active" id="cp-all" onclick="filterByCat('all')">🏷️ ${isBn ? 'সব পণ্য' : 'All'}</button>
       <button type="button" class="cat-pill" id="cp-rod" onclick="filterByCat('Rod')">🏗️ ${isBn ? 'রড (Rod)' : 'Rod'}</button>
@@ -295,12 +297,22 @@ function filterByCat(cat) {
   const btn = $(`#cp-${cat.toLowerCase()}`);
   if (btn) btn.classList.add('active');
 
+  const terms = {
+    'all': [],
+    'rod': ['rod', 'রড'],
+    'cement': ['cement', 'সিমেন্ট'],
+    'brick': ['brick', 'ইট', 'খোয়া'],
+    'sand': ['sand', 'বালু', 'বালি']
+  }[cat.toLowerCase()] || [cat.toLowerCase()];
+
   document.querySelectorAll("#ptable tr").forEach(function (tr, i) {
     if (i === 0) return;
     if (cat === 'all') {
       tr.style.display = "";
     } else {
-      tr.style.display = tr.textContent.toLowerCase().includes(cat.toLowerCase()) ? "" : "none";
+      const text = tr.textContent.toLowerCase();
+      const match = terms.some(t => text.includes(t));
+      tr.style.display = match ? "" : "none";
     }
   });
 }
