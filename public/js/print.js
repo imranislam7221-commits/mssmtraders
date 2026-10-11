@@ -91,19 +91,32 @@ function buildInvoiceMemoHtml(inv, customer, s) {
     </div>
 
     <div class="cust-info">
-      <div class="c-row">
-        <span class="c-lbl">নং</span>
-        <span class="c-dots" style="max-width:140px;font-weight:700">${cleanInvNo}</span>
-        <span class="c-lbl" style="margin-left:auto">তারিখ</span>
-        <span class="c-dots" style="max-width:140px">${bnDigits(inv.time_display ? inv.time_display.split(' | ')[0] : fmtDate(inv.timestamp))}</span>
-      </div>
-      <div class="c-row" style="margin-top:4px">
-        <span class="c-lbl">নাম</span>
-        <span class="c-dots">${esc(inv.customer_name || 'নগদ কাস্টমার')}</span>
-      </div>
-      <div class="c-row" style="margin-top:4px">
-        <span class="c-lbl">ঠিকানা</span>
-        <span class="c-dots">${customer ? esc(customer.address || customer.phone || '') : ''}</span>
+      <div class="cust-info-flex">
+        <div class="cust-col-left">
+          <div class="c-row">
+            <span class="c-lbl">নাম</span>
+            <span class="c-dots">${esc(inv.customer_name || 'নগদ কাস্টমার')}</span>
+          </div>
+          <div class="c-row" style="margin-top:4px">
+            <span class="c-lbl">ঠিকানা</span>
+            <span class="c-dots">${customer && customer.address ? esc(customer.address) : ''}</span>
+          </div>
+          <div class="c-row" style="margin-top:4px">
+            <span class="c-lbl">মোবাইল</span>
+            <span class="c-dots">${customer && customer.phone ? bnDigits(customer.phone) : ''}</span>
+          </div>
+        </div>
+
+        <div class="cust-col-right">
+          <div class="c-row">
+            <span class="c-lbl">তারিখ</span>
+            <span class="c-dots date-dots">${bnDigits(inv.time_display ? inv.time_display.split(' | ')[0] : fmtDate(inv.timestamp))}</span>
+          </div>
+          <div class="c-row" style="margin-top:4px">
+            <span class="c-lbl">মেমো নং</span>
+            <span class="c-dots inv-dots">${cleanInvNo}</span>
+          </div>
+        </div>
       </div>
     </div>
 

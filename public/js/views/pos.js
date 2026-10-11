@@ -78,10 +78,13 @@ VIEWS.pos = async function () {
         <input type="hidden" id="custsel" value="0">
         <button class="btn sm" style="margin-top:6px" onclick="newCustInline()">${isBn ? '+ নতুন কাস্টমার' : '+ New customer'}</button>
 
-        <div id="newcust" style="display:none;background:#f8fafc;padding:10px;border-radius:8px;margin-top:8px;border:1px solid var(--line)">
+        <div id="newcust" style="display:none;background:#f8fafc;padding:12px;border-radius:8px;margin-top:8px;border:1px solid var(--line)">
+          <div style="font-weight:700;font-size:13px;color:var(--brand);margin-bottom:6px">📝 ${isBn ? 'নতুন কাস্টমারের তথ্য' : 'New Customer Details'}</div>
           <label style="margin-top:0">${isBn ? 'নতুন কাস্টমারের নাম *' : 'New Customer Name *'}</label>
           <input id="ncname" placeholder="${isBn ? 'কাস্টমারের নাম' : 'Name'}">
-          <label>${isBn ? 'মোবাইল নম্বর' : 'Phone'}</label>
+          <label style="margin-top:6px">${isBn ? 'ঠিকানা (গ্রাম / এলাকা)' : 'Address'}</label>
+          <input id="ncaddress" placeholder="${isBn ? 'যেমন: দর্শনা পুরাতন বাজার, চুয়াডাঙ্গা' : 'e.g. Village/Area'}">
+          <label style="margin-top:6px">${isBn ? 'মোবাইল নম্বর' : 'Phone'}</label>
           <input id="ncphone" placeholder="${isBn ? '০১XXXXXXXXX' : '01XXXXXXXXX'}">
           <label style="display:flex;gap:6px;align-items:center;margin-top:8px;cursor:pointer">
             <input type="checkbox" id="ncwa" style="width:auto"> ${isBn ? 'হোয়াটসঅ্যাপ চালু (রসিদ যাবে হোয়াটসঅ্যাপে)' : 'WhatsApp enabled'}
@@ -393,8 +396,9 @@ async function saveInvoice(doPrint) {
   if (ncName) {
     body.customer = {
       name: ncName,
-      phone: $('#ncphone').value,
-      whatsapp_enabled: $('#ncwa').checked
+      address: $('#ncaddress') ? $('#ncaddress').value.trim() : '',
+      phone: $('#ncphone') ? $('#ncphone').value.trim() : '',
+      whatsapp_enabled: $('#ncwa') ? $('#ncwa').checked : false
     };
   } else if (+custsel > 0) {
     body.customer_id = +custsel;

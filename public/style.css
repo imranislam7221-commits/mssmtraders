@@ -227,17 +227,32 @@ table.tbl td.num, table.tbl th.num { text-align: right; }
 .extra-line { font-size: 10px; color: #444; text-align: center; }
 
 /* Customer rows */
-.cust-info { margin-top: 6px; font-size: 12px; }
-.c-row { display: flex; align-items: baseline; gap: 4px; margin-bottom: 3px; }
-.c-lbl { font-weight: 700; color: #000; min-width: 32px; white-space: nowrap; font-size: 12.5px; }
+.cust-info { margin-top: 6px; font-size: 12.5px; }
+.cust-info-flex { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; }
+.cust-col-left { flex: 1; }
+.cust-col-right { width: 175px; flex-shrink: 0; }
+.c-row { display: flex; align-items: baseline; gap: 5px; margin-bottom: 4px; }
+.c-lbl { font-weight: 700; color: #000; min-width: 44px; white-space: nowrap; font-size: 13px; }
 .c-dots {
   flex: 1;
   border-bottom: 1.5px dotted #333;
-  min-height: 16px;
-  padding: 0 4px;
+  min-height: 18px;
+  padding: 0 4px 2px 4px;
   font-weight: 600;
   color: #111;
-  font-size: 12px;
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+.cust-col-right .c-lbl { min-width: 50px; }
+.cust-col-right .c-dots {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #0b4ea2;
+  letter-spacing: 0.6px;
+  text-align: center;
+}
+.cust-col-right .date-dots {
+  letter-spacing: 1px;
 }
 
 /* Memo Items Table */
