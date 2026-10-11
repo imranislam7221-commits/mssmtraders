@@ -61,7 +61,7 @@ VIEWS.settings = async function () {
       </div>
       <p style="font-size:13.5px;color:var(--fg);margin:10px 0 14px 0;line-height:1.6">
         আপনার জন্য কোনো জটিল স্ক্রিপ্ট বা Google Apps Script ছাড়াই সরাসরি অনলাইন ক্লাউড ব্যাকআপ সিস্টেম রেডি করা আছে। 
-        যেকোনো নতুন মোবাইল বা ল্যাপটপে <b><a href="https://mssmtraders-pos.onrender.com" target="_blank" style="color:var(--brand2);text-decoration:underline">mssmtraders-pos.onrender.com</a></b> এ গিয়ে আপনার জিমেইল <b>monjurahmed1984dsn@gmail.com</b> ও পাসওয়ার্ড দিলেই সমস্ত হিসাব দেখতে পাবেন।
+        যেকোনো নতুন মোবাইল বা ল্যাপটপে <b><a href="https://mssmtraders-pos.onrender.com" target="_blank" style="color:var(--brand2);text-decoration:underline">mssmtraders-pos.onrender.com</a></b> এ গিয়ে আপনার জিমেইল <b>mssmtradersdokan@gmail.com</b> ও পাসওয়ার্ড দিলেই সমস্ত হিসাব দেখতে পাবেন।
       </p>
 
       <div style="display:flex;gap:10px;flex-wrap:wrap">

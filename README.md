@@ -13,7 +13,7 @@ PC বন্ধ থাকলেও একই WiFi-তে মোবাইল থ�
 
 | Role | Username / Gmail | Password |
 |---|---|---|
-| 👑 প্রোপ্রাইটর (মুনজুর আহমেদ) | `mssmtradersdokan` অথবা `monjurahmed1984dsn@gmail.com` | `Smtradersdokan` |
+| 👑 প্রোপ্রাইটর (মুনজুর আহমেদ) | `mssmtradersdokan` অথবা `mssmtradersdokan@gmail.com` | `Smtradersdokan` |
 
 - দোকান: **মেসার্স এম.এস ট্রেডার্স**, দর্শনা, চুয়াডাঙ্গা।
 

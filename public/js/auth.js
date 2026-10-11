@@ -8,12 +8,12 @@ function renderLogin(err) {
     <div class="sub">রড, সিমেন্ট ও নির্মাণ সামগ্রী — পিওএস ও হিসাব সিস্টেম</div>
     <div style="text-align:center;margin-top:8px"><button class="btn sm" type="button" onclick="toggleLang()">🌐 বাংলা / English</button></div>
     <form id="loginform">
-      <label>ইউজারনেম বা জিমেইল (Username / Gmail)</label><input name="email" type="text" required placeholder="mssmtradersdokan অথবা monjurahmed1984dsn@gmail.com" autocomplete="username">
+      <label>ইউজারনেম বা জিমেইল (Username / Gmail)</label><input name="email" type="text" required placeholder="mssmtradersdokan অথবা mssmtradersdokan@gmail.com" autocomplete="username">
       <label>পাসওয়ার্ড (Password)</label><input name="password" type="password" required placeholder="••••••••" autocomplete="current-password">
       ${err ? '<div class="err">' + esc(err) + '</div>' : ''}
       <br><button class="btn pri blk" type="submit">লগইন করুন →</button>
     </form>
-    <div class="login-hint"><b>লগইন তথ্য:</b><br>🔑 ইউজারনেম: <b>mssmtradersdokan</b><br>📧 জিমেইল: <b>monjurahmed1984dsn@gmail.com</b><br>🔒 পাসওয়ার্ড: <b>Smtradersdokan</b></div>
+    <div class="login-hint"><b>লগইন তথ্য:</b><br>🔑 ইউজারনেম: <b>mssmtradersdokan</b><br>📧 জিমেইল: <b>mssmtradersdokan@gmail.com</b><br>🔒 পাসওয়ার্ড: <b>Smtradersdokan</b></div>
   </div></div>`;
   if (window.applyLang) applyLang();
   $('#loginform').addEventListener('submit', async e => {
