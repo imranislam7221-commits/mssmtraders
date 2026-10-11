@@ -33,12 +33,25 @@ function toast(msg, isErr) { const t = $('#toast') || Object.assign(document.bod
 async function api(path, opts = {}) {
   const headers = { 'Content-Type': 'application/json' };
   if (S.token) headers['Authorization'] = 'Bearer ' + S.token;
-  const res = await fetch('/api' + path, { method: opts.method || 'GET', headers, body: opts.body ? JSON.stringify(opts.body) : undefined });
-  let data = {};
-  try { data = await res.json(); } catch (e) {}
-  if (res.status === 401 && S.token) { S.token = ''; S.user = null; localStorage.removeItem('pos_token'); location.hash = '#/login'; throw new Error(data.error || 'Session expired'); }
-  if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
-  return data;
+  try {
+    const res = await fetch('/api' + path, { method: opts.method || 'GET', headers, body: opts.body ? JSON.stringify(opts.body) : undefined });
+    let data = {};
+    try { data = await res.json(); } catch (e) {}
+    if (res.status === 401 && S.token) { S.token = ''; S.user = null; localStorage.removeItem('pos_token'); location.hash = '#/login'; throw new Error(data.error || 'Session expired'); }
+    if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+    if (!opts.method || opts.method === 'GET') {
+      try { localStorage.setItem('mst_cache_' + path, JSON.stringify(data)); } catch (_) {}
+    }
+    return data;
+  } catch (err) {
+    if (!opts.method || opts.method === 'GET') {
+      const cached = localStorage.getItem('mst_cache_' + path);
+      if (cached) {
+        try { return JSON.parse(cached); } catch (_) {}
+      }
+    }
+    throw err;
+  }
 }
 function modal(html, wide) {
   const root = $('#modal-root');
@@ -107,4 +120,99 @@ document.addEventListener('focusin', function (e) {
     }
   }
 });
+
+/* ---------- Offline Invoices Queue & Auto Background Sync ---------- */
+window.MST_OFFLINE = {
+  getQueue() {
+    try { return JSON.parse(localStorage.getItem('mst_offline_queue') || '[]'); }
+    catch (_) { return []; }
+  },
+  saveQueue(q) {
+    try { localStorage.setItem('mst_offline_queue', JSON.stringify(q)); }
+    catch (_) {}
+    this.updateStatus();
+  },
+  addInvoice(body, localInv) {
+    const q = this.getQueue();
+    q.push({
+      id: localInv.id,
+      created_at: new Date().toISOString(),
+      body,
+      invoice: localInv
+    });
+    this.saveQueue(q);
+    return localInv;
+  },
+  _isSyncing: false,
+  async syncNow() {
+    if (this._isSyncing || !navigator.onLine) return;
+    const q = this.getQueue();
+    if (!q.length) {
+      this.updateStatus();
+      return;
+    }
+    this._isSyncing = true;
+    this.updateStatus();
+    console.log('[OfflineSync] Attempting to sync ' + q.length + ' queued invoices...');
+    const remaining = [];
+    let syncedCount = 0;
+    for (const item of q) {
+      try {
+        await api('/invoices', { method: 'POST', body: item.body });
+        syncedCount++;
+      } catch (err) {
+        if (!navigator.onLine || err.message.includes('fetch') || err.message.includes('Network') || err.message.includes('অফলাইন') || err.message.includes('503')) {
+          remaining.push(item);
+        } else {
+          console.error('[OfflineSync Item Error]', err.message);
+          remaining.push(item);
+        }
+      }
+    }
+    this._isSyncing = false;
+    this.saveQueue(remaining);
+    if (syncedCount > 0) {
+      toast('✅ ' + syncedCount + 'টি অফলাইন মেমো সফলভাবে ক্লাউড ও গুগল শিটে সিঙ্ক হয়েছে!');
+      if (window.router) {
+        try { window.router(); } catch (_) {}
+      }
+    }
+  },
+  updateStatus() {
+    const badge = $('#offline-sync-badge');
+    if (!badge) return;
+    const q = this.getQueue();
+    if (!navigator.onLine) {
+      badge.style.display = 'inline-flex';
+      badge.style.background = '#fef2f2';
+      badge.style.color = '#991b1b';
+      badge.style.border = '1px solid #fecaca';
+      badge.innerHTML = '📴 অফলাইন ' + (q.length ? `(${q.length}টি পেন্ডিং)` : '');
+    } else if (q.length > 0) {
+      badge.style.display = 'inline-flex';
+      badge.style.background = '#fefce8';
+      badge.style.color = '#854d0e';
+      badge.style.border = '1px solid #fde047';
+      badge.innerHTML = `🟡 সিঙ্ক হচ্ছে... (${q.length}টি মেমো)`;
+    } else {
+      badge.style.display = 'none';
+    }
+  }
+};
+
+window.addEventListener('online', () => {
+  toast('🌐 ইন্টারনেট ফিরে এসেছে! অফলাইন ডাটা সিঙ্ক হচ্ছে...');
+  window.MST_OFFLINE.updateStatus();
+  window.MST_OFFLINE.syncNow();
+});
+window.addEventListener('offline', () => {
+  toast('📴 ইন্টারনেট নেই — অফলাইন মোডে স্বয়ংক্রিয় সেভ হচ্ছে।', true);
+  window.MST_OFFLINE.updateStatus();
+});
+setInterval(() => {
+  if (navigator.onLine && window.MST_OFFLINE.getQueue().length > 0) {
+    window.MST_OFFLINE.syncNow();
+  }
+}, 15000);
+
 

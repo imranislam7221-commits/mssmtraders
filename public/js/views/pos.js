@@ -432,6 +432,55 @@ async function saveInvoice(doPrint) {
     S.cart = [];
     invoiceSuccess(d.invoice, d.customer, doPrint);
   } catch (e) {
+    if (!navigator.onLine || e.message.includes('fetch') || e.message.includes('Network') || e.message.includes('অফলাইন') || e.message.includes('503')) {
+      const sub = S.cart.reduce((s, c) => s + c.qty * c.price, 0);
+      const disc = +body.discount || 0;
+      const vatP = +body.vat_percent || 0;
+      const vat = sub * vatP / 100;
+      const total = Math.max(0, sub + vat - disc);
+      const paid = +body.paid_amount || 0;
+      const due = total - paid;
+      const offlineId = 'OFF-' + Math.floor(1000 + Math.random() * 9000);
+      const offlineCust = body.customer ? { name: body.customer.name, address: body.customer.address, phone: body.customer.phone } : (S.__customers.find(c => c.id === body.customer_id) || { name: 'নগদ কাস্টমার' });
+      const offlineInv = {
+        id: offlineId,
+        invoice_no: offlineId,
+        date: new Date().toISOString(),
+        items: S.cart.map(c => {
+          const p = (S.__products || []).find(x => x.id === c.product_id) || {};
+          return {
+            product_id: c.product_id,
+            product_name: p.name || '',
+            category: p.category || '',
+            unit: p.unit || '',
+            qty: c.qty,
+            unit_price: c.price,
+            total_price: c.qty * c.price
+          };
+        }),
+        subtotal: sub,
+        discount: disc,
+        vat_percent: vatP,
+        vat_amount: vat,
+        total,
+        paid_amount: paid,
+        due_amount: due,
+        customer_id: body.customer_id || null,
+        customer_name: offlineCust.name,
+        customer_address: offlineCust.address || '',
+        customer_phone: offlineCust.phone || '',
+        note: body.note,
+        is_offline: true
+      };
+
+      if (window.MST_OFFLINE) {
+        window.MST_OFFLINE.addInvoice(body, offlineInv);
+      }
+      S.cart = [];
+      invoiceSuccess(offlineInv, offlineCust, doPrint);
+      toast('📴 অফলাইন মোড: চালান #' + offlineId + ' লোকালি সেভ হয়েছে। নেট পেলেই অটো গুগল শিটে সিঙ্ক হবে!');
+      return;
+    }
     toast(e.message, true);
   }
 }

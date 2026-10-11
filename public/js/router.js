@@ -15,7 +15,7 @@ function layout(inner) {
   document.title = 'মেসার্স এম.এস ট্রেডার্স — POS & Inventory';
   const roleTitle = isBn ? (S.user.role === 'owner' ? 'দোকানের মালিক' : (S.user.role === 'manager' ? 'ম্যানেজার' : esc(S.user.role))) : esc(S.user.role);
   $('#app').innerHTML = `
-  <div class="topbar"><div><div class="t">🏗️ মেসার্স এম.এস ট্রেডার্স</div></div><div class="who">${esc(S.user.name)} (${roleTitle}) <button onclick="toggleLang()" style="background:none;border:1px solid #57534e;color:#fbbf24;border-radius:7px;padding:3px 8px;font-size:11px;cursor:pointer">🌐 ${isBn ? 'English' : 'বাংলা'}</button></div></div>
+  <div class="topbar"><div><div class="t">🏗️ মেসার্স এম.এস ট্রেডার্স</div></div><div class="who"><span id="offline-sync-badge" style="display:none;align-items:center;padding:3px 9px;border-radius:12px;font-size:11.5px;font-weight:600;margin-right:8px"></span>${esc(S.user.name)} (${roleTitle}) <button onclick="toggleLang()" style="background:none;border:1px solid #57534e;color:#fbbf24;border-radius:7px;padding:3px 8px;font-size:11px;cursor:pointer">🌐 ${isBn ? 'English' : 'বাংলা'}</button></div></div>
   <div class="layout">
     <aside class="sidebar">
       <div class="side-brand"><div class="t">🏗️ মেসার্স এম.এস ট্রেডার্স</div><div class="s">রড, সিমেন্ট ও নির্মাণ সামগ্রী</div></div>
@@ -31,6 +31,7 @@ function layout(inner) {
   </div>
   <nav class="bottomnav">${NAV.filter(n => !n.owner || isOwner()).slice(0, 5).map(n => '<a href="' + n.h + '" class="' + (cur === n.h ? 'active' : '') + '"><span class="ico">' + n.ico + '</span>' + (isBn ? n.bn : n.label).split(' ')[0] + '</a>').join('')}</nav>`;
   if (window.applyLang) applyLang();
+  if (window.MST_OFFLINE) window.MST_OFFLINE.updateStatus();
 }
 const VIEWS = {};
 async function router() {
@@ -40,9 +41,15 @@ async function router() {
       try {
         const d = await api('/me');
         S.user = d.user;
+        try { localStorage.setItem('mst_cached_user', JSON.stringify(d.user)); } catch (_) {}
       } catch (e) {
-        S.token = '';
-        localStorage.removeItem('pos_token');
+        const cachedUser = localStorage.getItem('mst_cached_user');
+        if (cachedUser && (!navigator.onLine || e.message.includes('fetch') || e.message.includes('Network') || e.message.includes('অফলাইন') || e.message.includes('503'))) {
+          try { S.user = JSON.parse(cachedUser); } catch (_) {}
+        } else {
+          S.token = '';
+          localStorage.removeItem('pos_token');
+        }
       }
     }
     if (!S.user) {

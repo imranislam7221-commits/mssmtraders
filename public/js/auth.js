@@ -28,6 +28,7 @@ function renderLogin(err) {
       clearTimeout(slow);
       S.token = d.token; S.user = d.user;
       localStorage.setItem('pos_token', S.token);
+      try { localStorage.setItem('mst_cached_user', JSON.stringify(d.user)); } catch (_) {}
       location.hash = '#/dashboard';
       router();
     } catch (ex) {

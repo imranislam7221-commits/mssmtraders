@@ -300,9 +300,24 @@ function showPrintPreviewModal(html, title, onPrint) {
   if (b2) b2.onclick = doTrigger;
 }
 
-async function printInvoice(id) {
+async function printInvoice(id, offlineInv, offlineCustomer) {
   try {
-    const { invoice: inv, customer } = await api('/invoices/' + id);
+    let inv, customer;
+    if (offlineInv) {
+      inv = offlineInv;
+      customer = offlineCustomer;
+    } else if (typeof id === 'string' && id.startsWith('OFF-') && window.MST_OFFLINE) {
+      const found = window.MST_OFFLINE.getQueue().find(x => x.id === id);
+      if (found && found.invoice) {
+        inv = found.invoice;
+        customer = { name: inv.customer_name, address: inv.customer_address, phone: inv.customer_phone };
+      }
+    }
+    if (!inv) {
+      const res = await api('/invoices/' + id);
+      inv = res.invoice;
+      customer = res.customer;
+    }
     const s = await settingsSafe();
     const memoHtml = buildInvoiceMemoHtml(inv, customer, s);
     const pa = $('#print-area');
