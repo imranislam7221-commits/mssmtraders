@@ -1,5 +1,5 @@
 /* M/S M.S. Traders POS — Service Worker for PWA (Offline & Fast Caching) */
-const CACHE_NAME = 'mst-pos-v20261011_v2';
+const CACHE_NAME = 'mst-pos-v20261011_v3';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
