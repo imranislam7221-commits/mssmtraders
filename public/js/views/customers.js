@@ -2,16 +2,18 @@
 VIEWS.customers = async function () {
   const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const { customers } = await api('/customers');
-  const rows = customers.map(c => `<tr onclick="viewCustomer(${c.id})" style="cursor:pointer">
+  const rows = customers.map((c, i) => `<tr onclick="viewCustomer(${c.id})" style="cursor:pointer">
+    <td class="c-sl" style="text-align:center;font-weight:600;color:var(--mut);width:50px">${isBn ? bnDigits(i + 1) : (i + 1)}</td>
     <td><b>${esc(c.name)}</b></td>
-    <td>${esc(c.phone || '—')}</td>
+    <td>${c.phone ? `<a href="tel:${esc(c.phone)}" onclick="event.stopPropagation()" class="phone-link" title="${isBn ? 'সরাসরি কল দিন' : 'Call'}">📞 ${esc(c.phone)}</a>` : '—'}</td>
+    <td>${esc(c.address || '—')}</td>
     <td class="num ${c.total_due > 0 ? 'dueX' : 'due0'}"><b>${money(c.total_due)}</b></td>
     <td style="white-space:nowrap">
       <button class="btn sm grn" onclick="event.stopPropagation();payModal(${c.id}, ${c.total_due})">${isBn ? '💵 বাকি জমা নিন' : '💵 Collect Due'}</button>
       <button class="btn sm" onclick="event.stopPropagation();editCustomer(${c.id})">✏️</button>
       ${isOwner() ? ` <button class="btn sm ${c.total_due > 0 ? 'mut' : 'dan'}" onclick="event.stopPropagation();delCustomer(${c.id}, ${c.total_due})" title="${c.total_due > 0 ? (isBn ? 'বাকি টাকা পরিশোধ ছাড়া ডিলিট বন্ধ 🔒' : 'Locked — clear due first') : (isBn ? 'মুছুন' : 'Delete')}">${c.total_due > 0 ? '🔒' : '🗑️'}</button>` : ''}
     </td>
-  </tr>`).join('') || `<tr><td colspan="4" class="empty">${isBn ? 'কোনো কাস্টমার পাওয়া যায়নি' : 'No customers yet'}</td></tr>`;
+  </tr>`).join('') || `<tr><td colspan="6" class="empty">${isBn ? 'কোনো কাস্টমার পাওয়া যায়নি' : 'No customers yet'}</td></tr>`;
 
   layout(`
     <div class="page-head">
@@ -28,8 +30,10 @@ VIEWS.customers = async function () {
       <div class="tblwrap">
         <table class="tbl" id="ctable">
           <tr>
+            <th style="width:50px;text-align:center">${isBn ? 'ক্র. নং' : 'SL'}</th>
             <th>${isBn ? 'নাম' : 'Name'}</th>
             <th>${isBn ? 'মোবাইল নম্বর' : 'Phone'}</th>
+            <th>${isBn ? 'ঠিকানা' : 'Address'}</th>
             <th class="num">${isBn ? 'মোট বাকি (টাকা)' : 'Total Due (Baki)'}</th>
             <th>${isBn ? 'অ্যাকশন' : 'Actions'}</th>
           </tr>
@@ -55,6 +59,9 @@ function customerModal(c) {
         <input name="phone" value="${esc(c.phone || '')}" placeholder="০১XXXXXXXXX">
         <label>${isBn ? 'ঠিকানা' : 'Address'}</label>
         <input name="address" value="${esc(c.address || '')}" placeholder="${isBn ? 'যেমন: পুরাতন বাজার, দর্শনা' : 'e.g. Mirpur-1, Dhaka'}">
+        <label>${isBn ? 'পূর্বের বাকি / বকেয়া (৳)' : 'Previous Due / Opening Due (Tk)'}</label>
+        <input name="opening_due" type="number" step="0.01" min="0" value="${c.id ? (c.total_due || '') : ''}" placeholder="${isBn ? '০.০০ (যদি পূর্বের বাকি থাকে)' : '0.00'}">
+        <small style="color:var(--mut);display:block;margin-top:2px;font-size:12px">${isBn ? '💡 কাস্টমারের পূর্বের কোনো বাকি বা বকেয়া থাকলে এখানে টাকার পরিমাণ লিখুন।' : '💡 Enter existing outstanding due amount if any.'}</small>
         <br>
         <button class="btn pri blk">${isBn ? 'সংরক্ষণ করুন' : 'Save'}</button>
       </form>
@@ -63,7 +70,12 @@ function customerModal(c) {
   $('#cform').addEventListener('submit', async e => {
     e.preventDefault();
     const f = e.target;
-    const body = { name: f.name.value, phone: f.phone.value, address: f.address.value };
+    const body = { 
+      name: f.name.value, 
+      phone: f.phone.value, 
+      address: f.address.value,
+      opening_due: f.opening_due ? f.opening_due.value : 0
+    };
     try {
       if (c.id) await api('/customers/' + c.id, { method: 'PUT', body });
       else await api('/customers', { method: 'POST', body });
@@ -121,7 +133,10 @@ async function viewCustomer(id) {
       <div class="grid g3">
         <div class="stat">
           <div class="lab">${isBn ? 'মোবাইল ও ঠিকানা' : 'Phone'}</div>
-          <div class="val" style="font-size:15px">${esc(c.phone || '—')}${c.address ? '<br><small style="font-weight:400;color:var(--mut)">' + esc(c.address) + '</small>' : ''}</div>
+          <div class="val" style="font-size:15px">
+            ${c.phone ? `<a href="tel:${esc(c.phone)}" class="phone-link" style="margin-bottom:4px">📞 ${esc(c.phone)}</a>` : '—'}
+            ${c.address ? '<br><small style="font-weight:400;color:var(--mut)">' + esc(c.address) + '</small>' : ''}
+          </div>
         </div>
         <div class="stat ${c.total_due > 0 ? 'due' : ''}">
           <div class="lab">${isBn ? 'বর্তমান মোট বাকি' : 'Outstanding Due'}</div>
@@ -297,8 +312,15 @@ window.printSinglePayment = async function (cid, lid) {
 
 function filterCustomers(q) {
   q = q.toLowerCase();
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
+  let sl = 1;
   document.querySelectorAll("#ctable tr").forEach(function (tr, i) {
     if (i === 0) return;
-    tr.style.display = tr.textContent.toLowerCase().includes(q) ? "" : "none";
+    const match = tr.textContent.toLowerCase().includes(q);
+    tr.style.display = match ? "" : "none";
+    if (match) {
+      const slCell = tr.querySelector('.c-sl');
+      if (slCell) slCell.textContent = isBn ? bnDigits(sl++) : (sl++);
+    }
   });
 }

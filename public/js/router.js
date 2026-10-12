@@ -6,6 +6,7 @@ const NAV = [
   { h: '#/customers', ico: '👥', label: 'Customers', bn: 'কাস্টমার হিসাব' },
   { h: '#/invoices', ico: '🗂️', label: 'Invoices', bn: 'ইনভয়েস তালিকা' },
   { h: '#/expenses', ico: '💸', label: 'Expenses', bn: 'খরচের খাতা' },
+  { h: '#/incomes', ico: '💰', label: 'Other Income', bn: 'অন্যান্য আয়' },
   { h: '#/settings', ico: '⚙️', label: 'Settings', bn: 'সেটিংস' }
 ];
 function layout(inner) {

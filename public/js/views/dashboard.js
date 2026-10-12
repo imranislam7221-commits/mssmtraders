@@ -31,9 +31,10 @@ VIEWS.dashboard = async function () {
         <div class="lab">${isBn ? 'সর্বমোট বাকি (দোকানের মোট পাওনা)' : 'Total Outstanding Dues'}</div>
         <div class="val">${money(d.total_due)}</div>
       </div>
-      <div class="stat">
-        <div class="lab">📅 ${isBn ? 'চলতি মাসের মোট খরচ' : 'This Month Expense'}</div>
-        <div class="val">${money(d.month_expense || 0)}</div>
+      <div class="stat due0">
+        <div class="lab">💰 ${isBn ? 'অন্যান্য আয় (কমিশন / সরবরাহ লাভ)' : 'Other Income (Commission)'}</div>
+        <div class="val" style="color:var(--green)">${money(d.today_income || 0)}</div>
+        <div class="lab" style="margin-top:4px">${isBn ? 'চলতি মাস: ' + money(d.month_income || 0) : 'Month: ' + money(d.month_income || 0)}</div>
       </div>
       ${isOwner() ? `
       <div class="stat">
@@ -95,6 +96,7 @@ VIEWS.dashboard = async function () {
         <a class="btn pri" href="#/pos">${isBn ? '🧾 নতুন বিক্রয় (POS)' : '🧾 New Sale'}</a>
         <a class="btn" href="#/stock">${isBn ? '📥 স্টক ইন' : '📥 Stock In'}</a>
         <a class="btn" href="#/expenses">${isBn ? '💸 খরচের খাতা' : '💸 Expenses'}</a>
+        <a class="btn" href="#/incomes">${isBn ? '💰 অন্যান্য আয়' : '💰 Other Income'}</a>
         <a class="btn" href="#/customers">${isBn ? '👤 কাস্টমার বাকি খাতা' : '👤 Customer'}</a>
       </div>
     </div>
