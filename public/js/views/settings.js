@@ -23,7 +23,7 @@ VIEWS.settings = async function () {
         </div>
         <label>ঠিকানা</label><input name="shop_address" value="${esc(s.shop_address)}">
         <div class="grid g2">
-          <div><label>ডিফল্ট ভ্যাট %</label><input name="vat_percent" type="number" step="0.01" value="${s.vat_percent || 0}"></div>
+          <div><label>ডিফল্ট লেবার/লোড খরচ (৳)</label><input name="default_labor_cost" type="number" step="0.01" value="${s.default_labor_cost || 0}"></div>
           <div><label>শুরুর নগদ টাকা (Opening Cash)</label><input name="opening_cash" type="number" step="0.01" value="${s.opening_cash || 0}"></div>
         </div>
         <label>মালিকের SMS নম্বর (বিক্রি/বাকি/কেনা সব লেনদেনের খবর এই নম্বরে যাবে)</label><input name="notify_number" value="${esc(s.notify_number || '')}" placeholder="01XXXXXXXXX">
@@ -157,7 +157,7 @@ VIEWS.settings = async function () {
         method: 'PUT',
         body: {
           shop_name: f.shop_name.value, shop_phone: f.shop_phone.value, shop_address: f.shop_address.value,
-          vat_percent: f.vat_percent.value, opening_cash: f.opening_cash.value, notify_number: f.notify_number.value,
+          default_labor_cost: f.default_labor_cost ? f.default_labor_cost.value : 0, vat_percent: 0, opening_cash: f.opening_cash.value, notify_number: f.notify_number.value,
           receipt_header: f.receipt_header.value, receipt_footer: f.receipt_footer.value,
           memo_logo: f.memo_logo.value, memo_title_line: f.memo_title_line.value, memo_pro_line: f.memo_pro_line.value,
           memo_trade_line: f.memo_trade_line.value, memo_address_line: f.memo_address_line.value,

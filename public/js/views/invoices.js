@@ -14,7 +14,7 @@ VIEWS.invoices = async function () {
     <td style="white-space:nowrap">
       <button class="btn sm pri" onclick="viewInvoice(${i.id})">${isBn ? 'দেখুন' : 'View'}</button>
       <button class="btn sm grn" onclick="printInvoice(${i.id})" title="${isBn ? 'প্রিন্ট' : 'Print'}">🖨️</button>
-      ${isOwner() ? `<button class="btn sm ${i.due > 0 ? 'mut' : 'dan'}" onclick="delInvoice(${i.id}, ${i.due})" title="${i.due > 0 ? (isBn ? 'বাকি চালান পরিশোধ ছাড়া ডিলিট বন্ধ 🔒' : 'Locked — invoice has due') : (isBn ? 'মুছুন' : 'Delete')}">${i.due > 0 ? '🔒' : '🗑️'}</button>` : ''}
+      ${isOwner() ? `<button class="btn sm dan" onclick="delInvoice(${i.id}, ${i.due})" title="${isBn ? 'চালান মুছুন' : 'Delete'}">🗑️</button>` : ''}
     </td>
   </tr>`).join('') || `<tr><td colspan="9" class="empty">${isBn ? 'কোনো ইনভয়েস পাওয়া যায়নি' : 'No invoices found'}</td></tr>`;
 
@@ -85,6 +85,7 @@ async function viewInvoice(id) {
       <div style="margin-top:10px">
         <div class="sumrow"><span>${isBn ? 'সাবটোটাল' : 'Subtotal'}</span><span>${money(inv.subtotal)}</span></div>
         ${inv.discount > 0 ? `<div class="sumrow"><span>${isBn ? 'ছাড়' : 'Discount'}</span><span>− ${money(inv.discount)}</span></div>` : ''}
+        ${inv.labor_cost > 0 ? `<div class="sumrow"><span>${isBn ? 'লেবার / লোড খরচ' : 'Labor / Loading'}</span><span>+ ${money(inv.labor_cost)}</span></div>` : ''}
         ${inv.vat > 0 ? `<div class="sumrow"><span>${isBn ? 'ভ্যাট' : 'VAT'} (${isBn ? bnDigits(inv.vat_percent) : inv.vat_percent}%)</span><span>+ ${money(inv.vat)}</span></div>` : ''}
         <div class="sumrow total"><span>${isBn ? 'সর্বমোট' : 'Total'}</span><span>${money(inv.total)}</span></div>
         <div class="sumrow"><span>${isBn ? 'জমা' : 'Paid'}</span><span>${money(inv.paid)}</span></div>
@@ -97,6 +98,7 @@ async function viewInvoice(id) {
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
         <button class="btn grn" onclick="printInvoice(${inv.id})">🖨️ ${isBn ? 'মেমো প্রিন্ট প্রিভিউ' : 'Print Receipt'}</button>
         <button class="btn" onclick="resendSms(${inv.id})">📱 ${isBn ? 'এসএমএস পাঠান' : 'Resend SMS'}</button>
+        ${isOwner() ? `<button class="btn dan" onclick="delInvoice(${inv.id}, ${inv.due})">🗑️ ${isBn ? 'চালান বাতিল / মুছুন' : 'Delete Invoice'}</button>` : ''}
       </div>
     </div>`, true);
 }
@@ -146,23 +148,19 @@ async function resendSms(id) {
 
 async function delInvoice(id, due) {
   const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
-  if (due > 0) {
-    toast(isBn ? '⚠️ এই চালানে বকেয়া (বাকি) রয়েছে! সম্পূর্ণ বাকি পরিশোধ ছাড়া চালান ডিলিট করা যাবে না।' : 'Cannot delete! Invoice has outstanding due.', true);
-    return;
-  }
-  askConfirm(
-    isBn ? 'এই চালানটি মুছবেন? স্টক ও কাস্টমার লেজার স্বয়ংক্রিয়ভাবে পূর্বের অবস্থায় ফিরে যাবে।' : 'Delete this invoice? Stock & customer ledger will be auto-reversed.',
-    async function () {
-      try {
-        await api('/invoices/' + id, { method: 'DELETE' });
-        toast(isBn ? 'চালান মুছে ফেলা হয়েছে এবং স্টক সমন্বয় করা হয়েছে' : 'Invoice deleted & reversed');
-        closeModal();
-        router();
-      } catch (e) {
-        toast(e.message, true);
-      }
+  const msg = due > 0
+    ? (isBn ? `এই চালানে বকেয়া বাকি রয়েছে (${money(due)})। আপনি কি নিশ্চিত এই চালানটি বাতিল/মুছে ফেলতে চান? (স্টক, জমা ও কাস্টমার বাকি হিসাব স্বয়ংক্রিয়ভাবে সমন্বয় হবে)` : `This invoice has due of ${money(due)}. Delete anyway? (Stock, cash & customer balance will auto-reverse)`)
+    : (isBn ? 'এই চালানটি মুছবেন? স্টক ও কাস্টমার লেজার স্বয়ংক্রিয়ভাবে পূর্বের অবস্থায় ফিরে যাবে।' : 'Delete this invoice? Stock & customer ledger will be auto-reversed.');
+  askConfirm(msg, async function () {
+    try {
+      await api('/invoices/' + id, { method: 'DELETE' });
+      toast(isBn ? 'চালান মুছে ফেলা হয়েছে এবং স্টক ও বাকি সমন্বয় করা হয়েছে' : 'Invoice deleted & reversed');
+      closeModal();
+      router();
+    } catch (e) {
+      toast(e.message, true);
     }
-  );
+  });
 }
 
 function filterInvoices(q) {

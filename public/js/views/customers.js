@@ -11,7 +11,7 @@ VIEWS.customers = async function () {
     <td style="white-space:nowrap">
       <button class="btn sm grn" onclick="event.stopPropagation();payModal(${c.id}, ${c.total_due})">${isBn ? '💵 বাকি জমা নিন' : '💵 Collect Due'}</button>
       <button class="btn sm" onclick="event.stopPropagation();editCustomer(${c.id})">✏️</button>
-      ${isOwner() ? ` <button class="btn sm ${c.total_due > 0 ? 'mut' : 'dan'}" onclick="event.stopPropagation();delCustomer(${c.id}, ${c.total_due})" title="${c.total_due > 0 ? (isBn ? 'বাকি টাকা পরিশোধ ছাড়া ডিলিট বন্ধ 🔒' : 'Locked — clear due first') : (isBn ? 'মুছুন' : 'Delete')}">${c.total_due > 0 ? '🔒' : '🗑️'}</button>` : ''}
+      ${isOwner() ? ` <button class="btn sm dan" onclick="event.stopPropagation();delCustomer(${c.id}, ${c.total_due})" title="${isBn ? 'মুছুন' : 'Delete'}">🗑️</button>` : ''}
     </td>
   </tr>`).join('') || `<tr><td colspan="6" class="empty">${isBn ? 'কোনো কাস্টমার পাওয়া যায়নি' : 'No customers yet'}</td></tr>`;
 
@@ -103,11 +103,10 @@ function editCustomer(id) {
 
 async function delCustomer(id, due) {
   const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
-  if (due > 0) {
-    toast(isBn ? '⚠️ এই কাস্টমারের বকেয়া বাকি রয়েছে! সম্পূর্ণ বাকি পরিশোধ ছাড়া কাস্টমার ডিলিট করা যাবে না।' : 'Cannot delete! Customer has pending due amount.', true);
-    return;
-  }
-  askConfirm(isBn ? 'এই কাস্টমারকে মুছে ফেলতে চান?' : 'Delete customer?', async function () {
+  const msg = due > 0
+    ? (isBn ? `এই কাস্টমারের বকেয়া বাকি রয়েছে (${money(due)})। আপনি কি নিশ্চিত এই কাস্টমার ও তার বাকি হিসাব মুছে ফেলতে চান?` : `Customer has due of ${money(due)}. Delete customer anyway?`)
+    : (isBn ? 'এই কাস্টমারকে মুছে ফেলতে চান?' : 'Delete customer?');
+  askConfirm(msg, async function () {
     try {
       await api('/customers/' + id, { method: 'DELETE' });
       toast(isBn ? 'কাস্টমার মুছে ফেলা হয়েছে' : 'Customer deleted');

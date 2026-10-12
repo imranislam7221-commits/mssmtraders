@@ -1,12 +1,12 @@
 {
   "counters": {
     "user": 1,
-    "product": 37,
-    "ledger": 12,
-    "customer": 14,
-    "cash": 11,
-    "invoice": 4,
-    "cleger": 23,
+    "product": 38,
+    "ledger": 19,
+    "customer": 20,
+    "cash": 17,
+    "invoice": 6,
+    "cleger": 37,
     "expense": 0,
     "income": 1
   },
@@ -691,6 +691,66 @@
       "note": "Stock returned (invoice deleted by মুনজুর আহমেদ)",
       "timestamp": "2026-10-12T09:38:43.442Z",
       "time_display": "12-10-2026 | 15:38:43"
+    },
+    {
+      "id": 13,
+      "product_id": 1,
+      "product_name": "ফ্রেশ সিমেন্ট ১০০",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "type": "OUT",
+      "quantity": 2,
+      "unit_cost": null,
+      "unit_price": 580,
+      "source": "INV-5",
+      "note": "Sold to Invoice Due Test Customer",
+      "timestamp": "2026-10-12T09:55:02.667Z",
+      "time_display": "12-10-2026 | 15:55:02"
+    },
+    {
+      "id": 14,
+      "product_id": 1,
+      "product_name": "ফ্রেশ সিমেন্ট ১০০",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "type": "IN",
+      "quantity": 2,
+      "unit_cost": null,
+      "unit_price": 580,
+      "source": "Reversal: INV-5 deleted",
+      "note": "Stock returned (invoice deleted by মুনজুর আহমেদ)",
+      "timestamp": "2026-10-12T09:55:02.678Z",
+      "time_display": "12-10-2026 | 15:55:02"
+    },
+    {
+      "id": 15,
+      "product_id": 1,
+      "product_name": "ফ্রেশ সিমেন্ট ১০০",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "type": "OUT",
+      "quantity": 2,
+      "unit_cost": null,
+      "unit_price": 580,
+      "source": "INV-6",
+      "note": "Sold to Labor Test Cust",
+      "timestamp": "2026-10-12T10:07:19.336Z",
+      "time_display": "12-10-2026 | 16:07:19"
+    },
+    {
+      "id": 16,
+      "product_id": 1,
+      "product_name": "ফ্রেশ সিমেন্ট ১০০",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "type": "IN",
+      "quantity": 2,
+      "unit_cost": null,
+      "unit_price": 580,
+      "source": "Reversal: INV-6 deleted",
+      "note": "Stock returned (invoice deleted by মুনজুর আহমেদ)",
+      "timestamp": "2026-10-12T10:07:19.345Z",
+      "time_display": "12-10-2026 | 16:07:19"
     }
   ],
   "customers": [
@@ -940,11 +1000,82 @@
       "time_display": "12-10-2026 | 15:03:23"
     }
   ],
-  "cash_ledger": [],
+  "cash_ledger": [
+    {
+      "id": 12,
+      "type": "IN",
+      "amount": 580,
+      "balance": 580,
+      "source": "INV-5",
+      "note": "Sale payment",
+      "user_name": "মুনজুর আহমেদ",
+      "timestamp": "2026-10-12T09:55:02.667Z",
+      "time_display": "12-10-2026 | 15:55:02"
+    },
+    {
+      "id": 13,
+      "type": "OUT",
+      "amount": 580,
+      "balance": 0,
+      "source": "Reversal",
+      "note": "Invoice deleted: INV-5",
+      "user_name": "মুনজুর আহমেদ",
+      "timestamp": "2026-10-12T09:55:02.678Z",
+      "time_display": "12-10-2026 | 15:55:02"
+    },
+    {
+      "id": 14,
+      "type": "IN",
+      "amount": 1000,
+      "balance": 1000,
+      "source": "INV-6",
+      "note": "Sale payment",
+      "user_name": "মুনজুর আহমেদ",
+      "timestamp": "2026-10-12T10:07:19.336Z",
+      "time_display": "12-10-2026 | 16:07:19"
+    },
+    {
+      "id": 15,
+      "type": "OUT",
+      "amount": 1000,
+      "balance": 0,
+      "source": "Reversal",
+      "note": "Invoice deleted: INV-6",
+      "user_name": "মুনজুর আহমেদ",
+      "timestamp": "2026-10-12T10:07:19.345Z",
+      "time_display": "12-10-2026 | 16:07:19"
+    },
+    {
+      "id": 16,
+      "type": "IN",
+      "amount": 5450,
+      "balance": 5450,
+      "source": "INV-7",
+      "note": "Sale payment",
+      "user_name": "মুনজুর আহমেদ",
+      "timestamp": "2026-10-12T10:09:32.869Z",
+      "time_display": "12-10-2026 | 16:09:32"
+    },
+    {
+      "id": 17,
+      "type": "OUT",
+      "amount": 5450,
+      "balance": 0,
+      "source": "Reversal",
+      "note": "Invoice deleted: INV-7",
+      "user_name": "মুনজুর আহমেদ",
+      "timestamp": "2026-10-12T10:09:32.876Z",
+      "time_display": "12-10-2026 | 16:09:32"
+    }
+  ],
   "sessions": {
-    "54b522422ffc6c6593be4fa84888f709": {
+    "241ebd198f94b4ac66dcb6ed78425f29": {
       "user_id": 1,
-      "created_at": "2026-10-12T09:43:32.356Z"
+      "created_at": "2026-10-12T10:07:19.307Z"
+    },
+    "101bba7ed9d6cc0b1c9392785ce7b560": {
+      "user_id": 1,
+      "created_at": "2026-10-12T10:09:32.843Z"
     }
   },
   "settings": {
@@ -972,8 +1103,9 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-12T09:42:59.037Z"
-    }
+      "last_sync": "2026-10-12T10:07:25.647Z"
+    },
+    "default_labor_cost": 0
   },
   "expenses": [],
   "incomes": []

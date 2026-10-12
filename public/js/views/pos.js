@@ -117,8 +117,8 @@ VIEWS.pos = async function () {
             <input id="fdiscount" type="number" step="0.01" placeholder="${isBn ? '০.০০' : '0.00'}" onfocus="this.select()" oninput="calcTotals()">
           </div>
           <div>
-            <label style="margin-top:0">${isBn ? 'ভ্যাট (%)' : 'VAT (%)'}</label>
-            <input id="fvat" type="number" step="0.01" placeholder="${isBn ? '০' : '0'}" onfocus="this.select()" oninput="calcTotals()">
+            <label style="margin-top:0">${isBn ? 'লেবার / লোড খরচ (৳)' : 'Labor / Loading (Tk)'}</label>
+            <input id="flabor" type="number" step="0.01" min="0" placeholder="${isBn ? '০.০০' : '0.00'}" onfocus="this.select()" oninput="calcTotals()">
           </div>
         </div>
 
@@ -365,9 +365,8 @@ function totalsHtml() {
   const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const sub = S.cart.reduce((s, c) => s + c.qty * c.price, 0);
   const disc = Math.max(0, parseFloat(($('#fdiscount') || {}).value) || 0);
-  const vatP = parseFloat(($('#fvat') || {}).value) || 0;
-  const vat = sub * vatP / 100;
-  const total = Math.max(0, sub + vat - disc);
+  const labor = Math.max(0, parseFloat(($('#flabor') || {}).value) || 0);
+  const total = Math.max(0, sub + labor - disc);
   const paid = Math.max(0, parseFloat(($('#fpaid') || {}).value) || 0);
   
   const custId = +($('#custsel') ? $('#custsel').value : 0);
@@ -380,7 +379,7 @@ function totalsHtml() {
     return `
       <div class="sumrow"><span>${isBn ? 'সাবটোটাল' : 'Subtotal'}</span><span>${money(sub)}</span></div>
       ${disc > 0 ? `<div class="sumrow"><span>${isBn ? 'ছাড় (ডিসকাউন্ট)' : 'Discount'}</span><span>− ${money(disc)}</span></div>` : ''}
-      ${vat > 0 ? `<div class="sumrow"><span>${isBn ? 'ভ্যাট' : 'VAT'} (${isBn ? bnDigits(vatP) : vatP}%)</span><span>+ ${money(vat)}</span></div>` : ''}
+      ${labor > 0 ? `<div class="sumrow"><span>${isBn ? 'লেবার / লোড খরচ' : 'Labor / Loading'}</span><span>+ ${money(labor)}</span></div>` : ''}
       <div class="sumrow"><span>${isBn ? 'চলতি বিল' : 'Current Bill'}</span><span>${money(total)}</span></div>
       <div class="sumrow" style="color:var(--brand,#d97706);font-weight:600"><span>${isBn ? 'পূর্বের বকেয়া' : 'Previous Due'}</span><span>${money(prevDue)}</span></div>
       <div class="sumrow total"><span>${isBn ? 'সর্বমোট পাওনা (বিল + বকেয়া)' : 'Grand Total Due'}</span><span>${money(grandTotal)}</span></div>
@@ -392,7 +391,7 @@ function totalsHtml() {
   return `
     <div class="sumrow"><span>${isBn ? 'সাবটোটাল' : 'Subtotal'}</span><span>${money(sub)}</span></div>
     ${disc > 0 ? `<div class="sumrow"><span>${isBn ? 'ছাড় (ডিসকাউন্ট)' : 'Discount'}</span><span>− ${money(disc)}</span></div>` : ''}
-    ${vat > 0 ? `<div class="sumrow"><span>${isBn ? 'ভ্যাট' : 'VAT'} (${isBn ? bnDigits(vatP) : vatP}%)</span><span>+ ${money(vat)}</span></div>` : ''}
+    ${labor > 0 ? `<div class="sumrow"><span>${isBn ? 'লেবার / লোড খরচ' : 'Labor / Loading'}</span><span>+ ${money(labor)}</span></div>` : ''}
     <div class="sumrow total"><span>${isBn ? 'সর্বমোট প্রদেয়' : 'Net Payable'}</span><span>${money(total)}</span></div>
     <div class="sumrow"><span>${isBn ? 'জমা টাকা' : 'Paid'}</span><span>${money(paid)}</span></div>
     <div class="sumrow duerow"><span>${isBn ? 'বকেয়া / বাকি' : 'Due (Baki)'}</span><span>${money(due)}</span></div>`;
@@ -427,7 +426,7 @@ async function saveInvoice(doPrint) {
   const body = {
     items: S.cart.map(c => ({ product_id: c.product_id, qty: c.qty, price: c.price })),
     discount: $('#fdiscount').value || 0,
-    vat_percent: $('#fvat').value || 0,
+    labor_cost: $('#flabor') ? ($('#flabor').value || 0) : 0,
     paid_amount: $('#fpaid').value || 0,
     note: $('#fnote').value
   };
@@ -457,9 +456,8 @@ async function saveInvoice(doPrint) {
     if (!navigator.onLine || e.message.includes('fetch') || e.message.includes('Network') || e.message.includes('অফলাইন') || e.message.includes('503')) {
       const sub = S.cart.reduce((s, c) => s + c.qty * c.price, 0);
       const disc = +body.discount || 0;
-      const vatP = +body.vat_percent || 0;
-      const vat = sub * vatP / 100;
-      const total = Math.max(0, sub + vat - disc);
+      const labor = +body.labor_cost || 0;
+      const total = Math.max(0, sub + labor - disc);
       const paid = +body.paid_amount || 0;
       const due = total - paid;
       const offlineId = 'OFF-' + Math.floor(1000 + Math.random() * 9000);
@@ -482,8 +480,9 @@ async function saveInvoice(doPrint) {
         }),
         subtotal: sub,
         discount: disc,
-        vat_percent: vatP,
-        vat_amount: vat,
+        labor_cost: labor,
+        vat_percent: 0,
+        vat_amount: 0,
         total,
         paid_amount: paid,
         due_amount: due,

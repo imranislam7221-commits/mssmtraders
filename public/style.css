@@ -9,9 +9,35 @@
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; }
-body { font-family: 'Segoe UI', 'Hind Siliguri', system-ui, sans-serif; background: var(--bg); color: var(--ink); font-size: 15px; }
+body {
+  font-family: 'Noto Sans Bengali', 'SolaimanLipi', 'Kalpurush', 'Hind Siliguri', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
 button { font: inherit; cursor: pointer; }
-input, select, textarea { font: inherit; padding: 9px 11px; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink); width: 100%; outline: none; }
+input, select, textarea {
+  font-family: 'Noto Sans Bengali', 'SolaimanLipi', 'Kalpurush', 'Hind Siliguri', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  padding: 9px 11px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+  width: 100%;
+  outline: none;
+}
+.num, .val, .c-sl, table.tbl td.num, table.tbl th.num, .sumrow, .stat .val, .money {
+  font-family: 'Noto Sans Bengali', 'SolaimanLipi', 'Kalpurush', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+.c-sl {
+  color: #1e293b !important;
+  font-weight: 700 !important;
+  font-size: 14px;
+}
 input:focus, select:focus, textarea:focus { border-color: var(--brand2); box-shadow: 0 0 0 3px rgba(217,119,6,.15); }
 label { font-size: 12.5px; font-weight: 600; color: var(--mut); display: block; margin: 10px 0 4px; }
 a { color: var(--blue); text-decoration: none; }

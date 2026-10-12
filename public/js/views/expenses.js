@@ -260,7 +260,7 @@ function printExpenseVoucher(id) {
       <button class="modal-x" onclick="closeModal()">×</button>
     </div>
     <div class="modal-b">
-      <div id="voucher-print" style="background:#fff;border:1px solid #e2e8f0;padding:20px;border-radius:8px;font-family:'Hind Siliguri',sans-serif">
+      <div id="voucher-print" style="background:#fff;border:1px solid #e2e8f0;padding:20px;border-radius:8px;font-family:'Noto Sans Bengali','Hind Siliguri',sans-serif">
         <div style="text-align:center;border-bottom:2px dashed #94a3b8;padding-bottom:12px;margin-bottom:14px">
           <h2 style="margin:0;font-size:20px;color:#1e293b">মেসার্স এম.এস ট্রেডার্স</h2>
           <div style="font-size:12.5px;color:#64748b">সোসাইটি পুরাতন মার্কেট, পুরাতন বাজার, দর্শনা, চুয়াডাঙ্গা।</div>

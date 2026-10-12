@@ -65,7 +65,7 @@ function buildInvoiceMemoHtml(inv, customer, s) {
   }).join('');
 
   // Pad table with empty rows to match authentic 10-12 row memo pad
-  const minRows = Math.max(8, Math.min(12, 12 - (inv.discount > 0 ? 1 : 0) - (inv.vat > 0 ? 1 : 0)));
+  const minRows = Math.max(8, Math.min(12, 12 - (inv.discount > 0 ? 1 : 0) - (inv.labor_cost > 0 ? 1 : 0) - (inv.vat > 0 ? 1 : 0)));
   const emptyCount = Math.max(0, minRows - inv.items.length);
   let emptyRowsHtml = '';
   for (let i = 0; i < emptyCount; i++) {
@@ -139,10 +139,17 @@ function buildInvoiceMemoHtml(inv, customer, s) {
           <td class="r-bold">সাবটোটাল-</td>
           <td class="r">${bnDigits(inv.subtotal)}</td>
         </tr>
+        ${inv.discount > 0 ? `
         <tr class="sub-disc">
           <td colspan="3" class="blank-tot"></td>
           <td class="r-bold">ছাড়-</td>
           <td class="r">− ${bnDigits(inv.discount)}</td>
+        </tr>` : ''}
+        ${inv.labor_cost > 0 ? `
+        <tr class="sub-labor">
+          <td colspan="3" class="blank-tot"></td>
+          <td class="r-bold">লেবার / লোড খরচ-</td>
+          <td class="r">+ ${bnDigits(inv.labor_cost)}</td>
         </tr>` : ''}
         ${inv.vat > 0 ? `
         <tr class="sub-vat">

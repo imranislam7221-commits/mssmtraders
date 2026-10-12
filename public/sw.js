@@ -1,5 +1,5 @@
 /* M/S M.S. Traders POS — Service Worker for PWA (Offline & Fast Caching) */
-const CACHE_NAME = 'mst-pos-v20261012_v4';
+const CACHE_NAME = 'mst-pos-v20261012_v5';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -71,7 +71,7 @@ self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(req).then(cached => {
       const fetchPromise = fetch(req).then(networkResponse => {
-        if (networkResponse && networkResponse.status === 200) {
+        if (networkResponse && (networkResponse.status === 200 || networkResponse.type === 'opaque')) {
           const clone = networkResponse.clone();
           caches.open(CACHE_NAME).then(cache => cache.put(req, clone));
         }
