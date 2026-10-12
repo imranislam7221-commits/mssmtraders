@@ -601,156 +601,6 @@
       "note": "বাকিতে ক্রয় (Credit)",
       "timestamp": "2026-10-12T08:42:14.706Z",
       "time_display": "12-10-2026 | 14:42:14"
-    },
-    {
-      "id": 7,
-      "product_id": 1,
-      "product_name": "ফ্রেশ সিমেন্ট ১০০",
-      "user_id": 1,
-      "user_name": "মুনজুর আহমেদ",
-      "type": "OUT",
-      "quantity": 15,
-      "unit_cost": null,
-      "unit_price": 590,
-      "source": "INV-2",
-      "note": "Sold to জিহাদ ছোট",
-      "timestamp": "2026-10-12T09:01:10.802Z",
-      "time_display": "12-10-2026 | 15:01:10"
-    },
-    {
-      "id": 8,
-      "product_id": 1,
-      "product_name": "ফ্রেশ সিমেন্ট ১০০",
-      "user_id": 1,
-      "user_name": "মুনজুর আহমেদ",
-      "type": "IN",
-      "quantity": 15,
-      "unit_cost": null,
-      "unit_price": 590,
-      "source": "Reversal: INV-2 deleted",
-      "note": "Stock returned (invoice deleted by মুনজুর আহমেদ)",
-      "timestamp": "2026-10-12T09:01:48.436Z",
-      "time_display": "12-10-2026 | 15:01:48"
-    },
-    {
-      "id": 9,
-      "product_id": 1,
-      "product_name": "ফ্রেশ সিমেন্ট ১০০",
-      "user_id": 1,
-      "user_name": "মুনজুর আহমেদ",
-      "type": "OUT",
-      "quantity": 15,
-      "unit_cost": null,
-      "unit_price": 590,
-      "source": "INV-3",
-      "note": "Sold to জিহাদ ছোট",
-      "timestamp": "2026-10-12T09:02:34.659Z",
-      "time_display": "12-10-2026 | 15:02:34"
-    },
-    {
-      "id": 10,
-      "product_id": 1,
-      "product_name": "ফ্রেশ সিমেন্ট ১০০",
-      "user_id": 1,
-      "user_name": "মুনজুর আহমেদ",
-      "type": "IN",
-      "quantity": 15,
-      "unit_cost": null,
-      "unit_price": 590,
-      "source": "Reversal: INV-3 deleted",
-      "note": "Stock returned (invoice deleted by মুনজুর আহমেদ)",
-      "timestamp": "2026-10-12T09:03:23.361Z",
-      "time_display": "12-10-2026 | 15:03:23"
-    },
-    {
-      "id": 11,
-      "product_id": 3,
-      "product_name": "ফ্রেশ সিমেন্ট ৮০",
-      "user_id": 1,
-      "user_name": "মুনজুর আহমেদ",
-      "type": "OUT",
-      "quantity": 10,
-      "unit_cost": null,
-      "unit_price": 560,
-      "source": "INV-4",
-      "note": "Sold to jjk",
-      "timestamp": "2026-10-12T09:05:15.171Z",
-      "time_display": "12-10-2026 | 15:05:15"
-    },
-    {
-      "id": 12,
-      "product_id": 3,
-      "product_name": "ফ্রেশ সিমেন্ট ৮০",
-      "user_id": 1,
-      "user_name": "মুনজুর আহমেদ",
-      "type": "IN",
-      "quantity": 10,
-      "unit_cost": null,
-      "unit_price": 560,
-      "source": "Reversal: INV-4 deleted",
-      "note": "Stock returned (invoice deleted by মুনজুর আহমেদ)",
-      "timestamp": "2026-10-12T09:38:43.442Z",
-      "time_display": "12-10-2026 | 15:38:43"
-    },
-    {
-      "id": 13,
-      "product_id": 1,
-      "product_name": "ফ্রেশ সিমেন্ট ১০০",
-      "user_id": 1,
-      "user_name": "মুনজুর আহমেদ",
-      "type": "OUT",
-      "quantity": 2,
-      "unit_cost": null,
-      "unit_price": 580,
-      "source": "INV-5",
-      "note": "Sold to Invoice Due Test Customer",
-      "timestamp": "2026-10-12T09:55:02.667Z",
-      "time_display": "12-10-2026 | 15:55:02"
-    },
-    {
-      "id": 14,
-      "product_id": 1,
-      "product_name": "ফ্রেশ সিমেন্ট ১০০",
-      "user_id": 1,
-      "user_name": "মুনজুর আহমেদ",
-      "type": "IN",
-      "quantity": 2,
-      "unit_cost": null,
-      "unit_price": 580,
-      "source": "Reversal: INV-5 deleted",
-      "note": "Stock returned (invoice deleted by মুনজুর আহমেদ)",
-      "timestamp": "2026-10-12T09:55:02.678Z",
-      "time_display": "12-10-2026 | 15:55:02"
-    },
-    {
-      "id": 15,
-      "product_id": 1,
-      "product_name": "ফ্রেশ সিমেন্ট ১০০",
-      "user_id": 1,
-      "user_name": "মুনজুর আহমেদ",
-      "type": "OUT",
-      "quantity": 2,
-      "unit_cost": null,
-      "unit_price": 580,
-      "source": "INV-6",
-      "note": "Sold to Labor Test Cust",
-      "timestamp": "2026-10-12T10:07:19.336Z",
-      "time_display": "12-10-2026 | 16:07:19"
-    },
-    {
-      "id": 16,
-      "product_id": 1,
-      "product_name": "ফ্রেশ সিমেন্ট ১০০",
-      "user_id": 1,
-      "user_name": "মুনজুর আহমেদ",
-      "type": "IN",
-      "quantity": 2,
-      "unit_cost": null,
-      "unit_price": 580,
-      "source": "Reversal: INV-6 deleted",
-      "note": "Stock returned (invoice deleted by মুনজুর আহমেদ)",
-      "timestamp": "2026-10-12T10:07:19.345Z",
-      "time_display": "12-10-2026 | 16:07:19"
     }
   ],
   "customers": [
@@ -894,110 +744,6 @@
       "note": "জিহাদ ছোট — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-12T08:58:31.188Z",
       "time_display": "12-10-2026 | 14:58:31"
-    },
-    {
-      "id": 11,
-      "customer_id": 13,
-      "user_id": 1,
-      "user_name": "মুনজুর আহমেদ",
-      "transaction_type": "DEBIT",
-      "amount": 8850,
-      "balance": 130236,
-      "source": "INV-2",
-      "note": "Invoice INV-2",
-      "timestamp": "2026-10-12T09:01:10.802Z",
-      "time_display": "12-10-2026 | 15:01:10"
-    },
-    {
-      "id": 12,
-      "customer_id": 13,
-      "user_id": 1,
-      "user_name": "মুনজুর আহমেদ",
-      "transaction_type": "CREDIT",
-      "amount": 20000,
-      "balance": 110236,
-      "source": "INV-2",
-      "note": "Payment for INV-2",
-      "timestamp": "2026-10-12T09:01:10.802Z",
-      "time_display": "12-10-2026 | 15:01:10"
-    },
-    {
-      "id": 13,
-      "customer_id": 13,
-      "user_id": 1,
-      "user_name": "মুনজুর আহমেদ",
-      "transaction_type": "CREDIT",
-      "amount": 8850,
-      "balance": 101386,
-      "source": "Reversal",
-      "note": "Reversal of INV-2 (deleted)",
-      "timestamp": "2026-10-12T09:01:48.436Z",
-      "time_display": "12-10-2026 | 15:01:48"
-    },
-    {
-      "id": 14,
-      "customer_id": 13,
-      "user_id": 1,
-      "user_name": "মুনজুর আহমেদ",
-      "transaction_type": "DEBIT",
-      "amount": 20000,
-      "balance": 121386,
-      "source": "Reversal",
-      "note": "Payment taken back for deleted INV-2",
-      "timestamp": "2026-10-12T09:01:48.436Z",
-      "time_display": "12-10-2026 | 15:01:48"
-    },
-    {
-      "id": 15,
-      "customer_id": 13,
-      "user_id": 1,
-      "user_name": "মুনজুর আহমেদ",
-      "transaction_type": "DEBIT",
-      "amount": 8850,
-      "balance": 130236,
-      "source": "INV-3",
-      "note": "Invoice INV-3",
-      "timestamp": "2026-10-12T09:02:34.659Z",
-      "time_display": "12-10-2026 | 15:02:34"
-    },
-    {
-      "id": 16,
-      "customer_id": 13,
-      "user_id": 1,
-      "user_name": "মুনজুর আহমেদ",
-      "transaction_type": "CREDIT",
-      "amount": 20000,
-      "balance": 110236,
-      "source": "INV-3",
-      "note": "Payment for INV-3",
-      "timestamp": "2026-10-12T09:02:34.659Z",
-      "time_display": "12-10-2026 | 15:02:34"
-    },
-    {
-      "id": 17,
-      "customer_id": 13,
-      "user_id": 1,
-      "user_name": "মুনজুর আহমেদ",
-      "transaction_type": "CREDIT",
-      "amount": 8850,
-      "balance": 101386,
-      "source": "Reversal",
-      "note": "Reversal of INV-3 (deleted)",
-      "timestamp": "2026-10-12T09:03:23.361Z",
-      "time_display": "12-10-2026 | 15:03:23"
-    },
-    {
-      "id": 18,
-      "customer_id": 13,
-      "user_id": 1,
-      "user_name": "মুনজুর আহমেদ",
-      "transaction_type": "DEBIT",
-      "amount": 20000,
-      "balance": 121386,
-      "source": "Reversal",
-      "note": "Payment taken back for deleted INV-3",
-      "timestamp": "2026-10-12T09:03:23.361Z",
-      "time_display": "12-10-2026 | 15:03:23"
     }
   ],
   "cash_ledger": [
@@ -1069,13 +815,9 @@
     }
   ],
   "sessions": {
-    "241ebd198f94b4ac66dcb6ed78425f29": {
+    "45cf654f4da9b25287560f7b10ca42d5": {
       "user_id": 1,
-      "created_at": "2026-10-12T10:07:19.307Z"
-    },
-    "101bba7ed9d6cc0b1c9392785ce7b560": {
-      "user_id": 1,
-      "created_at": "2026-10-12T10:09:32.843Z"
+      "created_at": "2026-10-12T10:20:29.223Z"
     }
   },
   "settings": {
@@ -1103,7 +845,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-12T10:07:25.647Z"
+      "last_sync": "2026-10-12T10:20:19.207Z"
     },
     "default_labor_cost": 0
   },
