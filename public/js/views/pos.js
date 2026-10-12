@@ -507,6 +507,8 @@ async function saveInvoice(doPrint) {
 }
 
 function invoiceSuccess(inv, customer, doPrint) {
+  window.__lastSavedInvoice = inv;
+  window.__lastSavedCustomer = customer;
   const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   modal(`
     <div class="modal-h">
@@ -528,7 +530,7 @@ function invoiceSuccess(inv, customer, doPrint) {
         📱 ${isBn ? 'কাস্টমার এসএমএস:' : 'Customer SMS:'} <b>${esc(inv.sms_status || 'pending')}</b>
       </p>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
-        <button class="btn grn" onclick="printInvoice(${inv.id})">${isBn ? '🖨️ মেমো প্রিভিউ ও প্রিন্ট' : '🖨️ Print Receipt'}</button>
+        <button class="btn grn" onclick="printInvoice('${inv.id}')">${isBn ? '🖨️ মেমো প্রিভিউ ও প্রিন্ট' : '🖨️ Print Receipt'}</button>
         <button class="btn pri" onclick="closeModal();router()">${isBn ? 'সম্পন্ন' : 'Done'}</button>
       </div>
     </div>`);

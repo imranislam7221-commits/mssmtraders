@@ -133,12 +133,12 @@ function buildInvoiceMemoHtml(inv, customer, s) {
       <tbody>
         ${rows}
         ${emptyRowsHtml}
-        ${inv.discount > 0 ? `
+        ${(inv.discount > 0 || inv.labor_cost > 0) ? `
         <tr class="sub-disc">
           <td colspan="3" class="blank-tot"></td>
           <td class="r-bold">সাবটোটাল-</td>
           <td class="r">${bnDigits(inv.subtotal)}</td>
-        </tr>
+        </tr>` : ''}
         ${inv.discount > 0 ? `
         <tr class="sub-disc">
           <td colspan="3" class="blank-tot"></td>
@@ -314,6 +314,9 @@ async function printInvoice(id, offlineInv, offlineCustomer) {
     if (offlineInv) {
       inv = offlineInv;
       customer = offlineCustomer;
+    } else if (window.__lastSavedInvoice && (window.__lastSavedInvoice.id === id || String(window.__lastSavedInvoice.id) === String(id))) {
+      inv = window.__lastSavedInvoice;
+      customer = window.__lastSavedCustomer || (inv.customer_id && (window.S && window.S.__customers) ? window.S.__customers.find(c => c.id === inv.customer_id) : null);
     } else if (typeof id === 'string' && id.startsWith('OFF-') && window.MST_OFFLINE) {
       const found = window.MST_OFFLINE.getQueue().find(x => x.id === id);
       if (found && found.invoice) {
@@ -335,7 +338,8 @@ async function printInvoice(id, offlineInv, offlineCustomer) {
       if (pa) pa.innerHTML = memoHtml;
     });
   } catch (e) {
-    toast('প্রিন্ট প্রিভিউ লোড হতে সমস্যা: ' + e.message, true);
+    console.error('printInvoice error:', e);
+    toast('প্রিন্ট প্রিভিউ লোড হতে সমস্যা: ' + (e.message || e), true);
   }
 }
 
@@ -493,4 +497,10 @@ async function printPaymentReceipt(pay, c) {
     toast('রসিদ প্রিভিউ লোড হতে সমস্যা: ' + e.message, true);
   }
 }
+
+window.printInvoice = printInvoice;
+window.printStatement = printStatement;
+window.printPaymentReceipt = printPaymentReceipt;
+window.buildInvoiceMemoHtml = buildInvoiceMemoHtml;
+window.showPrintPreviewModal = showPrintPreviewModal;
 

@@ -7,16 +7,22 @@ function toAsciiDigits(x) {
   const bn = '০১২৩৪৫৬৭৮৯';
   return String(x == null ? '' : x).replace(/[০-৯]/g, d => bn.indexOf(d));
 }
+window.bnDigits = bnDigits;
+window.toAsciiDigits = toAsciiDigits;
 
 /* ---------- state + helpers ---------- */
 const S = { token: localStorage.getItem('pos_token') || '', user: null, cart: [], posCustomer: null };
+window.S = S;
 const $ = sel => document.querySelector(sel);
+window.$ = $;
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+window.esc = esc;
 const money = n => {
   const val = Number(n || 0).toLocaleString('en-IN', { maximumFractionDigits: 2 });
   const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   return '৳ ' + (isBn ? bnDigits(val) : val);
 };
+window.money = money;
 const fmtDate = iso => {
   const d = new Date(iso);
   const p = x => String(x).padStart(2, '0');
