@@ -165,7 +165,8 @@ function buildInvoiceMemoHtml(inv, customer, s) {
 
     ${(() => {
       const prevDue = inv.prev_due != null ? inv.prev_due : (customer ? Math.max(0, round2((customer.total_due || 0) - (inv.due || 0))) : 0);
-      const netDue = inv.net_due != null ? inv.net_due : (customer ? (customer.total_due || 0) : (inv.due || 0));
+      const netDue = inv.net_due != null ? inv.net_due : (customer ? Math.max(0, round2(prevDue + (inv.total || 0) - (inv.paid || 0))) : (inv.due || 0));
+      const extraPaid = Math.max(0, round2((inv.paid || 0) - (inv.total || 0)));
       return `
     <table class="pay-strip">
       <tr>
@@ -173,10 +174,10 @@ function buildInvoiceMemoHtml(inv, customer, s) {
         <td>জমা: <b>${bnDigits(inv.paid)}</b> ৳</td>
         <td>চলতি বাকি: <b class="${inv.due > 0 ? 'due-text' : ''}">${bnDigits(inv.due)}</b> ৳</td>
       </tr>
-      ${(customer && (prevDue > 0 || netDue > inv.due)) ? `
+      ${(customer && (prevDue > 0 || netDue > 0 || extraPaid > 0)) ? `
       <tr class="prev-due-row">
-        <td>পূর্বের বকেয়া: <b>${bnDigits(prevDue)}</b> ৳</td>
-        <td colspan="2" style="text-align:right">সর্বমোট বাকি: <b class="due-text" style="font-size:12px">${bnDigits(netDue)}</b> ৳</td>
+        <td>পূর্বের বকেয়া: <b>${bnDigits(prevDue)}</b> ৳ ${extraPaid > 0 ? `<br><small style="font-weight:400;color:var(--brand,#b45309)">(বকেয়া থেকে কর্তন: −${bnDigits(extraPaid)} ৳)</small>` : ''}</td>
+        <td colspan="2" style="text-align:right">সর্বমোট বাকি: <b class="due-text" style="font-size:13px">${bnDigits(netDue)}</b> ৳</td>
       </tr>` : ''}
     </table>`;
     })()}

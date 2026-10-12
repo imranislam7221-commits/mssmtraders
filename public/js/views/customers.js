@@ -5,7 +5,7 @@ VIEWS.customers = async function () {
   const rows = customers.map((c, i) => `<tr onclick="viewCustomer(${c.id})" style="cursor:pointer">
     <td class="c-sl" style="text-align:center;font-weight:600;color:var(--mut);width:50px">${isBn ? bnDigits(i + 1) : (i + 1)}</td>
     <td><b>${esc(c.name)}</b></td>
-    <td>${c.phone ? `<a href="tel:${esc(c.phone)}" onclick="event.stopPropagation()" class="phone-link" title="${isBn ? 'সরাসরি কল দিন' : 'Call'}">📞 ${esc(c.phone)}</a>` : '—'}</td>
+    <td>${c.phone ? `<a href="tel:${toAsciiDigits(c.phone)}" onclick="event.stopPropagation()" class="phone-link" title="${isBn ? 'সরাসরি কল দিন' : 'Call'}">📞 ${esc(c.phone)}</a>` : '—'}</td>
     <td>${esc(c.address || '—')}</td>
     <td class="num ${c.total_due > 0 ? 'dueX' : 'due0'}"><b>${money(c.total_due)}</b></td>
     <td style="white-space:nowrap">
@@ -59,9 +59,15 @@ function customerModal(c) {
         <input name="phone" value="${esc(c.phone || '')}" placeholder="০১XXXXXXXXX">
         <label>${isBn ? 'ঠিকানা' : 'Address'}</label>
         <input name="address" value="${esc(c.address || '')}" placeholder="${isBn ? 'যেমন: পুরাতন বাজার, দর্শনা' : 'e.g. Mirpur-1, Dhaka'}">
+        ${c.id ? `
+        <label>${isBn ? 'বর্তমান মোট বাকি' : 'Current Due'}</label>
+        <div style="padding:9px 12px;background:var(--brandbg,#fffbeb);border:1px solid rgba(217,119,6,0.3);border-radius:6px;font-weight:700;color:var(--brand);margin-bottom:6px">${money(c.total_due || 0)}</div>
+        <small style="color:var(--mut);display:block;margin-top:2px;font-size:12px">${isBn ? '💡 বাকি জমা নিতে কাস্টমার তালিকা থেকে \"💵 বাকি জমা নিন\" বাটন ব্যবহার করুন।' : '💡 To collect dues, use the Collect Due button from customer list.'}</small>
+        ` : `
         <label>${isBn ? 'পূর্বের বাকি / বকেয়া (৳)' : 'Previous Due / Opening Due (Tk)'}</label>
-        <input name="opening_due" type="number" step="0.01" min="0" value="${c.id ? (c.total_due || '') : ''}" placeholder="${isBn ? '০.০০ (যদি পূর্বের বাকি থাকে)' : '0.00'}">
+        <input name="opening_due" type="number" step="0.01" min="0" value="" placeholder="${isBn ? '০.০০ (যদি পূর্বের বাকি থাকে)' : '0.00'}">
         <small style="color:var(--mut);display:block;margin-top:2px;font-size:12px">${isBn ? '💡 কাস্টমারের পূর্বের কোনো বাকি বা বকেয়া থাকলে এখানে টাকার পরিমাণ লিখুন।' : '💡 Enter existing outstanding due amount if any.'}</small>
+        `}
         <br>
         <button class="btn pri blk">${isBn ? 'সংরক্ষণ করুন' : 'Save'}</button>
       </form>
@@ -73,9 +79,11 @@ function customerModal(c) {
     const body = { 
       name: f.name.value, 
       phone: f.phone.value, 
-      address: f.address.value,
-      opening_due: f.opening_due ? f.opening_due.value : 0
+      address: f.address.value 
     };
+    if (!c.id && f.opening_due) {
+      body.opening_due = f.opening_due.value;
+    }
     try {
       if (c.id) await api('/customers/' + c.id, { method: 'PUT', body });
       else await api('/customers', { method: 'POST', body });
@@ -134,7 +142,7 @@ async function viewCustomer(id) {
         <div class="stat">
           <div class="lab">${isBn ? 'মোবাইল ও ঠিকানা' : 'Phone'}</div>
           <div class="val" style="font-size:15px">
-            ${c.phone ? `<a href="tel:${esc(c.phone)}" class="phone-link" style="margin-bottom:4px">📞 ${esc(c.phone)}</a>` : '—'}
+            ${c.phone ? `<a href="tel:${toAsciiDigits(c.phone)}" class="phone-link" style="margin-bottom:4px">📞 ${esc(c.phone)}</a>` : '—'}
             ${c.address ? '<br><small style="font-weight:400;color:var(--mut)">' + esc(c.address) + '</small>' : ''}
           </div>
         </div>

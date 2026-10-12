@@ -369,12 +369,30 @@ function totalsHtml() {
   const vat = sub * vatP / 100;
   const total = Math.max(0, sub + vat - disc);
   const paid = Math.max(0, parseFloat(($('#fpaid') || {}).value) || 0);
-  const due = total - paid;
+  
+  const custId = +($('#custsel') ? $('#custsel').value : 0);
+  const c = custId ? (S.__customers || []).find(x => x.id === custId) : null;
+  const prevDue = c ? (c.total_due || 0) : 0;
 
+  if (prevDue > 0) {
+    const grandTotal = total + prevDue;
+    const netRem = Math.max(0, grandTotal - paid);
+    return `
+      <div class="sumrow"><span>${isBn ? 'সাবটোটাল' : 'Subtotal'}</span><span>${money(sub)}</span></div>
+      ${disc > 0 ? `<div class="sumrow"><span>${isBn ? 'ছাড় (ডিসকাউন্ট)' : 'Discount'}</span><span>− ${money(disc)}</span></div>` : ''}
+      ${vat > 0 ? `<div class="sumrow"><span>${isBn ? 'ভ্যাট' : 'VAT'} (${isBn ? bnDigits(vatP) : vatP}%)</span><span>+ ${money(vat)}</span></div>` : ''}
+      <div class="sumrow"><span>${isBn ? 'চলতি বিল' : 'Current Bill'}</span><span>${money(total)}</span></div>
+      <div class="sumrow" style="color:var(--brand,#d97706);font-weight:600"><span>${isBn ? 'পূর্বের বকেয়া' : 'Previous Due'}</span><span>${money(prevDue)}</span></div>
+      <div class="sumrow total"><span>${isBn ? 'সর্বমোট পাওনা (বিল + বকেয়া)' : 'Grand Total Due'}</span><span>${money(grandTotal)}</span></div>
+      <div class="sumrow"><span>${isBn ? 'জমা টাকা' : 'Paid'}</span><span>${money(paid)}</span></div>
+      <div class="sumrow duerow"><span style="color:var(--red,#dc2626)">${isBn ? 'অবশিষ্ট সর্বমোট বাকি' : 'Net Remaining Due'}</span><span>${money(netRem)}</span></div>`;
+  }
+
+  const due = Math.max(0, total - paid);
   return `
     <div class="sumrow"><span>${isBn ? 'সাবটোটাল' : 'Subtotal'}</span><span>${money(sub)}</span></div>
-    <div class="sumrow"><span>${isBn ? 'ছাড় (ডিসকাউন্ট)' : 'Discount'}</span><span>− ${money(disc)}</span></div>
-    <div class="sumrow"><span>${isBn ? 'ভ্যাট' : 'VAT'} (${isBn ? bnDigits(vatP) : vatP}%)</span><span>+ ${money(vat)}</span></div>
+    ${disc > 0 ? `<div class="sumrow"><span>${isBn ? 'ছাড় (ডিসকাউন্ট)' : 'Discount'}</span><span>− ${money(disc)}</span></div>` : ''}
+    ${vat > 0 ? `<div class="sumrow"><span>${isBn ? 'ভ্যাট' : 'VAT'} (${isBn ? bnDigits(vatP) : vatP}%)</span><span>+ ${money(vat)}</span></div>` : ''}
     <div class="sumrow total"><span>${isBn ? 'সর্বমোট প্রদেয়' : 'Net Payable'}</span><span>${money(total)}</span></div>
     <div class="sumrow"><span>${isBn ? 'জমা টাকা' : 'Paid'}</span><span>${money(paid)}</span></div>
     <div class="sumrow duerow"><span>${isBn ? 'বকেয়া / বাকি' : 'Due (Baki)'}</span><span>${money(due)}</span></div>`;
@@ -580,6 +598,7 @@ function pickCust(id, name) {
   } else {
     card.style.display = 'none';
   }
+  calcTotals();
 }
 
 /* ---------- Rod & Ton Weight Calculator Modal ---------- */

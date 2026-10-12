@@ -1,28 +1,28 @@
 /* M/S M.S. Traders POS — Service Worker for PWA (Offline & Fast Caching) */
-const CACHE_NAME = 'mst-pos-v20261012_v3';
+const CACHE_NAME = 'mst-pos-v20261012_v4';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/style.css?v=20261012_v3',
+  '/style.css?v=20261012_v4',
   '/icons/icon.svg',
   '/icons/icon-192.png',
   '/icons/icon-512.png',
-  '/js/core.js?v=20261012_v3',
-  '/js/i18n.js?v=20261012_v3',
-  '/js/auth.js?v=20261012_v3',
-  '/js/router.js?v=20261012_v3',
-  '/js/boot.js?v=20261012_v3',
-  '/js/print.js?v=20261012_v3',
-  '/js/views/dashboard.js?v=20261012_v3',
-  '/js/views/products.js?v=20261012_v3',
-  '/js/views/stock.js?v=20261012_v3',
-  '/js/views/pos.js?v=20261012_v3',
-  '/js/views/invoices.js?v=20261012_v3',
-  '/js/views/customers.js?v=20261012_v3',
-  '/js/views/expenses.js?v=20261012_v3',
-  '/js/views/incomes.js?v=20261012_v3',
-  '/js/views/settings.js?v=20261012_v3'
+  '/js/core.js?v=20261012_v4',
+  '/js/i18n.js?v=20261012_v4',
+  '/js/auth.js?v=20261012_v4',
+  '/js/router.js?v=20261012_v4',
+  '/js/boot.js?v=20261012_v4',
+  '/js/print.js?v=20261012_v4',
+  '/js/views/dashboard.js?v=20261012_v4',
+  '/js/views/products.js?v=20261012_v4',
+  '/js/views/stock.js?v=20261012_v4',
+  '/js/views/pos.js?v=20261012_v4',
+  '/js/views/invoices.js?v=20261012_v4',
+  '/js/views/customers.js?v=20261012_v4',
+  '/js/views/expenses.js?v=20261012_v4',
+  '/js/views/incomes.js?v=20261012_v4',
+  '/js/views/settings.js?v=20261012_v4'
 ];
 
 self.addEventListener('install', event => {

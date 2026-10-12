@@ -3,6 +3,10 @@
 
 window.LANG = localStorage.getItem('pos_lang') || 'bn';
 function bnDigits(x) { return String(x == null ? '' : x).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[+d]); }
+function toAsciiDigits(x) {
+  const bn = '০১২৩৪৫৬৭৮৯';
+  return String(x == null ? '' : x).replace(/[০-৯]/g, d => bn.indexOf(d));
+}
 
 /* ---------- state + helpers ---------- */
 const S = { token: localStorage.getItem('pos_token') || '', user: null, cart: [], posCustomer: null };
