@@ -1,6 +1,40 @@
 /* ---------- printing (memo-pad style matching physical printed pad) ---------- */
+function esc(s) {
+  if (typeof window !== 'undefined' && typeof window.esc === 'function' && window.esc !== esc) return window.esc(s);
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+if (typeof window !== 'undefined') window.esc = esc;
+
+function bnDigits(x) {
+  if (typeof window !== 'undefined' && typeof window.bnDigits === 'function' && window.bnDigits !== bnDigits) return window.bnDigits(x);
+  return String(x == null ? '' : x).replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[+d]);
+}
+if (typeof window !== 'undefined') window.bnDigits = bnDigits;
+
 function round2(n) { return Math.round((Number(n || 0) + Number.EPSILON) * 100) / 100; }
 if (typeof window !== 'undefined') window.round2 = round2;
+
+function money(n) {
+  if (typeof window !== 'undefined' && typeof window.money === 'function' && window.money !== money) return window.money(n);
+  const val = Number(n || 0).toLocaleString('en-IN', { maximumFractionDigits: 2 });
+  return '৳ ' + bnDigits(val);
+}
+if (typeof window !== 'undefined') window.money = money;
+
+function fmtDate(iso) {
+  if (typeof window !== 'undefined' && typeof window.fmtDate === 'function' && window.fmtDate !== fmtDate) return window.fmtDate(iso);
+  const d = new Date(iso);
+  const p = x => String(x).padStart(2, '0');
+  return bnDigits(p(d.getDate()) + '-' + p(d.getMonth() + 1) + '-' + d.getFullYear());
+}
+if (typeof window !== 'undefined') window.fmtDate = fmtDate;
+
+function getBanglaMoneyWords(n) {
+  if (typeof banglaMoneyWords === 'function') return banglaMoneyWords(n);
+  if (typeof window !== 'undefined' && typeof window.banglaMoneyWords === 'function') return window.banglaMoneyWords(n);
+  return bnDigits(n);
+}
+
 
 async function settingsSafe() {
   try { return (await api('/settings')).settings; }
@@ -79,7 +113,7 @@ function buildInvoiceMemoHtml(inv, customer, s) {
     emptyRowsHtml += `<tr><td class="c">${rowNo}</td><td>&nbsp;</td><td></td><td></td><td></td></tr>`;
   }
 
-  const totalWords = banglaMoneyWords(inv.total) + ' টাকা মাত্র।';
+  const totalWords = getBanglaMoneyWords(inv.total) + ' টাকা মাত্র।';
   const cleanInvNo = bnDigits(String(inv.invoice_no || '').replace(/^INV-?/i, ''));
 
   return `
@@ -266,7 +300,7 @@ function buildStatementMemoHtml(c, ledger, s, rng) {
 
     <div class="kothay-box" style="margin-top:6px">
       <span class="kothay-lbl">কথায়</span>
-      <span class="kothay-dots">মোট বাকি ${banglaMoneyWords(c.total_due)} টাকা মাত্র।</span>
+      <span class="kothay-dots">মোট বাকি ${getBanglaMoneyWords(c.total_due)} টাকা মাত্র।</span>
     </div>
 
     <div class="memo-footer-flex" style="margin-top:18px">
@@ -471,7 +505,7 @@ function buildPaymentReceiptHtml(pay, c, s) {
 
     <div class="kothay-box" style="margin-top:8px">
       <span class="kothay-lbl">কথায়</span>
-      <span class="kothay-dots">জমা গ্রহণ ${banglaMoneyWords(pay.amount)} টাকা মাত্র।</span>
+      <span class="kothay-dots">জমা গ্রহণ ${getBanglaMoneyWords(pay.amount)} টাকা মাত্র।</span>
     </div>
 
     <div class="memo-footer-flex" style="margin-top:24px">
