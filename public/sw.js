@@ -1,28 +1,28 @@
 /* M/S M.S. Traders POS — Service Worker for PWA (Offline & Fast Caching) */
-const CACHE_NAME = 'mst-pos-v20261012_v8';
+const CACHE_NAME = 'mst-pos-v20261012_v9';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/style.css?v=20261012_v8',
+  '/style.css?v=20261012_v9',
   '/icons/icon.svg',
   '/icons/icon-192.png',
   '/icons/icon-512.png',
-  '/js/core.js?v=20261012_v8',
-  '/js/i18n.js?v=20261012_v8',
-  '/js/auth.js?v=20261012_v8',
-  '/js/router.js?v=20261012_v8',
-  '/js/boot.js?v=20261012_v8',
-  '/js/print.js?v=20261012_v8',
-  '/js/views/dashboard.js?v=20261012_v8',
-  '/js/views/products.js?v=20261012_v8',
-  '/js/views/stock.js?v=20261012_v8',
-  '/js/views/pos.js?v=20261012_v8',
-  '/js/views/invoices.js?v=20261012_v8',
-  '/js/views/customers.js?v=20261012_v8',
-  '/js/views/expenses.js?v=20261012_v8',
-  '/js/views/incomes.js?v=20261012_v8',
-  '/js/views/settings.js?v=20261012_v8'
+  '/js/core.js?v=20261012_v9',
+  '/js/i18n.js?v=20261012_v9',
+  '/js/auth.js?v=20261012_v9',
+  '/js/router.js?v=20261012_v9',
+  '/js/boot.js?v=20261012_v9',
+  '/js/print.js?v=20261012_v9',
+  '/js/views/dashboard.js?v=20261012_v9',
+  '/js/views/products.js?v=20261012_v9',
+  '/js/views/stock.js?v=20261012_v9',
+  '/js/views/pos.js?v=20261012_v9',
+  '/js/views/invoices.js?v=20261012_v9',
+  '/js/views/customers.js?v=20261012_v9',
+  '/js/views/expenses.js?v=20261012_v9',
+  '/js/views/incomes.js?v=20261012_v9',
+  '/js/views/settings.js?v=20261012_v9'
 ];
 
 self.addEventListener('install', event => {
@@ -67,22 +67,21 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Static assets & navigation: Stale-While-Revalidate / Cache-first
+  // Static assets & scripts: Network-first to always fetch hotfixes, falling back to cache offline
   event.respondWith(
-    caches.match(req).then(cached => {
-      const fetchPromise = fetch(req).then(networkResponse => {
-        if (networkResponse && (networkResponse.status === 200 || networkResponse.type === 'opaque')) {
-          const clone = networkResponse.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(req, clone));
-        }
-        return networkResponse;
-      }).catch(() => {
+    fetch(req).then(networkResponse => {
+      if (networkResponse && (networkResponse.status === 200 || networkResponse.type === 'opaque')) {
+        const clone = networkResponse.clone();
+        caches.open(CACHE_NAME).then(cache => cache.put(req, clone));
+      }
+      return networkResponse;
+    }).catch(() => {
+      return caches.match(req).then(cached => {
         if (cached) return cached;
         if (req.mode === 'navigate') {
           return caches.match('/index.html');
         }
       });
-      return cached || fetchPromise;
     })
   );
 });

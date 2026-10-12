@@ -348,20 +348,19 @@ function showPrintPreviewModal(html, title, onPrint) {
   if (b2) b2.onclick = doTrigger;
 }
 
-async function printInvoice(id, offlineInv, offlineCustomer) {
+async function printInvoice(id, passedInv, passedCustomer) {
   try {
-    let inv, customer;
-    if (offlineInv) {
-      inv = offlineInv;
-      customer = offlineCustomer;
-    } else if (window.__lastSavedInvoice && (window.__lastSavedInvoice.id === id || String(window.__lastSavedInvoice.id) === String(id))) {
-      inv = window.__lastSavedInvoice;
-      customer = window.__lastSavedCustomer || (inv.customer_id && (window.S && window.S.__customers) ? window.S.__customers.find(c => c.id === inv.customer_id) : null);
-    } else if (typeof id === 'string' && id.startsWith('OFF-') && window.MST_OFFLINE) {
-      const found = window.MST_OFFLINE.getQueue().find(x => x.id === id);
-      if (found && found.invoice) {
-        inv = found.invoice;
-        customer = { name: inv.customer_name, address: inv.customer_address, phone: inv.customer_phone };
+    let inv = passedInv || null, customer = passedCustomer || null;
+    if (!inv) {
+      if (window.__lastSavedInvoice && (window.__lastSavedInvoice.id === id || String(window.__lastSavedInvoice.id) === String(id))) {
+        inv = window.__lastSavedInvoice;
+        customer = window.__lastSavedCustomer || (inv.customer_id && (window.S && window.S.__customers) ? window.S.__customers.find(c => c.id === inv.customer_id) : null);
+      } else if (typeof id === 'string' && id.startsWith('OFF-') && window.MST_OFFLINE) {
+        const found = window.MST_OFFLINE.getQueue().find(x => x.id === id);
+        if (found && found.invoice) {
+          inv = found.invoice;
+          customer = { name: inv.customer_name, address: inv.customer_address, phone: inv.customer_phone };
+        }
       }
     }
     if (!inv) {
@@ -382,6 +381,7 @@ async function printInvoice(id, offlineInv, offlineCustomer) {
     toast('প্রিন্ট প্রিভিউ লোড হতে সমস্যা: ' + (e.message || e), true);
   }
 }
+if (typeof window !== 'undefined') window.printInvoice = printInvoice;
 
 async function printStatement(id, fromDate, toDate) {
   try {

@@ -510,6 +510,19 @@ function invoiceSuccess(inv, customer, doPrint) {
   window.__lastSavedInvoice = inv;
   window.__lastSavedCustomer = customer;
   const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
+
+  if (doPrint) {
+    if (typeof window.printInvoice === 'function') {
+      window.printInvoice(inv.id, inv, customer);
+    } else if (typeof printInvoice === 'function') {
+      printInvoice(inv.id, inv, customer);
+    }
+    return;
+  }
+
+  const custDue = customer && customer.total_due != null ? customer.total_due : (inv.net_due != null ? inv.net_due : inv.due);
+  const extraPaid = Math.max(0, round2((inv.paid || 0) - (inv.total || 0)));
+
   modal(`
     <div class="modal-h">
       <h3>${isBn ? `✅ চালান #${esc(inv.invoice_no)} সংরক্ষিত হয়েছে` : `✅ Invoice ${esc(inv.invoice_no)} saved`}</h3>
@@ -518,25 +531,56 @@ function invoiceSuccess(inv, customer, doPrint) {
     <div class="modal-b">
       <div class="grid g2">
         <div class="stat">
-          <div class="lab">${isBn ? 'সর্বমোট বিল' : 'Total'}</div>
+          <div class="lab">${isBn ? 'চলতি বিল' : 'Current Bill'}</div>
           <div class="val">${money(inv.total)}</div>
         </div>
-        <div class="stat ${inv.due > 0 ? 'due' : ''}">
-          <div class="lab">${isBn ? 'বাকি' : 'Due (Baki)'}</div>
-          <div class="val">${money(inv.due)}</div>
+        <div class="stat">
+          <div class="lab">${isBn ? 'জমা গ্রহণ' : 'Cash Received'}</div>
+          <div class="val" style="color:var(--grn,#15803d)">${money(inv.paid)}</div>
         </div>
       </div>
+
+      ${customer ? `
+      <div style="margin-top:12px;padding:12px 14px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px">
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--mut)">
+          <span>👤 ${isBn ? 'কাস্টমার:' : 'Customer:'} <b>${esc(customer.name)}</b></span>
+          <span>${isBn ? 'চলতি চালানের বাকি:' : 'Invoice Due:'} <b>${money(inv.due)}</b></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding-top:8px;border-top:1px dashed #cbd5e1">
+          <div>
+            <span style="font-size:13.5px;font-weight:700;color:var(--txt)">${isBn ? 'কাস্টমারের অবশিষ্ট মোট বাকি:' : 'Total Customer Due:'}</span>
+            ${extraPaid > 0 ? `<div style="font-size:11px;color:var(--brand,#b45309)">(${isBn ? 'পূর্বের বকেয়া থেকে কর্তন:' : 'Deducted from due:'} −${money(extraPaid)})</div>` : ''}
+          </div>
+          <span style="font-size:16px;font-weight:800;color:${custDue > 0 ? 'var(--dan,#b91c1c)' : 'var(--grn,#15803d)'}">
+            ${custDue > 0 ? money(custDue) : (isBn ? '০ ৳ (সম্পূর্ণ পরিশোধ)' : '0 (Paid in full)')}
+          </span>
+        </div>
+      </div>
+      ` : `
+      <div class="stat ${inv.due > 0 ? 'due' : ''}" style="margin-top:12px">
+        <div class="lab">${isBn ? 'বাকি' : 'Due (Baki)'}</div>
+        <div class="val">${money(inv.due)}</div>
+      </div>
+      `}
+
       <p style="margin-top:12px;font-size:13px;color:var(--mut)">
         📱 ${isBn ? 'কাস্টমার এসএমএস:' : 'Customer SMS:'} <b>${esc(inv.sms_status || 'pending')}</b>
       </p>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
-        <button class="btn grn" onclick="printInvoice('${inv.id}')">${isBn ? '🖨️ মেমো প্রিভিউ ও প্রিন্ট' : '🖨️ Print Receipt'}</button>
+        <button class="btn grn" id="btn-success-memo" onclick="(window.printInvoice || printInvoice)('${inv.id}', window.__lastSavedInvoice, window.__lastSavedCustomer)">${isBn ? '🖨️ মেমো প্রিভিউ ও প্রিন্ট' : '🖨️ Print Receipt'}</button>
         <button class="btn pri" onclick="closeModal();router()">${isBn ? 'সম্পন্ন' : 'Done'}</button>
       </div>
     </div>`);
 
-  if (doPrint) {
-    setTimeout(() => printInvoice(inv.id), 250);
+  const memoBtn = $('#btn-success-memo');
+  if (memoBtn) {
+    memoBtn.onclick = function() {
+      if (typeof window.printInvoice === 'function') {
+        window.printInvoice(inv.id, inv, customer);
+      } else if (typeof printInvoice === 'function') {
+        printInvoice(inv.id, inv, customer);
+      }
+    };
   }
 }
 
