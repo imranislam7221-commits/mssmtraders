@@ -2,11 +2,11 @@
   "counters": {
     "user": 1,
     "product": 38,
-    "ledger": 19,
-    "customer": 20,
-    "cash": 17,
-    "invoice": 6,
-    "cleger": 37,
+    "ledger": 21,
+    "customer": 21,
+    "cash": 19,
+    "invoice": 0,
+    "cleger": 39,
     "expense": 0,
     "income": 1
   },
@@ -812,12 +812,34 @@
       "user_name": "মুনজুর আহমেদ",
       "timestamp": "2026-10-12T10:09:32.876Z",
       "time_display": "12-10-2026 | 16:09:32"
+    },
+    {
+      "id": 18,
+      "type": "IN",
+      "amount": 8700,
+      "balance": 8700,
+      "source": "INV-7",
+      "note": "Sale payment",
+      "user_name": "মুনজুর আহমেদ",
+      "timestamp": "2026-10-12T10:25:37.107Z",
+      "time_display": "12-10-2026 | 16:25:37"
+    },
+    {
+      "id": 19,
+      "type": "OUT",
+      "amount": 8700,
+      "balance": 0,
+      "source": "Reversal",
+      "note": "Invoice deleted: INV-7",
+      "user_name": "মুনজুর আহমেদ",
+      "timestamp": "2026-10-12T10:25:37.115Z",
+      "time_display": "12-10-2026 | 16:25:37"
     }
   ],
   "sessions": {
-    "45cf654f4da9b25287560f7b10ca42d5": {
+    "19644254da56eacc87778a9f1b5512be": {
       "user_id": 1,
-      "created_at": "2026-10-12T10:20:29.223Z"
+      "created_at": "2026-10-12T10:37:37.551Z"
     }
   },
   "settings": {
@@ -845,7 +867,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-12T10:20:19.207Z"
+      "last_sync": "2026-10-12T10:37:28.670Z"
     },
     "default_labor_cost": 0
   },
