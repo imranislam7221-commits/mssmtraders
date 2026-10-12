@@ -1,4 +1,7 @@
 /* ---------- printing (memo-pad style matching physical printed pad) ---------- */
+function round2(n) { return Math.round((Number(n || 0) + Number.EPSILON) * 100) / 100; }
+if (typeof window !== 'undefined') window.round2 = round2;
+
 async function settingsSafe() {
   try { return (await api('/settings')).settings; }
   catch (e) {}
@@ -44,6 +47,9 @@ function ml(s) { return esc(s).split('\n').map(t => t.trim()).filter(Boolean).jo
 
 function padBn(n) {
   return bnDigits(n);
+}
+function round2(n) {
+  return Math.round((Number(n || 0) + Number.EPSILON) * 100) / 100;
 }
 
 function buildInvoiceMemoHtml(inv, customer, s) {

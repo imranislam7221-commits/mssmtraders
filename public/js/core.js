@@ -7,8 +7,10 @@ function toAsciiDigits(x) {
   const bn = '০১২৩৪৫৬৭৮৯';
   return String(x == null ? '' : x).replace(/[০-৯]/g, d => bn.indexOf(d));
 }
+function round2(n) { return Math.round((Number(n || 0) + Number.EPSILON) * 100) / 100; }
 window.bnDigits = bnDigits;
 window.toAsciiDigits = toAsciiDigits;
+window.round2 = round2;
 
 /* ---------- state + helpers ---------- */
 const S = { token: localStorage.getItem('pos_token') || '', user: null, cart: [], posCustomer: null };
