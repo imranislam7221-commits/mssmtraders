@@ -461,10 +461,12 @@ async function saveInvoice(doPrint) {
       const paid = +body.paid_amount || 0;
       const due = total - paid;
       const offlineId = 'OFF-' + Math.floor(1000 + Math.random() * 9000);
+      body.offline_invoice_no = offlineId;
       const offlineCust = body.customer ? { name: body.customer.name, address: body.customer.address, phone: body.customer.phone } : (S.__customers.find(c => c.id === body.customer_id) || { name: 'নগদ কাস্টমার' });
       const offlineInv = {
         id: offlineId,
         invoice_no: offlineId,
+        offline_invoice_no: offlineId,
         date: new Date().toISOString(),
         items: S.cart.map(c => {
           const p = (S.__products || []).find(x => x.id === c.product_id) || {};
@@ -513,9 +515,9 @@ function invoiceSuccess(inv, customer, doPrint) {
 
   if (doPrint) {
     if (typeof window.printInvoice === 'function') {
-      window.printInvoice(inv.id, inv, customer);
+      window.printInvoice(inv.id, inv, customer, true);
     } else if (typeof printInvoice === 'function') {
-      printInvoice(inv.id, inv, customer);
+      printInvoice(inv.id, inv, customer, true);
     }
     return;
   }

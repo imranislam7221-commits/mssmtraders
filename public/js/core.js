@@ -173,11 +173,24 @@ window.MST_OFFLINE = {
         await api('/invoices', { method: 'POST', body: item.body });
         syncedCount++;
       } catch (err) {
-        if (!navigator.onLine || err.message.includes('fetch') || err.message.includes('Network') || err.message.includes('অফলাইন') || err.message.includes('503')) {
+        const isNetworkErr = !navigator.onLine || err.message.includes('fetch') || err.message.includes('Network') || err.message.includes('অফলাইন') || err.message.includes('503');
+        if (isNetworkErr) {
           remaining.push(item);
         } else {
+          item.retryCount = (item.retryCount || 0) + 1;
+          item.lastError = err.message;
           console.error('[OfflineSync Item Error]', err.message);
-          remaining.push(item);
+          if (item.retryCount >= 3) {
+            // Bug #5 fix: move permanently failing items out of retry queue
+            try {
+              const failedList = JSON.parse(localStorage.getItem('pos_offline_failed') || '[]');
+              failedList.push({ ...item, failed_at: new Date().toISOString() });
+              localStorage.setItem('pos_offline_failed', JSON.stringify(failedList));
+            } catch (_) {}
+            toast('⚠️ অফলাইন চালান #' + (item.body.offline_invoice_no || item.id) + ' সিঙ্ক করা যায়নি: ' + err.message, true);
+          } else {
+            remaining.push(item);
+          }
         }
       }
     }

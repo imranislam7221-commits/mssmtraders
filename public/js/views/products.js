@@ -1,13 +1,14 @@
 /* ---------- products ---------- */
-VIEWS.products = async function () {
-  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
-  const { products } = await api('/products');
-  const rows = products.slice().sort(prodSort).map(p => {
+let CURRENT_CAT = 'all';
+
+function renderProductRows(list, isBn) {
+  return list.slice().sort(prodSort).map(p => {
     const rawName = p.name || '';
     const pName = isBn ? (I18N_BN[rawName] || t(rawName) || rawName) : rawName;
-    return `<tr>
+    const isArchived = !!p.is_archived;
+    return `<tr style="${isArchived ? 'opacity:0.8;background:rgba(239,68,68,0.06)' : ''}">
     <td>
-      <b>${esc(pName)}</b><br>
+      <b>${esc(pName)}</b> ${isArchived ? `<span class="badge out" style="font-size:11px;padding:2px 6px">${isBn ? '🗄️ আর্কাইভকৃত' : 'Archived'}</span>` : ''}<br>
       <small style="color:var(--mut)">${esc(isBn ? bnCat(p.category) : p.category)}${p.size_mili ? ' • ' + (isBn ? p.size_mili + ' মি.লি' : p.size_mili + 'mm') : ''}</small>
     </td>
     <td>${esc(isBn ? bnUnit(p.unit) : p.unit)}</td>
@@ -15,12 +16,25 @@ VIEWS.products = async function () {
     <td class="num">${money(p.purchase_price)}</td>
     <td class="num"><b>${money(p.selling_price)}</b></td>
     <td style="white-space:nowrap">
-      <button class="btn sm grn" onclick="openStockIn(${p.id})">${isBn ? '+ স্টক ইন' : '+ Stock In'}</button>
-      <button class="btn sm" onclick="editProduct(${p.id})">✏️ ${isBn ? 'এডিট' : 'Edit'}</button>
-      ${isOwner() ? `<button class="btn sm dan" onclick="delProduct(${p.id})">🗑️</button>` : ''}
+      ${isArchived ? `
+        <button class="btn sm grn" onclick="restoreProduct(${p.id})">🔄 ${isBn ? 'পুনরুদ্ধার' : 'Restore'}</button>
+      ` : `
+        <button class="btn sm grn" onclick="openStockIn(${p.id})">${isBn ? '+ স্টক ইন' : '+ Stock In'}</button>
+        <button class="btn sm" onclick="editProduct(${p.id})">✏️ ${isBn ? 'এডিট' : 'Edit'}</button>
+        ${isOwner() ? `<button class="btn sm dan" onclick="delProduct(${p.id})">🗑️</button>` : ''}
+      `}
     </td>
   </tr>`;
-  }).join('') || `<tr><td colspan="6" class="empty">${isBn ? 'কোনো পণ্য পাওয়া যায়নি — নতুন পণ্য যোগ করুন' : 'No products — add your first product'}</td></tr>`;
+  }).join('') || `<tr><td colspan="6" class="empty">${isBn ? 'কোনো পণ্য পাওয়া যায়নি' : 'No products found'}</td></tr>`;
+}
+
+VIEWS.products = async function () {
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
+  const { products } = await api('/products?include_archived=1');
+  window.__allProducts = products || [];
+
+  const activeProds = (products || []).filter(p => !p.is_archived);
+  const rows = renderProductRows(activeProds, isBn);
 
   layout(`
     <div class="page-head">
@@ -40,6 +54,7 @@ VIEWS.products = async function () {
       <button type="button" class="cat-pill" id="cp-sand" onclick="filterByCat('Sand')">🏖️ ${isBn ? 'বালু' : 'Sand'}</button>
       <button type="button" class="cat-pill" id="cp-khua" onclick="filterByCat('Khua')">🪨 ${isBn ? 'খোয়া' : 'Chips'}</button>
       <button type="button" class="cat-pill" id="cp-brick" onclick="filterByCat('Brick')">🧱 ${isBn ? 'ইট' : 'Bricks'}</button>
+      <button type="button" class="cat-pill" id="cp-archived" onclick="filterByCat('archived')">🗄️ ${isBn ? 'আর্কাইভকৃত' : 'Archived'}</button>
     </div>
     <div class="card">
       <div class="tblwrap">
@@ -152,15 +167,30 @@ async function editProduct(id) {
 }
 async function delProduct(id) {
   const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
-  askConfirm(isBn ? 'এই পণ্যটি স্থায়ীভাবে মুছে ফেলবেন?' : 'Delete this product permanently?', async function () {
+  askConfirm(isBn ? 'এই পণ্যটি কি তালিকা থেকে বাদ দিতে চান? (অতীত লেনদেন থাকলে ডাটা অক্ষত রাখতে আর্কাইভ হবে)' : 'Remove this product? (Will be archived if past transactions exist)', async function () {
     try {
-      await api('/products/' + id, { method: 'DELETE' });
-      toast(isBn ? 'পণ্য মুছে ফেলা হয়েছে' : 'Product deleted');
+      const res = await api('/products/' + id, { method: 'DELETE' });
+      if (res.action === 'archived') {
+        toast(isBn ? '🗄️ পণ্যটিতে অতীত বিক্রয়/লেনদেন থাকায় এটি নিরাপদে আর্কাইভ করা হয়েছে।' : 'Product archived to preserve transaction history');
+      } else {
+        toast(isBn ? 'পণ্য মুছে ফেলা হয়েছে' : 'Product deleted');
+      }
       router();
     } catch (e) {
       toast(e.message, true);
     }
   });
+}
+
+async function restoreProduct(id) {
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
+  try {
+    await api('/products/' + id, { method: 'PUT', body: { restore: true } });
+    toast(isBn ? '✅ পণ্যটি সক্রিয় তালিকায় পুনরুদ্ধার করা হয়েছে!' : 'Product restored');
+    router();
+  } catch (err) {
+    toast(err.message, true);
+  }
 }
 
 function openStockIn(pid) {
@@ -242,12 +272,13 @@ function stockInModal(pid, products) {
         <div class="grid g2">
           <div>
             <label>${isBn ? 'সাপ্লায়ার / মহাজন / মিল' : 'Supplier / Vendor Source'}</label>
-            <input name="supplier" placeholder="${isBn ? 'যেমন: বিএসআরএম / আবুল খায়ের / মেঘনা' : 'e.g. BSRM / Abul Khair'}">
+            <input name="supplier" list="supp-datalist" placeholder="${isBn ? 'যেমন: বিএসআরএম / আবুল খায়ের / মেঘনা' : 'e.g. BSRM / Abul Khair'}">
+            <datalist id="supp-datalist"></datalist>
           </div>
           <div>
             <label>${isBn ? 'পেমেন্ট ধরন' : 'Payment Type'}</label>
             <select name="is_credit">
-              <option value="1">${isBn ? 'বাকিতে চালান / কোম্পানি ক্রেডিট (ক্যাশ কাটবে না)' : 'Company Credit (no cash deduction)'}</option>
+              <option value="1">${isBn ? 'বাকিতে চালান / কোম্পানি ক্রেডিট (মহাজন খাতায় দেনা বাড়বে)' : 'Company Credit (creates debt in supplier ledger)'}</option>
               <option value="0">${isBn ? 'নগদ ক্যাশ প্রদান (ক্যাশ ব্যালেন্স থেকে কাটবে)' : 'Cash Payment (deduct from cash)'}</option>
             </select>
           </div>
@@ -258,6 +289,14 @@ function stockInModal(pid, products) {
         <button class="btn grn blk">${isBn ? 'স্টকে যোগ করুন ➕' : 'Add Stock ➕'}</button>
       </form>
     </div>`);
+
+  // Load existing suppliers for autocomplete
+  api('/suppliers').then(d => {
+    const dl = $('#supp-datalist');
+    if (dl && d.suppliers) {
+      dl.innerHTML = d.suppliers.map(s => `<option value="${esc(s.name)}">${esc(s.company ? s.company + ' — ' : '')}${esc(s.name)}</option>`).join('');
+    }
+  }).catch(() => {});
 
   const sif = $('#siform');
   const updSI = function () {
@@ -326,27 +365,41 @@ function filterProducts(q) {
 }
 
 function filterByCat(cat) {
+  CURRENT_CAT = cat;
   document.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
   const btn = $(`#cp-${cat.toLowerCase()}`);
   if (btn) btn.classList.add('active');
 
-  const terms = {
-    'all': [],
-    'cement': ['cement', 'সিমেন্ট'],
-    'rod': ['rod', 'রড'],
-    'sand': ['sand', 'বালু', 'বালি'],
-    'khua': ['khua', 'খোয়া', 'খোয়া', 'chips'],
-    'brick': ['brick', 'ইট']
-  }[cat.toLowerCase()] || [cat.toLowerCase()];
+  const tbl = $('#ptable');
+  if (!tbl) return;
+  const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
+  let list = window.__allProducts || [];
 
-  document.querySelectorAll("#ptable tr").forEach(function (tr, i) {
-    if (i === 0) return;
-    if (cat === 'all') {
-      tr.style.display = "";
-    } else {
-      const text = tr.textContent.toLowerCase();
-      const match = terms.some(t => text.includes(t));
-      tr.style.display = match ? "" : "none";
+  if (cat === 'archived') {
+    list = list.filter(p => p.is_archived);
+  } else {
+    list = list.filter(p => !p.is_archived);
+    if (cat !== 'all') {
+      const terms = {
+        'cement': ['cement', 'সিমেন্ট'],
+        'rod': ['rod', 'রড'],
+        'sand': ['sand', 'বালু', 'বালি'],
+        'khua': ['khua', 'খোয়া', 'খোয়া', 'chips'],
+        'brick': ['brick', 'ইট']
+      }[cat.toLowerCase()] || [cat.toLowerCase()];
+      list = list.filter(p => {
+        const text = (p.name + ' ' + (p.category || '')).toLowerCase();
+        return terms.some(t => text.includes(t));
+      });
     }
-  });
+  }
+
+  tbl.innerHTML = `<tr>
+    <th>${isBn ? 'পণ্য' : 'Product'}</th>
+    <th>${isBn ? 'একক' : 'Unit'}</th>
+    <th class="num">${isBn ? 'বর্তমান স্টক' : 'Current Stock'}</th>
+    <th class="num">${isBn ? 'ক্রয় মূল্য' : 'Purchase Price'}</th>
+    <th class="num">${isBn ? 'বিক্রয় মূল্য' : 'Selling Price'}</th>
+    <th>${isBn ? 'অ্যাকশন' : 'Actions'}</th>
+  </tr>` + renderProductRows(list, isBn);
 }

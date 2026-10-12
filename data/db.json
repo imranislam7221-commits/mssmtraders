@@ -1,14 +1,16 @@
 {
   "counters": {
     "user": 1,
-    "product": 38,
-    "ledger": 21,
-    "customer": 21,
-    "cash": 0,
-    "invoice": 0,
-    "cleger": 39,
+    "product": 40,
+    "ledger": 36,
+    "customer": 22,
+    "cash": 15,
+    "invoice": 13,
+    "cleger": 63,
     "expense": 0,
-    "income": 1
+    "income": 1,
+    "supplier": 1,
+    "spledger": 4
   },
   "users": [
     {
@@ -238,7 +240,7 @@
       "unit": "কেজি",
       "size_mili": 8,
       "opening_stock": 0,
-      "current_stock": 0,
+      "current_stock": 50,
       "purchase_price": 71,
       "selling_price": 81,
       "low_stock": 100,
@@ -539,6 +541,21 @@
       "created_at": "2026-10-12T06:42:33.350Z",
       "created_by": 1,
       "id": 37
+    },
+    {
+      "id": 40,
+      "name": "টেস্ট হিস্ট্রি পণ্য ২",
+      "category": "Rod",
+      "unit": "kg",
+      "size_mili": null,
+      "opening_stock": 10,
+      "current_stock": 10,
+      "purchase_price": 80,
+      "selling_price": 95,
+      "low_stock": 10,
+      "created_at": "2026-10-12T17:22:25.293Z",
+      "created_by": 1,
+      "is_archived": false
     }
   ],
   "stock_ledger": [
@@ -601,6 +618,36 @@
       "note": "বাকিতে ক্রয় (Credit)",
       "timestamp": "2026-10-12T08:42:14.706Z",
       "time_display": "12-10-2026 | 14:42:14"
+    },
+    {
+      "id": 33,
+      "product_id": 40,
+      "product_name": "টেস্ট হিস্ট্রি পণ্য ২",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "type": "OPENING",
+      "quantity": 10,
+      "unit_cost": 80,
+      "unit_price": null,
+      "source": "Opening Stock",
+      "note": "Created with initial stock",
+      "timestamp": "2026-10-12T17:22:25.293Z",
+      "time_display": "12-10-2026 | 23:22:25"
+    },
+    {
+      "id": 35,
+      "product_id": 16,
+      "product_name": "এইচকেজি রড ৮ মি.লি",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "type": "IN",
+      "quantity": 50,
+      "unit_cost": 90,
+      "unit_price": null,
+      "source": "বিএসআরএম ডিলারশিপ দর্শনা",
+      "note": "বাকিতে ক্রয় (Credit) • ৫টি বান্ডিল বাকিতে সরবরাহ",
+      "timestamp": "2026-10-12T17:22:25.444Z",
+      "time_display": "12-10-2026 | 23:22:25"
     }
   ],
   "customers": [
@@ -657,6 +704,15 @@
       "whatsapp_enabled": false,
       "total_due": 121386,
       "created_at": "2026-10-12T08:58:31.188Z"
+    },
+    {
+      "id": 22,
+      "name": "টেস্ট অফলাইন কাস্টমার",
+      "phone": "01799887766",
+      "address": "",
+      "whatsapp_enabled": false,
+      "total_due": 0,
+      "created_at": "2026-10-12T16:53:20.798Z"
     }
   ],
   "invoices": [],
@@ -746,8 +802,48 @@
       "time_display": "12-10-2026 | 14:58:31"
     }
   ],
-  "cash_ledger": [],
-  "sessions": {},
+  "cash_ledger": [
+    {
+      "id": 13,
+      "type": "OUT",
+      "amount": 4500,
+      "balance": -4500,
+      "source": "Supplier Payment",
+      "note": "মহাজন পরিশোধ: বিএসআরএম ডিলারশিপ দর্শনা (চেক নং #৯৮৭৬৫ নগদ পরিশোধ)",
+      "user_name": "মুনজুর আহমেদ",
+      "timestamp": "2026-10-12T17:22:25.450Z",
+      "time_display": "12-10-2026 | 23:22:25"
+    },
+    {
+      "id": 14,
+      "type": "OUT",
+      "amount": 10000,
+      "balance": -14500,
+      "source": "Supplier Payment",
+      "note": "মহাজন পরিশোধ: বিএসআরএম ডিলারশিপ দর্শনা (বাকী সব শোধ)",
+      "user_name": "মুনজুর আহমেদ",
+      "timestamp": "2026-10-12T17:22:25.460Z",
+      "time_display": "12-10-2026 | 23:22:25"
+    }
+  ],
+  "sessions": {
+    "c335f3a718a40ae91f10d9a75dfd719f": {
+      "user_id": 1,
+      "created_at": "2026-10-12T15:11:57.402Z"
+    },
+    "57bac3e7462623ddbe9981ae1a196319": {
+      "user_id": 1,
+      "created_at": "2026-10-12T16:53:20.757Z"
+    },
+    "6b1c0646c4c77b1f520d1e9a47eb588d": {
+      "user_id": 1,
+      "created_at": "2026-10-12T16:53:36.961Z"
+    },
+    "34c85db6b69a6b0d59ba311d577b071b": {
+      "user_id": 1,
+      "created_at": "2026-10-12T17:22:25.204Z"
+    }
+  },
   "settings": {
     "shop_name": "মেসার্স এম.এস ট্রেডার্স",
     "shop_phone": "01956-226465",
@@ -773,10 +869,384 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-12T10:37:28.670Z"
+      "last_sync": "2026-10-12T17:53:42.488Z"
     },
     "default_labor_cost": 0
   },
   "expenses": [],
-  "incomes": []
+  "incomes": [],
+  "deleted_invoices": [
+    {
+      "id": 7,
+      "invoice_no": "INV-7",
+      "offline_invoice_no": null,
+      "customer_id": 22,
+      "customer_name": "টেস্ট অফলাইন কাস্টমার",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "items": [
+        {
+          "product_id": 1,
+          "name": "ফ্রেশ সিমেন্ট ১০০",
+          "unit": "বস্তা",
+          "qty": 1,
+          "price": 200,
+          "amount": 200
+        }
+      ],
+      "subtotal": 200,
+      "discount": 0,
+      "labor_cost": 0,
+      "vat_percent": 0,
+      "vat": 0,
+      "total": 200,
+      "paid": 750,
+      "due": 0,
+      "prev_due": 50,
+      "net_due": -500,
+      "note": "",
+      "print_status": "pending",
+      "sms_status": "skipped (MiMSMS not configured)",
+      "wa_status": "pending",
+      "timestamp": "2026-10-12T16:53:20.889Z",
+      "time_display": "12-10-2026 | 22:53:20",
+      "deleted_at": "2026-10-12T16:53:20.907Z",
+      "deleted_by": "মুনজুর আহমেদ"
+    },
+    {
+      "id": 11,
+      "invoice_no": "INV-11",
+      "offline_invoice_no": null,
+      "customer_id": 22,
+      "customer_name": "টেস্ট অফলাইন কাস্টমার",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "items": [
+        {
+          "product_id": 1,
+          "name": "ফ্রেশ সিমেন্ট ১০০",
+          "unit": "বস্তা",
+          "qty": 1,
+          "price": 200,
+          "amount": 200
+        }
+      ],
+      "subtotal": 200,
+      "discount": 0,
+      "labor_cost": 0,
+      "vat_percent": 0,
+      "vat": 0,
+      "total": 200,
+      "paid": 800,
+      "due": 0,
+      "prev_due": 100,
+      "net_due": -500,
+      "note": "",
+      "print_status": "pending",
+      "sms_status": "skipped (MiMSMS not configured)",
+      "wa_status": "pending",
+      "timestamp": "2026-10-12T16:53:37.087Z",
+      "time_display": "12-10-2026 | 22:53:37",
+      "deleted_at": "2026-10-12T16:53:37.128Z",
+      "deleted_by": "মুনজুর আহমেদ"
+    },
+    {
+      "id": 8,
+      "invoice_no": "INV-8",
+      "offline_invoice_no": "OFF-3469",
+      "customer_id": 22,
+      "customer_name": "টেস্ট অফলাইন কাস্টমার",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "items": [
+        {
+          "product_id": 1,
+          "name": "ফ্রেশ সিমেন্ট ১০০",
+          "unit": "বস্তা",
+          "qty": 1,
+          "price": 100,
+          "amount": 100
+        }
+      ],
+      "subtotal": 100,
+      "discount": 0,
+      "labor_cost": 0,
+      "vat_percent": 0,
+      "vat": 0,
+      "total": 100,
+      "paid": 100,
+      "due": 0,
+      "prev_due": 50,
+      "net_due": 50,
+      "note": "",
+      "print_status": "pending",
+      "sms_status": "skipped (MiMSMS not configured)",
+      "wa_status": "pending",
+      "timestamp": "2026-10-12T16:53:36.984Z",
+      "time_display": "12-10-2026 | 22:53:37",
+      "deleted_at": "2026-10-12T16:53:37.150Z",
+      "deleted_by": "মুনজুর আহমেদ"
+    },
+    {
+      "id": 9,
+      "invoice_no": "INV-9",
+      "offline_invoice_no": "OFF-2739",
+      "customer_id": 22,
+      "customer_name": "টেস্ট অফলাইন কাস্টমার",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "items": [
+        {
+          "product_id": 1,
+          "name": "ফ্রেশ সিমেন্ট ১০০",
+          "unit": "বস্তা",
+          "qty": 1,
+          "price": 100,
+          "amount": 100
+        }
+      ],
+      "subtotal": 100,
+      "discount": 0,
+      "labor_cost": 0,
+      "vat_percent": 0,
+      "vat": 0,
+      "total": 100,
+      "paid": 50,
+      "due": 50,
+      "prev_due": 50,
+      "net_due": 100,
+      "note": "",
+      "print_status": "pending",
+      "sms_status": "skipped (MiMSMS not configured)",
+      "wa_status": "pending",
+      "timestamp": "2026-10-12T16:53:36.987Z",
+      "time_display": "12-10-2026 | 22:53:37",
+      "deleted_at": "2026-10-12T16:53:37.153Z",
+      "deleted_by": "মুনজুর আহমেদ"
+    },
+    {
+      "id": 10,
+      "invoice_no": "INV-10",
+      "offline_invoice_no": null,
+      "customer_id": 22,
+      "customer_name": "টেস্ট অফলাইন কাস্টমার",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "items": [
+        {
+          "product_id": 1,
+          "name": "ফ্রেশ সিমেন্ট ১০০",
+          "unit": "বস্তা",
+          "qty": 1,
+          "price": 1000,
+          "amount": 1000
+        }
+      ],
+      "subtotal": 1000,
+      "discount": 0,
+      "labor_cost": 0,
+      "vat_percent": 5,
+      "vat": 50,
+      "total": 1050,
+      "paid": 1050,
+      "due": 0,
+      "prev_due": 100,
+      "net_due": 100,
+      "note": "",
+      "print_status": "pending",
+      "sms_status": "skipped (MiMSMS not configured)",
+      "wa_status": "pending",
+      "timestamp": "2026-10-12T16:53:37.073Z",
+      "time_display": "12-10-2026 | 22:53:37",
+      "deleted_at": "2026-10-12T16:53:37.155Z",
+      "deleted_by": "মুনজুর আহমেদ"
+    },
+    {
+      "id": 4,
+      "invoice_no": "INV-4",
+      "offline_invoice_no": "OFF-4295",
+      "customer_id": 22,
+      "customer_name": "টেস্ট অফলাইন কাস্টমার",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "items": [
+        {
+          "product_id": 1,
+          "name": "ফ্রেশ সিমেন্ট ১০০",
+          "unit": "বস্তা",
+          "qty": 1,
+          "price": 100,
+          "amount": 100
+        }
+      ],
+      "subtotal": 100,
+      "discount": 0,
+      "labor_cost": 0,
+      "vat_percent": 0,
+      "vat": 0,
+      "total": 100,
+      "paid": 100,
+      "due": 0,
+      "prev_due": 0,
+      "net_due": 0,
+      "note": "",
+      "print_status": "pending",
+      "sms_status": "skipped (MiMSMS not configured)",
+      "wa_status": "pending",
+      "timestamp": "2026-10-12T16:53:20.798Z",
+      "time_display": "12-10-2026 | 22:56:23",
+      "deleted_at": "2026-10-12T16:56:23.892Z",
+      "deleted_by": "মুনজুর আহমেদ"
+    },
+    {
+      "id": 5,
+      "invoice_no": "INV-5",
+      "offline_invoice_no": "OFF-8077",
+      "customer_id": 22,
+      "customer_name": "টেস্ট অফলাইন কাস্টমার",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "items": [
+        {
+          "product_id": 1,
+          "name": "ফ্রেশ সিমেন্ট ১০০",
+          "unit": "বস্তা",
+          "qty": 1,
+          "price": 100,
+          "amount": 100
+        }
+      ],
+      "subtotal": 100,
+      "discount": 0,
+      "labor_cost": 0,
+      "vat_percent": 0,
+      "vat": 0,
+      "total": 100,
+      "paid": 50,
+      "due": 50,
+      "prev_due": 0,
+      "net_due": 50,
+      "note": "",
+      "print_status": "pending",
+      "sms_status": "skipped (MiMSMS not configured)",
+      "wa_status": "pending",
+      "timestamp": "2026-10-12T16:53:20.803Z",
+      "time_display": "12-10-2026 | 22:56:25",
+      "deleted_at": "2026-10-12T16:56:25.914Z",
+      "deleted_by": "মুনজুর আহমেদ"
+    },
+    {
+      "id": 6,
+      "invoice_no": "INV-6",
+      "offline_invoice_no": null,
+      "customer_id": 22,
+      "customer_name": "টেস্ট অফলাইন কাস্টমার",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "items": [
+        {
+          "product_id": 1,
+          "name": "ফ্রেশ সিমেন্ট ১০০",
+          "unit": "বস্তা",
+          "qty": 1,
+          "price": 1000,
+          "amount": 1000
+        }
+      ],
+      "subtotal": 1000,
+      "discount": 0,
+      "labor_cost": 0,
+      "vat_percent": 5,
+      "vat": 50,
+      "total": 1050,
+      "paid": 1050,
+      "due": 0,
+      "prev_due": 50,
+      "net_due": 50,
+      "note": "",
+      "print_status": "pending",
+      "sms_status": "skipped (MiMSMS not configured)",
+      "wa_status": "pending",
+      "timestamp": "2026-10-12T16:53:20.850Z",
+      "time_display": "12-10-2026 | 22:56:29",
+      "deleted_at": "2026-10-12T16:56:29.970Z",
+      "deleted_by": "মুনজুর আহমেদ"
+    },
+    {
+      "id": 12,
+      "invoice_no": "INV-12",
+      "offline_invoice_no": null,
+      "customer_id": null,
+      "customer_name": "Cash Customer",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "items": [
+        {
+          "product_id": 40,
+          "name": "টেস্ট হিস্ট্রি পণ্য ২",
+          "unit": "kg",
+          "qty": 10,
+          "price": 95,
+          "amount": 950
+        }
+      ],
+      "subtotal": 950,
+      "discount": 0,
+      "labor_cost": 0,
+      "vat_percent": 0,
+      "vat": 0,
+      "total": 950,
+      "paid": 950,
+      "due": 0,
+      "prev_due": 0,
+      "net_due": 0,
+      "note": "",
+      "print_status": "pending",
+      "sms_status": "skipped (MiMSMS not configured)",
+      "wa_status": "pending",
+      "timestamp": "2026-10-12T17:22:25.304Z",
+      "time_display": "12-10-2026 | 23:22:25",
+      "deleted_at": "2026-10-12T17:22:25.395Z",
+      "deleted_by": "মুনজুর আহমেদ"
+    },
+    {
+      "id": 13,
+      "invoice_no": "INV-13",
+      "offline_invoice_no": null,
+      "customer_id": 22,
+      "customer_name": "টেস্ট অফলাইন কাস্টমার",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "items": [
+        {
+          "product_id": 1,
+          "name": "ফ্রেশ সিমেন্ট ১০০",
+          "unit": "বস্তা",
+          "qty": 100,
+          "price": 580,
+          "amount": 58000
+        }
+      ],
+      "subtotal": 58000,
+      "discount": 5000,
+      "labor_cost": 500,
+      "vat_percent": 0,
+      "vat": 0,
+      "total": 53500,
+      "paid": 50000,
+      "due": 3500,
+      "prev_due": 0,
+      "net_due": 3500,
+      "note": "",
+      "print_status": "pending",
+      "sms_status": "skipped (MiMSMS not configured)",
+      "wa_status": "pending",
+      "timestamp": "2026-10-12T17:53:34.714Z",
+      "time_display": "12-10-2026 | 23:54:04",
+      "deleted_at": "2026-10-12T17:54:04.175Z",
+      "deleted_by": "মুনজুর আহমেদ"
+    }
+  ],
+  "suppliers": [],
+  "supplier_ledger": []
 }

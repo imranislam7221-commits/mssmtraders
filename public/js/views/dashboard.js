@@ -28,28 +28,30 @@ VIEWS.dashboard = async function () {
     </div>
     <div class="grid g4">
       <div class="stat due">
-        <div class="lab">${isBn ? 'সর্বমোট বাকি (দোকানের মোট পাওনা)' : 'Total Outstanding Dues'}</div>
+        <div class="lab">👥 ${isBn ? 'কাস্টমার বাকি (দোকানের মোট পাওনা)' : 'Customer Dues (Receivable)'}</div>
         <div class="val">${money(d.total_due)}</div>
+        <div class="lab" style="margin-top:4px"><a href="#/customers" style="color:#fef08a;font-weight:600">${isBn ? 'কাস্টমার খাতা →' : 'Customers →'}</a></div>
+      </div>
+      <div class="stat due">
+        <div class="lab">🏭 ${isBn ? 'মহাজন দেনা (দোকানের মোট দেনা)' : 'Supplier Debt (Payable)'}</div>
+        <div class="val">${money(d.total_supplier_payable || 0)}</div>
+        <div class="lab" style="margin-top:4px"><a href="#/suppliers" style="color:#fef08a;font-weight:600">${isBn ? 'মহাজন খাতা →' : 'Suppliers →'}</a></div>
       </div>
       <div class="stat due0">
-        <div class="lab">💰 ${isBn ? 'অন্যান্য আয় (কমিশন / সরবরাহ লাভ)' : 'Other Income (Commission)'}</div>
+        <div class="lab">💰 ${isBn ? 'অন্যান্য আয় (কমিশন / লাভ)' : 'Other Income'}</div>
         <div class="val" style="color:var(--green)">${money(d.today_income || 0)}</div>
         <div class="lab" style="margin-top:4px">${isBn ? 'চলতি মাস: ' + money(d.month_income || 0) : 'Month: ' + money(d.month_income || 0)}</div>
       </div>
       ${isOwner() ? `
       <div class="stat">
-        <div class="lab">${isBn ? 'বর্তমান স্টক মূল্য (ক্রয়মূল্য)' : 'Stock Valuation (cost)'}</div>
+        <div class="lab">${isBn ? 'স্টক মূল্য (ক্রয়দর)' : 'Stock Valuation'}</div>
         <div class="val">${money(d.stock_valuation_cost)}</div>
-        <div class="lab" style="margin-top:4px">${isBn ? 'বিক্রয় মূল্য: ' + money(d.stock_valuation_sale) : 'Sale value: ' + money(d.stock_valuation_sale)}</div>
+        <div class="lab" style="margin-top:4px">${isBn ? 'বিক্রয় মূল্য: ' + money(d.stock_valuation_sale) : 'Sale: ' + money(d.stock_valuation_sale)}</div>
       </div>` : `
-      <div class="stat">
-        <div class="lab">${isBn ? 'মোট পণ্য' : 'Products'}</div>
-        <div class="val">${isBn ? bnDigits(d.products) : d.products}</div>
-      </div>`}
       <div class="stat">
         <div class="lab">${isBn ? 'মোট কাস্টমার' : 'Customers'}</div>
         <div class="val">${isBn ? bnDigits(d.customers) : d.customers}</div>
-      </div>
+      </div>`}
     </div>`;
 
   const invRows = d.recent_invoices.map(i => `

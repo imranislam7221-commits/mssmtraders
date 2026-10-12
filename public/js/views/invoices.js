@@ -2,12 +2,19 @@
 VIEWS.invoices = async function () {
   const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const { invoices } = await api('/invoices');
-  const rows = invoices.map(i => `<tr>
+  window.__invoices = invoices || [];
+
+  const totalSales = round2((invoices || []).reduce((s, i) => s + (Number(i.total) || 0), 0));
+  const totalPaid = round2((invoices || []).reduce((s, i) => s + (Number(i.paid) || 0), 0));
+  const totalDue = round2((invoices || []).reduce((s, i) => s + (Number(i.due) || 0), 0));
+  const dueCount = (invoices || []).filter(i => (Number(i.due) || 0) > 0).length;
+
+  const rows = (invoices || []).map(i => `<tr>
     <td><b>${esc(i.invoice_no)}</b></td>
     <td>${esc(i.customer_name)}</td>
     <td class="num">${money(i.total)}</td>
-    <td class="num">${money(i.paid)}</td>
-    <td class="num ${i.due > 0 ? 'dueX' : 'due0'}">${money(i.due)}</td>
+    <td class="num" style="color:var(--green)">${money(i.paid)}</td>
+    <td class="num ${i.due > 0 ? 'dueX' : 'due0'}"><b>${money(i.due)}</b></td>
     <td><span class="badge mut">${esc(i.sms_status || '—')}</span></td>
     <td>${fmtDT(i.timestamp)}</td>
     <td>${esc(i.user_name)}</td>
@@ -22,28 +29,62 @@ VIEWS.invoices = async function () {
     <div class="page-head">
       <div>
         <h1>${isBn ? 'বিক্রয় রসিদ ও মেমো তালিকা' : 'Invoices'}</h1>
-        <div class="sub">${isBn ? 'সকল বিক্রয়ের বিস্তারিত তালিকা ও অডিট হিসাব' : 'All bills — immutable audit trail (who & when)'}</div>
+        <div class="sub">${isBn ? 'সকল বিক্রয়ের বিস্তারিত তালিকা, মোট অনাদায়ি বাকি ও অডিট হিসাব' : 'All bills — immutable audit trail (who & when)'}</div>
       </div>
       <div style="display:flex;gap:8px;align-items:center">
-        <input id="isearch2" placeholder="${isBn ? '🔍 ইনভয়েস খুঁজুন…' : '🔍 Search invoice…'}" style="width:220px" oninput="filterInvoices(this.value)">
+        <input id="isearch2" placeholder="${isBn ? '🔍 ইনভয়েস বা কাস্টমার খুঁজুন…' : '🔍 Search invoice…'}" style="width:220px" oninput="filterInvoices(this.value)">
         <a class="btn pri" href="#/pos">${isBn ? '🧾 নতুন বিক্রয় (POS)' : '🧾 New Sale'}</a>
       </div>
     </div>
+
+    <!-- Summary Statistics with prominent Remaining Due -->
+    <div class="grid g3" style="margin-bottom:14px">
+      <div class="stat due">
+        <div class="lab">⚠️ ${isBn ? 'ইনভয়েসের মোট বাকি (Remaining Due)' : 'Total Remaining Due'}</div>
+        <div class="val" id="inv-total-due">${money(totalDue)}</div>
+        <div class="lab" style="margin-top:4px;color:#fff">${isBn ? (dueCount ? `${bnDigits(dueCount)} টি চালানে বাকি রয়েছে` : 'কোনো বাকি নেই') : `${dueCount} bills with due`}</div>
+      </div>
+      <div class="stat">
+        <div class="lab">🧾 ${isBn ? 'মোট বিক্রয় বিল (Total Invoiced)' : 'Total Invoiced'}</div>
+        <div class="val" id="inv-total-sales">${money(totalSales)}</div>
+        <div class="lab" style="margin-top:4px">${isBn ? bnDigits(invoices.length) + ' টি মোট চালান' : invoices.length + ' total invoices'}</div>
+      </div>
+      <div class="stat brand">
+        <div class="lab">💵 ${isBn ? 'মোট আদায়কৃত জমা (Total Collected)' : 'Total Collected'}</div>
+        <div class="val" id="inv-total-paid" style="color:var(--green)">${money(totalPaid)}</div>
+        <div class="lab" style="margin-top:4px">${isBn ? 'নগদ জমা প্রাপ্তি' : 'Cash received'}</div>
+      </div>
+    </div>
+
     <div class="card">
       <div class="tblwrap">
         <table class="tbl" id="itable">
-          <tr>
-            <th>${isBn ? 'মেমো / রসিদ নং' : 'Invoice'}</th>
-            <th>${isBn ? 'কাস্টমার' : 'Customer'}</th>
-            <th class="num">${isBn ? 'মোট বিল' : 'Total'}</th>
-            <th class="num">${isBn ? 'জমা' : 'Paid'}</th>
-            <th class="num">${isBn ? 'বাকি' : 'Due'}</th>
-            <th>${isBn ? 'এসএমএস স্ট্যাটাস' : 'SMS'}</th>
-            <th>${isBn ? 'তারিখ ও সময়' : 'Date & Time'}</th>
-            <th>${isBn ? 'বিক্রেতা' : 'By'}</th>
-            <th>${isBn ? 'অ্যাকশন' : 'Actions'}</th>
-          </tr>
-          ${rows}
+          <thead>
+            <tr>
+              <th>${isBn ? 'মেমো / রসিদ নং' : 'Invoice'}</th>
+              <th>${isBn ? 'কাস্টমার' : 'Customer'}</th>
+              <th class="num">${isBn ? 'মোট বিল' : 'Total'}</th>
+              <th class="num">${isBn ? 'জমা' : 'Paid'}</th>
+              <th class="num">${isBn ? 'বাকি' : 'Due'}</th>
+              <th>${isBn ? 'এসএমএস স্ট্যাটাস' : 'SMS'}</th>
+              <th>${isBn ? 'তারিখ ও সময়' : 'Date & Time'}</th>
+              <th>${isBn ? 'বিক্রেতা' : 'By'}</th>
+              <th>${isBn ? 'অ্যাকশন' : 'Actions'}</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rows}
+          </tbody>
+          ${invoices && invoices.length > 0 ? `
+          <tfoot>
+            <tr style="background:#f8fafc;font-weight:700;border-top:2px solid var(--line)">
+              <td colspan="2" style="text-align:right"><b>${isBn ? 'সর্বমোট যোগফল:' : 'Total:'}</b></td>
+              <td class="num" id="foot-inv-sales"><b>${money(totalSales)}</b></td>
+              <td class="num" id="foot-inv-paid" style="color:var(--green)"><b>${money(totalPaid)}</b></td>
+              <td class="num dueX" id="foot-inv-due"><b>${money(totalDue)}</b></td>
+              <td colspan="4"></td>
+            </tr>
+          </tfoot>` : ''}
         </table>
       </div>
     </div>`);
@@ -164,9 +205,41 @@ async function delInvoice(id, due) {
 }
 
 function filterInvoices(q) {
-  q = q.toLowerCase();
-  document.querySelectorAll("#itable tr").forEach(function (tr, i) {
-    if (i === 0) return;
-    tr.style.display = tr.textContent.toLowerCase().includes(q) ? "" : "none";
+  q = (q || '').trim().toLowerCase();
+  const list = window.__invoices || [];
+  let visSales = 0, visPaid = 0, visDue = 0, visDueCount = 0, visCount = 0;
+
+  document.querySelectorAll("#itable tbody tr").forEach(function (tr) {
+    const text = tr.textContent.toLowerCase();
+    const match = !q || text.includes(q);
+    tr.style.display = match ? "" : "none";
   });
+
+  for (const inv of list) {
+    const searchStr = (String(inv.invoice_no || '') + ' ' + String(inv.customer_name || '') + ' ' + String(inv.user_name || '')).toLowerCase();
+    if (!q || searchStr.includes(q)) {
+      const tot = Number(inv.total) || 0;
+      const pd = Number(inv.paid) || 0;
+      const du = Number(inv.due) || 0;
+      visSales = round2(visSales + tot);
+      visPaid = round2(visPaid + pd);
+      visDue = round2(visDue + du);
+      if (du > 0) visDueCount++;
+      visCount++;
+    }
+  }
+
+  const tdEl = document.getElementById('inv-total-due');
+  if (tdEl) tdEl.textContent = money(visDue);
+  const tsEl = document.getElementById('inv-total-sales');
+  if (tsEl) tsEl.textContent = money(visSales);
+  const tpEl = document.getElementById('inv-total-paid');
+  if (tpEl) tpEl.textContent = money(visPaid);
+
+  const footDue = document.getElementById('foot-inv-due');
+  if (footDue) footDue.innerHTML = `<b>${money(visDue)}</b>`;
+  const footSales = document.getElementById('foot-inv-sales');
+  if (footSales) footSales.innerHTML = `<b>${money(visSales)}</b>`;
+  const footPaid = document.getElementById('foot-inv-paid');
+  if (footPaid) footPaid.innerHTML = `<b>${money(visPaid)}</b>`;
 }
