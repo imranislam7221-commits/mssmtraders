@@ -6,24 +6,26 @@ VIEWS.invoices = async function () {
 
   const totalSales = round2((invoices || []).reduce((s, i) => s + (Number(i.total) || 0), 0));
   const totalPaid = round2((invoices || []).reduce((s, i) => s + (Number(i.paid) || 0), 0));
-  const totalDue = round2((invoices || []).reduce((s, i) => s + (Number(i.due) || 0), 0));
-  const dueCount = (invoices || []).filter(i => (Number(i.due) || 0) > 0).length;
+  const totalDue = round2((invoices || []).reduce((s, i) => s + ((i.net_due != null ? Number(i.net_due) : Number(i.due)) || 0), 0));
+  const dueCount = (invoices || []).filter(i => ((i.net_due != null ? Number(i.net_due) : Number(i.due)) || 0) > 0).length;
 
-  const rows = (invoices || []).map(i => `<tr>
-    <td><b>${esc(i.invoice_no)}</b></td>
-    <td>${esc(i.customer_name)}</td>
-    <td class="num">${money(i.total)}</td>
-    <td class="num" style="color:var(--green)">${money(i.paid)}</td>
-    <td class="num ${i.due > 0 ? 'dueX' : 'due0'}"><b>${money(i.due)}</b></td>
-    <td><span class="badge mut">${esc(i.sms_status || '—')}</span></td>
-    <td>${fmtDT(i.timestamp)}</td>
-    <td>${esc(i.user_name)}</td>
-    <td style="white-space:nowrap">
-      <button class="btn sm pri" onclick="viewInvoice(${i.id})">${isBn ? 'দেখুন' : 'View'}</button>
-      <button class="btn sm grn" onclick="printInvoice(${i.id})" title="${isBn ? 'প্রিন্ট' : 'Print'}">🖨️</button>
-      ${isOwner() ? `<button class="btn sm dan" onclick="delInvoice(${i.id}, ${i.due})" title="${isBn ? 'চালান মুছুন' : 'Delete'}">🗑️</button>` : ''}
-    </td>
-  </tr>`).join('') || `<tr><td colspan="9" class="empty">${isBn ? 'কোনো ইনভয়েস পাওয়া যায়নি' : 'No invoices found'}</td></tr>`;
+  const rows = (invoices || []).map(i => {
+    const mainDue = (i.net_due != null ? Number(i.net_due) : Number(i.due)) || 0;
+    return `<tr>
+      <td><b>${esc(i.invoice_no)}</b></td>
+      <td>${esc(i.customer_name)}</td>
+      <td class="num">${money(i.total)}</td>
+      <td class="num" style="color:var(--green)">${money(i.paid)}</td>
+      <td class="num ${mainDue > 0 ? 'dueX' : 'due0'}"><b>${money(mainDue)}</b></td>
+      <td>${fmtDT(i.timestamp)}</td>
+      <td>${esc(i.user_name)}</td>
+      <td style="white-space:nowrap">
+        <button class="btn sm pri" onclick="viewInvoice(${i.id})">${isBn ? 'দেখুন' : 'View'}</button>
+        <button class="btn sm grn" onclick="printInvoice(${i.id})" title="${isBn ? 'প্রিন্ট' : 'Print'}">🖨️</button>
+        ${isOwner() ? `<button class="btn sm dan" onclick="delInvoice(${i.id}, ${mainDue})" title="${isBn ? 'চালান মুছুন' : 'Delete'}">🗑️</button>` : ''}
+      </td>
+    </tr>`;
+  }).join('') || `<tr><td colspan="8" class="empty">${isBn ? 'কোনো ইনভয়েস পাওয়া যায়নি' : 'No invoices found'}</td></tr>`;
 
   layout(`
     <div class="page-head">
@@ -66,7 +68,6 @@ VIEWS.invoices = async function () {
               <th class="num">${isBn ? 'মোট বিল' : 'Total'}</th>
               <th class="num">${isBn ? 'জমা' : 'Paid'}</th>
               <th class="num">${isBn ? 'বাকি' : 'Due'}</th>
-              <th>${isBn ? 'এসএমএস স্ট্যাটাস' : 'SMS'}</th>
               <th>${isBn ? 'তারিখ ও সময়' : 'Date & Time'}</th>
               <th>${isBn ? 'বিক্রেতা' : 'By'}</th>
               <th>${isBn ? 'অ্যাকশন' : 'Actions'}</th>
@@ -82,7 +83,7 @@ VIEWS.invoices = async function () {
               <td class="num" id="foot-inv-sales"><b>${money(totalSales)}</b></td>
               <td class="num" id="foot-inv-paid" style="color:var(--green)"><b>${money(totalPaid)}</b></td>
               <td class="num dueX" id="foot-inv-due"><b>${money(totalDue)}</b></td>
-              <td colspan="4"></td>
+              <td colspan="3"></td>
             </tr>
           </tfoot>` : ''}
         </table>
@@ -128,12 +129,14 @@ async function viewInvoice(id) {
         ${inv.discount > 0 ? `<div class="sumrow"><span>${isBn ? 'ছাড়' : 'Discount'}</span><span>− ${money(inv.discount)}</span></div>` : ''}
         ${inv.labor_cost > 0 ? `<div class="sumrow"><span>${isBn ? 'লেবার / লোড খরচ' : 'Labor / Loading'}</span><span>+ ${money(inv.labor_cost)}</span></div>` : ''}
         ${inv.vat > 0 ? `<div class="sumrow"><span>${isBn ? 'ভ্যাট' : 'VAT'} (${isBn ? bnDigits(inv.vat_percent) : inv.vat_percent}%)</span><span>+ ${money(inv.vat)}</span></div>` : ''}
-        <div class="sumrow total"><span>${isBn ? 'সর্বমোট' : 'Total'}</span><span>${money(inv.total)}</span></div>
+        <div class="sumrow total"><span>${isBn ? 'চলতি বিল' : 'Current Bill'}</span><span>${money(inv.total)}</span></div>
         <div class="sumrow"><span>${isBn ? 'জমা' : 'Paid'}</span><span>${money(inv.paid)}</span></div>
-        <div class="sumrow duerow"><span>${isBn ? 'বকেয়া / বাকি' : 'Due'}</span><span>${money(inv.due)}</span></div>
+        <div class="sumrow"><span>${isBn ? 'চলতি বাকি' : 'Bill Due'}</span><span>${money(inv.due)}</span></div>
+        ${(inv.prev_due > 0) ? `<div class="sumrow"><span>${isBn ? 'পূর্বের বকেয়া' : 'Previous Due'}</span><span>${money(inv.prev_due)}</span></div>` : ''}
+        <div class="sumrow duerow"><span>${isBn ? 'অবশিষ্ট সর্বমোট বাকি' : 'Net Due'}</span><span>${money(inv.net_due != null ? inv.net_due : inv.due)}</span></div>
       </div>
       <p style="margin-top:10px;font-size:12.5px;color:var(--mut)">
-        🕒 ${esc(inv.time_display)} • 👤 ${esc(inv.user_name)} • 📱 SMS: ${esc(inv.sms_status || '—')}
+        🕒 ${esc(inv.time_display)} • 👤 ${esc(inv.user_name)}
         ${inv.note ? '<br>📝 ' + esc(inv.note) : ''}
       </p>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
@@ -220,7 +223,7 @@ function filterInvoices(q) {
     if (!q || searchStr.includes(q)) {
       const tot = Number(inv.total) || 0;
       const pd = Number(inv.paid) || 0;
-      const du = Number(inv.due) || 0;
+      const du = Number(inv.net_due != null ? inv.net_due : inv.due) || 0;
       visSales = round2(visSales + tot);
       visPaid = round2(visPaid + pd);
       visDue = round2(visDue + du);

@@ -55,16 +55,19 @@ VIEWS.dashboard = async function () {
       </div>`}
     </div>`;
 
-  const invRows = d.recent_invoices.map(i => `
+  const invRows = d.recent_invoices.map(i => {
+    const mainDue = (i.net_due != null ? Number(i.net_due) : Number(i.due)) || 0;
+    return `
     <tr onclick="viewInvoice(${i.id})" style="cursor:pointer">
       <td><b>${esc(i.invoice_no)}</b></td>
       <td>${esc(i.customer_name)}</td>
       <td class="num">${money(i.total)}</td>
       <td class="num">${money(i.paid)}</td>
-      <td class="num ${i.due > 0 ? 'dueX' : 'due0'}">${money(i.due)}</td>
+      <td class="num ${mainDue > 0 ? 'dueX' : 'due0'}">${money(mainDue)}</td>
       <td>${fmtDT(i.timestamp)}</td>
       <td>${esc(i.user_name)}</td>
-    </tr>`).join('') || `<tr><td colspan="7" class="empty">${isBn ? 'এখনো কোনো ইনভয়েস হয়নি — পিওএস থেকে নতুন বিক্রয় করুন' : 'No invoices yet — start billing from POS'}</td></tr>`;
+    </tr>`;
+  }).join('') || `<tr><td colspan="7" class="empty">${isBn ? 'এখনো কোনো ইনভয়েস হয়নি — পিওএস থেকে নতুন বিক্রয় করুন' : 'No invoices yet — start billing from POS'}</td></tr>`;
 
   const expRows = (d.recent_expenses || []).map(e => `
     <tr>
