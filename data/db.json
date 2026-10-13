@@ -757,30 +757,7 @@
       "time_display": "12-10-2026 | 14:58:31"
     }
   ],
-  "cash_ledger": [
-    {
-      "id": 13,
-      "type": "OUT",
-      "amount": 4500,
-      "balance": -4500,
-      "source": "Supplier Payment",
-      "note": "মহাজন পরিশোধ: বিএসআরএম ডিলারশিপ দর্শনা (চেক নং #৯৮৭৬৫ নগদ পরিশোধ)",
-      "user_name": "মুনজুর আহমেদ",
-      "timestamp": "2026-10-12T17:22:25.450Z",
-      "time_display": "12-10-2026 | 23:22:25"
-    },
-    {
-      "id": 14,
-      "type": "OUT",
-      "amount": 10000,
-      "balance": -14500,
-      "source": "Supplier Payment",
-      "note": "মহাজন পরিশোধ: বিএসআরএম ডিলারশিপ দর্শনা (বাকী সব শোধ)",
-      "user_name": "মুনজুর আহমেদ",
-      "timestamp": "2026-10-12T17:22:25.460Z",
-      "time_display": "12-10-2026 | 23:22:25"
-    }
-  ],
+  "cash_ledger": [],
   "sessions": {
     "c335f3a718a40ae91f10d9a75dfd719f": {
       "user_id": 1,

@@ -32,10 +32,10 @@ VIEWS.dashboard = async function () {
         <div class="val">${money(d.total_due)}</div>
         <div class="lab" style="margin-top:4px"><a href="#/customers" style="color:#fef08a;font-weight:600">${isBn ? 'কাস্টমার খাতা →' : 'Customers →'}</a></div>
       </div>
-      <div class="stat due">
-        <div class="lab">🏭 ${isBn ? 'মহাজন দেনা (দোকানের মোট দেনা)' : 'Supplier Debt (Payable)'}</div>
-        <div class="val">${money(d.total_supplier_payable || 0)}</div>
-        <div class="lab" style="margin-top:4px"><a href="#/suppliers" style="color:#fef08a;font-weight:600">${isBn ? 'মহাজন খাতা →' : 'Suppliers →'}</a></div>
+      <div class="stat">
+        <div class="lab">👥 ${isBn ? 'মোট কাস্টমার' : 'Total Customers'}</div>
+        <div class="val">${isBn ? bnDigits(d.customers) + ' জন' : d.customers}</div>
+        <div class="lab" style="margin-top:4px"><a href="#/customers" style="color:var(--brand2);font-weight:600">${isBn ? 'কাস্টমার তালিকা →' : 'Customers →'}</a></div>
       </div>
       <div class="stat due0">
         <div class="lab">💰 ${isBn ? 'অন্যান্য আয় (কমিশন / লাভ)' : 'Other Income'}</div>
@@ -49,8 +49,9 @@ VIEWS.dashboard = async function () {
         <div class="lab" style="margin-top:4px">${isBn ? 'বিক্রয় মূল্য: ' + money(d.stock_valuation_sale) : 'Sale: ' + money(d.stock_valuation_sale)}</div>
       </div>` : `
       <div class="stat">
-        <div class="lab">${isBn ? 'মোট কাস্টমার' : 'Customers'}</div>
-        <div class="val">${isBn ? bnDigits(d.customers) : d.customers}</div>
+        <div class="lab">${isBn ? 'মোট পণ্য' : 'Products'}</div>
+        <div class="val">${isBn ? bnDigits(d.products) : d.products}</div>
+        <div class="lab" style="margin-top:4px"><a href="#/products" style="color:var(--brand2);font-weight:600">${isBn ? 'পণ্য তালিকা →' : 'Products →'}</a></div>
       </div>`}
     </div>`;
 

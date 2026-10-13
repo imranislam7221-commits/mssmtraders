@@ -4,7 +4,6 @@ const NAV = [
   { h: '#/products', ico: '📦', label: 'Products', bn: 'পণ্য ও স্টক' },
   { h: '#/stock', ico: '📋', label: 'Stock Ledger', bn: 'স্টক খাতা' },
   { h: '#/customers', ico: '👥', label: 'Customers', bn: 'কাস্টমার হিসাব' },
-  { h: '#/suppliers', ico: '🏭', label: 'Suppliers', bn: 'মহাজন / ডিলার' },
   { h: '#/invoices', ico: '🗂️', label: 'Invoices', bn: 'ইনভয়েস তালিকা' },
   { h: '#/expenses', ico: '💸', label: 'Expenses', bn: 'খরচের খাতা' },
   { h: '#/incomes', ico: '💰', label: 'Other Income', bn: 'অন্যান্য আয়' },
@@ -37,7 +36,7 @@ function layout(inner) {
     { h: '#/dashboard', ico: '📊', label: 'Home', bn: 'হোম' },
     { h: '#/pos', ico: '🧾', label: 'POS', bn: 'বিক্রয়' },
     { h: '#/products', ico: '📦', label: 'Products', bn: 'পণ্য' },
-    { h: '#/suppliers', ico: '🏭', label: 'Suppliers', bn: 'মহাজন' }
+    { h: '#/customers', ico: '👥', label: 'Customers', bn: 'কাস্টমার' }
   ];
 
   const bottomLinks = bottomQuickNav.map(n => 
