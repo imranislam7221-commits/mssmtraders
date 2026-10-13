@@ -76,16 +76,6 @@ VIEWS.invoices = async function () {
           <tbody>
             ${rows}
           </tbody>
-          ${invoices && invoices.length > 0 ? `
-          <tfoot>
-            <tr style="background:#f8fafc;font-weight:700;border-top:2px solid var(--line)">
-              <td colspan="2" style="text-align:right"><b>${isBn ? 'সর্বমোট যোগফল:' : 'Total:'}</b></td>
-              <td class="num" id="foot-inv-sales"><b>${money(totalSales)}</b></td>
-              <td class="num" id="foot-inv-paid" style="color:var(--green)"><b>${money(totalPaid)}</b></td>
-              <td class="num dueX" id="foot-inv-due"><b>${money(totalDue)}</b></td>
-              <td colspan="3"></td>
-            </tr>
-          </tfoot>` : ''}
         </table>
       </div>
     </div>`);
@@ -238,11 +228,4 @@ function filterInvoices(q) {
   if (tsEl) tsEl.textContent = money(visSales);
   const tpEl = document.getElementById('inv-total-paid');
   if (tpEl) tpEl.textContent = money(visPaid);
-
-  const footDue = document.getElementById('foot-inv-due');
-  if (footDue) footDue.innerHTML = `<b>${money(visDue)}</b>`;
-  const footSales = document.getElementById('foot-inv-sales');
-  if (footSales) footSales.innerHTML = `<b>${money(visSales)}</b>`;
-  const footPaid = document.getElementById('foot-inv-paid');
-  if (footPaid) footPaid.innerHTML = `<b>${money(visPaid)}</b>`;
 }
