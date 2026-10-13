@@ -70,6 +70,20 @@ VIEWS.settings = async function () {
       </div>
     </div>
 
+    <!-- GitHub 100% Permanent Cloud Auto-Sync Card -->
+    <div class="card" style="margin-top:16px;border:1.5px solid #10b981;background:rgba(16,185,129,0.06)">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+        <h3 style="margin:0;color:#059669">🛡️ GitHub পার্মানেন্ট অটো-ব্যাকআপ (Render Cloud Auto-Sync)</h3>
+        <span class="badge grn" style="font-size:12.5px;font-weight:700">সক্রিয় ও সুরক্ষিত ✅</span>
+      </div>
+      <p style="font-size:13.5px;color:var(--fg);margin:10px 0 14px 0;line-height:1.6">
+        Render সার্ভার স্লিপ হলেও ডাটা যাতে কখনোই না মুছে, সেজন্য দোকানে যেকোনো নতুন পণ্য, স্টক, কাস্টমার বা মেমো তৈরি হলেই তা স্বয়ংক্রিয়ভাবে গিটহাবে ব্যাকআপ হয়ে যায়। 
+      </p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button type="button" id="btnGithubSyncNow" class="btn grn">🔄 এখনই গিটহাবে ব্যাকআপ পাঠান (Sync Now)</button>
+      </div>
+    </div>
+
     <!-- 1-Click Excel / Google Sheets CSV Export -->
     <div class="card" style="margin-top:16px">
       <h3>📊 এক ক্লিকে এক্সেল ও গুগল শিট ফাইল ডাউনলোড</h3>
@@ -219,6 +233,24 @@ VIEWS.settings = async function () {
       btn.textContent = '📥 ক্লাউড থেকে ডাটা লোকালে আনুন (Pull from Cloud)';
     }
   });
+
+  // GitHub Auto-Sync Now button
+  const ghBtn = $('#btnGithubSyncNow');
+  if (ghBtn) {
+    ghBtn.addEventListener('click', async () => {
+      ghBtn.disabled = true;
+      ghBtn.textContent = '⏳ গিটহাবে ব্যাকআপ হচ্ছে...';
+      try {
+        const res = await api('/backup/github/sync', { method: 'POST' });
+        toast(res.message || 'গিটহাবে ডাটাবেজ ব্যাকআপ সফল হয়েছে ✅');
+      } catch (ex) {
+        toast('গিটহাব সিঙ্ক ব্যর্থ: ' + ex.message, true);
+      } finally {
+        ghBtn.disabled = false;
+        ghBtn.textContent = '🔄 এখনই গিটহাবে ব্যাকআপ পাঠান (Sync Now)';
+      }
+    });
+  }
 
   // 1-Click CSV Exports
   const getTodayStr = () => new Date().toISOString().split('T')[0];

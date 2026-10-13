@@ -1,6 +1,8 @@
 # Runtime data temp files
 data/*.tmp
 data/*.bak
+data/.gh_token
+.env
 
 # Temp/fix scripts
 fix*.cjs
