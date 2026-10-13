@@ -769,6 +769,10 @@
     "20b866cc58b13929d57bb14b16fc9868": {
       "user_id": 1,
       "created_at": "2026-10-13T15:35:16.155Z"
+    },
+    "320ba46ebab664087c95bcc6a181c1b4": {
+      "user_id": 1,
+      "created_at": "2026-10-13T15:45:53.815Z"
     }
   },
   "settings": {
@@ -796,7 +800,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-13T15:34:33.893Z"
+      "last_sync": "2026-10-13T15:35:21.305Z"
     },
     "default_labor_cost": 0
   },
