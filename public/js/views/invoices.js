@@ -84,6 +84,7 @@ VIEWS.invoices = async function () {
 async function viewInvoice(id) {
   const isBn = (window.LANG || localStorage.getItem('pos_lang') || 'bn') === 'bn';
   const { invoice: inv, customer } = await api('/invoices/' + id);
+  const extraPaid = Math.max(0, Math.round(((inv.paid || 0) - (inv.total || 0)) * 100) / 100);
   const items = inv.items.map(i => {
     const rawName = i.name || '';
     const iName = isBn ? (I18N_BN[rawName] || t(rawName) || rawName) : rawName;
@@ -123,6 +124,7 @@ async function viewInvoice(id) {
         <div class="sumrow"><span>${isBn ? 'জমা' : 'Paid'}</span><span>${money(inv.paid)}</span></div>
         <div class="sumrow"><span>${isBn ? 'চলতি বাকি' : 'Bill Due'}</span><span>${money(inv.due)}</span></div>
         ${(inv.prev_due > 0) ? `<div class="sumrow"><span>${isBn ? 'পূর্বের বকেয়া' : 'Previous Due'}</span><span>${money(inv.prev_due)}</span></div>` : ''}
+        ${(inv.prev_due > 0 && extraPaid > 0) ? `<div class="sumrow"><span>${isBn ? 'বকেয়া থেকে কর্তন' : 'Deducted from Due'}</span><span>− ${money(extraPaid)}</span></div>` : ''}
         <div class="sumrow duerow"><span>${isBn ? 'অবশিষ্ট সর্বমোট বাকি' : 'Net Due'}</span><span>${money(inv.net_due != null ? inv.net_due : inv.due)}</span></div>
       </div>
       <p style="margin-top:10px;font-size:12.5px;color:var(--mut)">
