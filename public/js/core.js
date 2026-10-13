@@ -53,6 +53,15 @@ async function api(path, opts = {}) {
     if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
     if (!opts.method || opts.method === 'GET') {
       try { localStorage.setItem('mst_cache_' + path, JSON.stringify(data)); } catch (_) {}
+    } else {
+      try {
+        const seg = path.replace(/^\//, '').split('/')[0];
+        Object.keys(localStorage).forEach(k => {
+          if (k.startsWith('mst_cache_/' + seg) || k.startsWith('mst_cache_/dashboard')) {
+            localStorage.removeItem(k);
+          }
+        });
+      } catch (_) {}
     }
     return data;
   } catch (err) {
@@ -136,7 +145,18 @@ document.addEventListener('focusin', function (e) {
 /* ---------- Offline Invoices Queue & Auto Background Sync ---------- */
 window.MST_OFFLINE = {
   getQueue() {
-    try { return JSON.parse(localStorage.getItem('mst_offline_queue') || '[]'); }
+    try {
+      const q = JSON.parse(localStorage.getItem('mst_offline_queue') || '[]');
+      const cleaned = q.filter(item => {
+        const cName = (item.body && item.body.customer && item.body.customer.name) || (item.invoice && item.invoice.customer_name) || '';
+        const cPhone = (item.body && item.body.customer && item.body.customer.phone) || '';
+        return !cName.includes('টেস্ট') && cPhone !== '01799887766';
+      });
+      if (cleaned.length !== q.length) {
+        localStorage.setItem('mst_offline_queue', JSON.stringify(cleaned));
+      }
+      return cleaned;
+    }
     catch (_) { return []; }
   },
   saveQueue(q) {
