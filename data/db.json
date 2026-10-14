@@ -3,10 +3,10 @@
     "user": 1,
     "product": 40,
     "ledger": 36,
-    "customer": 21,
+    "customer": 22,
     "cash": 15,
     "invoice": 13,
-    "cleger": 71,
+    "cleger": 72,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -731,6 +731,15 @@
       "whatsapp_enabled": false,
       "total_due": 3211,
       "created_at": "2026-10-14T06:17:40.902Z"
+    },
+    {
+      "id": 22,
+      "name": "সহেল ভাই",
+      "phone": "01963142731",
+      "address": "আজিমপুর",
+      "whatsapp_enabled": false,
+      "total_due": 11619,
+      "created_at": "2026-10-14T06:18:42.566Z"
     }
   ],
   "invoices": [],
@@ -930,6 +939,20 @@
       "note": "আলামিন — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T06:17:40.902Z",
       "time_display": "14-10-2026 | 12:17:40"
+    },
+    {
+      "id": 72,
+      "customer_id": 22,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 11619,
+      "balance": 11619,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "সহেল ভাই — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T06:18:42.566Z",
+      "time_display": "14-10-2026 | 12:18:42"
     }
   ],
   "cash_ledger": [],
@@ -988,7 +1011,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T06:17:44.854Z"
+      "last_sync": "2026-10-14T06:18:46.367Z"
     },
     "default_labor_cost": 0
   },
