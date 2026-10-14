@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 76,
+    "customer": 77,
     "cash": 15,
     "invoice": 13,
-    "cleger": 126,
+    "cleger": 127,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1106,6 +1106,15 @@
       "whatsapp_enabled": false,
       "total_due": 10230,
       "created_at": "2026-10-14T10:15:50.609Z"
+    },
+    {
+      "id": 77,
+      "name": "সিজান / কামরুল মি:",
+      "phone": "",
+      "address": "শ্যামপুর",
+      "whatsapp_enabled": false,
+      "total_due": 4000,
+      "created_at": "2026-10-14T10:17:03.845Z"
     }
   ],
   "invoices": [],
@@ -2061,6 +2070,20 @@
       "note": "রিপন / শাকিল — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T10:15:50.609Z",
       "time_display": "14-10-2026 | 16:15:50"
+    },
+    {
+      "id": 127,
+      "customer_id": 77,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 4000,
+      "balance": 4000,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "সিজান / কামরুল মি: — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T10:17:03.845Z",
+      "time_display": "14-10-2026 | 16:17:03"
     }
   ],
   "cash_ledger": [],
@@ -2131,7 +2154,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T10:14:40.298Z"
+      "last_sync": "2026-10-14T10:17:07.335Z"
     },
     "default_labor_cost": 0
   },
