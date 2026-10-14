@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 88,
+    "customer": 89,
     "cash": 15,
     "invoice": 13,
-    "cleger": 138,
+    "cleger": 139,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1214,6 +1214,15 @@
       "whatsapp_enabled": false,
       "total_due": 5630,
       "created_at": "2026-10-14T10:54:47.143Z"
+    },
+    {
+      "id": 89,
+      "name": "মিঠু - দাদা -",
+      "phone": "",
+      "address": "শ্যামপুর",
+      "whatsapp_enabled": false,
+      "total_due": 7750,
+      "created_at": "2026-10-14T10:56:25.070Z"
     }
   ],
   "invoices": [],
@@ -2337,6 +2346,20 @@
       "note": "জাসিম - ফকির - মিয়া — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T10:54:47.143Z",
       "time_display": "14-10-2026 | 16:54:47"
+    },
+    {
+      "id": 139,
+      "customer_id": 89,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 7750,
+      "balance": 7750,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "মিঠু - দাদা - — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T10:56:25.070Z",
+      "time_display": "14-10-2026 | 16:56:25"
     }
   ],
   "cash_ledger": [],
@@ -2407,7 +2430,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T10:54:50.508Z"
+      "last_sync": "2026-10-14T10:56:28.879Z"
     },
     "default_labor_cost": 0
   },
