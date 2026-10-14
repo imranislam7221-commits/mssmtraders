@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 33,
+    "customer": 34,
     "cash": 15,
     "invoice": 13,
-    "cleger": 83,
+    "cleger": 84,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -728,6 +728,15 @@
       "whatsapp_enabled": false,
       "total_due": 46460,
       "created_at": "2026-10-14T06:33:06.308Z"
+    },
+    {
+      "id": 34,
+      "name": "সুজন মামা",
+      "phone": "01920980954",
+      "address": "শ্যামপুর",
+      "whatsapp_enabled": false,
+      "total_due": 980,
+      "created_at": "2026-10-14T06:34:03.927Z"
     }
   ],
   "invoices": [],
@@ -1095,6 +1104,20 @@
       "note": "কমরুল মি: — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T06:33:06.308Z",
       "time_display": "14-10-2026 | 12:33:06"
+    },
+    {
+      "id": 84,
+      "customer_id": 34,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 980,
+      "balance": 980,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "সুজন মামা — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T06:34:03.927Z",
+      "time_display": "14-10-2026 | 12:34:03"
     }
   ],
   "cash_ledger": [],
@@ -1161,7 +1184,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T06:33:09.570Z"
+      "last_sync": "2026-10-14T06:34:07.428Z"
     },
     "default_labor_cost": 0
   },
