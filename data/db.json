@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 42,
+    "customer": 43,
     "cash": 15,
     "invoice": 13,
-    "cleger": 92,
+    "cleger": 93,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -800,6 +800,15 @@
       "whatsapp_enabled": false,
       "total_due": 19980,
       "created_at": "2026-10-14T09:05:25.735Z"
+    },
+    {
+      "id": 43,
+      "name": "কল্পনা আপু",
+      "phone": "01790007195",
+      "address": "শ্যামপুর",
+      "whatsapp_enabled": false,
+      "total_due": 28640,
+      "created_at": "2026-10-14T09:07:18.296Z"
     }
   ],
   "invoices": [],
@@ -1279,6 +1288,20 @@
       "note": "সেলিম মামা — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T09:05:25.735Z",
       "time_display": "14-10-2026 | 15:05:25"
+    },
+    {
+      "id": 93,
+      "customer_id": 43,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 28640,
+      "balance": 28640,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "কল্পনা আপু — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T09:07:18.296Z",
+      "time_display": "14-10-2026 | 15:07:18"
     }
   ],
   "cash_ledger": [],
