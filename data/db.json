@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 68,
+    "customer": 69,
     "cash": 15,
     "invoice": 13,
-    "cleger": 118,
+    "cleger": 119,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1034,6 +1034,15 @@
       "whatsapp_enabled": false,
       "total_due": 24800,
       "created_at": "2026-10-14T10:04:12.309Z"
+    },
+    {
+      "id": 69,
+      "name": "একলাস",
+      "phone": "01903199335",
+      "address": "ঈশ্বরচন্দ্রপুর",
+      "whatsapp_enabled": false,
+      "total_due": 24750,
+      "created_at": "2026-10-14T10:05:27.978Z"
     }
   ],
   "invoices": [],
@@ -1877,6 +1886,20 @@
       "note": "ইব্রাহিম — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T10:04:12.309Z",
       "time_display": "14-10-2026 | 16:04:12"
+    },
+    {
+      "id": 119,
+      "customer_id": 69,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 24750,
+      "balance": 24750,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "একলাস — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T10:05:27.978Z",
+      "time_display": "14-10-2026 | 16:05:27"
     }
   ],
   "cash_ledger": [],
@@ -1943,7 +1966,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T10:04:15.310Z"
+      "last_sync": "2026-10-14T10:05:31.104Z"
     },
     "default_labor_cost": 0
   },
