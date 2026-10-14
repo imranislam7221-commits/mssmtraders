@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 98,
+    "customer": 99,
     "cash": 15,
     "invoice": 13,
-    "cleger": 148,
+    "cleger": 149,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1304,6 +1304,15 @@
       "whatsapp_enabled": false,
       "total_due": 121386,
       "created_at": "2026-10-14T11:14:50.872Z"
+    },
+    {
+      "id": 99,
+      "name": "হাফিজুল- ভাই",
+      "phone": "01955445436",
+      "address": "ছোট - আড়িয়া",
+      "whatsapp_enabled": false,
+      "total_due": 33180,
+      "created_at": "2026-10-14T11:15:23.027Z"
     }
   ],
   "invoices": [],
@@ -2567,6 +2576,20 @@
       "note": "জিহাদ ছোট — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T11:14:50.872Z",
       "time_display": "14-10-2026 | 17:14:50"
+    },
+    {
+      "id": 149,
+      "customer_id": 99,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 33180,
+      "balance": 33180,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "হাফিজুল- ভাই — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T11:15:23.027Z",
+      "time_display": "14-10-2026 | 17:15:23"
     }
   ],
   "cash_ledger": [],
@@ -2637,7 +2660,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T11:08:02.902Z"
+      "last_sync": "2026-10-14T11:15:25.886Z"
     },
     "default_labor_cost": 0
   },
