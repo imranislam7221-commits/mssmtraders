@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 75,
+    "customer": 76,
     "cash": 15,
     "invoice": 13,
-    "cleger": 125,
+    "cleger": 126,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1097,6 +1097,15 @@
       "whatsapp_enabled": false,
       "total_due": 2560,
       "created_at": "2026-10-14T10:12:33.396Z"
+    },
+    {
+      "id": 76,
+      "name": "রিপন / শাকিল",
+      "phone": "01904127557",
+      "address": "শান্তিপারা",
+      "whatsapp_enabled": false,
+      "total_due": 10230,
+      "created_at": "2026-10-14T10:15:50.609Z"
     }
   ],
   "invoices": [],
@@ -2038,6 +2047,20 @@
       "note": "মামুন মি: আদর — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T10:12:33.396Z",
       "time_display": "14-10-2026 | 16:12:33"
+    },
+    {
+      "id": 126,
+      "customer_id": 76,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 10230,
+      "balance": 10230,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "রিপন / শাকিল — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T10:15:50.609Z",
+      "time_display": "14-10-2026 | 16:15:50"
     }
   ],
   "cash_ledger": [],
