@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 67,
+    "customer": 68,
     "cash": 15,
     "invoice": 13,
-    "cleger": 117,
+    "cleger": 118,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1025,6 +1025,15 @@
       "whatsapp_enabled": false,
       "total_due": 5050,
       "created_at": "2026-10-14T10:02:38.375Z"
+    },
+    {
+      "id": 68,
+      "name": "ইব্রাহিম",
+      "phone": "01746627723",
+      "address": "ঈশ্বরচন্দ্রপুর",
+      "whatsapp_enabled": false,
+      "total_due": 24800,
+      "created_at": "2026-10-14T10:04:12.309Z"
     }
   ],
   "invoices": [],
@@ -1854,6 +1863,20 @@
       "note": "টুটুল / সম্রাট সু — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T10:02:38.375Z",
       "time_display": "14-10-2026 | 16:02:38"
+    },
+    {
+      "id": 118,
+      "customer_id": 68,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 24800,
+      "balance": 24800,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "ইব্রাহিম — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T10:04:12.309Z",
+      "time_display": "14-10-2026 | 16:04:12"
     }
   ],
   "cash_ledger": [],
@@ -1920,7 +1943,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T10:02:41.018Z"
+      "last_sync": "2026-10-14T10:04:15.310Z"
     },
     "default_labor_cost": 0
   },
