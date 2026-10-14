@@ -786,7 +786,7 @@
     {
       "id": 40,
       "name": "সেলিম মামা",
-      "phone": "01924843898",
+      "phone": "01914569415",
       "address": "আকুন্দবাড়িয়া",
       "whatsapp_enabled": false,
       "total_due": 36895,
@@ -1322,7 +1322,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T06:40:27.097Z"
+      "last_sync": "2026-10-14T06:47:36.808Z"
     },
     "default_labor_cost": 0
   },
