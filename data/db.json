@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 91,
+    "customer": 92,
     "cash": 15,
     "invoice": 13,
-    "cleger": 141,
+    "cleger": 142,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1241,6 +1241,15 @@
       "whatsapp_enabled": false,
       "total_due": 9330,
       "created_at": "2026-10-14T10:57:48.333Z"
+    },
+    {
+      "id": 92,
+      "name": "সাজ্জাদ",
+      "phone": "01959371586",
+      "address": "ঈশ্বরচন্দ্রপুর",
+      "whatsapp_enabled": false,
+      "total_due": 49194,
+      "created_at": "2026-10-14T11:01:31.293Z"
     }
   ],
   "invoices": [],
@@ -2406,6 +2415,20 @@
       "note": "লিটন - ড্রাইভার — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T10:57:48.333Z",
       "time_display": "14-10-2026 | 16:57:48"
+    },
+    {
+      "id": 142,
+      "customer_id": 92,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 49194,
+      "balance": 49194,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "সাজ্জাদ — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T11:01:31.293Z",
+      "time_display": "14-10-2026 | 17:01:31"
     }
   ],
   "cash_ledger": [],
@@ -2476,7 +2499,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T10:57:51.765Z"
+      "last_sync": "2026-10-14T11:01:34.559Z"
     },
     "default_labor_cost": 0
   },
