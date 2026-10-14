@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 99,
+    "customer": 100,
     "cash": 15,
     "invoice": 13,
-    "cleger": 149,
+    "cleger": 150,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1313,6 +1313,15 @@
       "whatsapp_enabled": false,
       "total_due": 33180,
       "created_at": "2026-10-14T11:15:23.027Z"
+    },
+    {
+      "id": 100,
+      "name": "সুমন - দোকান",
+      "phone": "01718220115",
+      "address": "শ্যামপুর",
+      "whatsapp_enabled": false,
+      "total_due": 9838,
+      "created_at": "2026-10-14T11:16:27.208Z"
     }
   ],
   "invoices": [],
@@ -2590,6 +2599,20 @@
       "note": "হাফিজুল- ভাই — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T11:15:23.027Z",
       "time_display": "14-10-2026 | 17:15:23"
+    },
+    {
+      "id": 150,
+      "customer_id": 100,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 9838,
+      "balance": 9838,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "সুমন - দোকান — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T11:16:27.208Z",
+      "time_display": "14-10-2026 | 17:16:27"
     }
   ],
   "cash_ledger": [],
@@ -2660,7 +2683,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T11:15:25.886Z"
+      "last_sync": "2026-10-14T11:16:30.831Z"
     },
     "default_labor_cost": 0
   },
