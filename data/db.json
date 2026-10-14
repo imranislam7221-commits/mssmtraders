@@ -123,34 +123,6 @@
       "id": 7
     },
     {
-      "name": "বিএসআরএম রড ২০ মি.লি",
-      "category": "রড",
-      "unit": "কেজি",
-      "size_mili": 20,
-      "opening_stock": 0,
-      "current_stock": 0,
-      "purchase_price": 74,
-      "selling_price": 84,
-      "low_stock": 100,
-      "created_at": "2026-10-12T06:42:33.350Z",
-      "created_by": 1,
-      "id": 8
-    },
-    {
-      "name": "বিএসআরএম রড ২৫ মি.লি",
-      "category": "রড",
-      "unit": "কেজি",
-      "size_mili": 25,
-      "opening_stock": 0,
-      "current_stock": 0,
-      "purchase_price": 74,
-      "selling_price": 84,
-      "low_stock": 100,
-      "created_at": "2026-10-12T06:42:33.350Z",
-      "created_by": 1,
-      "id": 9
-    },
-    {
       "name": "একেএস রড ৮ মি.লি",
       "category": "রড",
       "unit": "কেজি",
@@ -205,34 +177,6 @@
       "created_at": "2026-10-12T06:42:33.350Z",
       "created_by": 1,
       "id": 13
-    },
-    {
-      "name": "একেএস রড ২০ মি.লি",
-      "category": "রড",
-      "unit": "কেজি",
-      "size_mili": 20,
-      "opening_stock": 0,
-      "current_stock": 0,
-      "purchase_price": 72,
-      "selling_price": 82,
-      "low_stock": 100,
-      "created_at": "2026-10-12T06:42:33.350Z",
-      "created_by": 1,
-      "id": 14
-    },
-    {
-      "name": "একেএস রড ২৫ মি.লি",
-      "category": "রড",
-      "unit": "কেজি",
-      "size_mili": 25,
-      "opening_stock": 0,
-      "current_stock": 0,
-      "purchase_price": 72,
-      "selling_price": 82,
-      "low_stock": 100,
-      "created_at": "2026-10-12T06:42:33.350Z",
-      "created_by": 1,
-      "id": 15
     },
     {
       "name": "এইচকেজি রড ৮ মি.লি",
@@ -291,34 +235,6 @@
       "id": 19
     },
     {
-      "name": "এইচকেজি রড ২০ মি.লি",
-      "category": "রড",
-      "unit": "কেজি",
-      "size_mili": 20,
-      "opening_stock": 0,
-      "current_stock": 0,
-      "purchase_price": 71,
-      "selling_price": 81,
-      "low_stock": 100,
-      "created_at": "2026-10-12T06:42:33.350Z",
-      "created_by": 1,
-      "id": 20
-    },
-    {
-      "name": "এইচকেজি রড ২৫ মি.লি",
-      "category": "রড",
-      "unit": "কেজি",
-      "size_mili": 25,
-      "opening_stock": 0,
-      "current_stock": 0,
-      "purchase_price": 71,
-      "selling_price": 81,
-      "low_stock": 100,
-      "created_at": "2026-10-12T06:42:33.350Z",
-      "created_by": 1,
-      "id": 21
-    },
-    {
       "name": "সিএসআরএম রড ৮ মি.লি",
       "category": "রড",
       "unit": "কেজি",
@@ -375,34 +291,6 @@
       "id": 25
     },
     {
-      "name": "সিএসআরএম রড ২০ মি.লি",
-      "category": "রড",
-      "unit": "কেজি",
-      "size_mili": 20,
-      "opening_stock": 0,
-      "current_stock": 0,
-      "purchase_price": 70,
-      "selling_price": 80,
-      "low_stock": 100,
-      "created_at": "2026-10-12T06:42:33.350Z",
-      "created_by": 1,
-      "id": 26
-    },
-    {
-      "name": "সিএসআরএম রড ২৫ মি.লি",
-      "category": "রড",
-      "unit": "কেজি",
-      "size_mili": 25,
-      "opening_stock": 0,
-      "current_stock": 0,
-      "purchase_price": 70,
-      "selling_price": 80,
-      "low_stock": 100,
-      "created_at": "2026-10-12T06:42:33.350Z",
-      "created_by": 1,
-      "id": 27
-    },
-    {
       "name": "পিএসআরএম রড ৮ মি.লি",
       "category": "রড",
       "unit": "কেজি",
@@ -457,34 +345,6 @@
       "created_at": "2026-10-12T06:42:33.350Z",
       "created_by": 1,
       "id": 31
-    },
-    {
-      "name": "পিএসআরএম রড ২০ মি.লি",
-      "category": "রড",
-      "unit": "কেজি",
-      "size_mili": 20,
-      "opening_stock": 0,
-      "current_stock": 0,
-      "purchase_price": 70,
-      "selling_price": 80,
-      "low_stock": 100,
-      "created_at": "2026-10-12T06:42:33.350Z",
-      "created_by": 1,
-      "id": 32
-    },
-    {
-      "name": "পিএসআরএম রড ২৫ মি.লি",
-      "category": "রড",
-      "unit": "কেজি",
-      "size_mili": 25,
-      "opening_stock": 0,
-      "current_stock": 0,
-      "purchase_price": 70,
-      "selling_price": 80,
-      "low_stock": 100,
-      "created_at": "2026-10-12T06:42:33.350Z",
-      "created_by": 1,
-      "id": 33
     },
     {
       "name": "তার (বাইন্ডিং ওয়্যার)",
@@ -1140,7 +1000,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T06:22:31.026Z"
+      "last_sync": "2026-10-14T06:24:35.389Z"
     },
     "default_labor_cost": 0
   },
