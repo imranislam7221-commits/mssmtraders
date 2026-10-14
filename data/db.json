@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 92,
+    "customer": 93,
     "cash": 15,
     "invoice": 13,
-    "cleger": 142,
+    "cleger": 143,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1250,6 +1250,15 @@
       "whatsapp_enabled": false,
       "total_due": 49194,
       "created_at": "2026-10-14T11:01:31.293Z"
+    },
+    {
+      "id": 93,
+      "name": "আবদুর রহমান",
+      "phone": "01818983893",
+      "address": "কেরু-পাড়া / শান্তিপাড়া",
+      "whatsapp_enabled": false,
+      "total_due": 10060,
+      "created_at": "2026-10-14T11:02:23.934Z"
     }
   ],
   "invoices": [],
@@ -2429,6 +2438,20 @@
       "note": "সাজ্জাদ — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T11:01:31.293Z",
       "time_display": "14-10-2026 | 17:01:31"
+    },
+    {
+      "id": 143,
+      "customer_id": 93,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 10060,
+      "balance": 10060,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "আবদুর রহমান — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T11:02:23.934Z",
+      "time_display": "14-10-2026 | 17:02:23"
     }
   ],
   "cash_ledger": [],
