@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 27,
+    "customer": 28,
     "cash": 15,
     "invoice": 13,
-    "cleger": 77,
+    "cleger": 78,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -674,6 +674,15 @@
       "whatsapp_enabled": false,
       "total_due": 152924,
       "created_at": "2026-10-14T06:25:16.975Z"
+    },
+    {
+      "id": 28,
+      "name": "হারুন ভাই ইতালি",
+      "phone": "",
+      "address": "ঈশ্বরচন্দ্রপুর",
+      "whatsapp_enabled": false,
+      "total_due": 3061,
+      "created_at": "2026-10-14T06:26:22.761Z"
     }
   ],
   "invoices": [],
@@ -957,6 +966,20 @@
       "note": "শাহাজান — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T06:25:16.975Z",
       "time_display": "14-10-2026 | 12:25:16"
+    },
+    {
+      "id": 78,
+      "customer_id": 28,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 3061,
+      "balance": 3061,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "হারুন ভাই ইতালি — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T06:26:22.761Z",
+      "time_display": "14-10-2026 | 12:26:22"
     }
   ],
   "cash_ledger": [],
@@ -1023,7 +1046,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T06:24:35.389Z"
+      "last_sync": "2026-10-14T06:26:26.026Z"
     },
     "default_labor_cost": 0
   },
