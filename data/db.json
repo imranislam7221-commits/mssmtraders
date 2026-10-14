@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 105,
+    "customer": 106,
     "cash": 15,
     "invoice": 13,
-    "cleger": 155,
+    "cleger": 156,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1367,6 +1367,15 @@
       "whatsapp_enabled": false,
       "total_due": 4300,
       "created_at": "2026-10-14T11:22:12.017Z"
+    },
+    {
+      "id": 106,
+      "name": "লিটন - হাবিব - ভাই",
+      "phone": "01941204494",
+      "address": "জয়নগর",
+      "whatsapp_enabled": false,
+      "total_due": 2000,
+      "created_at": "2026-10-14T11:23:00.994Z"
     }
   ],
   "invoices": [],
@@ -2728,6 +2737,20 @@
       "note": "মুক্তি - ভাই — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T11:22:12.017Z",
       "time_display": "14-10-2026 | 17:22:12"
+    },
+    {
+      "id": 156,
+      "customer_id": 106,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 2000,
+      "balance": 2000,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "লিটন - হাবিব - ভাই — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T11:23:00.994Z",
+      "time_display": "14-10-2026 | 17:23:00"
     }
   ],
   "cash_ledger": [],
@@ -2798,7 +2821,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T11:22:15.192Z"
+      "last_sync": "2026-10-14T11:23:04.635Z"
     },
     "default_labor_cost": 0
   },
