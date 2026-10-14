@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 85,
+    "customer": 86,
     "cash": 15,
     "invoice": 13,
-    "cleger": 135,
+    "cleger": 136,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1187,6 +1187,15 @@
       "whatsapp_enabled": false,
       "total_due": 57641,
       "created_at": "2026-10-14T10:48:49.543Z"
+    },
+    {
+      "id": 86,
+      "name": "মোহন - মিস্ত্রি",
+      "phone": "01938520279",
+      "address": "ঈশ্বরচন্দ্রপুর",
+      "whatsapp_enabled": false,
+      "total_due": 4750,
+      "created_at": "2026-10-14T10:49:32.036Z"
     }
   ],
   "invoices": [],
@@ -2268,6 +2277,20 @@
       "note": "নাজমুল - মামা — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T10:48:49.543Z",
       "time_display": "14-10-2026 | 16:48:49"
+    },
+    {
+      "id": 136,
+      "customer_id": 86,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 4750,
+      "balance": 4750,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "মোহন - মিস্ত্রি — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T10:49:32.036Z",
+      "time_display": "14-10-2026 | 16:49:32"
     }
   ],
   "cash_ledger": [],
@@ -2338,7 +2361,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T10:48:52.743Z"
+      "last_sync": "2026-10-14T10:49:35.055Z"
     },
     "default_labor_cost": 0
   },
