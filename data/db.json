@@ -3,10 +3,10 @@
     "user": 1,
     "product": 40,
     "ledger": 36,
-    "customer": 20,
+    "customer": 21,
     "cash": 15,
     "invoice": 13,
-    "cleger": 70,
+    "cleger": 71,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -722,6 +722,15 @@
       "whatsapp_enabled": false,
       "total_due": 37183,
       "created_at": "2026-10-14T06:16:35.116Z"
+    },
+    {
+      "id": 21,
+      "name": "আলামিন",
+      "phone": "01981935837",
+      "address": "শ্যামপুর",
+      "whatsapp_enabled": false,
+      "total_due": 3211,
+      "created_at": "2026-10-14T06:17:40.902Z"
     }
   ],
   "invoices": [],
@@ -907,6 +916,20 @@
       "note": "রফিকুল ভাই (CNDA) — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T06:16:35.116Z",
       "time_display": "14-10-2026 | 12:16:35"
+    },
+    {
+      "id": 71,
+      "customer_id": 21,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 3211,
+      "balance": 3211,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "আলামিন — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T06:17:40.902Z",
+      "time_display": "14-10-2026 | 12:17:40"
     }
   ],
   "cash_ledger": [],
@@ -965,7 +988,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T06:15:44.382Z"
+      "last_sync": "2026-10-14T06:17:44.854Z"
     },
     "default_labor_cost": 0
   },
