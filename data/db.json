@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 69,
+    "customer": 70,
     "cash": 15,
     "invoice": 13,
-    "cleger": 119,
+    "cleger": 120,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1043,6 +1043,15 @@
       "whatsapp_enabled": false,
       "total_due": 24750,
       "created_at": "2026-10-14T10:05:27.978Z"
+    },
+    {
+      "id": 70,
+      "name": "মিলন বালি ইসরাফিল",
+      "phone": "01981938058",
+      "address": "দর্শনা",
+      "whatsapp_enabled": false,
+      "total_due": 1080,
+      "created_at": "2026-10-14T10:06:05.389Z"
     }
   ],
   "invoices": [],
@@ -1900,6 +1909,20 @@
       "note": "একলাস — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T10:05:27.978Z",
       "time_display": "14-10-2026 | 16:05:27"
+    },
+    {
+      "id": 120,
+      "customer_id": 70,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 1080,
+      "balance": 1080,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "মিলন বালি ইসরাফিল — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T10:06:05.389Z",
+      "time_display": "14-10-2026 | 16:06:05"
     }
   ],
   "cash_ledger": [],
@@ -1966,7 +1989,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T10:05:31.104Z"
+      "last_sync": "2026-10-14T10:06:08.893Z"
     },
     "default_labor_cost": 0
   },
