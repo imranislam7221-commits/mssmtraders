@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 64,
+    "customer": 65,
     "cash": 15,
     "invoice": 13,
-    "cleger": 114,
+    "cleger": 115,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -998,6 +998,15 @@
       "whatsapp_enabled": false,
       "total_due": 12775,
       "created_at": "2026-10-14T09:58:39.336Z"
+    },
+    {
+      "id": 65,
+      "name": "শরিফুল  খাদিম",
+      "phone": "01936980283",
+      "address": "ঈশ্বরচন্দ্রপুর",
+      "whatsapp_enabled": false,
+      "total_due": 20640,
+      "created_at": "2026-10-14T09:59:38.389Z"
     }
   ],
   "invoices": [],
@@ -1785,6 +1794,20 @@
       "note": "লুকমান — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T09:58:39.336Z",
       "time_display": "14-10-2026 | 15:58:39"
+    },
+    {
+      "id": 115,
+      "customer_id": 65,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 20640,
+      "balance": 20640,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "শরিফুল  খাদিম — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T09:59:38.389Z",
+      "time_display": "14-10-2026 | 15:59:38"
     }
   ],
   "cash_ledger": [],
@@ -1851,7 +1874,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T09:58:42.820Z"
+      "last_sync": "2026-10-14T09:59:42.156Z"
     },
     "default_labor_cost": 0
   },
