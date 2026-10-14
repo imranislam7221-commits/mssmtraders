@@ -3,10 +3,10 @@
     "user": 1,
     "product": 40,
     "ledger": 36,
-    "customer": 18,
+    "customer": 19,
     "cash": 15,
     "invoice": 13,
-    "cleger": 68,
+    "cleger": 69,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -704,6 +704,15 @@
       "whatsapp_enabled": false,
       "total_due": 2670,
       "created_at": "2026-10-14T06:14:41.014Z"
+    },
+    {
+      "id": 19,
+      "name": "আকুবার",
+      "phone": "01729890257",
+      "address": "রেঙ্গেরপোতা",
+      "whatsapp_enabled": false,
+      "total_due": 24970,
+      "created_at": "2026-10-14T06:15:40.751Z"
     }
   ],
   "invoices": [],
@@ -861,6 +870,20 @@
       "note": "শহিদুল ভাই — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T06:14:41.014Z",
       "time_display": "14-10-2026 | 12:14:41"
+    },
+    {
+      "id": 69,
+      "customer_id": 19,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 24970,
+      "balance": 24970,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "আকুবার — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T06:15:40.751Z",
+      "time_display": "14-10-2026 | 12:15:40"
     }
   ],
   "cash_ledger": [],
@@ -919,7 +942,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T06:14:47.170Z"
+      "last_sync": "2026-10-14T06:15:44.382Z"
     },
     "default_labor_cost": 0
   },
