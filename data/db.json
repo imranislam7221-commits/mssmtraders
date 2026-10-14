@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 73,
+    "customer": 74,
     "cash": 15,
     "invoice": 13,
-    "cleger": 123,
+    "cleger": 124,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1079,6 +1079,15 @@
       "whatsapp_enabled": false,
       "total_due": 6900,
       "created_at": "2026-10-14T10:09:38.374Z"
+    },
+    {
+      "id": 74,
+      "name": "দুলাল আসাদুল মি:",
+      "phone": "01406532315",
+      "address": "ঈশ্বরচন্দ্রপুর",
+      "whatsapp_enabled": false,
+      "total_due": 5252,
+      "created_at": "2026-10-14T10:11:44.740Z"
     }
   ],
   "invoices": [],
@@ -1992,6 +2001,20 @@
       "note": "জছনা _লাল্টু মি: — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T10:09:38.374Z",
       "time_display": "14-10-2026 | 16:09:38"
+    },
+    {
+      "id": 124,
+      "customer_id": 74,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 5252,
+      "balance": 5252,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "দুলাল আসাদুল মি: — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T10:11:44.740Z",
+      "time_display": "14-10-2026 | 16:11:44"
     }
   ],
   "cash_ledger": [],
@@ -2058,7 +2081,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T10:09:41.734Z"
+      "last_sync": "2026-10-14T10:11:48.542Z"
     },
     "default_labor_cost": 0
   },
