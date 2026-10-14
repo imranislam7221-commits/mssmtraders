@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 107,
+    "customer": 108,
     "cash": 15,
     "invoice": 13,
-    "cleger": 157,
+    "cleger": 158,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1385,6 +1385,15 @@
       "whatsapp_enabled": false,
       "total_due": 3870,
       "created_at": "2026-10-14T11:23:54.180Z"
+    },
+    {
+      "id": 108,
+      "name": "বকুল রাজমিস্ত্রি",
+      "phone": "01999120333",
+      "address": "শ্যামপুর",
+      "whatsapp_enabled": false,
+      "total_due": 3250,
+      "created_at": "2026-10-14T11:24:44.878Z"
     }
   ],
   "invoices": [],
@@ -2774,6 +2783,20 @@
       "note": "সেমোল দাদা সেলুন — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T11:23:54.180Z",
       "time_display": "14-10-2026 | 17:23:54"
+    },
+    {
+      "id": 158,
+      "customer_id": 108,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 3250,
+      "balance": 3250,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "বকুল রাজমিস্ত্রি — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T11:24:44.878Z",
+      "time_display": "14-10-2026 | 17:24:44"
     }
   ],
   "cash_ledger": [],
@@ -2844,7 +2867,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T11:23:57.063Z"
+      "last_sync": "2026-10-14T11:24:48.845Z"
     },
     "default_labor_cost": 0
   },
