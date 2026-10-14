@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 34,
+    "customer": 35,
     "cash": 15,
     "invoice": 13,
-    "cleger": 84,
+    "cleger": 85,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -737,6 +737,15 @@
       "whatsapp_enabled": false,
       "total_due": 980,
       "created_at": "2026-10-14T06:34:03.927Z"
+    },
+    {
+      "id": 35,
+      "name": "আছমা আপু",
+      "phone": "",
+      "address": "ঈশ্বরচন্দ্রপুর",
+      "whatsapp_enabled": false,
+      "total_due": 397218,
+      "created_at": "2026-10-14T06:35:20.585Z"
     }
   ],
   "invoices": [],
@@ -1118,6 +1127,20 @@
       "note": "সুজন মামা — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T06:34:03.927Z",
       "time_display": "14-10-2026 | 12:34:03"
+    },
+    {
+      "id": 85,
+      "customer_id": 35,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 397218,
+      "balance": 397218,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "আছমা আপু — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T06:35:20.585Z",
+      "time_display": "14-10-2026 | 12:35:20"
     }
   ],
   "cash_ledger": [],
@@ -1184,7 +1207,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T06:34:07.428Z"
+      "last_sync": "2026-10-14T06:35:24.297Z"
     },
     "default_labor_cost": 0
   },
