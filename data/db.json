@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 52,
+    "customer": 53,
     "cash": 15,
     "invoice": 13,
-    "cleger": 102,
+    "cleger": 103,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -890,6 +890,15 @@
       "whatsapp_enabled": false,
       "total_due": 20000,
       "created_at": "2026-10-14T09:18:18.038Z"
+    },
+    {
+      "id": 53,
+      "name": "হচেন ভাই",
+      "phone": "01921939623",
+      "address": "রামনগর",
+      "whatsapp_enabled": false,
+      "total_due": 20362,
+      "created_at": "2026-10-14T09:41:19.291Z"
     }
   ],
   "invoices": [],
@@ -1509,6 +1518,20 @@
       "note": "আলিয়া আপু — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T09:18:18.038Z",
       "time_display": "14-10-2026 | 15:18:18"
+    },
+    {
+      "id": 103,
+      "customer_id": 53,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 20362,
+      "balance": 20362,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "হচেন ভাই — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T09:41:19.291Z",
+      "time_display": "14-10-2026 | 15:41:19"
     }
   ],
   "cash_ledger": [],
