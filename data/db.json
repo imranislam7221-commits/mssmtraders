@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 43,
+    "customer": 44,
     "cash": 15,
     "invoice": 13,
-    "cleger": 93,
+    "cleger": 94,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -809,6 +809,15 @@
       "whatsapp_enabled": false,
       "total_due": 28640,
       "created_at": "2026-10-14T09:07:18.296Z"
+    },
+    {
+      "id": 44,
+      "name": "ইনামুল মামা",
+      "phone": "01937724119",
+      "address": "প্রতাপুর",
+      "whatsapp_enabled": false,
+      "total_due": 6382,
+      "created_at": "2026-10-14T09:08:07.046Z"
     }
   ],
   "invoices": [],
@@ -1302,6 +1311,20 @@
       "note": "কল্পনা আপু — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T09:07:18.296Z",
       "time_display": "14-10-2026 | 15:07:18"
+    },
+    {
+      "id": 94,
+      "customer_id": 44,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 6382,
+      "balance": 6382,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "ইনামুল মামা — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T09:08:07.046Z",
+      "time_display": "14-10-2026 | 15:08:07"
     }
   ],
   "cash_ledger": [],
@@ -1368,7 +1391,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T09:05:29.593Z"
+      "last_sync": "2026-10-14T09:08:10.893Z"
     },
     "default_labor_cost": 0
   },
