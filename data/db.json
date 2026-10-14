@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 63,
+    "customer": 64,
     "cash": 15,
     "invoice": 13,
-    "cleger": 113,
+    "cleger": 114,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -989,6 +989,15 @@
       "whatsapp_enabled": false,
       "total_due": 50245,
       "created_at": "2026-10-14T09:57:55.806Z"
+    },
+    {
+      "id": 64,
+      "name": "লুকমান",
+      "phone": "",
+      "address": "ঈশ্বরচন্দ্রপুর",
+      "whatsapp_enabled": false,
+      "total_due": 12775,
+      "created_at": "2026-10-14T09:58:39.336Z"
     }
   ],
   "invoices": [],
@@ -1762,6 +1771,20 @@
       "note": "মিঠু / মানিক দাদা — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T09:57:55.806Z",
       "time_display": "14-10-2026 | 15:57:55"
+    },
+    {
+      "id": 114,
+      "customer_id": 64,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 12775,
+      "balance": 12775,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "লুকমান — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T09:58:39.336Z",
+      "time_display": "14-10-2026 | 15:58:39"
     }
   ],
   "cash_ledger": [],
@@ -1828,7 +1851,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T09:57:59.629Z"
+      "last_sync": "2026-10-14T09:58:42.820Z"
     },
     "default_labor_cost": 0
   },
