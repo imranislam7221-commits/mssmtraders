@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 77,
+    "customer": 78,
     "cash": 15,
     "invoice": 13,
-    "cleger": 127,
+    "cleger": 128,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1115,6 +1115,15 @@
       "whatsapp_enabled": false,
       "total_due": 4000,
       "created_at": "2026-10-14T10:17:03.845Z"
+    },
+    {
+      "id": 78,
+      "name": "উত্তম দাদা",
+      "phone": "",
+      "address": "দর্শনা-শ্যামপুর",
+      "whatsapp_enabled": false,
+      "total_due": 4015,
+      "created_at": "2026-10-14T10:18:18.168Z"
     }
   ],
   "invoices": [],
@@ -2084,6 +2093,20 @@
       "note": "সিজান / কামরুল মি: — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T10:17:03.845Z",
       "time_display": "14-10-2026 | 16:17:03"
+    },
+    {
+      "id": 128,
+      "customer_id": 78,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 4015,
+      "balance": 4015,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "উত্তম দাদা — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T10:18:18.168Z",
+      "time_display": "14-10-2026 | 16:18:18"
     }
   ],
   "cash_ledger": [],
@@ -2154,7 +2177,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T10:17:07.335Z"
+      "last_sync": "2026-10-14T10:18:21.610Z"
     },
     "default_labor_cost": 0
   },
