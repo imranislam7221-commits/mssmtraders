@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 54,
+    "customer": 55,
     "cash": 15,
     "invoice": 13,
-    "cleger": 104,
+    "cleger": 105,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -908,6 +908,15 @@
       "whatsapp_enabled": false,
       "total_due": 19172,
       "created_at": "2026-10-14T09:42:18.463Z"
+    },
+    {
+      "id": 55,
+      "name": "টিপু ভাই",
+      "phone": "01720660985",
+      "address": "শ্যামপুর",
+      "whatsapp_enabled": false,
+      "total_due": 98057,
+      "created_at": "2026-10-14T09:44:02.735Z"
     }
   ],
   "invoices": [],
@@ -1555,6 +1564,20 @@
       "note": "মুস্তাফিজুর ইমাম — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T09:42:18.463Z",
       "time_display": "14-10-2026 | 15:42:18"
+    },
+    {
+      "id": 105,
+      "customer_id": 55,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 98057,
+      "balance": 98057,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "টিপু ভাই — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T09:44:02.735Z",
+      "time_display": "14-10-2026 | 15:44:02"
     }
   ],
   "cash_ledger": [],
@@ -1621,7 +1644,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T09:42:21.703Z"
+      "last_sync": "2026-10-14T09:44:05.561Z"
     },
     "default_labor_cost": 0
   },
