@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 28,
+    "customer": 29,
     "cash": 15,
     "invoice": 13,
-    "cleger": 78,
+    "cleger": 79,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -683,6 +683,15 @@
       "whatsapp_enabled": false,
       "total_due": 3061,
       "created_at": "2026-10-14T06:26:22.761Z"
+    },
+    {
+      "id": 29,
+      "name": "শহিদুল মামা",
+      "phone": "শ্যামপুর",
+      "address": "শ্যামপুর",
+      "whatsapp_enabled": false,
+      "total_due": 20000,
+      "created_at": "2026-10-14T06:27:56.644Z"
     }
   ],
   "invoices": [],
@@ -980,6 +989,20 @@
       "note": "হারুন ভাই ইতালি — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T06:26:22.761Z",
       "time_display": "14-10-2026 | 12:26:22"
+    },
+    {
+      "id": 79,
+      "customer_id": 29,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 20000,
+      "balance": 20000,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "শহিদুল মামা — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T06:27:56.644Z",
+      "time_display": "14-10-2026 | 12:27:56"
     }
   ],
   "cash_ledger": [],
@@ -1046,7 +1069,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T06:26:26.026Z"
+      "last_sync": "2026-10-14T06:28:00.149Z"
     },
     "default_labor_cost": 0
   },
