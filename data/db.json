@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 44,
+    "customer": 45,
     "cash": 15,
     "invoice": 13,
-    "cleger": 94,
+    "cleger": 95,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -818,6 +818,15 @@
       "whatsapp_enabled": false,
       "total_due": 6382,
       "created_at": "2026-10-14T09:08:07.046Z"
+    },
+    {
+      "id": 45,
+      "name": "খালেক মামা",
+      "phone": "01400603536",
+      "address": "ঈশ্বরচন্দ্রপুর",
+      "whatsapp_enabled": false,
+      "total_due": 9850,
+      "created_at": "2026-10-14T09:08:45.558Z"
     }
   ],
   "invoices": [],
@@ -1325,6 +1334,20 @@
       "note": "ইনামুল মামা — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T09:08:07.046Z",
       "time_display": "14-10-2026 | 15:08:07"
+    },
+    {
+      "id": 95,
+      "customer_id": 45,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 9850,
+      "balance": 9850,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "খালেক মামা — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T09:08:45.558Z",
+      "time_display": "14-10-2026 | 15:08:45"
     }
   ],
   "cash_ledger": [],
