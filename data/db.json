@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 72,
+    "customer": 73,
     "cash": 15,
     "invoice": 13,
-    "cleger": 122,
+    "cleger": 123,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1070,6 +1070,15 @@
       "whatsapp_enabled": false,
       "total_due": 200,
       "created_at": "2026-10-14T10:08:16.617Z"
+    },
+    {
+      "id": 73,
+      "name": "জছনা _লাল্টু মি:",
+      "phone": "01993948523--01927772263",
+      "address": "ঈশ্বরচন্দ্রপুর",
+      "whatsapp_enabled": false,
+      "total_due": 6900,
+      "created_at": "2026-10-14T10:09:38.374Z"
     }
   ],
   "invoices": [],
@@ -1969,6 +1978,20 @@
       "note": "রিদয় মামা — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T10:08:16.617Z",
       "time_display": "14-10-2026 | 16:08:16"
+    },
+    {
+      "id": 123,
+      "customer_id": 73,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 6900,
+      "balance": 6900,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "জছনা _লাল্টু মি: — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T10:09:38.374Z",
+      "time_display": "14-10-2026 | 16:09:38"
     }
   ],
   "cash_ledger": [],
@@ -2035,7 +2058,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T10:08:20.448Z"
+      "last_sync": "2026-10-14T10:09:41.734Z"
     },
     "default_labor_cost": 0
   },
