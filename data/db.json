@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 65,
+    "customer": 66,
     "cash": 15,
     "invoice": 13,
-    "cleger": 115,
+    "cleger": 116,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1007,6 +1007,15 @@
       "whatsapp_enabled": false,
       "total_due": 20640,
       "created_at": "2026-10-14T09:59:38.389Z"
+    },
+    {
+      "id": 66,
+      "name": "লিটন ভাই এজেন্ট",
+      "phone": "01914310214",
+      "address": "শ্যামপুর",
+      "whatsapp_enabled": false,
+      "total_due": 292,
+      "created_at": "2026-10-14T10:01:26.859Z"
     }
   ],
   "invoices": [],
@@ -1808,6 +1817,20 @@
       "note": "শরিফুল  খাদিম — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T09:59:38.389Z",
       "time_display": "14-10-2026 | 15:59:38"
+    },
+    {
+      "id": 116,
+      "customer_id": 66,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 292,
+      "balance": 292,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "লিটন ভাই এজেন্ট — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T10:01:26.859Z",
+      "time_display": "14-10-2026 | 16:01:26"
     }
   ],
   "cash_ledger": [],
@@ -1874,7 +1897,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T09:59:42.156Z"
+      "last_sync": "2026-10-14T10:01:29.621Z"
     },
     "default_labor_cost": 0
   },
