@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 82,
+    "customer": 83,
     "cash": 15,
     "invoice": 13,
-    "cleger": 132,
+    "cleger": 133,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1160,6 +1160,15 @@
       "whatsapp_enabled": false,
       "total_due": 9260,
       "created_at": "2026-10-14T10:21:15.703Z"
+    },
+    {
+      "id": 83,
+      "name": "বাবুল বিপু  ভাই",
+      "phone": "",
+      "address": "সোলমারি",
+      "whatsapp_enabled": false,
+      "total_due": 7063,
+      "created_at": "2026-10-14T10:21:46.631Z"
     }
   ],
   "invoices": [],
@@ -2199,6 +2208,20 @@
       "note": "সামাজ কল্লান — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T10:21:15.703Z",
       "time_display": "14-10-2026 | 16:21:15"
+    },
+    {
+      "id": 133,
+      "customer_id": 83,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 7063,
+      "balance": 7063,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "বাবুল বিপু  ভাই — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T10:21:46.631Z",
+      "time_display": "14-10-2026 | 16:21:46"
     }
   ],
   "cash_ledger": [],
@@ -2269,7 +2292,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-14T10:21:18.773Z"
+      "last_sync": "2026-10-14T10:21:49.406Z"
     },
     "default_labor_cost": 0
   },
