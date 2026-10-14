@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 39,
+    "customer": 40,
     "cash": 15,
     "invoice": 13,
-    "cleger": 89,
+    "cleger": 90,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -782,6 +782,15 @@
       "whatsapp_enabled": false,
       "total_due": 84000,
       "created_at": "2026-10-14T06:40:23.922Z"
+    },
+    {
+      "id": 40,
+      "name": "সেলিম মামা",
+      "phone": "01924843898",
+      "address": "আকুন্দবাড়িয়া",
+      "whatsapp_enabled": false,
+      "total_due": 36895,
+      "created_at": "2026-10-14T06:47:31.258Z"
     }
   ],
   "invoices": [],
@@ -1233,6 +1242,20 @@
       "note": "মিন্টু ভাই বালি — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-14T06:40:23.922Z",
       "time_display": "14-10-2026 | 12:40:23"
+    },
+    {
+      "id": 90,
+      "customer_id": 40,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 36895,
+      "balance": 36895,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "সেলিম মামা — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-14T06:47:31.258Z",
+      "time_display": "14-10-2026 | 12:47:31"
     }
   ],
   "cash_ledger": [],
