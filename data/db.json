@@ -2,7 +2,7 @@
   "counters": {
     "user": 1,
     "product": 41,
-    "ledger": 37,
+    "ledger": 38,
     "customer": 178,
     "cash": 15,
     "invoice": 13,
@@ -184,7 +184,7 @@
       "unit": "কেজি",
       "size_mili": 8,
       "opening_stock": 0,
-      "current_stock": 0,
+      "current_stock": 1000,
       "purchase_price": 71,
       "selling_price": 81,
       "low_stock": 100,
@@ -492,6 +492,21 @@
       "note": "Created with initial stock",
       "timestamp": "2026-10-14T06:19:50.716Z",
       "time_display": "14-10-2026 | 12:19:50"
+    },
+    {
+      "id": 38,
+      "product_id": 16,
+      "product_name": "এইচকেজি রড ৮ মি.লি",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "type": "IN",
+      "quantity": 1000,
+      "unit_cost": 71,
+      "unit_price": null,
+      "source": "Stock In",
+      "note": "বাকিতে ক্রয় (Credit) • 1 টন চালান",
+      "timestamp": "2026-10-15T10:24:51.492Z",
+      "time_display": "15-10-2026 | 16:24:51"
     }
   ],
   "customers": [
