@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 136,
+    "customer": 137,
     "cash": 15,
     "invoice": 13,
-    "cleger": 186,
+    "cleger": 187,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1646,6 +1646,15 @@
       "whatsapp_enabled": false,
       "total_due": 25695,
       "created_at": "2026-10-15T04:16:54.056Z"
+    },
+    {
+      "id": 137,
+      "name": "জুনাপ ভাই",
+      "phone": "01976902856",
+      "address": "আকুন্দবাড়িয়া",
+      "whatsapp_enabled": false,
+      "total_due": 131535,
+      "created_at": "2026-10-15T04:18:09.864Z"
     }
   ],
   "invoices": [],
@@ -3441,6 +3450,20 @@
       "note": "আমজাদ / লিয়ন — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-15T04:16:54.056Z",
       "time_display": "15-10-2026 | 10:16:54"
+    },
+    {
+      "id": 187,
+      "customer_id": 137,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 131535,
+      "balance": 131535,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "জুনাপ ভাই — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-15T04:18:09.864Z",
+      "time_display": "15-10-2026 | 10:18:09"
     }
   ],
   "cash_ledger": [],
