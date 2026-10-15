@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 123,
+    "customer": 124,
     "cash": 15,
     "invoice": 13,
-    "cleger": 173,
+    "cleger": 174,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1529,6 +1529,15 @@
       "whatsapp_enabled": false,
       "total_due": 19530,
       "created_at": "2026-10-15T03:23:28.312Z"
+    },
+    {
+      "id": 124,
+      "name": "সাইফুল মামা-",
+      "phone": "01943877252--01963279410",
+      "address": "কাদিপুর",
+      "whatsapp_enabled": false,
+      "total_due": 21400,
+      "created_at": "2026-10-15T03:25:06.292Z"
     }
   ],
   "invoices": [],
@@ -3142,6 +3151,20 @@
       "note": "আশাদুল মামা- — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-15T03:23:28.312Z",
       "time_display": "15-10-2026 | 09:23:28"
+    },
+    {
+      "id": 174,
+      "customer_id": 124,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 21400,
+      "balance": 21400,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "সাইফুল মামা- — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-15T03:25:06.292Z",
+      "time_display": "15-10-2026 | 09:25:06"
     }
   ],
   "cash_ledger": [],
@@ -3212,7 +3235,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-15T03:23:32.036Z"
+      "last_sync": "2026-10-15T03:25:10.030Z"
     },
     "default_labor_cost": 0
   },
