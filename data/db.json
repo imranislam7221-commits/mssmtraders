@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 149,
+    "customer": 150,
     "cash": 15,
     "invoice": 13,
-    "cleger": 199,
+    "cleger": 200,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1754,6 +1754,15 @@
       "whatsapp_enabled": false,
       "total_due": 52000,
       "created_at": "2026-10-15T05:39:48.821Z"
+    },
+    {
+      "id": 150,
+      "name": "কলিম মামা",
+      "phone": "01626155154",
+      "address": "দর্শনা",
+      "whatsapp_enabled": false,
+      "total_due": 20000,
+      "created_at": "2026-10-15T05:41:31.420Z"
     }
   ],
   "invoices": [],
@@ -3717,6 +3726,20 @@
       "note": "মাহাবুল / কাশেম মি: — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-15T05:39:48.821Z",
       "time_display": "15-10-2026 | 11:39:48"
+    },
+    {
+      "id": 200,
+      "customer_id": 150,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 20000,
+      "balance": 20000,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "কলিম মামা — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-15T05:41:31.420Z",
+      "time_display": "15-10-2026 | 11:41:31"
     }
   ],
   "cash_ledger": [],
@@ -3787,7 +3810,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-15T05:39:09.582Z"
+      "last_sync": "2026-10-15T05:41:35.311Z"
     },
     "default_labor_cost": 0
   },
