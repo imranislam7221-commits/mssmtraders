@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 115,
+    "customer": 116,
     "cash": 15,
     "invoice": 13,
-    "cleger": 165,
+    "cleger": 166,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1457,6 +1457,15 @@
       "whatsapp_enabled": false,
       "total_due": 41840,
       "created_at": "2026-10-15T03:13:50.816Z"
+    },
+    {
+      "id": 116,
+      "name": "শাকিল আকিজ সি:",
+      "phone": "01707926721",
+      "address": "পরানপুর",
+      "whatsapp_enabled": false,
+      "total_due": 4260,
+      "created_at": "2026-10-15T03:15:34.770Z"
     }
   ],
   "invoices": [],
@@ -2958,6 +2967,20 @@
       "note": "আ: আলিম — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-15T03:13:50.816Z",
       "time_display": "15-10-2026 | 09:13:50"
+    },
+    {
+      "id": 166,
+      "customer_id": 116,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 4260,
+      "balance": 4260,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "শাকিল আকিজ সি: — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-15T03:15:34.770Z",
+      "time_display": "15-10-2026 | 09:15:34"
     }
   ],
   "cash_ledger": [],
