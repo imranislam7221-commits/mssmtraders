@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 162,
+    "customer": 163,
     "cash": 15,
     "invoice": 13,
-    "cleger": 212,
+    "cleger": 213,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1871,6 +1871,15 @@
       "whatsapp_enabled": false,
       "total_due": 40671,
       "created_at": "2026-10-15T05:55:23.068Z"
+    },
+    {
+      "id": 163,
+      "name": "নাবিছউদ্দি",
+      "phone": "",
+      "address": "জয়নগর",
+      "whatsapp_enabled": false,
+      "total_due": 71494,
+      "created_at": "2026-10-15T06:31:39.852Z"
     }
   ],
   "invoices": [],
@@ -4016,6 +4025,20 @@
       "note": "অন্তর মামা — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-15T05:55:23.068Z",
       "time_display": "15-10-2026 | 11:55:23"
+    },
+    {
+      "id": 213,
+      "customer_id": 163,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 71494,
+      "balance": 71494,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "নাবিছউদ্দি — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-15T06:31:39.852Z",
+      "time_display": "15-10-2026 | 12:31:39"
     }
   ],
   "cash_ledger": [],
