@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 154,
+    "customer": 155,
     "cash": 15,
     "invoice": 13,
-    "cleger": 204,
+    "cleger": 205,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1799,6 +1799,15 @@
       "whatsapp_enabled": false,
       "total_due": 1935,
       "created_at": "2026-10-15T05:44:17.878Z"
+    },
+    {
+      "id": 155,
+      "name": "আরিয়ান মামা",
+      "phone": "01953038579",
+      "address": "পড়ানপুর",
+      "whatsapp_enabled": false,
+      "total_due": 32562,
+      "created_at": "2026-10-15T05:45:49.930Z"
     }
   ],
   "invoices": [],
@@ -3832,6 +3841,20 @@
       "note": "সাইদুর / পাহাড় — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-15T05:44:17.878Z",
       "time_display": "15-10-2026 | 11:44:17"
+    },
+    {
+      "id": 205,
+      "customer_id": 155,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 32562,
+      "balance": 32562,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "আরিয়ান মামা — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-15T05:45:49.930Z",
+      "time_display": "15-10-2026 | 11:45:49"
     }
   ],
   "cash_ledger": [],
