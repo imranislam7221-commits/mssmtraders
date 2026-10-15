@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 176,
+    "customer": 177,
     "cash": 15,
     "invoice": 13,
-    "cleger": 226,
+    "cleger": 227,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1997,6 +1997,15 @@
       "whatsapp_enabled": false,
       "total_due": 13775,
       "created_at": "2026-10-15T09:58:01.278Z"
+    },
+    {
+      "id": 177,
+      "name": "আশাদুল - মাছ",
+      "phone": "01725937587",
+      "address": "শ্যামপুর",
+      "whatsapp_enabled": false,
+      "total_due": 4400,
+      "created_at": "2026-10-15T09:59:01.079Z"
     }
   ],
   "invoices": [],
@@ -4338,6 +4347,20 @@
       "note": "সেলিম — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-15T09:58:01.278Z",
       "time_display": "15-10-2026 | 15:58:01"
+    },
+    {
+      "id": 227,
+      "customer_id": 177,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 4400,
+      "balance": 4400,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "আশাদুল - মাছ — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-15T09:59:01.079Z",
+      "time_display": "15-10-2026 | 15:59:01"
     }
   ],
   "cash_ledger": [],
@@ -4408,7 +4431,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-15T09:57:01.321Z"
+      "last_sync": "2026-10-15T09:58:06.120Z"
     },
     "default_labor_cost": 0
   },
