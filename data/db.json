@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 165,
+    "customer": 166,
     "cash": 15,
     "invoice": 13,
-    "cleger": 215,
+    "cleger": 216,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1898,6 +1898,15 @@
       "whatsapp_enabled": false,
       "total_due": 1661,
       "created_at": "2026-10-15T06:35:25.419Z"
+    },
+    {
+      "id": 166,
+      "name": "শাহীদুল মামা মি:",
+      "phone": "01921135645",
+      "address": "শ্যামপুর",
+      "whatsapp_enabled": false,
+      "total_due": 39378,
+      "created_at": "2026-10-15T06:36:49.434Z"
     }
   ],
   "invoices": [],
@@ -4085,6 +4094,20 @@
       "note": "মজিবর  চাচা - — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-15T06:35:25.419Z",
       "time_display": "15-10-2026 | 12:35:25"
+    },
+    {
+      "id": 216,
+      "customer_id": 166,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 39378,
+      "balance": 39378,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "শাহীদুল মামা মি: — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-15T06:36:49.434Z",
+      "time_display": "15-10-2026 | 12:36:49"
     }
   ],
   "cash_ledger": [],
@@ -4155,7 +4178,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-15T06:35:29.052Z"
+      "last_sync": "2026-10-15T06:36:52.470Z"
     },
     "default_labor_cost": 0
   },
