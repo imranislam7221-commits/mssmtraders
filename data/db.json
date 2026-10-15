@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 114,
+    "customer": 115,
     "cash": 15,
     "invoice": 13,
-    "cleger": 164,
+    "cleger": 165,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1448,6 +1448,15 @@
       "whatsapp_enabled": false,
       "total_due": 11340,
       "created_at": "2026-10-15T03:11:32.690Z"
+    },
+    {
+      "id": 115,
+      "name": "আ: আলিম",
+      "phone": "01735858350",
+      "address": "শ্যামপুর",
+      "whatsapp_enabled": false,
+      "total_due": 41840,
+      "created_at": "2026-10-15T03:13:50.816Z"
     }
   ],
   "invoices": [],
@@ -2935,6 +2944,20 @@
       "note": "মেহেদি — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-15T03:11:32.690Z",
       "time_display": "15-10-2026 | 09:11:32"
+    },
+    {
+      "id": 165,
+      "customer_id": 115,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 41840,
+      "balance": 41840,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "আ: আলিম — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-15T03:13:50.816Z",
+      "time_display": "15-10-2026 | 09:13:50"
     }
   ],
   "cash_ledger": [],
@@ -3005,7 +3028,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-15T03:11:36.369Z"
+      "last_sync": "2026-10-15T03:13:54.195Z"
     },
     "default_labor_cost": 0
   },
