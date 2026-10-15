@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 117,
+    "customer": 118,
     "cash": 15,
     "invoice": 13,
-    "cleger": 167,
+    "cleger": 168,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1475,6 +1475,15 @@
       "whatsapp_enabled": false,
       "total_due": 6050,
       "created_at": "2026-10-15T03:16:44.955Z"
+    },
+    {
+      "id": 118,
+      "name": "হাসমত ভাই",
+      "phone": "01920427872",
+      "address": "আজিমপুর",
+      "whatsapp_enabled": false,
+      "total_due": 10000,
+      "created_at": "2026-10-15T03:17:31.248Z"
     }
   ],
   "invoices": [],
@@ -3004,6 +3013,20 @@
       "note": "কুবাদ চাচা — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-15T03:16:44.955Z",
       "time_display": "15-10-2026 | 09:16:44"
+    },
+    {
+      "id": 168,
+      "customer_id": 118,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 10000,
+      "balance": 10000,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "হাসমত ভাই — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-15T03:17:31.248Z",
+      "time_display": "15-10-2026 | 09:17:31"
     }
   ],
   "cash_ledger": [],
@@ -3074,7 +3097,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-15T03:15:39.737Z"
+      "last_sync": "2026-10-15T03:17:34.891Z"
     },
     "default_labor_cost": 0
   },
