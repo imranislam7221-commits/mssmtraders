@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 124,
+    "customer": 125,
     "cash": 15,
     "invoice": 13,
-    "cleger": 174,
+    "cleger": 175,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1538,6 +1538,15 @@
       "whatsapp_enabled": false,
       "total_due": 21400,
       "created_at": "2026-10-15T03:25:06.292Z"
+    },
+    {
+      "id": 125,
+      "name": "সেতু আপু শিবলু মি:",
+      "phone": "017459368525",
+      "address": "পাটাচুড়া",
+      "whatsapp_enabled": false,
+      "total_due": 957,
+      "created_at": "2026-10-15T03:26:14.664Z"
     }
   ],
   "invoices": [],
@@ -3165,6 +3174,20 @@
       "note": "সাইফুল মামা- — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-15T03:25:06.292Z",
       "time_display": "15-10-2026 | 09:25:06"
+    },
+    {
+      "id": 175,
+      "customer_id": 125,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 957,
+      "balance": 957,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "সেতু আপু শিবলু মি: — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-15T03:26:14.664Z",
+      "time_display": "15-10-2026 | 09:26:14"
     }
   ],
   "cash_ledger": [],
@@ -3235,7 +3258,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-15T03:25:10.030Z"
+      "last_sync": "2026-10-15T03:26:18.627Z"
     },
     "default_labor_cost": 0
   },
