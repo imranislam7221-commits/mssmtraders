@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 130,
+    "customer": 131,
     "cash": 15,
     "invoice": 13,
-    "cleger": 180,
+    "cleger": 181,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1592,6 +1592,15 @@
       "whatsapp_enabled": false,
       "total_due": 25502,
       "created_at": "2026-10-15T03:35:37.008Z"
+    },
+    {
+      "id": 131,
+      "name": "ঝন্টু ভাই",
+      "phone": "01987275410",
+      "address": "আক্দবাড়িয়া",
+      "whatsapp_enabled": false,
+      "total_due": 15140,
+      "created_at": "2026-10-15T03:37:26.616Z"
     }
   ],
   "invoices": [],
@@ -3303,6 +3312,20 @@
       "note": "নাসির  ভাই — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-15T03:35:37.008Z",
       "time_display": "15-10-2026 | 09:35:37"
+    },
+    {
+      "id": 181,
+      "customer_id": 131,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 15140,
+      "balance": 15140,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "ঝন্টু ভাই — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-15T03:37:26.616Z",
+      "time_display": "15-10-2026 | 09:37:26"
     }
   ],
   "cash_ledger": [],
@@ -3373,7 +3396,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-15T03:32:47.239Z"
+      "last_sync": "2026-10-15T03:37:30.507Z"
     },
     "default_labor_cost": 0
   },
