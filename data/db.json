@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 172,
+    "customer": 173,
     "cash": 15,
     "invoice": 13,
-    "cleger": 222,
+    "cleger": 223,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1961,6 +1961,15 @@
       "whatsapp_enabled": false,
       "total_due": 28584,
       "created_at": "2026-10-15T09:54:35.994Z"
+    },
+    {
+      "id": 173,
+      "name": "জুয়েল  - শহিদুল - খুকা",
+      "phone": "01997916218",
+      "address": "ঈশ্বরচন্দ্রপুর",
+      "whatsapp_enabled": false,
+      "total_due": 9645,
+      "created_at": "2026-10-15T09:55:50.850Z"
     }
   ],
   "invoices": [],
@@ -4246,6 +4255,20 @@
       "note": "সুমন - শহিদুল — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-15T09:54:35.994Z",
       "time_display": "15-10-2026 | 15:54:35"
+    },
+    {
+      "id": 223,
+      "customer_id": 173,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 9645,
+      "balance": 9645,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "জুয়েল  - শহিদুল - খুকা — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-15T09:55:50.850Z",
+      "time_display": "15-10-2026 | 15:55:50"
     }
   ],
   "cash_ledger": [],
@@ -4316,7 +4339,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-15T09:54:39.102Z"
+      "last_sync": "2026-10-15T09:55:54.535Z"
     },
     "default_labor_cost": 0
   },
