@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 160,
+    "customer": 161,
     "cash": 15,
     "invoice": 13,
-    "cleger": 210,
+    "cleger": 211,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1853,6 +1853,15 @@
       "whatsapp_enabled": false,
       "total_due": 3404,
       "created_at": "2026-10-15T05:53:08.090Z"
+    },
+    {
+      "id": 161,
+      "name": "হাছানুল ড্রাইভার",
+      "phone": "01811945373",
+      "address": "শ্যামপুর",
+      "whatsapp_enabled": false,
+      "total_due": 4049,
+      "created_at": "2026-10-15T05:54:10.857Z"
     }
   ],
   "invoices": [],
@@ -3970,6 +3979,20 @@
       "note": "মারুফ - দোকান — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-15T05:53:08.090Z",
       "time_display": "15-10-2026 | 11:53:08"
+    },
+    {
+      "id": 211,
+      "customer_id": 161,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 4049,
+      "balance": 4049,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "হাছানুল ড্রাইভার — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-15T05:54:10.857Z",
+      "time_display": "15-10-2026 | 11:54:10"
     }
   ],
   "cash_ledger": [],
@@ -4040,7 +4063,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-15T05:53:11.440Z"
+      "last_sync": "2026-10-15T05:54:14.807Z"
     },
     "default_labor_cost": 0
   },
