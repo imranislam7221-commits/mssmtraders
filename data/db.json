@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 129,
+    "customer": 130,
     "cash": 15,
     "invoice": 13,
-    "cleger": 179,
+    "cleger": 180,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1583,6 +1583,15 @@
       "whatsapp_enabled": false,
       "total_due": 55500,
       "created_at": "2026-10-15T03:32:43.319Z"
+    },
+    {
+      "id": 130,
+      "name": "নাসির  ভাই",
+      "phone": "01995907510",
+      "address": "পরানপুর",
+      "whatsapp_enabled": false,
+      "total_due": 25502,
+      "created_at": "2026-10-15T03:35:37.008Z"
     }
   ],
   "invoices": [],
@@ -3280,6 +3289,20 @@
       "note": "বকুল ভাইরা ভাই — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-15T03:32:43.319Z",
       "time_display": "15-10-2026 | 09:32:43"
+    },
+    {
+      "id": 180,
+      "customer_id": 130,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 25502,
+      "balance": 25502,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "নাসির  ভাই — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-15T03:35:37.008Z",
+      "time_display": "15-10-2026 | 09:35:37"
     }
   ],
   "cash_ledger": [],
