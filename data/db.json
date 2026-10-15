@@ -2,7 +2,7 @@
   "counters": {
     "user": 1,
     "product": 41,
-    "ledger": 38,
+    "ledger": 39,
     "customer": 178,
     "cash": 15,
     "invoice": 13,
@@ -254,7 +254,7 @@
       "unit": "কেজি",
       "size_mili": 10,
       "opening_stock": 0,
-      "current_stock": 0,
+      "current_stock": 1500,
       "purchase_price": 70,
       "selling_price": 80,
       "low_stock": 100,
@@ -507,6 +507,21 @@
       "note": "বাকিতে ক্রয় (Credit) • 1 টন চালান",
       "timestamp": "2026-10-15T10:24:51.492Z",
       "time_display": "15-10-2026 | 16:24:51"
+    },
+    {
+      "id": 39,
+      "product_id": 23,
+      "product_name": "সিএসআরএম রড ১০ মি.লি",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "type": "IN",
+      "quantity": 1500,
+      "unit_cost": 70,
+      "unit_price": null,
+      "source": "Stock In",
+      "note": "বাকিতে ক্রয় (Credit) • 1.5 টন চালান",
+      "timestamp": "2026-10-15T10:25:38.306Z",
+      "time_display": "15-10-2026 | 16:25:38"
     }
   ],
   "customers": [
@@ -4469,7 +4484,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-15T09:59:46.601Z"
+      "last_sync": "2026-10-15T10:24:57.337Z"
     },
     "default_labor_cost": 0
   },
