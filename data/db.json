@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 171,
+    "customer": 172,
     "cash": 15,
     "invoice": 13,
-    "cleger": 221,
+    "cleger": 222,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1952,6 +1952,15 @@
       "whatsapp_enabled": false,
       "total_due": 63710,
       "created_at": "2026-10-15T09:53:52.097Z"
+    },
+    {
+      "id": 172,
+      "name": "সুমন - শহিদুল",
+      "phone": "01928563038",
+      "address": "মদনা / ঈশ্বরচন্দ্রপুর",
+      "whatsapp_enabled": false,
+      "total_due": 28584,
+      "created_at": "2026-10-15T09:54:35.994Z"
     }
   ],
   "invoices": [],
@@ -4223,6 +4232,20 @@
       "note": "হাসান - ভাই — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-15T09:53:52.097Z",
       "time_display": "15-10-2026 | 15:53:52"
+    },
+    {
+      "id": 222,
+      "customer_id": 172,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 28584,
+      "balance": 28584,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "সুমন - শহিদুল — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-15T09:54:35.994Z",
+      "time_display": "15-10-2026 | 15:54:35"
     }
   ],
   "cash_ledger": [],
@@ -4293,7 +4316,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-15T09:52:55.768Z"
+      "last_sync": "2026-10-15T09:54:39.102Z"
     },
     "default_labor_cost": 0
   },
