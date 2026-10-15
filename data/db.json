@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 157,
+    "customer": 158,
     "cash": 15,
     "invoice": 13,
-    "cleger": 207,
+    "cleger": 208,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1826,6 +1826,15 @@
       "whatsapp_enabled": false,
       "total_due": 20560,
       "created_at": "2026-10-15T05:47:03.010Z"
+    },
+    {
+      "id": 158,
+      "name": "কামরুজামান ইমাম",
+      "phone": "01918605078",
+      "address": "শ্যামপুর",
+      "whatsapp_enabled": false,
+      "total_due": 6750,
+      "created_at": "2026-10-15T05:49:37.609Z"
     }
   ],
   "invoices": [],
@@ -3901,6 +3910,20 @@
       "note": "জুয়েল কাকা — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-15T05:47:03.010Z",
       "time_display": "15-10-2026 | 11:47:03"
+    },
+    {
+      "id": 208,
+      "customer_id": 158,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 6750,
+      "balance": 6750,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "কামরুজামান ইমাম — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-15T05:49:37.609Z",
+      "time_display": "15-10-2026 | 11:49:37"
     }
   ],
   "cash_ledger": [],
@@ -3971,7 +3994,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-15T05:46:28.765Z"
+      "last_sync": "2026-10-15T05:49:41.185Z"
     },
     "default_labor_cost": 0
   },
