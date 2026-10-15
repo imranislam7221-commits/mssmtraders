@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 139,
+    "customer": 140,
     "cash": 15,
     "invoice": 13,
-    "cleger": 189,
+    "cleger": 190,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1673,6 +1673,15 @@
       "whatsapp_enabled": false,
       "total_due": 24030,
       "created_at": "2026-10-15T04:23:47.869Z"
+    },
+    {
+      "id": 140,
+      "name": "কাশেম মি:",
+      "phone": "01949140332",
+      "address": "শ্যামপুর",
+      "whatsapp_enabled": false,
+      "total_due": 1850,
+      "created_at": "2026-10-15T04:24:38.672Z"
     }
   ],
   "invoices": [],
@@ -3510,6 +3519,20 @@
       "note": "মফি মামা — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-15T04:23:47.869Z",
       "time_display": "15-10-2026 | 10:23:47"
+    },
+    {
+      "id": 190,
+      "customer_id": 140,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 1850,
+      "balance": 1850,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "কাশেম মি: — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-15T04:24:38.672Z",
+      "time_display": "15-10-2026 | 10:24:38"
     }
   ],
   "cash_ledger": [],
@@ -3580,7 +3603,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-15T04:18:56.155Z"
+      "last_sync": "2026-10-15T04:24:41.736Z"
     },
     "default_labor_cost": 0
   },
