@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 39,
-    "customer": 181,
+    "customer": 182,
     "cash": 15,
     "invoice": 13,
-    "cleger": 231,
+    "cleger": 232,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -2072,6 +2072,15 @@
       "whatsapp_enabled": false,
       "total_due": 1100,
       "created_at": "2026-10-15T11:42:56.716Z"
+    },
+    {
+      "id": 182,
+      "name": "রুবেল/ সজিব",
+      "phone": "01992309756",
+      "address": "শ্যামপুর",
+      "whatsapp_enabled": false,
+      "total_due": 1345,
+      "created_at": "2026-10-15T11:43:38.183Z"
     }
   ],
   "invoices": [],
@@ -4483,6 +4492,20 @@
       "note": "জিনারুল ভাই — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-15T11:42:56.716Z",
       "time_display": "15-10-2026 | 17:42:56"
+    },
+    {
+      "id": 232,
+      "customer_id": 182,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 1345,
+      "balance": 1345,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "রুবেল/ সজিব — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-15T11:43:38.183Z",
+      "time_display": "15-10-2026 | 17:43:38"
     }
   ],
   "cash_ledger": [],
@@ -4553,7 +4576,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-15T11:42:34.821Z"
+      "last_sync": "2026-10-15T11:43:04.894Z"
     },
     "default_labor_cost": 0
   },
