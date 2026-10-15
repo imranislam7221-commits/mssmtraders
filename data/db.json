@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 39,
-    "customer": 178,
+    "customer": 179,
     "cash": 15,
     "invoice": 13,
-    "cleger": 228,
+    "cleger": 229,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -2045,6 +2045,15 @@
       "whatsapp_enabled": false,
       "total_due": 3700,
       "created_at": "2026-10-15T09:59:43.051Z"
+    },
+    {
+      "id": 179,
+      "name": "সুমন ভাই",
+      "phone": "01942753690",
+      "address": "আজিমপুর",
+      "whatsapp_enabled": false,
+      "total_due": 12500,
+      "created_at": "2026-10-15T11:41:44.372Z"
     }
   ],
   "invoices": [],
@@ -4414,6 +4423,20 @@
       "note": "লিটু - দাদা — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-15T09:59:43.051Z",
       "time_display": "15-10-2026 | 15:59:43"
+    },
+    {
+      "id": 229,
+      "customer_id": 179,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 12500,
+      "balance": 12500,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "সুমন ভাই — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-15T11:41:44.372Z",
+      "time_display": "15-10-2026 | 17:41:44"
     }
   ],
   "cash_ledger": [],
