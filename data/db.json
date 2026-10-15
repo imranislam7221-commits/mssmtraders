@@ -3,10 +3,10 @@
     "user": 1,
     "product": 41,
     "ledger": 37,
-    "customer": 148,
+    "customer": 149,
     "cash": 15,
     "invoice": 13,
-    "cleger": 198,
+    "cleger": 199,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1745,6 +1745,15 @@
       "whatsapp_enabled": false,
       "total_due": 10900,
       "created_at": "2026-10-15T05:39:06.154Z"
+    },
+    {
+      "id": 149,
+      "name": "মাহাবুল / কাশেম মি:",
+      "phone": "01930457850",
+      "address": "আকুন্দবাড়িয়া",
+      "whatsapp_enabled": false,
+      "total_due": 52000,
+      "created_at": "2026-10-15T05:39:48.821Z"
     }
   ],
   "invoices": [],
@@ -3694,6 +3703,20 @@
       "note": "আইয়ুব আলী — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-15T05:39:06.154Z",
       "time_display": "15-10-2026 | 11:39:06"
+    },
+    {
+      "id": 199,
+      "customer_id": 149,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 52000,
+      "balance": 52000,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "মাহাবুল / কাশেম মি: — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-15T05:39:48.821Z",
+      "time_display": "15-10-2026 | 11:39:48"
     }
   ],
   "cash_ledger": [],
