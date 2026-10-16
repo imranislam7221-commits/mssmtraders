@@ -1248,7 +1248,7 @@
     {
       "id": 85,
       "name": "নাজমুল - মামা",
-      "phone": "01832519601--01782145751",
+      "phone": "01832519601",
       "address": "ঈশ্বরচন্দ্রপুর",
       "whatsapp_enabled": false,
       "total_due": 57641,
@@ -4670,7 +4670,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-15T15:00:14.550Z"
+      "last_sync": "2026-10-15T15:00:37.214Z"
     },
     "default_labor_cost": 0
   },
