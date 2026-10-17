@@ -1,8 +1,8 @@
 {
   "counters": {
     "user": 1,
-    "product": 46,
-    "ledger": 57,
+    "product": 47,
+    "ledger": 58,
     "customer": 184,
     "cash": 16,
     "invoice": 14,
@@ -485,6 +485,20 @@
       "low_stock": 10,
       "created_at": "2026-10-17T07:26:10.682Z",
       "created_by": 1
+    },
+    {
+      "id": 47,
+      "name": "ইট ১ নং",
+      "category": "ইট",
+      "unit": "পিস",
+      "size_mili": null,
+      "opening_stock": 4000,
+      "current_stock": 4000,
+      "purchase_price": 10.5,
+      "selling_price": 11,
+      "low_stock": 10,
+      "created_at": "2026-10-17T07:28:00.066Z",
+      "created_by": 1
     }
   ],
   "stock_ledger": [
@@ -862,6 +876,21 @@
       "note": "Created with initial stock",
       "timestamp": "2026-10-17T07:26:10.682Z",
       "time_display": "17-10-2026 | 13:26:10"
+    },
+    {
+      "id": 58,
+      "product_id": 47,
+      "product_name": "ইট ১ নং",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "type": "OPENING",
+      "quantity": 4000,
+      "unit_cost": 10.5,
+      "unit_price": null,
+      "source": "Opening Stock",
+      "note": "Created with initial stock",
+      "timestamp": "2026-10-17T07:28:00.066Z",
+      "time_display": "17-10-2026 | 13:28:00"
     }
   ],
   "customers": [
@@ -5022,7 +5051,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-17T07:16:46.039Z"
+      "last_sync": "2026-10-17T07:28:03.332Z"
     },
     "default_labor_cost": 0
   },
