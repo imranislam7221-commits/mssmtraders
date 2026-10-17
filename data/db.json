@@ -438,8 +438,8 @@
       "size_mili": null,
       "opening_stock": 0,
       "current_stock": 50,
-      "purchase_price": 80,
-      "selling_price": 85,
+      "purchase_price": 50,
+      "selling_price": 55,
       "low_stock": 10,
       "created_at": "2026-10-17T06:45:44.761Z",
       "created_by": 1
@@ -4728,7 +4728,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-17T06:47:05.691Z"
+      "last_sync": "2026-10-17T06:47:37.161Z"
     },
     "default_labor_cost": 0
   },
