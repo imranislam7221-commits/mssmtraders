@@ -1811,15 +1811,6 @@
       "created_at": "2026-10-14T11:17:06.489Z"
     },
     {
-      "id": 102,
-      "name": "বকতিয়ার ভাই",
-      "phone": "01731393344",
-      "address": "শ্যামপুর",
-      "whatsapp_enabled": false,
-      "total_due": 24653,
-      "created_at": "2026-10-14T11:19:32.808Z"
-    },
-    {
       "id": 103,
       "name": "স্বপন - রুটি",
       "phone": "01305833068",
@@ -3884,20 +3875,6 @@
       "time_display": "14-10-2026 | 17:17:06"
     },
     {
-      "id": 152,
-      "customer_id": 102,
-      "user_id": 1,
-      "user_name": "মুনজুর আহমেদ",
-      "transaction_type": "DEBIT",
-      "amount": 24653,
-      "balance": 24653,
-      "prev_due": 0,
-      "source": "পূর্বের বাকি (Opening Due)",
-      "note": "বকতিয়ার ভাই — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
-      "timestamp": "2026-10-14T11:19:32.808Z",
-      "time_display": "14-10-2026 | 17:19:32"
-    },
-    {
       "id": 153,
       "customer_id": 103,
       "user_id": 1,
@@ -5164,7 +5141,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-17T07:57:47.658Z"
+      "last_sync": "2026-10-17T11:50:29.126Z"
     },
     "default_labor_cost": 0
   },
