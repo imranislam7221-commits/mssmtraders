@@ -2,7 +2,7 @@
   "counters": {
     "user": 1,
     "product": 44,
-    "ledger": 48,
+    "ledger": 49,
     "customer": 184,
     "cash": 16,
     "invoice": 13,
@@ -226,9 +226,9 @@
       "unit": "কেজি",
       "size_mili": 16,
       "opening_stock": 0,
-      "current_stock": 0,
-      "purchase_price": 71,
-      "selling_price": 81,
+      "current_stock": 500,
+      "purchase_price": 86,
+      "selling_price": 90,
       "low_stock": 100,
       "created_at": "2026-10-12T06:42:33.350Z",
       "created_by": 1,
@@ -699,6 +699,21 @@
       "note": "পূর্বের স্টক 0 থেকে পরিবর্তন করে 6000 করা হলো",
       "timestamp": "2026-10-17T06:51:53.652Z",
       "time_display": "17-10-2026 | 12:51:53"
+    },
+    {
+      "id": 49,
+      "product_id": 19,
+      "product_name": "এইচকেজি রড ১৬ মি.লি",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "type": "IN",
+      "quantity": 500,
+      "unit_cost": 86,
+      "unit_price": null,
+      "source": "ম্যানুয়াল স্টক সংশোধন (Edit)",
+      "note": "পূর্বের স্টক 0 থেকে পরিবর্তন করে 500 করা হলো",
+      "timestamp": "2026-10-17T06:53:42.344Z",
+      "time_display": "17-10-2026 | 12:53:42"
     }
   ],
   "customers": [
@@ -4802,7 +4817,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-17T06:51:56.568Z"
+      "last_sync": "2026-10-17T06:53:46.106Z"
     },
     "default_labor_cost": 0
   },
