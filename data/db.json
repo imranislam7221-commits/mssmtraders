@@ -3,10 +3,10 @@
     "user": 1,
     "product": 49,
     "ledger": 62,
-    "customer": 184,
+    "customer": 185,
     "cash": 17,
     "invoice": 14,
-    "cleger": 237,
+    "cleger": 238,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -2538,6 +2538,15 @@
       "whatsapp_enabled": false,
       "total_due": 2750,
       "created_at": "2026-10-15T11:49:32.967Z"
+    },
+    {
+      "id": 185,
+      "name": "বকতিয়ার ভাই",
+      "phone": "01731393344",
+      "address": "শ্যামপুর",
+      "whatsapp_enabled": false,
+      "total_due": 34953,
+      "created_at": "2026-10-17T13:50:18.547Z"
     }
   ],
   "invoices": [
@@ -5048,6 +5057,20 @@
       "note": "Cash received",
       "timestamp": "2026-10-17T11:50:24.292Z",
       "time_display": "17-10-2026 | 17:50:24"
+    },
+    {
+      "id": 238,
+      "customer_id": 185,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 34953,
+      "balance": 34953,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "বকতিয়ার ভাই — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-10-17T13:50:18.547Z",
+      "time_display": "17-10-2026 | 19:50:18"
     }
   ],
   "cash_ledger": [
@@ -5141,7 +5164,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-17T11:50:29.126Z"
+      "last_sync": "2026-10-17T13:49:34.305Z"
     },
     "default_labor_cost": 0
   },
