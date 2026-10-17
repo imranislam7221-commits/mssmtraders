@@ -1770,7 +1770,7 @@
     {
       "id": 143,
       "name": "পিন্টু শাহ",
-      "phone": "18000",
+      "phone": "01917392644",
       "address": "দর্শনা",
       "whatsapp_enabled": false,
       "total_due": 18000,
@@ -4670,7 +4670,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-15T15:00:37.214Z"
+      "last_sync": "2026-10-17T06:40:00.256Z"
     },
     "default_labor_cost": 0
   },
