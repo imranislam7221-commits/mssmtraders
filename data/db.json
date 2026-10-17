@@ -2,11 +2,11 @@
   "counters": {
     "user": 1,
     "product": 44,
-    "ledger": 50,
+    "ledger": 52,
     "customer": 184,
     "cash": 16,
-    "invoice": 13,
-    "cleger": 235,
+    "invoice": 14,
+    "cleger": 236,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -58,7 +58,7 @@
       "unit": "বস্তা",
       "size_mili": null,
       "opening_stock": 0,
-      "current_stock": 361,
+      "current_stock": 359,
       "purchase_price": 520,
       "selling_price": 560,
       "low_stock": 40,
@@ -423,7 +423,7 @@
       "unit": "ঘনফুট",
       "size_mili": null,
       "opening_stock": 750,
-      "current_stock": 750,
+      "current_stock": 740,
       "purchase_price": 45,
       "selling_price": 50,
       "low_stock": 10,
@@ -729,6 +729,36 @@
       "note": "পূর্বের স্টক 0 থেকে পরিবর্তন করে 1100 করা হলো",
       "timestamp": "2026-10-17T06:57:52.224Z",
       "time_display": "17-10-2026 | 12:57:52"
+    },
+    {
+      "id": 51,
+      "product_id": 3,
+      "product_name": "ফ্রেশ সিমেন্ট ৮০",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "type": "OUT",
+      "quantity": 2,
+      "unit_cost": null,
+      "unit_price": 550,
+      "source": "INV-14",
+      "note": "Sold to টোটন ভাই",
+      "timestamp": "2026-10-17T07:06:37.735Z",
+      "time_display": "17-10-2026 | 13:06:37"
+    },
+    {
+      "id": 52,
+      "product_id": 42,
+      "product_name": "রানিং বালি",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "type": "OUT",
+      "quantity": 10,
+      "unit_cost": null,
+      "unit_price": 45,
+      "source": "INV-14",
+      "note": "Sold to টোটন ভাই",
+      "timestamp": "2026-10-17T07:06:37.735Z",
+      "time_display": "17-10-2026 | 13:06:37"
     }
   ],
   "customers": [
@@ -1863,7 +1893,7 @@
       "phone": "01716414681",
       "address": "শ্যামপুর-পাইপঘাট",
       "whatsapp_enabled": false,
-      "total_due": 6440,
+      "total_due": 7990,
       "created_at": "2026-10-15T04:16:11.006Z"
     },
     {
@@ -2299,7 +2329,51 @@
       "created_at": "2026-10-15T11:49:32.967Z"
     }
   ],
-  "invoices": [],
+  "invoices": [
+    {
+      "id": 14,
+      "invoice_no": "INV-14",
+      "offline_invoice_no": null,
+      "customer_id": 135,
+      "customer_name": "টোটন ভাই",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "items": [
+        {
+          "product_id": 3,
+          "name": "ফ্রেশ সিমেন্ট ৮০",
+          "unit": "বস্তা",
+          "qty": 2,
+          "price": 550,
+          "amount": 1100
+        },
+        {
+          "product_id": 42,
+          "name": "রানিং বালি",
+          "unit": "ঘনফুট",
+          "qty": 10,
+          "price": 45,
+          "amount": 450
+        }
+      ],
+      "subtotal": 1550,
+      "discount": 0,
+      "labor_cost": 0,
+      "vat_percent": 0,
+      "vat": 0,
+      "total": 1550,
+      "paid": 0,
+      "due": 1550,
+      "prev_due": 6440,
+      "net_due": 7990,
+      "note": "",
+      "print_status": "pending",
+      "sms_status": "skipped (MiMSMS not configured)",
+      "wa_status": "pending",
+      "timestamp": "2026-10-17T07:06:37.735Z",
+      "time_display": "17-10-2026 | 13:06:37"
+    }
+  ],
   "customer_ledger": [
     {
       "id": 5,
@@ -4750,6 +4824,19 @@
       "note": "Cash received",
       "timestamp": "2026-10-15T13:47:13.963Z",
       "time_display": "15-10-2026 | 19:47:13"
+    },
+    {
+      "id": 236,
+      "customer_id": 135,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 1550,
+      "balance": 7990,
+      "source": "INV-14",
+      "note": "Invoice INV-14",
+      "timestamp": "2026-10-17T07:06:37.735Z",
+      "time_display": "17-10-2026 | 13:06:37"
     }
   ],
   "cash_ledger": [
@@ -4832,7 +4919,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-17T06:57:55.732Z"
+      "last_sync": "2026-10-17T07:06:41.458Z"
     },
     "default_labor_cost": 0
   },
