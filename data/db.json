@@ -2,7 +2,7 @@
   "counters": {
     "user": 1,
     "product": 49,
-    "ledger": 61,
+    "ledger": 62,
     "customer": 184,
     "cash": 16,
     "invoice": 14,
@@ -352,10 +352,10 @@
       "unit": "কেজি",
       "size_mili": null,
       "opening_stock": 0,
-      "current_stock": 0,
-      "purchase_price": 95,
-      "selling_price": 115,
-      "low_stock": 20,
+      "current_stock": 25,
+      "purchase_price": 145,
+      "selling_price": 160,
+      "low_stock": 10,
       "created_at": "2026-10-12T06:42:33.350Z",
       "created_by": 1,
       "id": 34
@@ -964,6 +964,21 @@
       "note": "পূর্বের স্টক 0 থেকে পরিবর্তন করে 15 করা হলো",
       "timestamp": "2026-10-17T07:57:03.535Z",
       "time_display": "17-10-2026 | 13:57:03"
+    },
+    {
+      "id": 62,
+      "product_id": 34,
+      "product_name": "তার (বাইন্ডিং ওয়্যার)",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "type": "IN",
+      "quantity": 25,
+      "unit_cost": 145,
+      "unit_price": null,
+      "source": "ম্যানুয়াল স্টক সংশোধন (Edit)",
+      "note": "পূর্বের স্টক 0 থেকে পরিবর্তন করে 25 করা হলো",
+      "timestamp": "2026-10-17T07:57:43.632Z",
+      "time_display": "17-10-2026 | 13:57:43"
     }
   ],
   "customers": [
