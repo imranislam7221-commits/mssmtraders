@@ -4,9 +4,9 @@
     "product": 49,
     "ledger": 62,
     "customer": 184,
-    "cash": 16,
+    "cash": 17,
     "invoice": 14,
-    "cleger": 236,
+    "cleger": 237,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1159,7 +1159,7 @@
       "phone": "জয়নগর",
       "address": "01909707068--01908312675",
       "whatsapp_enabled": false,
-      "total_due": 152924,
+      "total_due": 100000,
       "created_at": "2026-10-14T06:25:16.975Z"
     },
     {
@@ -5057,6 +5057,20 @@
       "note": "Invoice INV-14",
       "timestamp": "2026-10-17T07:06:37.735Z",
       "time_display": "17-10-2026 | 13:06:37"
+    },
+    {
+      "id": 237,
+      "customer_id": 27,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "CREDIT",
+      "amount": 52924,
+      "balance": 100000,
+      "prev_due": 152924,
+      "source": "Payment Collection",
+      "note": "Cash received",
+      "timestamp": "2026-10-17T11:50:24.292Z",
+      "time_display": "17-10-2026 | 17:50:24"
     }
   ],
   "cash_ledger": [
@@ -5070,6 +5084,17 @@
       "user_name": "মুনজুর আহমেদ",
       "timestamp": "2026-10-15T13:47:13.963Z",
       "time_display": "15-10-2026 | 19:47:13"
+    },
+    {
+      "id": 17,
+      "type": "IN",
+      "amount": 52924,
+      "balance": 53924,
+      "source": "Payment Collection",
+      "note": "Cash received (শাহাজান)",
+      "user_name": "মুনজুর আহমেদ",
+      "timestamp": "2026-10-17T11:50:24.292Z",
+      "time_display": "17-10-2026 | 17:50:24"
     }
   ],
   "sessions": {
@@ -5139,7 +5164,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-17T07:57:07.429Z"
+      "last_sync": "2026-10-17T07:57:47.658Z"
     },
     "default_labor_cost": 0
   },
