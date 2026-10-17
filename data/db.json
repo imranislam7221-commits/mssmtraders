@@ -2,7 +2,7 @@
   "counters": {
     "user": 1,
     "product": 44,
-    "ledger": 45,
+    "ledger": 46,
     "customer": 184,
     "cash": 16,
     "invoice": 13,
@@ -451,7 +451,7 @@
       "unit": "ঘনফুট",
       "size_mili": null,
       "opening_stock": 50,
-      "current_stock": 50,
+      "current_stock": 60,
       "purchase_price": 80,
       "selling_price": 85,
       "low_stock": 10,
@@ -654,6 +654,21 @@
       "note": "Created with initial stock",
       "timestamp": "2026-10-17T06:48:14.911Z",
       "time_display": "17-10-2026 | 12:48:14"
+    },
+    {
+      "id": 46,
+      "product_id": 44,
+      "product_name": "পঞ্চগড় বালি",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "type": "IN",
+      "quantity": 10,
+      "unit_cost": 80,
+      "unit_price": null,
+      "source": "ম্যানুয়াল স্টক সংশোধন (Edit)",
+      "note": "পূর্বের স্টক 50 থেকে পরিবর্তন করে 60 করা হলো",
+      "timestamp": "2026-10-17T06:48:32.556Z",
+      "time_display": "17-10-2026 | 12:48:32"
     }
   ],
   "customers": [
@@ -4757,7 +4772,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-17T06:48:18.320Z"
+      "last_sync": "2026-10-17T06:48:35.622Z"
     },
     "default_labor_cost": 0
   },
