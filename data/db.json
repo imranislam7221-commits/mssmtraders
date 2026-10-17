@@ -2,7 +2,7 @@
   "counters": {
     "user": 1,
     "product": 43,
-    "ledger": 43,
+    "ledger": 44,
     "customer": 184,
     "cash": 16,
     "invoice": 13,
@@ -437,9 +437,9 @@
       "unit": "ঘনফুট",
       "size_mili": null,
       "opening_stock": 0,
-      "current_stock": 0,
-      "purchase_price": 0,
-      "selling_price": 0,
+      "current_stock": 50,
+      "purchase_price": 80,
+      "selling_price": 85,
       "low_stock": 10,
       "created_at": "2026-10-17T06:45:44.761Z",
       "created_by": 1
@@ -610,6 +610,21 @@
       "note": "Created with initial stock",
       "timestamp": "2026-10-17T06:44:21.512Z",
       "time_display": "17-10-2026 | 12:44:21"
+    },
+    {
+      "id": 44,
+      "product_id": 43,
+      "product_name": "সেকেন্ড ডালাই  বালি",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "type": "IN",
+      "quantity": 50,
+      "unit_cost": 80,
+      "unit_price": null,
+      "source": "ম্যানুয়াল স্টক সংশোধন (Edit)",
+      "note": "পূর্বের স্টক 0 থেকে পরিবর্তন করে 50 করা হলো",
+      "timestamp": "2026-10-17T06:47:02.499Z",
+      "time_display": "17-10-2026 | 12:47:02"
     }
   ],
   "customers": [
@@ -4713,7 +4728,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-17T06:44:25.426Z"
+      "last_sync": "2026-10-17T06:47:05.691Z"
     },
     "default_labor_cost": 0
   },
