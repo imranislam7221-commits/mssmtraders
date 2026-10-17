@@ -2,7 +2,7 @@
   "counters": {
     "user": 1,
     "product": 44,
-    "ledger": 54,
+    "ledger": 55,
     "customer": 184,
     "cash": 16,
     "invoice": 14,
@@ -44,7 +44,7 @@
       "unit": "বস্তা",
       "size_mili": null,
       "opening_stock": 0,
-      "current_stock": 111,
+      "current_stock": 78,
       "purchase_price": 535,
       "selling_price": 570,
       "low_stock": 40,
@@ -789,6 +789,21 @@
       "note": "পূর্বের স্টক 359 থেকে পরিবর্তন করে 166 করা হলো",
       "timestamp": "2026-10-17T07:09:23.756Z",
       "time_display": "17-10-2026 | 13:09:23"
+    },
+    {
+      "id": 55,
+      "product_id": 2,
+      "product_name": "ফ্রেশ সিমেন্ট ৯৪",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "type": "OUT",
+      "quantity": 33,
+      "unit_cost": 535,
+      "unit_price": null,
+      "source": "ম্যানুয়াল স্টক সংশোধন (Edit)",
+      "note": "পূর্বের স্টক 111 থেকে পরিবর্তন করে 78 করা হলো",
+      "timestamp": "2026-10-17T07:09:34.725Z",
+      "time_display": "17-10-2026 | 13:09:34"
     }
   ],
   "customers": [
@@ -4949,7 +4964,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-17T07:09:26.858Z"
+      "last_sync": "2026-10-17T07:09:38.293Z"
     },
     "default_labor_cost": 0
   },
