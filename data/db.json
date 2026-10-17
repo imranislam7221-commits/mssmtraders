@@ -1,7 +1,7 @@
 {
   "counters": {
     "user": 1,
-    "product": 42,
+    "product": 43,
     "ledger": 43,
     "customer": 184,
     "cash": 16,
@@ -428,6 +428,20 @@
       "selling_price": 50,
       "low_stock": 10,
       "created_at": "2026-10-17T06:44:21.512Z",
+      "created_by": 1
+    },
+    {
+      "id": 43,
+      "name": "সেকেন্ড ডালাই  বালি",
+      "category": "বালি",
+      "unit": "ঘনফুট",
+      "size_mili": null,
+      "opening_stock": 0,
+      "current_stock": 0,
+      "purchase_price": 0,
+      "selling_price": 0,
+      "low_stock": 10,
+      "created_at": "2026-10-17T06:45:44.761Z",
       "created_by": 1
     }
   ],
