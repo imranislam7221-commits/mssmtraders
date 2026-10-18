@@ -2,11 +2,11 @@
   "counters": {
     "user": 1,
     "product": 49,
-    "ledger": 63,
-    "customer": 186,
-    "cash": 18,
-    "invoice": 15,
-    "cleger": 240,
+    "ledger": 64,
+    "customer": 187,
+    "cash": 19,
+    "invoice": 16,
+    "cleger": 242,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -44,7 +44,7 @@
       "unit": "বস্তা",
       "size_mili": null,
       "opening_stock": 0,
-      "current_stock": 78,
+      "current_stock": 71,
       "purchase_price": 535,
       "selling_price": 570,
       "low_stock": 40,
@@ -994,6 +994,21 @@
       "note": "Sold to মনিরুল ভাই",
       "timestamp": "2026-10-18T01:45:47.445Z",
       "time_display": "18-10-2026 | 07:45:47"
+    },
+    {
+      "id": 64,
+      "product_id": 2,
+      "product_name": "ফ্রেশ সিমেন্ট ৯৪",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "type": "OUT",
+      "quantity": 7,
+      "unit_cost": null,
+      "unit_price": 550,
+      "source": "INV-16",
+      "note": "Sold to রেসাদ ভাই",
+      "timestamp": "2026-10-18T01:49:30.590Z",
+      "time_display": "18-10-2026 | 07:49:30"
     }
   ],
   "customers": [
@@ -2571,6 +2586,15 @@
       "whatsapp_enabled": false,
       "total_due": -3400,
       "created_at": "2026-10-18T01:45:47.445Z"
+    },
+    {
+      "id": 187,
+      "name": "রেসাদ ভাই",
+      "phone": "",
+      "address": "শ্যামপুর",
+      "whatsapp_enabled": false,
+      "total_due": 0,
+      "created_at": "2026-10-18T01:49:30.590Z"
     }
   ],
   "invoices": [
@@ -2651,6 +2675,41 @@
       "wa_status": "pending",
       "timestamp": "2026-10-18T01:45:47.445Z",
       "time_display": "18-10-2026 | 07:45:47"
+    },
+    {
+      "id": 16,
+      "invoice_no": "INV-16",
+      "offline_invoice_no": null,
+      "customer_id": 187,
+      "customer_name": "রেসাদ ভাই",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "items": [
+        {
+          "product_id": 2,
+          "name": "ফ্রেশ সিমেন্ট ৯৪",
+          "unit": "বস্তা",
+          "qty": 7,
+          "price": 550,
+          "amount": 3850
+        }
+      ],
+      "subtotal": 3850,
+      "discount": 0,
+      "labor_cost": 0,
+      "vat_percent": 0,
+      "vat": 0,
+      "total": 3850,
+      "paid": 3850,
+      "due": 0,
+      "prev_due": 0,
+      "net_due": 0,
+      "note": "",
+      "print_status": "pending",
+      "sms_status": "skipped (MiMSMS not configured)",
+      "wa_status": "pending",
+      "timestamp": "2026-10-18T01:49:30.590Z",
+      "time_display": "18-10-2026 | 07:49:30"
     }
   ],
   "customer_ledger": [
@@ -5156,6 +5215,32 @@
       "note": "Payment for INV-15",
       "timestamp": "2026-10-18T01:45:47.445Z",
       "time_display": "18-10-2026 | 07:45:47"
+    },
+    {
+      "id": 241,
+      "customer_id": 187,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 3850,
+      "balance": 3850,
+      "source": "INV-16",
+      "note": "Invoice INV-16",
+      "timestamp": "2026-10-18T01:49:30.590Z",
+      "time_display": "18-10-2026 | 07:49:30"
+    },
+    {
+      "id": 242,
+      "customer_id": 187,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "CREDIT",
+      "amount": 3850,
+      "balance": 0,
+      "source": "INV-16",
+      "note": "Payment for INV-16",
+      "timestamp": "2026-10-18T01:49:30.590Z",
+      "time_display": "18-10-2026 | 07:49:30"
     }
   ],
   "cash_ledger": [
@@ -5191,6 +5276,17 @@
       "user_name": "মুনজুর আহমেদ",
       "timestamp": "2026-10-18T01:45:47.445Z",
       "time_display": "18-10-2026 | 07:45:47"
+    },
+    {
+      "id": 19,
+      "type": "IN",
+      "amount": 3850,
+      "balance": 66774,
+      "source": "INV-16",
+      "note": "Sale payment",
+      "user_name": "মুনজুর আহমেদ",
+      "timestamp": "2026-10-18T01:49:30.590Z",
+      "time_display": "18-10-2026 | 07:49:30"
     }
   ],
   "sessions": {
@@ -5260,7 +5356,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-17T13:50:22.564Z"
+      "last_sync": "2026-10-18T01:45:52.067Z"
     },
     "default_labor_cost": 0
   },
