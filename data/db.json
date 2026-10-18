@@ -2,11 +2,11 @@
   "counters": {
     "user": 1,
     "product": 49,
-    "ledger": 64,
+    "ledger": 65,
     "customer": 187,
     "cash": 19,
-    "invoice": 16,
-    "cleger": 242,
+    "invoice": 17,
+    "cleger": 243,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -58,7 +58,7 @@
       "unit": "বস্তা",
       "size_mili": null,
       "opening_stock": 0,
-      "current_stock": 156,
+      "current_stock": 150,
       "purchase_price": 520,
       "selling_price": 560,
       "low_stock": 40,
@@ -1009,6 +1009,21 @@
       "note": "Sold to রেসাদ ভাই",
       "timestamp": "2026-10-18T01:49:30.590Z",
       "time_display": "18-10-2026 | 07:49:30"
+    },
+    {
+      "id": 65,
+      "product_id": 3,
+      "product_name": "ফ্রেশ সিমেন্ট ৮০",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "type": "OUT",
+      "quantity": 6,
+      "unit_cost": null,
+      "unit_price": 560,
+      "source": "INV-17",
+      "note": "Sold to লিটন - হাবিব - ভাই",
+      "timestamp": "2026-10-18T02:11:16.804Z",
+      "time_display": "18-10-2026 | 08:11:16"
     }
   ],
   "customers": [
@@ -1873,7 +1888,7 @@
       "phone": "01941204494",
       "address": "জয়নগর",
       "whatsapp_enabled": false,
-      "total_due": 2000,
+      "total_due": 5378,
       "created_at": "2026-10-14T11:23:00.994Z"
     },
     {
@@ -2710,6 +2725,41 @@
       "wa_status": "pending",
       "timestamp": "2026-10-18T01:49:30.590Z",
       "time_display": "18-10-2026 | 07:49:30"
+    },
+    {
+      "id": 17,
+      "invoice_no": "INV-17",
+      "offline_invoice_no": null,
+      "customer_id": 106,
+      "customer_name": "লিটন - হাবিব - ভাই",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "items": [
+        {
+          "product_id": 3,
+          "name": "ফ্রেশ সিমেন্ট ৮০",
+          "unit": "বস্তা",
+          "qty": 6,
+          "price": 560,
+          "amount": 3360
+        }
+      ],
+      "subtotal": 3360,
+      "discount": 0,
+      "labor_cost": 18,
+      "vat_percent": 0,
+      "vat": 0,
+      "total": 3378,
+      "paid": 0,
+      "due": 3378,
+      "prev_due": 2000,
+      "net_due": 5378,
+      "note": "",
+      "print_status": "pending",
+      "sms_status": "skipped (MiMSMS not configured)",
+      "wa_status": "pending",
+      "timestamp": "2026-10-18T02:11:16.804Z",
+      "time_display": "18-10-2026 | 08:11:16"
     }
   ],
   "customer_ledger": [
@@ -5241,6 +5291,19 @@
       "note": "Payment for INV-16",
       "timestamp": "2026-10-18T01:49:30.590Z",
       "time_display": "18-10-2026 | 07:49:30"
+    },
+    {
+      "id": 243,
+      "customer_id": 106,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 3378,
+      "balance": 5378,
+      "source": "INV-17",
+      "note": "Invoice INV-17",
+      "timestamp": "2026-10-18T02:11:16.804Z",
+      "time_display": "18-10-2026 | 08:11:16"
     }
   ],
   "cash_ledger": [
@@ -5356,7 +5419,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-18T01:45:52.067Z"
+      "last_sync": "2026-10-18T02:11:20.785Z"
     },
     "default_labor_cost": 0
   },
