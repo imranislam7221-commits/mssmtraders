@@ -2,11 +2,11 @@
   "counters": {
     "user": 1,
     "product": 49,
-    "ledger": 62,
-    "customer": 185,
-    "cash": 17,
-    "invoice": 14,
-    "cleger": 238,
+    "ledger": 63,
+    "customer": 186,
+    "cash": 18,
+    "invoice": 15,
+    "cleger": 240,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -58,7 +58,7 @@
       "unit": "বস্তা",
       "size_mili": null,
       "opening_stock": 0,
-      "current_stock": 166,
+      "current_stock": 156,
       "purchase_price": 520,
       "selling_price": 560,
       "low_stock": 40,
@@ -979,6 +979,21 @@
       "note": "পূর্বের স্টক 0 থেকে পরিবর্তন করে 25 করা হলো",
       "timestamp": "2026-10-17T07:57:43.632Z",
       "time_display": "17-10-2026 | 13:57:43"
+    },
+    {
+      "id": 63,
+      "product_id": 3,
+      "product_name": "ফ্রেশ সিমেন্ট ৮০",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "type": "OUT",
+      "quantity": 10,
+      "unit_cost": null,
+      "unit_price": 560,
+      "source": "INV-15",
+      "note": "Sold to মনিরুল ভাই",
+      "timestamp": "2026-10-18T01:45:47.445Z",
+      "time_display": "18-10-2026 | 07:45:47"
     }
   ],
   "customers": [
@@ -2547,6 +2562,15 @@
       "whatsapp_enabled": false,
       "total_due": 34953,
       "created_at": "2026-10-17T13:50:18.547Z"
+    },
+    {
+      "id": 186,
+      "name": "মনিরুল ভাই",
+      "phone": "01403565992",
+      "address": "শ্যামপুর",
+      "whatsapp_enabled": false,
+      "total_due": -3400,
+      "created_at": "2026-10-18T01:45:47.445Z"
     }
   ],
   "invoices": [
@@ -2592,6 +2616,41 @@
       "wa_status": "pending",
       "timestamp": "2026-10-17T07:06:37.735Z",
       "time_display": "17-10-2026 | 13:06:37"
+    },
+    {
+      "id": 15,
+      "invoice_no": "INV-15",
+      "offline_invoice_no": null,
+      "customer_id": 186,
+      "customer_name": "মনিরুল ভাই",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "items": [
+        {
+          "product_id": 3,
+          "name": "ফ্রেশ সিমেন্ট ৮০",
+          "unit": "বস্তা",
+          "qty": 10,
+          "price": 560,
+          "amount": 5600
+        }
+      ],
+      "subtotal": 5600,
+      "discount": 0,
+      "labor_cost": 0,
+      "vat_percent": 0,
+      "vat": 0,
+      "total": 5600,
+      "paid": 9000,
+      "due": 0,
+      "prev_due": 0,
+      "net_due": -3400,
+      "note": "",
+      "print_status": "pending",
+      "sms_status": "skipped (MiMSMS not configured)",
+      "wa_status": "pending",
+      "timestamp": "2026-10-18T01:45:47.445Z",
+      "time_display": "18-10-2026 | 07:45:47"
     }
   ],
   "customer_ledger": [
@@ -5071,6 +5130,32 @@
       "note": "বকতিয়ার ভাই — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-10-17T13:50:18.547Z",
       "time_display": "17-10-2026 | 19:50:18"
+    },
+    {
+      "id": 239,
+      "customer_id": 186,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 5600,
+      "balance": 5600,
+      "source": "INV-15",
+      "note": "Invoice INV-15",
+      "timestamp": "2026-10-18T01:45:47.445Z",
+      "time_display": "18-10-2026 | 07:45:47"
+    },
+    {
+      "id": 240,
+      "customer_id": 186,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "CREDIT",
+      "amount": 9000,
+      "balance": -3400,
+      "source": "INV-15",
+      "note": "Payment for INV-15",
+      "timestamp": "2026-10-18T01:45:47.445Z",
+      "time_display": "18-10-2026 | 07:45:47"
     }
   ],
   "cash_ledger": [
@@ -5095,6 +5180,17 @@
       "user_name": "মুনজুর আহমেদ",
       "timestamp": "2026-10-17T11:50:24.292Z",
       "time_display": "17-10-2026 | 17:50:24"
+    },
+    {
+      "id": 18,
+      "type": "IN",
+      "amount": 9000,
+      "balance": 62924,
+      "source": "INV-15",
+      "note": "Sale payment",
+      "user_name": "মুনজুর আহমেদ",
+      "timestamp": "2026-10-18T01:45:47.445Z",
+      "time_display": "18-10-2026 | 07:45:47"
     }
   ],
   "sessions": {
@@ -5164,7 +5260,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-17T13:49:34.305Z"
+      "last_sync": "2026-10-17T13:50:22.564Z"
     },
     "default_labor_cost": 0
   },
