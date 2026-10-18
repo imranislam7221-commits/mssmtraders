@@ -2,11 +2,11 @@
   "counters": {
     "user": 1,
     "product": 49,
-    "ledger": 65,
+    "ledger": 67,
     "customer": 187,
     "cash": 19,
-    "invoice": 17,
-    "cleger": 243,
+    "invoice": 18,
+    "cleger": 244,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -58,7 +58,7 @@
       "unit": "বস্তা",
       "size_mili": null,
       "opening_stock": 0,
-      "current_stock": 150,
+      "current_stock": 149,
       "purchase_price": 520,
       "selling_price": 560,
       "low_stock": 40,
@@ -198,7 +198,7 @@
       "unit": "কেজি",
       "size_mili": 10,
       "opening_stock": 0,
-      "current_stock": 6000,
+      "current_stock": 5992.7,
       "purchase_price": 86,
       "selling_price": 90,
       "low_stock": 100,
@@ -1024,6 +1024,36 @@
       "note": "Sold to লিটন - হাবিব - ভাই",
       "timestamp": "2026-10-18T02:11:16.804Z",
       "time_display": "18-10-2026 | 08:11:16"
+    },
+    {
+      "id": 66,
+      "product_id": 3,
+      "product_name": "ফ্রেশ সিমেন্ট ৮০",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "type": "OUT",
+      "quantity": 1,
+      "unit_cost": null,
+      "unit_price": 560,
+      "source": "INV-18",
+      "note": "Sold to হাসান - ভাই",
+      "timestamp": "2026-10-18T02:26:58.791Z",
+      "time_display": "18-10-2026 | 08:26:58"
+    },
+    {
+      "id": 67,
+      "product_id": 17,
+      "product_name": "এইচকেজি রড ১০ মি.লি",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "type": "OUT",
+      "quantity": 7.3,
+      "unit_cost": null,
+      "unit_price": 90,
+      "source": "INV-18",
+      "note": "Sold to হাসান - ভাই",
+      "timestamp": "2026-10-18T02:26:58.791Z",
+      "time_display": "18-10-2026 | 08:26:58"
     }
   ],
   "customers": [
@@ -2464,7 +2494,7 @@
       "phone": "01987274988",
       "address": "জয়নগর",
       "whatsapp_enabled": false,
-      "total_due": 63710,
+      "total_due": 64927,
       "created_at": "2026-10-15T09:53:52.097Z"
     },
     {
@@ -2760,6 +2790,49 @@
       "wa_status": "pending",
       "timestamp": "2026-10-18T02:11:16.804Z",
       "time_display": "18-10-2026 | 08:11:16"
+    },
+    {
+      "id": 18,
+      "invoice_no": "INV-18",
+      "offline_invoice_no": null,
+      "customer_id": 171,
+      "customer_name": "হাসান - ভাই",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "items": [
+        {
+          "product_id": 3,
+          "name": "ফ্রেশ সিমেন্ট ৮০",
+          "unit": "বস্তা",
+          "qty": 1,
+          "price": 560,
+          "amount": 560
+        },
+        {
+          "product_id": 17,
+          "name": "এইচকেজি রড ১০ মি.লি",
+          "unit": "কেজি",
+          "qty": 7.3,
+          "price": 90,
+          "amount": 657
+        }
+      ],
+      "subtotal": 1217,
+      "discount": 0,
+      "labor_cost": 0,
+      "vat_percent": 0,
+      "vat": 0,
+      "total": 1217,
+      "paid": 0,
+      "due": 1217,
+      "prev_due": 63710,
+      "net_due": 64927,
+      "note": "",
+      "print_status": "pending",
+      "sms_status": "skipped (MiMSMS not configured)",
+      "wa_status": "pending",
+      "timestamp": "2026-10-18T02:26:58.791Z",
+      "time_display": "18-10-2026 | 08:26:58"
     }
   ],
   "customer_ledger": [
@@ -5304,6 +5377,19 @@
       "note": "Invoice INV-17",
       "timestamp": "2026-10-18T02:11:16.804Z",
       "time_display": "18-10-2026 | 08:11:16"
+    },
+    {
+      "id": 244,
+      "customer_id": 171,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 1217,
+      "balance": 64927,
+      "source": "INV-18",
+      "note": "Invoice INV-18",
+      "timestamp": "2026-10-18T02:26:58.791Z",
+      "time_display": "18-10-2026 | 08:26:58"
     }
   ],
   "cash_ledger": [
