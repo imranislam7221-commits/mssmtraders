@@ -2,11 +2,11 @@
   "counters": {
     "user": 1,
     "product": 49,
-    "ledger": 67,
+    "ledger": 69,
     "customer": 187,
     "cash": 19,
-    "invoice": 18,
-    "cleger": 244,
+    "invoice": 19,
+    "cleger": 245,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -58,7 +58,7 @@
       "unit": "বস্তা",
       "size_mili": null,
       "opening_stock": 0,
-      "current_stock": 149,
+      "current_stock": 139,
       "purchase_price": 520,
       "selling_price": 560,
       "low_stock": 40,
@@ -128,7 +128,7 @@
       "unit": "কেজি",
       "size_mili": 8,
       "opening_stock": 0,
-      "current_stock": 1100,
+      "current_stock": 1050.8,
       "purchase_price": 91.5,
       "selling_price": 92,
       "low_stock": 100,
@@ -1054,6 +1054,36 @@
       "note": "Sold to হাসান - ভাই",
       "timestamp": "2026-10-18T02:26:58.791Z",
       "time_display": "18-10-2026 | 08:26:58"
+    },
+    {
+      "id": 68,
+      "product_id": 3,
+      "product_name": "ফ্রেশ সিমেন্ট ৮০",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "type": "OUT",
+      "quantity": 10,
+      "unit_cost": null,
+      "unit_price": 550,
+      "source": "INV-19",
+      "note": "Sold to জমু/জসিম",
+      "timestamp": "2026-10-18T05:04:27.170Z",
+      "time_display": "18-10-2026 | 11:04:27"
+    },
+    {
+      "id": 69,
+      "product_id": 10,
+      "product_name": "একেএস রড ৮ মি.লি",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "type": "OUT",
+      "quantity": 49.2,
+      "unit_cost": null,
+      "unit_price": 90,
+      "source": "INV-19",
+      "note": "Sold to জমু/জসিম",
+      "timestamp": "2026-10-18T05:04:27.170Z",
+      "time_display": "18-10-2026 | 11:04:27"
     }
   ],
   "customers": [
@@ -2062,7 +2092,7 @@
       "phone": "01955662264",
       "address": "চাঁদপুর",
       "whatsapp_enabled": false,
-      "total_due": 70742,
+      "total_due": 80680,
       "created_at": "2026-10-15T03:22:08.787Z"
     },
     {
@@ -2833,6 +2863,49 @@
       "wa_status": "pending",
       "timestamp": "2026-10-18T02:26:58.791Z",
       "time_display": "18-10-2026 | 08:26:58"
+    },
+    {
+      "id": 19,
+      "invoice_no": "INV-19",
+      "offline_invoice_no": null,
+      "customer_id": 122,
+      "customer_name": "জমু/জসিম",
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "items": [
+        {
+          "product_id": 3,
+          "name": "ফ্রেশ সিমেন্ট ৮০",
+          "unit": "বস্তা",
+          "qty": 10,
+          "price": 550,
+          "amount": 5500
+        },
+        {
+          "product_id": 10,
+          "name": "একেএস রড ৮ মি.লি",
+          "unit": "কেজি",
+          "qty": 49.2,
+          "price": 90,
+          "amount": 4428
+        }
+      ],
+      "subtotal": 9928,
+      "discount": 0,
+      "labor_cost": 10,
+      "vat_percent": 0,
+      "vat": 0,
+      "total": 9938,
+      "paid": 0,
+      "due": 9938,
+      "prev_due": 70742,
+      "net_due": 80680,
+      "note": "",
+      "print_status": "pending",
+      "sms_status": "skipped (MiMSMS not configured)",
+      "wa_status": "pending",
+      "timestamp": "2026-10-18T05:04:27.170Z",
+      "time_display": "18-10-2026 | 11:04:27"
     }
   ],
   "customer_ledger": [
@@ -5390,6 +5463,19 @@
       "note": "Invoice INV-18",
       "timestamp": "2026-10-18T02:26:58.791Z",
       "time_display": "18-10-2026 | 08:26:58"
+    },
+    {
+      "id": 245,
+      "customer_id": 122,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 9938,
+      "balance": 80680,
+      "source": "INV-19",
+      "note": "Invoice INV-19",
+      "timestamp": "2026-10-18T05:04:27.170Z",
+      "time_display": "18-10-2026 | 11:04:27"
     }
   ],
   "cash_ledger": [
@@ -5505,7 +5591,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-18T02:11:20.785Z"
+      "last_sync": "2026-10-18T02:27:03.978Z"
     },
     "default_labor_cost": 0
   },
