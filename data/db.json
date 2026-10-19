@@ -4,9 +4,9 @@
     "product": 49,
     "ledger": 69,
     "customer": 187,
-    "cash": 19,
+    "cash": 20,
     "invoice": 19,
-    "cleger": 245,
+    "cleger": 246,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -2443,7 +2443,7 @@
       "phone": "01907184829",
       "address": "রামনগর",
       "whatsapp_enabled": false,
-      "total_due": 40671,
+      "total_due": 35671,
       "created_at": "2026-10-15T05:55:23.068Z"
     },
     {
@@ -5476,6 +5476,20 @@
       "note": "Invoice INV-19",
       "timestamp": "2026-10-18T05:04:27.170Z",
       "time_display": "18-10-2026 | 11:04:27"
+    },
+    {
+      "id": 246,
+      "customer_id": 162,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "CREDIT",
+      "amount": 5000,
+      "balance": 35671,
+      "prev_due": 40671,
+      "source": "Payment Collection",
+      "note": "Cash received",
+      "timestamp": "2026-10-19T12:01:41.858Z",
+      "time_display": "19-10-2026 | 18:01:41"
     }
   ],
   "cash_ledger": [
@@ -5522,6 +5536,17 @@
       "user_name": "মুনজুর আহমেদ",
       "timestamp": "2026-10-18T01:49:30.590Z",
       "time_display": "18-10-2026 | 07:49:30"
+    },
+    {
+      "id": 20,
+      "type": "IN",
+      "amount": 5000,
+      "balance": 71774,
+      "source": "Payment Collection",
+      "note": "Cash received (অন্তর মামা)",
+      "user_name": "মুনজুর আহমেদ",
+      "timestamp": "2026-10-19T12:01:41.858Z",
+      "time_display": "19-10-2026 | 18:01:41"
     }
   ],
   "sessions": {
@@ -5591,7 +5616,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-10-18T02:27:03.978Z"
+      "last_sync": "2026-10-18T05:04:31.480Z"
     },
     "default_labor_cost": 0
   },
