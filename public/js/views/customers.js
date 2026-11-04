@@ -60,9 +60,9 @@ function customerModal(c) {
         <label>${isBn ? 'ঠিকানা' : 'Address'}</label>
         <input name="address" value="${esc(c.address || '')}" placeholder="${isBn ? 'যেমন: পুরাতন বাজার, দর্শনা' : 'e.g. Mirpur-1, Dhaka'}">
         ${c.id ? `
-        <label>${isBn ? 'বর্তমান মোট বাকি' : 'Current Due'}</label>
-        <div style="padding:9px 12px;background:var(--brandbg,#fffbeb);border:1px solid rgba(217,119,6,0.3);border-radius:6px;font-weight:700;color:var(--brand);margin-bottom:6px">${money(c.total_due || 0)}</div>
-        <small style="color:var(--mut);display:block;margin-top:2px;font-size:12px">${isBn ? '💡 বাকি জমা নিতে কাস্টমার তালিকা থেকে \"💵 বাকি জমা নিন\" বাটন ব্যবহার করুন।' : '💡 To collect dues, use the Collect Due button from customer list.'}</small>
+        <label>${isBn ? 'বর্তমান মোট বাকি (৳) — প্রয়োজন হলে এডিট করুন' : 'Total Due (Tk) — Edit to Adjust'}</label>
+        <input name="total_due" type="number" step="0.01" value="${c.total_due != null ? c.total_due : 0}" placeholder="0.00" style="font-weight:700;color:var(--brand)">
+        <small style="color:var(--mut);display:block;margin-top:2px;font-size:12px">${isBn ? '💡 বাকি পরিবর্তন করলে কাস্টমারের খাতা ও ব্যালেন্স স্বয়ংক্রিয়ভাবে সমন্বয় (Adjust) হয়ে যাবে।' : '💡 Changing due will automatically adjust ledger balance and log an audit trail.'}</small>
         ` : `
         <label>${isBn ? 'পূর্বের বাকি / বকেয়া (৳)' : 'Previous Due / Opening Due (Tk)'}</label>
         <input name="opening_due" type="number" step="0.01" min="0" value="" placeholder="${isBn ? '০.০০ (যদি পূর্বের বাকি থাকে)' : '0.00'}">
@@ -81,7 +81,12 @@ function customerModal(c) {
       phone: f.phone.value, 
       address: f.address.value 
     };
-    if (!c.id && f.opening_due) {
+    if (c.id) {
+      if (f.total_due && f.total_due.value !== '') {
+        body.total_due = f.total_due.value;
+        if (f.due_note) body.due_note = f.due_note.value;
+      }
+    } else if (f.opening_due) {
       body.opening_due = f.opening_due.value;
     }
     try {
