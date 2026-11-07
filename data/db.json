@@ -3,10 +3,10 @@
     "user": 1,
     "product": 49,
     "ledger": 69,
-    "customer": 188,
+    "customer": 189,
     "cash": 20,
     "invoice": 19,
-    "cleger": 247,
+    "cleger": 248,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -2679,6 +2679,15 @@
       "whatsapp_enabled": false,
       "total_due": 129441,
       "created_at": "2026-11-07T11:34:21.980Z"
+    },
+    {
+      "id": 189,
+      "name": "test",
+      "phone": "0000000000",
+      "address": "address",
+      "whatsapp_enabled": false,
+      "total_due": 1000,
+      "created_at": "2026-11-07T11:40:13.717Z"
     }
   ],
   "invoices": [
@@ -5513,6 +5522,20 @@
       "note": "সুমন  লালটু মিস্ত্রি — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-11-07T11:34:21.980Z",
       "time_display": "07-11-2026 | 17:34:21"
+    },
+    {
+      "id": 248,
+      "customer_id": 189,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 1000,
+      "balance": 1000,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "test — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-11-07T11:40:13.717Z",
+      "time_display": "07-11-2026 | 17:40:13"
     }
   ],
   "cash_ledger": [
@@ -5639,7 +5662,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-11-07T11:33:26.184Z"
+      "last_sync": "2026-11-07T11:34:26.318Z"
     },
     "default_labor_cost": 0
   },
