@@ -1,28 +1,28 @@
 /* M/S M.S. Traders POS — Service Worker for PWA (Offline & Fast Caching) */
-const CACHE_NAME = 'mst-pos-v20261013_v19';
+const CACHE_NAME = 'mst-pos-v20261110_v22';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/style.css?v=20261013_v19',
+  '/style.css?v=20261110_v22',
   '/icons/icon.svg',
   '/icons/icon-192.png',
   '/icons/icon-512.png',
-  '/js/core.js?v=20261013_v19',
-  '/js/i18n.js?v=20261013_v19',
-  '/js/auth.js?v=20261013_v19',
-  '/js/router.js?v=20261013_v19',
-  '/js/boot.js?v=20261013_v19',
-  '/js/print.js?v=20261013_v19',
-  '/js/views/dashboard.js?v=20261013_v19',
-  '/js/views/products.js?v=20261013_v19',
-  '/js/views/stock.js?v=20261013_v19',
-  '/js/views/pos.js?v=20261013_v19',
-  '/js/views/invoices.js?v=20261013_v19',
-  '/js/views/customers.js?v=20261013_v19',
-  '/js/views/expenses.js?v=20261013_v19',
-  '/js/views/incomes.js?v=20261013_v19',
-  '/js/views/settings.js?v=20261013_v19'
+  '/js/core.js?v=20261110_v22',
+  '/js/i18n.js?v=20261110_v22',
+  '/js/auth.js?v=20261110_v22',
+  '/js/router.js?v=20261110_v22',
+  '/js/boot.js?v=20261110_v22',
+  '/js/print.js?v=20261110_v22',
+  '/js/views/dashboard.js?v=20261110_v22',
+  '/js/views/products.js?v=20261110_v22',
+  '/js/views/stock.js?v=20261110_v22',
+  '/js/views/pos.js?v=20261110_v22',
+  '/js/views/invoices.js?v=20261110_v22',
+  '/js/views/customers.js?v=20261110_v22',
+  '/js/views/expenses.js?v=20261110_v22',
+  '/js/views/incomes.js?v=20261110_v22',
+  '/js/views/settings.js?v=20261110_v22'
 ];
 
 self.addEventListener('install', event => {
@@ -57,7 +57,7 @@ self.addEventListener('fetch', event => {
         return new Response(JSON.stringify({
           ok: false,
           offline: true,
-          error: 'আপনি বর্তমানে অফলাইনে আছেন। ইন্টারনেট কানেকশন পেলে পুনরায় চেষ্টা করুন।'
+          error: 'আপনি বর্তমানে অফলাইনে আছেন।'
         }), {
           status: 503,
           headers: { 'Content-Type': 'application/json; charset=utf-8' }
@@ -67,21 +67,24 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Static assets & scripts: Network-first to always fetch hotfixes, falling back to cache offline
+  // Static assets & scripts: Cache-first fallback to network & cache put
   event.respondWith(
-    fetch(req).then(networkResponse => {
-      if (networkResponse && (networkResponse.status === 200 || networkResponse.type === 'opaque')) {
-        const clone = networkResponse.clone();
-        caches.open(CACHE_NAME).then(cache => cache.put(req, clone));
-      }
-      return networkResponse;
-    }).catch(() => {
-      return caches.match(req).then(cached => {
+    caches.match(req, { ignoreSearch: false }).then(cached => {
+      const fetchPromise = fetch(req).then(networkResponse => {
+        if (networkResponse && (networkResponse.status === 200 || networkResponse.type === 'opaque')) {
+          const clone = networkResponse.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(req, clone));
+        }
+        return networkResponse;
+      }).catch(err => {
         if (cached) return cached;
         if (req.mode === 'navigate') {
           return caches.match('/index.html');
         }
+        throw err;
       });
+
+      return cached || fetchPromise;
     })
   );
 });

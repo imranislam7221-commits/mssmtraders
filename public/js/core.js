@@ -50,6 +50,13 @@ async function api(path, opts = {}) {
     let data = {};
     try { data = await res.json(); } catch (e) {}
     if (res.status === 401 && S.token) { S.token = ''; S.user = null; localStorage.removeItem('pos_token'); location.hash = '#/login'; throw new Error(data.error || 'Session expired'); }
+    if (res.status === 503 || (data && data.offline)) {
+      const cached = localStorage.getItem('mst_cache_' + path);
+      if (cached) {
+        try { return JSON.parse(cached); } catch (_) {}
+      }
+      throw new Error(data.error || 'আপনি বর্তমানে অফলাইনে আছেন');
+    }
     if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
     if (!opts.method || opts.method === 'GET') {
       try { localStorage.setItem('mst_cache_' + path, JSON.stringify(data)); } catch (_) {}
