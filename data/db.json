@@ -6,7 +6,7 @@
     "customer": 190,
     "cash": 20,
     "invoice": 19,
-    "cleger": 249,
+    "cleger": 250,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1777,7 +1777,7 @@
       "phone": "01938520279",
       "address": "ঈশ্বরচন্দ্রপুর",
       "whatsapp_enabled": false,
-      "total_due": 4750,
+      "total_due": 110,
       "created_at": "2026-10-14T10:49:32.036Z"
     },
     {
@@ -5536,6 +5536,20 @@
       "note": "খোকন বকুল মিস্ত্রি — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-11-07T11:49:28.109Z",
       "time_display": "07-11-2026 | 17:49:28"
+    },
+    {
+      "id": 250,
+      "customer_id": 86,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "CREDIT",
+      "amount": 4640,
+      "balance": 110,
+      "prev_due": 4750,
+      "source": "ম্যানুয়াল বাকি সংশোধন (Edit Due)",
+      "note": "বাকি সমন্বয়: পূর্বের ৳ 4750 থেকে পরিবর্তন করে ৳ 110 করা হলো",
+      "timestamp": "2026-11-10T13:01:38.354Z",
+      "time_display": "10-11-2026 | 19:01:38"
     }
   ],
   "cash_ledger": [
@@ -5666,7 +5680,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-11-10T04:23:28.307Z"
+      "last_sync": "2026-11-10T06:21:35.245Z"
     },
     "default_labor_cost": 0
   },
