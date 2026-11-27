@@ -3,10 +3,10 @@
     "user": 1,
     "product": 49,
     "ledger": 69,
-    "customer": 190,
+    "customer": 191,
     "cash": 20,
     "invoice": 19,
-    "cleger": 249,
+    "cleger": 252,
     "expense": 0,
     "income": 1,
     "supplier": 1,
@@ -1261,8 +1261,8 @@
     {
       "id": 27,
       "name": "শাহাজান",
-      "phone": "জয়নগর",
-      "address": "01909707068--01908312675",
+      "phone": "01909707068--01908312675",
+      "address": "জয়নগর",
       "whatsapp_enabled": false,
       "total_due": 100000,
       "created_at": "2026-10-14T06:25:16.975Z"
@@ -1777,7 +1777,7 @@
       "phone": "01938520279",
       "address": "ঈশ্বরচন্দ্রপুর",
       "whatsapp_enabled": false,
-      "total_due": 4750,
+      "total_due": 11750,
       "created_at": "2026-10-14T10:49:32.036Z"
     },
     {
@@ -2688,6 +2688,15 @@
       "whatsapp_enabled": false,
       "total_due": 17536,
       "created_at": "2026-11-07T11:49:28.109Z"
+    },
+    {
+      "id": 191,
+      "name": "মুনজুর মামা ইমাম",
+      "phone": "+8801920393099",
+      "address": "ঈশ্বর চন্দ্রপুর",
+      "whatsapp_enabled": false,
+      "total_due": 22886,
+      "created_at": "2026-11-12T14:14:53.598Z"
     }
   ],
   "invoices": [
@@ -5536,6 +5545,48 @@
       "note": "খোকন বকুল মিস্ত্রি — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
       "timestamp": "2026-11-07T11:49:28.109Z",
       "time_display": "07-11-2026 | 17:49:28"
+    },
+    {
+      "id": 250,
+      "customer_id": 86,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "CREDIT",
+      "amount": 4640,
+      "balance": 110,
+      "prev_due": 4750,
+      "source": "ম্যানুয়াল বাকি সংশোধন (Edit Due)",
+      "note": "বাকি সমন্বয়: পূর্বের ৳ 4750 থেকে পরিবর্তন করে ৳ 110 করা হলো",
+      "timestamp": "2026-11-10T13:01:38.354Z",
+      "time_display": "10-11-2026 | 19:01:38"
+    },
+    {
+      "id": 251,
+      "customer_id": 86,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 11640,
+      "balance": 11750,
+      "prev_due": 110,
+      "source": "ম্যানুয়াল বাকি সংশোধন (Edit Due)",
+      "note": "বাকি সমন্বয়: পূর্বের ৳ 110 থেকে পরিবর্তন করে ৳ 11750 করা হলো",
+      "timestamp": "2026-11-10T13:02:23.315Z",
+      "time_display": "10-11-2026 | 19:02:23"
+    },
+    {
+      "id": 252,
+      "customer_id": 191,
+      "user_id": 1,
+      "user_name": "মুনজুর আহমেদ",
+      "transaction_type": "DEBIT",
+      "amount": 22886,
+      "balance": 22886,
+      "prev_due": 0,
+      "source": "পূর্বের বাকি (Opening Due)",
+      "note": "মুনজুর মামা ইমাম — পূর্বের বকেয়া হিসাব / প্রারম্ভিক বাকি",
+      "timestamp": "2026-11-12T14:14:53.598Z",
+      "time_display": "12-11-2026 | 20:14:53"
     }
   ],
   "cash_ledger": [
@@ -5639,6 +5690,10 @@
     "15b3e9f0c444db5be629963ca09a84a8": {
       "user_id": 1,
       "created_at": "2026-11-10T05:29:25.593Z"
+    },
+    "bb37c7cd8008adb3dd11828ba6110021": {
+      "user_id": 1,
+      "created_at": "2026-11-27T13:23:20.800Z"
     }
   },
   "settings": {
@@ -5666,7 +5721,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-11-10T04:23:28.307Z"
+      "last_sync": "2026-11-18T12:18:32.915Z"
     },
     "default_labor_cost": 0
   },
