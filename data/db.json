@@ -1261,8 +1261,8 @@
     {
       "id": 27,
       "name": "শাহাজান",
-      "phone": "01909707068--01908312675",
-      "address": "জয়নগর",
+      "phone": "জয়নগর",
+      "address": "01909707068--01908312675",
       "whatsapp_enabled": false,
       "total_due": 100000,
       "created_at": "2026-10-14T06:25:16.975Z"
@@ -1777,7 +1777,7 @@
       "phone": "01938520279",
       "address": "ঈশ্বরচন্দ্রপুর",
       "whatsapp_enabled": false,
-      "total_due": 11750,
+      "total_due": 4750,
       "created_at": "2026-10-14T10:49:32.036Z"
     },
     {
@@ -2688,15 +2688,6 @@
       "whatsapp_enabled": false,
       "total_due": 17536,
       "created_at": "2026-11-07T11:49:28.109Z"
-    },
-    {
-      "id": 191,
-      "name": "মুনজুর মামা ইমাম",
-      "phone": "+8801920393099",
-      "address": "ঈশ্বর চন্দ্রপুর",
-      "whatsapp_enabled": false,
-      "total_due": 22886,
-      "created_at": "2026-11-12T14:14:53.598Z"
     }
   ],
   "invoices": [
@@ -5691,9 +5682,17 @@
       "user_id": 1,
       "created_at": "2026-11-10T05:29:25.593Z"
     },
+    "76f3670e757b1fa1765f77e715b8c641": {
+      "user_id": 1,
+      "created_at": "2026-11-27T13:23:10.251Z"
+    },
     "bb37c7cd8008adb3dd11828ba6110021": {
       "user_id": 1,
       "created_at": "2026-11-27T13:23:20.800Z"
+    },
+    "92d77ed1a54d9999da9918325cad9c31": {
+      "user_id": 1,
+      "created_at": "2026-11-27T13:23:36.099Z"
     }
   },
   "settings": {
@@ -5721,7 +5720,7 @@
     "google_sync": {
       "webhook_url": "https://script.google.com/macros/s/AKfycbw2QoMQefpD_p6X2mt6aQAohxncSjuwm0gas_ModDjyeo_WIADjvcELu4njnhX3kxKf/exec",
       "auto_sync": true,
-      "last_sync": "2026-11-18T12:18:32.915Z"
+      "last_sync": "2026-11-27T13:23:39.502Z"
     },
     "default_labor_cost": 0
   },
